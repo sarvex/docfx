@@ -39,7 +39,183 @@
       "output": {
         ".html": {
           "relative_path": "api/Microsoft.DocAsCode.Docset.html",
-          "hash": "gJYkOcT9l4+QmOPK0oQWUmw4fzaIrg38x0d9ooA/gXY="
+          "hash": "adPYBlEI28WkLFhpY8JadQN6s1ZVlMECYGCt7/OJD1w="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Microsoft.DocAsCode.Dotnet.DotnetApiCatalog.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Microsoft.DocAsCode.Dotnet.DotnetApiCatalog.html",
+          "hash": "NYmZNi1VztQh1zC2jeXE93y0rcSl1YmGM15VWkWMJLE="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Microsoft.DocAsCode.Dotnet.ManagedReference.AdditionalNotes.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Microsoft.DocAsCode.Dotnet.ManagedReference.AdditionalNotes.html",
+          "hash": "pGiddQR0k14LhRXfNKdfAqj7UNJZFX9sJ4vpwKtcTRY="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Microsoft.DocAsCode.Dotnet.ManagedReference.ApiParameter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Microsoft.DocAsCode.Dotnet.ManagedReference.ApiParameter.html",
+          "hash": "UC+vcaAQn2CP7Nv/wjUgVj2a8DR63qX+8uDtOYnJf44="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Microsoft.DocAsCode.Dotnet.ManagedReference.ArgumentInfo.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Microsoft.DocAsCode.Dotnet.ManagedReference.ArgumentInfo.html",
+          "hash": "NbWEAAdsCT1EU2FkGo9/OKRaK5EEdSIy+11qKO/ffbI="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Microsoft.DocAsCode.Dotnet.ManagedReference.AttributeInfo.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Microsoft.DocAsCode.Dotnet.ManagedReference.AttributeInfo.html",
+          "hash": "fccnB87YOZ2ace8DKw6g1m3v5mGUFiV3aflHslp7sEI="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Microsoft.DocAsCode.Dotnet.ManagedReference.ExceptionInfo.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Microsoft.DocAsCode.Dotnet.ManagedReference.ExceptionInfo.html",
+          "hash": "Gb6AiK07hvp7kgEPYghZjTSYZeWWzGeGu8UuDg5+LGI="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Microsoft.DocAsCode.Dotnet.ManagedReference.ItemViewModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Microsoft.DocAsCode.Dotnet.ManagedReference.ItemViewModel.html",
+          "hash": "lWon0GQC3K1AtInOvVtCYjeqYqcNI08HFLkLh+GI6mU="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Microsoft.DocAsCode.Dotnet.ManagedReference.LinkInfo.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Microsoft.DocAsCode.Dotnet.ManagedReference.LinkInfo.html",
+          "hash": "5qFvRqb0tIoBhOIPpRpzRr0/kempDnFiPAxKQB1PGss="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Microsoft.DocAsCode.Dotnet.ManagedReference.LinkType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Microsoft.DocAsCode.Dotnet.ManagedReference.LinkType.html",
+          "hash": "kMCvUJlvWjHxEuZW9gzuxh5MYFIYjyyufXvistDiQzg="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Microsoft.DocAsCode.Dotnet.ManagedReference.MemberType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Microsoft.DocAsCode.Dotnet.ManagedReference.MemberType.html",
+          "hash": "hWZ8xU3AwoQ/Y3AXDOi3wrLw7QMncD9P2Rg19SnmYNE="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Microsoft.DocAsCode.Dotnet.ManagedReference.NamedArgumentInfo.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Microsoft.DocAsCode.Dotnet.ManagedReference.NamedArgumentInfo.html",
+          "hash": "WTyss5alliYfUj0RXnPvjqGqOK/982cpoKSiEhmNgjE="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Microsoft.DocAsCode.Dotnet.ManagedReference.PageViewModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Microsoft.DocAsCode.Dotnet.ManagedReference.PageViewModel.html",
+          "hash": "ugeOLVQ92yNZVFksGOPP9QMkJJUiRWKAnzF8qp5pDuE="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Microsoft.DocAsCode.Dotnet.ManagedReference.SyntaxDetailViewModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Microsoft.DocAsCode.Dotnet.ManagedReference.SyntaxDetailViewModel.html",
+          "hash": "wEszkGNiWXHfMqNpJVffgR61NOgKbcQglCtFL5sg/O4="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Microsoft.DocAsCode.Dotnet.ManagedReference.SyntaxLanguage.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Microsoft.DocAsCode.Dotnet.ManagedReference.SyntaxLanguage.html",
+          "hash": "b9obvMB9n3lEhAYnqHvxjBoe2tF0DA2Smq8Sb4u0H4c="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Microsoft.DocAsCode.Dotnet.ManagedReference.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Microsoft.DocAsCode.Dotnet.ManagedReference.html",
+          "hash": "XrtRCnUZfoJN2GJaZRxVJyrsTLxDHdyrlJqUoMniVyc="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Microsoft.DocAsCode.Dotnet.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Microsoft.DocAsCode.Dotnet.html",
+          "hash": "UQ6gfk/f3eDVe2gmDs49w8GyKvRcWZUrvD5bIlqyzbw="
         }
       },
       "version": ""
@@ -61,7 +237,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "/ZbVXqnBqIkSmHnWsOhqk2wGXIblqcR/EcaEoxdpPe0="
+          "hash": "zSGzq08QcoKaUC1N97VghYfBtq0M4a/W/gBOy+TmPu4="
         }
       },
       "version": ""
