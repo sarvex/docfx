@@ -12,12 +12,17 @@
   "api/Microsoft.DocAsCode.Dotnet.DotnetApiCatalog.html": {
     "href": "api/Microsoft.DocAsCode.Dotnet.DotnetApiCatalog.html",
     "title": "Class DotnetApiCatalog | docfx",
-    "keywords": "Class DotnetApiCatalog Provides access to a .NET API definitions and their associated documentation. Inheritance object DotnetApiCatalog Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Namespace: Microsoft.DocAsCode.Dotnet Assembly: Microsoft.DocAsCode.Dotnet.dll Syntax public static class DotnetApiCatalog Methods | Improve this Doc View Source GenerateManagedReferenceYamlFiles(string) Generates metadata reference YANL files using docfx.json config. Declaration public static Task GenerateManagedReferenceYamlFiles(string configPath) Parameters Type Name Description string configPath The path to docfx.json config file. Returns Type Description Task A task to await for build completion."
+    "keywords": "Class DotnetApiCatalog Provides access to a .NET API definitions and their associated documentation. Inheritance object DotnetApiCatalog Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Namespace: Microsoft.DocAsCode.Dotnet Assembly: Microsoft.DocAsCode.Dotnet.dll Syntax public static class DotnetApiCatalog Methods | Improve this Doc View Source GenerateManagedReferenceYamlFiles(string, DotnetApiOptions) Generates metadata reference YANL files using docfx.json config. Declaration public static Task GenerateManagedReferenceYamlFiles(string configPath, DotnetApiOptions options) Parameters Type Name Description string configPath The path to docfx.json config file. DotnetApiOptions options Returns Type Description Task A task to await for build completion. | Improve this Doc View Source GenerateManagedReferenceYamlFiles(string) Generates metadata reference YANL files using docfx.json config. Declaration public static Task GenerateManagedReferenceYamlFiles(string configPath) Parameters Type Name Description string configPath The path to docfx.json config file. Returns Type Description Task A task to await for build completion."
+  },
+  "api/Microsoft.DocAsCode.Dotnet.DotnetApiOptions.html": {
+    "href": "api/Microsoft.DocAsCode.Dotnet.DotnetApiOptions.html",
+    "title": "Class DotnetApiOptions | docfx",
+    "keywords": "Class DotnetApiOptions Provides options to be used with GenerateManagedReferenceYamlFiles(string, DotnetApiOptions). Inheritance object DotnetApiOptions Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Namespace: Microsoft.DocAsCode.Dotnet Assembly: Microsoft.DocAsCode.Dotnet.dll Syntax public class DotnetApiOptions Properties | Improve this Doc View Source IncludeApi Customizes the namespaces and types to include in the API catalog. Excluding a parent symbol exclude all child symbols underneath it. Declaration public Func<ISymbol, SymbolIncludeState>? IncludeApi { get; init; } Property Value Type Description Func<ISymbol, SymbolIncludeState> Remarks Show private or internal symbols are not supported in this version. | Improve this Doc View Source IncludeAttribute Customizes the attributes to include in the API catalog. Excluding a parent symbol exclude all child symbols underneath it. Declaration public Func<ISymbol, SymbolIncludeState>? IncludeAttribute { get; init; } Property Value Type Description Func<ISymbol, SymbolIncludeState> Remarks Show private or internal symbols are not supported in this version."
   },
   "api/Microsoft.DocAsCode.Dotnet.html": {
     "href": "api/Microsoft.DocAsCode.Dotnet.html",
     "title": "Namespace Microsoft.DocAsCode.Dotnet | docfx",
-    "keywords": "Namespace Microsoft.DocAsCode.Dotnet Classes DotnetApiCatalog Provides access to a .NET API definitions and their associated documentation."
+    "keywords": "Namespace Microsoft.DocAsCode.Dotnet Classes DotnetApiCatalog Provides access to a .NET API definitions and their associated documentation. DotnetApiOptions Provides options to be used with GenerateManagedReferenceYamlFiles(string, DotnetApiOptions). Enums SymbolIncludeState Return state of the IncludeApi and IncludeAttribute callbacks."
   },
   "api/Microsoft.DocAsCode.Dotnet.ManagedReference.AdditionalNotes.html": {
     "href": "api/Microsoft.DocAsCode.Dotnet.ManagedReference.AdditionalNotes.html",
@@ -88,6 +93,11 @@
     "href": "api/Microsoft.DocAsCode.Dotnet.ManagedReference.SyntaxLanguage.html",
     "title": "Enum SyntaxLanguage | docfx",
     "keywords": "Enum SyntaxLanguage Namespace: Microsoft.DocAsCode.Dotnet.ManagedReference Assembly: Microsoft.DocAsCode.Dotnet.dll Syntax public enum SyntaxLanguage Fields Name Description CSharp Default VB"
+  },
+  "api/Microsoft.DocAsCode.Dotnet.SymbolIncludeState.html": {
+    "href": "api/Microsoft.DocAsCode.Dotnet.SymbolIncludeState.html",
+    "title": "Enum SymbolIncludeState | docfx",
+    "keywords": "Enum SymbolIncludeState Return state of the IncludeApi and IncludeAttribute callbacks. Namespace: Microsoft.DocAsCode.Dotnet Assembly: Microsoft.DocAsCode.Dotnet.dll Syntax public enum SymbolIncludeState Fields Name Description Default Determines whether to include or not using the default configuration. Exclude Ignores default rules and exclude the symbol from the API catalog. Include Ignore default rules and include the symbol in the API catalog."
   },
   "api/Microsoft.DocAsCode.html": {
     "href": "api/Microsoft.DocAsCode.html",

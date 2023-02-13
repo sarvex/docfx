@@ -69,6 +69,15 @@ references:
   commentId: T:Microsoft.DocAsCode.Dotnet.DotnetApiCatalog
   fullName: Microsoft.DocAsCode.Dotnet.DotnetApiCatalog
   nameWithType: DotnetApiCatalog
+- uid: Microsoft.DocAsCode.Dotnet.DotnetApiCatalog.GenerateManagedReferenceYamlFiles(System.String,Microsoft.DocAsCode.Dotnet.DotnetApiOptions)
+  name: GenerateManagedReferenceYamlFiles(string, DotnetApiOptions)
+  href: api/Microsoft.DocAsCode.Dotnet.DotnetApiCatalog.html#Microsoft_DocAsCode_Dotnet_DotnetApiCatalog_GenerateManagedReferenceYamlFiles_System_String_Microsoft_DocAsCode_Dotnet_DotnetApiOptions_
+  commentId: M:Microsoft.DocAsCode.Dotnet.DotnetApiCatalog.GenerateManagedReferenceYamlFiles(System.String,Microsoft.DocAsCode.Dotnet.DotnetApiOptions)
+  name.vb: GenerateManagedReferenceYamlFiles(String, DotnetApiOptions)
+  fullName: Microsoft.DocAsCode.Dotnet.DotnetApiCatalog.GenerateManagedReferenceYamlFiles(string, Microsoft.DocAsCode.Dotnet.DotnetApiOptions)
+  fullName.vb: Microsoft.DocAsCode.Dotnet.DotnetApiCatalog.GenerateManagedReferenceYamlFiles(String, Microsoft.DocAsCode.Dotnet.DotnetApiOptions)
+  nameWithType: DotnetApiCatalog.GenerateManagedReferenceYamlFiles(string, DotnetApiOptions)
+  nameWithType.vb: DotnetApiCatalog.GenerateManagedReferenceYamlFiles(String, DotnetApiOptions)
 - uid: Microsoft.DocAsCode.Dotnet.DotnetApiCatalog.GenerateManagedReferenceYamlFiles(System.String)
   name: GenerateManagedReferenceYamlFiles(string)
   href: api/Microsoft.DocAsCode.Dotnet.DotnetApiCatalog.html#Microsoft_DocAsCode_Dotnet_DotnetApiCatalog_GenerateManagedReferenceYamlFiles_System_String_
@@ -85,6 +94,38 @@ references:
   isSpec: "True"
   fullName: Microsoft.DocAsCode.Dotnet.DotnetApiCatalog.GenerateManagedReferenceYamlFiles
   nameWithType: DotnetApiCatalog.GenerateManagedReferenceYamlFiles
+- uid: Microsoft.DocAsCode.Dotnet.DotnetApiOptions
+  name: DotnetApiOptions
+  href: api/Microsoft.DocAsCode.Dotnet.DotnetApiOptions.html
+  commentId: T:Microsoft.DocAsCode.Dotnet.DotnetApiOptions
+  fullName: Microsoft.DocAsCode.Dotnet.DotnetApiOptions
+  nameWithType: DotnetApiOptions
+- uid: Microsoft.DocAsCode.Dotnet.DotnetApiOptions.IncludeApi
+  name: IncludeApi
+  href: api/Microsoft.DocAsCode.Dotnet.DotnetApiOptions.html#Microsoft_DocAsCode_Dotnet_DotnetApiOptions_IncludeApi
+  commentId: P:Microsoft.DocAsCode.Dotnet.DotnetApiOptions.IncludeApi
+  fullName: Microsoft.DocAsCode.Dotnet.DotnetApiOptions.IncludeApi
+  nameWithType: DotnetApiOptions.IncludeApi
+- uid: Microsoft.DocAsCode.Dotnet.DotnetApiOptions.IncludeApi*
+  name: IncludeApi
+  href: api/Microsoft.DocAsCode.Dotnet.DotnetApiOptions.html#Microsoft_DocAsCode_Dotnet_DotnetApiOptions_IncludeApi_
+  commentId: Overload:Microsoft.DocAsCode.Dotnet.DotnetApiOptions.IncludeApi
+  isSpec: "True"
+  fullName: Microsoft.DocAsCode.Dotnet.DotnetApiOptions.IncludeApi
+  nameWithType: DotnetApiOptions.IncludeApi
+- uid: Microsoft.DocAsCode.Dotnet.DotnetApiOptions.IncludeAttribute
+  name: IncludeAttribute
+  href: api/Microsoft.DocAsCode.Dotnet.DotnetApiOptions.html#Microsoft_DocAsCode_Dotnet_DotnetApiOptions_IncludeAttribute
+  commentId: P:Microsoft.DocAsCode.Dotnet.DotnetApiOptions.IncludeAttribute
+  fullName: Microsoft.DocAsCode.Dotnet.DotnetApiOptions.IncludeAttribute
+  nameWithType: DotnetApiOptions.IncludeAttribute
+- uid: Microsoft.DocAsCode.Dotnet.DotnetApiOptions.IncludeAttribute*
+  name: IncludeAttribute
+  href: api/Microsoft.DocAsCode.Dotnet.DotnetApiOptions.html#Microsoft_DocAsCode_Dotnet_DotnetApiOptions_IncludeAttribute_
+  commentId: Overload:Microsoft.DocAsCode.Dotnet.DotnetApiOptions.IncludeAttribute
+  isSpec: "True"
+  fullName: Microsoft.DocAsCode.Dotnet.DotnetApiOptions.IncludeAttribute
+  nameWithType: DotnetApiOptions.IncludeAttribute
 - uid: Microsoft.DocAsCode.Dotnet.ManagedReference
   name: Microsoft.DocAsCode.Dotnet.ManagedReference
   href: api/Microsoft.DocAsCode.Dotnet.ManagedReference.html
@@ -1360,6 +1401,30 @@ references:
   commentId: F:Microsoft.DocAsCode.Dotnet.ManagedReference.SyntaxLanguage.VB
   fullName: Microsoft.DocAsCode.Dotnet.ManagedReference.SyntaxLanguage.VB
   nameWithType: SyntaxLanguage.VB
+- uid: Microsoft.DocAsCode.Dotnet.SymbolIncludeState
+  name: SymbolIncludeState
+  href: api/Microsoft.DocAsCode.Dotnet.SymbolIncludeState.html
+  commentId: T:Microsoft.DocAsCode.Dotnet.SymbolIncludeState
+  fullName: Microsoft.DocAsCode.Dotnet.SymbolIncludeState
+  nameWithType: SymbolIncludeState
+- uid: Microsoft.DocAsCode.Dotnet.SymbolIncludeState.Default
+  name: Default
+  href: api/Microsoft.DocAsCode.Dotnet.SymbolIncludeState.html#Microsoft_DocAsCode_Dotnet_SymbolIncludeState_Default
+  commentId: F:Microsoft.DocAsCode.Dotnet.SymbolIncludeState.Default
+  fullName: Microsoft.DocAsCode.Dotnet.SymbolIncludeState.Default
+  nameWithType: SymbolIncludeState.Default
+- uid: Microsoft.DocAsCode.Dotnet.SymbolIncludeState.Exclude
+  name: Exclude
+  href: api/Microsoft.DocAsCode.Dotnet.SymbolIncludeState.html#Microsoft_DocAsCode_Dotnet_SymbolIncludeState_Exclude
+  commentId: F:Microsoft.DocAsCode.Dotnet.SymbolIncludeState.Exclude
+  fullName: Microsoft.DocAsCode.Dotnet.SymbolIncludeState.Exclude
+  nameWithType: SymbolIncludeState.Exclude
+- uid: Microsoft.DocAsCode.Dotnet.SymbolIncludeState.Include
+  name: Include
+  href: api/Microsoft.DocAsCode.Dotnet.SymbolIncludeState.html#Microsoft_DocAsCode_Dotnet_SymbolIncludeState_Include
+  commentId: F:Microsoft.DocAsCode.Dotnet.SymbolIncludeState.Include
+  fullName: Microsoft.DocAsCode.Dotnet.SymbolIncludeState.Include
+  nameWithType: SymbolIncludeState.Include
 - uid: user_manual
   name: docfx.exe User Manual
   href: tutorial/docfx.exe_user_manual.html
