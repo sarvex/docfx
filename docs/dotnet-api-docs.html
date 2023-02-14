@@ -181,7 +181,40 @@
 }
 </code></pre>
 <h2 id="filter-apis">Filter APIs</h2>
-<p>Docfx hides generated code or members marked as <code>[EditorBrowsableAttribute]</code> from API docs using filters. The <a href="https://github.com/dotnet/docfx/blob/main/src/Microsoft.DocAsCode.Metadata.ManagedReference.Common/Filters/defaultfilterconfig.yml">default filter config</a> contains common API patterns to exclude from docs.</p>
+<p>Docfx shows only the public accessible types and methods callable from another assembly. It also has a set of <a href="https://github.com/dotnet/docfx/blob/main/src/Microsoft.DocAsCode.Metadata.ManagedReference.Common/Filters/defaultfilterconfig.yml">default filtering rules</a> that excludes common API patterns based on attributes such as <code>[EditorBrowsableAttribute]</code>.</p>
+<p>To disable the default filtering rules, set the <code>disableDefaultFilter</code> property to <code>true</code>.</p>
+<p>To show private methods, set the <code>includePrivateMembers</code> config to <code>true</code>. When enabled, internal only langauge keywords such as <code>private</code> or <code>internal</code> starts to appear in the declaration of all APIs, to accurately reflect API accessibility.</p>
+<p>There are two ways of customizing the API filters:</p>
+<h3 id="custom-with-code">Custom with Code</h3>
+<p>To use a custom filtering with code:</p>
+<ol>
+<li>Use docfx .NET API generation as a NuGet library:</li>
+</ol>
+<pre><code class="lang-xml">&lt;PackageReference Include=&quot;Microsoft.DocAsCode.Dotnet&quot; Version=&quot;2.62.0&quot; /&gt;
+</code></pre>
+<ol start="2">
+<li>Configure the filter options:</li>
+</ol>
+<pre><code class="lang-cs">var options = new DotnetApiOptions
+{
+    // Filter based on types
+    IncludeApi = symbol =&gt; ...
+
+    // Filter based on attributes
+    IncludeAttribute = symbol =&gt; ...
+}
+
+await DotnetApiCatalog.GenerateManagedReferenceYamlFiles(&quot;docfx.json&quot;, options);
+</code></pre>
+<p>The filter callbacks takes an <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.codeanalysis.isymbol?view=roslyn-dotnet"><code>ISymbol</code></a> interface and produces an <a href="../api/Microsoft.Docascode.Dotnet.SymbolIncludeState.yml"><code>SymbolIncludeState</code></a> enum to choose between include the API, exclude the API or use the default filtering behavior.</p>
+<p>The callbacks are raised before applying the default rules but after processing type accessibility rules. Private types and members cannot be marked as include unless <code>includePrivateMembers</code> is true.</p>
+<p>Hiding the parent symbol also hides all of its child symbols, e.g.:</p>
+<ul>
+<li>If a namespace is hidden, all child namespaces and types underneath it are hidden.</li>
+<li>If a class is hidden, all nested types underneath it are hidden.</li>
+<li>If an interface is hidden, explicit implementations of that interface are also hidden.</li>
+</ul>
+<h3 id="custom-with-filter-rules">Custom with Filter Rules</h3>
 <p>To add additional filter rules, add a custom YAML file and set the <code>filter</code> property in <code>docfx.json</code> to point to the custom YAML filter:</p>
 <pre><code class="lang-json">{
   &quot;metadata&quot;: {
@@ -195,7 +228,7 @@
 }
 </code></pre>
 <p>The filter config is a list of rules. A rule can include or exclude a set of APIs based on a pattern. The rules are processed sequentially and would stop when a rule matches.</p>
-<h3 id="filter-by-uid">Filter by UID</h3>
+<h4 id="filter-by-uid">Filter by UID</h4>
 <p>Every item in the generated API docs has a <a href="dotnet-yaml-format.html"><code>UID</code></a> (a unique identifier calculated for each API) to filter against using regular expression. This example uses <code>uidRegex</code> to excludes all APIs whose uids start with <code>Microsoft.DevDiv</code> but not <code>Microsoft.DevDiv.SpecialCase</code>.</p>
 <pre><code class="lang-yaml">apiRules:
 - include:
@@ -203,7 +236,7 @@
 - exclude:
     uidRegex: ^Microsoft\.DevDiv
 </code></pre>
-<h3 id="filter-by-type">Filter by Type</h3>
+<h4 id="filter-by-type">Filter by Type</h4>
 <p>This example exclude APIs whose uid starts with <code>Microsoft.DevDiv</code> and type is <code>Type</code>:</p>
 <pre><code class="lang-yaml">apiRules:
 - exclude:
@@ -238,7 +271,7 @@
 </li>
 </ul>
 <p>API filter are hierarchical, if a namespace is excluded, all types/members defined in the namespace would also be excluded. Similarly, if a type is excluded, all members defined in the type would also be excluded.</p>
-<h3 id="filter-by-attribute">Filter by Attribute</h3>
+<h4 id="filter-by-attribute">Filter by Attribute</h4>
 <p>This example excludes all APIs which have <code>AttributeUsageAttribute</code> set to <code>System.AttributeTargets.Class</code> and the <code>Inherited</code> argument set to <code>true</code>:</p>
 <pre><code class="lang-yaml">apiRules:
 - exclude:
