@@ -12,10 +12,11 @@ namespace Microsoft.DocAsCode.HtmlToPdf
     using System.Threading.Tasks;
     using System.Web;
 
-    using iTextSharp.text.pdf;
-
     using Microsoft.DocAsCode.Common;
     using Microsoft.DocAsCode.Plugins;
+
+    using UglyToad.PdfPig;
+    using UglyToad.PdfPig.Writer;
 
     public class HtmlToPdfConverter
     {
@@ -63,7 +64,7 @@ namespace Microsoft.DocAsCode.HtmlToPdf
                 new ParallelOptions { MaxDegreeOfParallelism = _htmlToPdfOptions.MaxDegreeOfParallelism },
                 htmlFilePath =>
                 {
-                    var numberOfPages = Convert($"{WrapQuoteToPath(htmlFilePath)} -", reader => reader.NumberOfPages);
+                    var numberOfPages = Convert($"{WrapQuoteToPath(htmlFilePath)} -");
 
                     PartialPdfModel pdfModel = new PartialPdfModel
                     {
@@ -131,7 +132,7 @@ namespace Microsoft.DocAsCode.HtmlToPdf
                     Arguments = _htmlToPdfOptions + (_htmlToPdfOptions.IsReadArgsFromStdin ? string.Empty : (" " + arguments)),
                 }
             };
-            using(new LoggerPhaseScope(Constants.PdfCommandName))
+            using (new LoggerPhaseScope(Constants.PdfCommandName))
             {
                 Logger.LogVerbose($"Executing {process.StartInfo.FileName} {process.StartInfo.Arguments} ({arguments})");
                 process.Start();
@@ -280,25 +281,33 @@ namespace Microsoft.DocAsCode.HtmlToPdf
         {
             if (_htmlFilePaths.Count > 0)
             {
-                var outlines = GetOutlines();
                 using var pdfStream = new MemoryStream();
                 ConvertToStream($"{string.Join(" ", _htmlFilePaths.Select(WrapQuoteToPath))} -", pdfStream);
                 pdfStream.Position = 0;
 
-                using var pdfReader = new PdfReader(pdfStream);
-                using var pdfStamper = new PdfStamper(pdfReader, stream);
-                pdfStamper.Outlines = outlines;
+                WriteOutlines(pdfStream, stream);
             }
         }
 
-        private T Convert<T>(string arguments, Func<PdfReader, T> readerFunc)
+        private int Convert(string arguments)
         {
             using var pdfStream = new MemoryStream();
             ConvertToStream(arguments, pdfStream);
             pdfStream.Position = 0;
 
-            using var pdfReader = new PdfReader(pdfStream);
-            return readerFunc(pdfReader);
+            using var document = PdfDocument.Open(pdfStream);
+            return document.NumberOfPages;
+        }
+
+        private void WriteOutlines(MemoryStream input, Stream output)
+        {
+            using var document = PdfDocument.Open(input);
+            using var builder = new PdfDocumentBuilder(output);
+
+            for (var i = 1; i <= document.NumberOfPages; i++)
+            {
+                builder.AddPage(document, i);
+            }
         }
 
         #endregion
