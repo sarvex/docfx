@@ -6,7 +6,6 @@
 html,
 body {
   font-family: "Segoe UI", Tahoma, Helvetica, sans-serif;
-  height: 100%;
 }
 
 button,
@@ -106,36 +105,6 @@ h6,
   margin-bottom: 0;
 }
 
-#wrapper {
-  min-height: 100%;
-  position: relative;
-}
-
-/* blends header footer and content together with gradient effect */
-.grad-top {
-  /* For Safari 5.1 to 6.0 */
-
-  /* For Opera 11.1 to 12.0 */
-
-  /* For Firefox 3.6 to 15 */
-  background: linear-gradient(rgb(0 0 0 / 5%), rgb(0 0 0 / 0%));
-
-  /* Standard syntax */
-  height: 5px;
-}
-
-.grad-bottom {
-  /* For Safari 5.1 to 6.0 */
-
-  /* For Opera 11.1 to 12.0 */
-
-  /* For Firefox 3.6 to 15 */
-  background: linear-gradient(rgb(0 0 0 / 0%), rgb(0 0 0 / 5%));
-
-  /* Standard syntax */
-  height: 5px;
-}
-
 .divider {
   margin: 0 5px;
   color: #ccc;
@@ -143,14 +112,6 @@ h6,
 
 hr {
   border-color: #ccc;
-}
-
-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
 }
 
 header .navbar {
@@ -485,7 +446,6 @@ body .toc {
 }
 
 .article {
-  margin-top: 120px;
   margin-bottom: 115px;
 }
 
@@ -547,20 +507,6 @@ body .toc {
   max-height: 200px;
 }
 
-footer {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 1000;
-}
-
-.footer {
-  border-top: 1px solid #e7e7e7;
-  background-color: #f8f8f8;
-  padding: 15px 0;
-}
-
 @media (min-width: 768px) {
   #sidetoggle.collapse {
     display: block;
@@ -585,10 +531,6 @@ footer {
   /* TOC display for responsive */
   .article {
     margin-top: 30px !important;
-  }
-
-  header {
-    position: static;
   }
 
   .topnav {
@@ -638,11 +580,6 @@ footer {
 
   .article.grid-right {
     margin-left: 0;
-  }
-
-  .grad-top,
-  .grad-bottom {
-    display: none;
   }
 
   .toc-toggle {
@@ -781,10 +718,6 @@ div.embeddedvideo iframe {
   }
 
   .mobile-hide {
-    display: none;
-  }
-
-  .footer {
     display: none;
   }
 }

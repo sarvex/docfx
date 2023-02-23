@@ -14,6 +14,23 @@
   margin-left: 0;
 }
 
+header {
+  z-index: 1000;
+  position: sticky;
+  top: 0;
+}
+
+h2 {
+  scroll-margin-top: 100px;
+}
+
+footer {
+  z-index: 1000;
+  border-top: 1px solid #e7e7e7;
+  background-color: #f8f8f8;
+  padding: 15px 0;
+}
+
 .sideaffix {
   margin-top: 50px;
   font-size: 12px;
@@ -99,4 +116,10 @@
 .affix ul > li > a:hover::before {
   display: block;
   white-space: nowrap;
+}
+
+@media print {
+  footer {
+    display: none;
+  }
 }
