@@ -17,34 +17,29 @@
       {{>partials/breadcrumb}}
       {{/_disableBreadcrumb}}
     </header>
-    {{#_enableSearch}}
-    <div class="container body-content">
-      {{>partials/searchResults}}
-    </div>
-    {{/_enableSearch}}
-    <div role="main" class="container body-content hide-when-search">
-    {{^_disableToc}}
+
+    <main role="main" class="container body-content hide-when-search">
+      {{^_disableToc}}
       {{>partials/toc}}
-      <div class="article row grid-right">
-    {{/_disableToc}}
-    {{#_disableToc}}
-      <div class="article row grid">
       {{/_disableToc}}
-        {{#_disableAffix}}
-        <div class="col-md-12">
-        {{/_disableAffix}}
-        {{^_disableAffix}}
-        <div class="col-md-10">
-        {{/_disableAffix}}
-          <article class="content wrap" id="_content" data-uid="{{uid}}">
-              {{!body}}
-          </article>
-        </div>
+
+      <article class="content wrap" id="_content" data-uid="{{uid}}">
+        {{!body}}
+      </article>
+
+      <aside>
         {{^_disableAffix}}
         {{>partials/affix}}
         {{/_disableAffix}}
+      <aside>
+
+      {{#_enableSearch}}
+      <div class="container body-content">
+        {{>partials/searchResults}}
       </div>
-    </div>
+      {{/_enableSearch}}
+    </main>
+
     {{^_disableFooter}}
     {{>partials/footer}}
     {{/_disableFooter}}

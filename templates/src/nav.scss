@@ -37,8 +37,7 @@ footer {
   max-height: 100%;
   overflow: hidden;
   top: 100px;
-  bottom: 0;
-  position: fixed;
+  position: sticky;
 }
 
 .affix {
