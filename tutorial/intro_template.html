@@ -33,7 +33,8 @@
               </button>
 
               <a class="navbar-brand" href="../index.html">
-                <img id="logo" class="svg" src="../logo.svg" alt="">
+                <img id="logo" class="svg" src="../logo.svg" alt="docfx">
+  docfx
               </a>
             </div>
             <div class="collapse navbar-collapse" id="navbar">
@@ -84,20 +85,14 @@
 <p>Each file belongs to a <em>document type</em>. For example, the document type for Markdown files is <code>conceptual</code>, and the document type for <code>toc.md</code> files is <code>Toc</code>.</p>
 <p>For a specific <em>Template</em>, each <em>document type</em> can have several <em>Renderer</em>s. For a specific file, the template system picks the corresponding <em>Renderer</em>s to render the input data model into output files.</p>
 <h2 id="renderer"><em>Renderer</em></h2>
-<p><em>Renderer</em>s are files written in a specific templating language. It is used to transform the input data model into output files.</p>
-<p>Currently DocFX supports the following templating languages:</p>
-<ol>
-<li><a href="http://mustache.github.io">Mustache</a> templating language</li>
-<li><a href="https://github.com/Shopify/liquid">Liquid</a> templating language</li>
-</ol>
+<p><em>Renderer</em>s are files written in <a href="http://mustache.github.io">Mustache</a>. It is used to transform the input data model into output files.</p>
 <h3 id="naming-rule-for-a-renderer-file">Naming rule for a <em>Renderer</em> file</h3>
 <p>The naming rule for a <em>Renderer</em> file is:
-<code>&lt;document_type&gt;.&lt;output_extension&gt;[.primary].&lt;template_extension&gt;</code>.</p>
+<code>&lt;document_type&gt;.&lt;output_extension&gt;[.primary].tmpl</code>.</p>
 <ul>
 <li><code>&lt;document_type&gt;</code> is the <em>document type</em> current <em>Renderer</em> responsible to.</li>
 <li><code>&lt;output_extension&gt;</code> defines the extension of the output files going through current <em>Renderer</em>. For example, <code>conceptual.html.tmpl</code> transforms <code>file1.md</code> into output file <code>file1.html</code>, and <code>toc.json.tmpl</code> transforms <code>toc.md</code> into output file <code>toc.json</code>.</li>
 <li><code>[.primary]</code> is optional. It is used when there are multiple <em>Renderer</em>s with different extension for one particular document type. The output file transformed by the <code>.primary</code> <em>Renderer</em> is used as the file to be linked. The below example describes the behavior in detail.</li>
-<li><code>&lt;template_extension&gt;</code> is the extension of the <em>Renderer</em> file based on the templating language it uses. For Mustache <em>Renderer</em>, it is <code>.tmpl</code>, while for Liquid <em>Renderer</em>, it is <code>.liquid</code>.</li>
 </ul>
 <p>Here is an example.</p>
 <p>The following template contains two Mustache <em>Renderer</em> files for <code>conceptual</code> document type:</p>
@@ -168,38 +163,6 @@ Hello World
 </code></pre>
 <p>renders as the same as:</p>
 <pre><code class="lang-mustache">&lt;html&gt;
-    &lt;head&gt;&lt;/head&gt;
-    &lt;body&gt;
-        Hello World
-    &lt;body&gt;
-&lt;/html&gt;
-</code></pre>
-<h3 id="renderer-in-liquid-syntax"><em>Renderer</em> in Liquid syntax</h3>
-<h4 id="naming-rule-1">Naming rule</h4>
-<p><em>Renderer</em>s in <a href="https://github.com/Shopify/liquid">Liquid</a> syntax <strong>MUST</strong> end with <code>.liquid</code> extension. Liquid contains <a href="https://help.shopify.com/themes/liquid/tags/theme-tags#include">include</a> tag to support partials, we follow the ruby partials naming convention to have <code>_&lt;partialName&gt;.liquid</code> as partial template.</p>
-<h4 id="extended-syntax-for-dependencies-1">Extended syntax for Dependencies</h4>
-<p>DocFX introduces a custom tag <code>ref</code>, e.g. <code>{% ref file1 %}</code>, to specify the resource files that current template depends on.</p>
-<h4 id="extended-syntax-for-master-page-1">Extended syntax for Master page</h4>
-<p>DocFX introduces custom tags <code>master</code> and <code>body</code> to use master page:</p>
-<pre><code class="lang-liquid">{% master &lt;master_page_name&gt; %}
-</code></pre>
-<p>Inside the master page, the following syntax is used for pages to place their content body:</p>
-<pre><code class="lang-liquid">{% body %}
-</code></pre>
-<p>For example, with the following master page <code>_master.html</code>:</p>
-<pre><code class="lang-html">&lt;html&gt;
-    &lt;head&gt;&lt;/head&gt;
-    &lt;body&gt;
-        {% body %}
-    &lt;body&gt;
-&lt;/html&gt;
-</code></pre>
-<p>A template <code>conceptual.html.liquid</code> as follows:</p>
-<pre><code class="lang-liqud">{% master _master.html %}
-Hello World
-</code></pre>
-<p>renders as the same as:</p>
-<pre><code class="lang-liqud">&lt;html&gt;
     &lt;head&gt;&lt;/head&gt;
     &lt;body&gt;
         Hello World
