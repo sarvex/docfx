@@ -9,47 +9,45 @@
   {{>partials/head}}
   {{^redirect_url}}
   <body data-spy="scroll" data-target="#affix" data-offset="120">
-    <div id="wrapper">
-      <header>
-        {{^_disableNavbar}}
-        {{>partials/navbar}}
-        {{/_disableNavbar}}
-        {{^_disableBreadcrumb}}
-        {{>partials/breadcrumb}}
-        {{/_disableBreadcrumb}}
-      </header>
-      {{#_enableSearch}}
-      <div class="container body-content">
-        {{>partials/searchResults}}
-      </div>
-      {{/_enableSearch}}
-      <div role="main" class="container body-content hide-when-search">
-      {{^_disableToc}}
-        {{>partials/toc}}
-        <div class="article row grid-right">
+    <header>
+      {{^_disableNavbar}}
+      {{>partials/navbar}}
+      {{/_disableNavbar}}
+      {{^_disableBreadcrumb}}
+      {{>partials/breadcrumb}}
+      {{/_disableBreadcrumb}}
+    </header>
+    {{#_enableSearch}}
+    <main class="container">
+      {{>partials/searchResults}}
+    </main>
+    {{/_enableSearch}}
+    <main class="container hide-when-search">
+    {{^_disableToc}}
+      {{>partials/toc}}
+      <div class="article row grid-right">
+    {{/_disableToc}}
+    {{#_disableToc}}
+      <div class="article row grid">
       {{/_disableToc}}
-      {{#_disableToc}}
-        <div class="article row grid">
-        {{/_disableToc}}
-          {{#_disableAffix}}
-          <div class="col-md-12">
-          {{/_disableAffix}}
-          {{^_disableAffix}}
-          <div class="col-md-10">
-          {{/_disableAffix}}
-            <article class="content wrap" id="_content" data-uid="{{uid}}">
-                {{!body}}
-            </article>
-          </div>
-          {{^_disableAffix}}
-          {{>partials/affix}}
-          {{/_disableAffix}}
+        {{#_disableAffix}}
+        <div class="col-md-12">
+        {{/_disableAffix}}
+        {{^_disableAffix}}
+        <div class="col-md-10">
+        {{/_disableAffix}}
+          <article class="content wrap" id="_content" data-uid="{{uid}}">
+              {{!body}}
+          </article>
         </div>
+        {{^_disableAffix}}
+        {{>partials/affix}}
+        {{/_disableAffix}}
       </div>
-      {{^_disableFooter}}
-      {{>partials/footer}}
-      {{/_disableFooter}}
-    </div>
+    </main>
+    {{^_disableFooter}}
+    {{>partials/footer}}
+    {{/_disableFooter}}
     {{>partials/scripts}}
   </body>
   {{/redirect_url}}
