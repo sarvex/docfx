@@ -146,6 +146,15 @@ await Docset.Build(&quot;docfx.json&quot;, options);
 </code></pre>
 <p>This will be rendered as:</p>
 <div class="embeddedvideo"><iframe src="https://www.youtube-nocookie.com/embed/Sz1lCeedcPI" frameborder="0" allowfullscreen="true"></iframe></div>
+<h2 id="image">Image</h2>
+<p>You can embed a image in your page by using the following Markdown syntax:</p>
+<pre><code class="lang-md">![ &lt;alt-text&gt; ]( &lt;image-link&gt; )
+</code></pre>
+<p>Example:</p>
+<pre><code class="lang-md">![alt-text](https://learn.microsoft.com/en-us/media/learn/not-found/learn-not-found-light-mode.png?branch=main)
+</code></pre>
+<p>This will be rendered as:</p>
+<p><img src="https://learn.microsoft.com/en-us/media/learn/not-found/learn-not-found-light-mode.png?branch=main" alt="alt-text"></p>
 <h2 id="include-markdown-files">Include Markdown Files</h2>
 <p>Where markdown files need to be repeated in multiple articles, you can use an include file. The includes feature replace the reference with the contents of the included file at build time.</p>
 <p>You can reuse a common text snippet within a sentence using inline include:</p>
