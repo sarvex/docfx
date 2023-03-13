@@ -58,5 +58,8 @@ namespace Microsoft.DocAsCode
 
         [JsonProperty("namespaceLayout")]
         public NamespaceLayout NamespaceLayout{  get; set; }
+
+        [JsonProperty("markdownComment")]
+        public bool? MarkdownComment { get; set; }
     }
 }

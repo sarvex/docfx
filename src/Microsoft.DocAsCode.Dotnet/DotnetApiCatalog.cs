@@ -104,10 +104,24 @@ namespace Microsoft.DocAsCode.Dotnet
             var expandedFiles = GlobUtility.ExpandFileMapping(EnvironmentContext.BaseDirectory, projects);
             var expandedReferences = GlobUtility.ExpandFileMapping(EnvironmentContext.BaseDirectory, references);
 
+            var shouldSkipMarkup = false;
+            if (configModel is not null)
+            {
+                if (configModel.MarkdownComment.HasValue)
+                    shouldSkipMarkup = !configModel.MarkdownComment.Value;
+                else if (configModel.ShouldSkipMarkup.HasValue)
+                    shouldSkipMarkup = configModel.ShouldSkipMarkup.Value;
+            }
+
+            if (!shouldSkipMarkup && configModel?.MarkdownComment is null)
+            {
+                Logger.LogSuggestion($"Parsing XML comment as markdown will become an opt-in behavior in future releases, please set 'markdownComment' to true in docfx.json metadata config if markdown is used in XML comment.");
+            }
+
             return new ExtractMetadataConfig
             {
                 PreserveRawInlineComments = configModel?.Raw ?? false,
-                ShouldSkipMarkup = configModel?.ShouldSkipMarkup ?? false,
+                ShouldSkipMarkup = shouldSkipMarkup,
                 FilterConfigFile = configModel?.FilterConfigFile is null ? null : Path.GetFullPath(Path.Combine(EnvironmentContext.BaseDirectory, configModel.FilterConfigFile)),
                 IncludePrivateMembers = configModel?.IncludePrivateMembers ?? false,
                 GlobalNamespaceId = configModel?.GlobalNamespaceId,
