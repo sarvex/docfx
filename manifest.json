@@ -546,6 +546,16 @@
     },
     {
       "type": "Resource",
+      "source_relative_path": "extensions/images/modern.screenshot.png",
+      "output": {
+        "resource": {
+          "relative_path": "extensions/images/modern.screenshot.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
       "source_relative_path": "extensions/images/rest.operationpage.default.screenshot.png",
       "output": {
         "resource": {
@@ -621,7 +631,7 @@
       "output": {
         ".html": {
           "relative_path": "extensions/templates.html",
-          "hash": "artOivRMrd9Ov95r+bENUIeHDQ4shZ/80GMsFhFgJSo="
+          "hash": "3MdlqJjxPEIZmc7NThudnNfEb1ZBDARKuuVSn139o/s="
         }
       },
       "version": ""
