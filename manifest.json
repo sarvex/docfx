@@ -17,7 +17,7 @@
       "output": {
         ".html": {
           "relative_path": "README.html",
-          "hash": "filnPesCCfpK2EOOLGa2qW3/a8zs+J6d9eUw/XU+qak="
+          "hash": "3H/Nh6hhA3fqUdzxTytGo1r4c8MkU7G5r707f2GW97o="
         }
       },
       "version": ""
@@ -28,7 +28,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Microsoft.DocAsCode.BuildOptions.html",
-          "hash": "7gHyv5roFaUJ7Xuk0OJcemC30NgamlpsIuGVPNUMYjk="
+          "hash": "9b8Y35H4zVHWGJp+vdlvFWehH79Akzkpqly2pDmlZYM="
         }
       },
       "version": ""
@@ -39,7 +39,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Microsoft.DocAsCode.DataContracts.ManagedReference.AdditionalNotes.html",
-          "hash": "lMKc1WqJpoViNWvc7cdjhZjKdMRivS9Wi+oP0F3RwJY="
+          "hash": "yRTt4zOjiEkWXDXeeFsJBqcxNsBxkMimK1eZ0kW69iM="
         }
       },
       "version": ""
@@ -50,7 +50,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Microsoft.DocAsCode.DataContracts.ManagedReference.ApiParameter.html",
-          "hash": "LoJVq2/CrYMyRVwFaZlRTgww9H59HuQcvV3LQPmVNio="
+          "hash": "QSAQo5cBAfJuQssVnM0dC+vpbh/llnW8mWwbBMXMlCA="
         }
       },
       "version": ""
@@ -61,7 +61,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Microsoft.DocAsCode.DataContracts.ManagedReference.ArgumentInfo.html",
-          "hash": "ParWKqnVjeh1SLzLV/AGjhlGk1qxu4Pzudgo3YLKkxI="
+          "hash": "1xb/Xs2qr1jFnrxwBZLsFttd+nKD1m3qH9Fn00JjuzM="
         }
       },
       "version": ""
@@ -72,7 +72,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Microsoft.DocAsCode.DataContracts.ManagedReference.AttributeInfo.html",
-          "hash": "yZCUnpbYb5br9dTOeyJOIylKfSS+Sye7UV+dYNPV8xc="
+          "hash": "Hglu7lrv2bHUxMYsgWBqWyKYki4Zf20Ayrs2aOYNwO0="
         }
       },
       "version": ""
@@ -83,7 +83,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Microsoft.DocAsCode.DataContracts.ManagedReference.ExceptionInfo.html",
-          "hash": "/Y2uclDP2rag+ddk1Sd2OSVq2iU5PfIA3Je1fAXyfpE="
+          "hash": "+6LL9qgvnlcWsiveSncSPjhqWn0C0JRNwURbaof8MrA="
         }
       },
       "version": ""
@@ -94,7 +94,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Microsoft.DocAsCode.DataContracts.ManagedReference.ItemViewModel.html",
-          "hash": "O4b1vqDOKsjv5RxaK6sXngMrW8wwu+5swc1vR+qoTMU="
+          "hash": "tIMXTIqxmLwkJi4lBVk/777A2H+2Af3suWHyz57iH4g="
         }
       },
       "version": ""
@@ -105,7 +105,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Microsoft.DocAsCode.DataContracts.ManagedReference.LinkInfo.html",
-          "hash": "f9LRQPWKkoJm7tOLyrEn1o0h0tIQdWyDscEkYVmhUdQ="
+          "hash": "9fySlCWHBK4enD2LXk2Xjew1FM+098Jy5cMyJOMEubY="
         }
       },
       "version": ""
@@ -116,7 +116,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Microsoft.DocAsCode.DataContracts.ManagedReference.LinkType.html",
-          "hash": "K/03eqdQnPNBoJIlkcjRFAdVEzyJvhpHhUHSY8xjpR4="
+          "hash": "WtU+8pu9GGdFM0xgX2A16nVrktkVs4rULj2C1S/5e+M="
         }
       },
       "version": ""
@@ -127,7 +127,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Microsoft.DocAsCode.DataContracts.ManagedReference.MemberType.html",
-          "hash": "Hp8R0vdenKKRBq9n5nqLlQH/cFbG7kNwhFAHZ0UodJk="
+          "hash": "/xLDH9tq6iqHf2+sQql3cg6DqadDP3JKoTROQZza/ms="
         }
       },
       "version": ""
@@ -138,7 +138,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Microsoft.DocAsCode.DataContracts.ManagedReference.NamedArgumentInfo.html",
-          "hash": "TutI7WMI9XhX3xA660KCIXXuS1M91q8W9/fFc+r+L4Y="
+          "hash": "lFHERe4sFH50C4l3hijXYA548W6dGOwaZ+uzvN9kEKA="
         }
       },
       "version": ""
@@ -149,7 +149,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Microsoft.DocAsCode.DataContracts.ManagedReference.PageViewModel.html",
-          "hash": "33eCxx2J40nE9BndU3I+iUAq3p4PvYT1XIwJpHrAlW8="
+          "hash": "J6vizBiBlHl3om/LDf52CFQsl5ThwrjjSsiRWt95SGc="
         }
       },
       "version": ""
@@ -160,7 +160,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Microsoft.DocAsCode.DataContracts.ManagedReference.SyntaxDetailViewModel.html",
-          "hash": "OzCRx4zdxc2Lnelte2FytFPf72welex5fIyVczmYPrA="
+          "hash": "XaHqjKHWh44wdEC3MOImMTy407gcbDYDDvk1dNAe3Xc="
         }
       },
       "version": ""
@@ -171,7 +171,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Microsoft.DocAsCode.DataContracts.ManagedReference.SyntaxLanguage.html",
-          "hash": "HmlYhMa/rMwNNr9Lkerq6XbqjdxyNFP7bAClvvuTAJM="
+          "hash": "ST/G5TBX92/5LueXSKCRcXSzQjOz7QQsHXHRcT/1iI0="
         }
       },
       "version": ""
@@ -182,7 +182,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Microsoft.DocAsCode.DataContracts.ManagedReference.html",
-          "hash": "Zsgfu76rVZ8BDuA6+vJKTo86+mpnTGINGTd9AZyPtWE="
+          "hash": "g84xBIAfrhfjaDS/ClkKEkRFKwYkCe+J00aj5c7cD6k="
         }
       },
       "version": ""
@@ -193,7 +193,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Microsoft.DocAsCode.Docset.html",
-          "hash": "sYYnN9oh2dr/cxIooQjlrz+xlWpIDc43ZDNUkbX+yYU="
+          "hash": "o+MdXd8em05CdEk5eDlOuArTTbnS3O6FPOEc+rOAnBQ="
         }
       },
       "version": ""
@@ -204,7 +204,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Microsoft.DocAsCode.Dotnet.DotnetApiCatalog.html",
-          "hash": "rYGoxj5d0eOkoKb7BWum/tQytXogDA/qCZ9JvMjwbUQ="
+          "hash": "fuOtRbtmaZcb9hsIgFotOjcH4bWxSBWqMgsKYl0JQ/8="
         }
       },
       "version": ""
@@ -215,7 +215,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Microsoft.DocAsCode.Dotnet.DotnetApiOptions.html",
-          "hash": "X/BLXFzNu2MMs9X4pmWgSEbpqjIrM1/EDeiykYOg2HY="
+          "hash": "3eKbMpCPWwvNpUFjv+kVv55wSw0rxFo03BRRN/729Bg="
         }
       },
       "version": ""
@@ -226,7 +226,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Microsoft.DocAsCode.Dotnet.SymbolIncludeState.html",
-          "hash": "PQXYPKgSsRT3PjgjEUVk6uftiQykl5OGCDlXq6YUvmw="
+          "hash": "I9Egy9y2ZkurUnqPpgc29LmNl8aP9LbzE27DBmTIro8="
         }
       },
       "version": ""
@@ -237,7 +237,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Microsoft.DocAsCode.Dotnet.html",
-          "hash": "SbLGjq8BQdhKzGne3CDiYj/aR7Mr1N4Cqpw3RV/FQY8="
+          "hash": "ErFCkvZ7X3ZCDJdDsn9OzjRIQmdK/kDJumL/6/bnhMQ="
         }
       },
       "version": ""
@@ -248,7 +248,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Microsoft.DocAsCode.html",
-          "hash": "YzlTGS9rjIZLqQfQ5oya9j9tQ3RmE3BsYa99bjLcHso="
+          "hash": "x/acZ/rinB8pMwpC7BfIRqr2sw5CweFGNd+tLq5QoiQ="
         }
       },
       "version": ""
@@ -304,7 +304,7 @@
       "output": {
         ".html": {
           "relative_path": "docs/config.html",
-          "hash": "Q0c/m5C38ZRHsH4WTQfF/d/D53T373muAZ73pJ6xeXw="
+          "hash": "zjbcf94thNemaE3OtIBlMSL2pfwQadqTgHq4ijQOTJ4="
         }
       },
       "version": ""
@@ -318,7 +318,7 @@
       "output": {
         ".html": {
           "relative_path": "docs/dotnet-api-docs.html",
-          "hash": "ggYc2j4u2klM/FTNUpGHUC3rZTsm7wPUqb9lhdkcd7s="
+          "hash": "yOJqJlnaqy6c/C/Q+/EArnZTa8fh73lLI05CaBwHTeg="
         }
       },
       "version": ""
@@ -329,7 +329,7 @@
       "output": {
         ".html": {
           "relative_path": "docs/dotnet-yaml-format.html",
-          "hash": "ZT9GU7j23kB1Qfu3KPk0DJsulNKjUpG/hjidBMDsnpQ="
+          "hash": "xTg0oxHtEqNBTHqmNPo0diBnOAkOW6VIAh+JeKxjgKM="
         }
       },
       "version": ""
@@ -340,7 +340,7 @@
       "output": {
         ".html": {
           "relative_path": "docs/markdown.html",
-          "hash": "uxCsGcEBeFmqEWfTO+AimdGpals6zB3bU6outcm1lpM="
+          "hash": "hkla+w8lim0DoDHNjC7NGf6oAWZMI+/fwMvBgB5OwFM="
         }
       },
       "version": ""
@@ -351,7 +351,7 @@
       "output": {
         ".html": {
           "relative_path": "docs/pdf.html",
-          "hash": "l4WpUE7ufs+/k8FvQIa2jZ5jYL26GLNz7ZOp8G8M0hY="
+          "hash": "WDWHemQtMyLxiiHviDLoeKkv7bZ/YdkN0pzO050bA9M="
         }
       },
       "version": ""
@@ -362,7 +362,7 @@
       "output": {
         ".html": {
           "relative_path": "docs/rest-api-docs.html",
-          "hash": "Ho79MDXAZzCVM6GJUm8CsffDW8LsBHn4vDaesM6Ley8="
+          "hash": "3BSm/J2qiWu98yHN7IsfjSy4oV++9xCZkn0YsW1oh9M="
         }
       },
       "version": ""
@@ -373,7 +373,7 @@
       "output": {
         ".html": {
           "relative_path": "docs/table-of-contents.html",
-          "hash": "JiFzkbNKdC0Bg3gNpwtQe6mzI2arBqze2XksdgkMkwM="
+          "hash": "ir22dgHZsQhOYaDOosjE/f5KFrKmX3DOKoXs7u4sIFY="
         }
       },
       "version": ""
@@ -384,7 +384,7 @@
       "output": {
         ".html": {
           "relative_path": "docs/template.html",
-          "hash": "Ig1G5U0K0uRGaDWfr4T8fPoP2eCTA74FjUOSENo3yFM="
+          "hash": "f2D6lVxd2sfpys7ibbvyQBR8/Sr6ac7oDfEgQ854ocM="
         }
       },
       "version": ""
@@ -610,7 +610,7 @@
       "output": {
         ".html": {
           "relative_path": "extensions/packages.html",
-          "hash": "WQMcSeNQdbGWCEDQqxsX9C09WUw78EaD2sZ2NLJh0Eo="
+          "hash": "nC+HcZ5COwMGqmGDdzlZzmnp4sEUlXVAP+FRQd41CEo="
         }
       },
       "version": ""
@@ -621,7 +621,7 @@
       "output": {
         ".html": {
           "relative_path": "extensions/templates.html",
-          "hash": "f+fGLWO88+XhTqmV67jhjVOXPNulG1lzhp2f1D2KukA="
+          "hash": "artOivRMrd9Ov95r+bENUIeHDQ4shZ/80GMsFhFgJSo="
         }
       },
       "version": ""
@@ -647,7 +647,7 @@
       "output": {
         ".html": {
           "relative_path": "extensions/tools.html",
-          "hash": "qzpORNuDarsoYXfahO0ECIKuVV9cpOB9Q5FFRbq0Iwg="
+          "hash": "xWWGvHmB22wQPBkkyKU6qKgXC0foj5LmfdlIRF96o9k="
         }
       },
       "version": ""
@@ -658,7 +658,7 @@
       "output": {
         ".html": {
           "relative_path": "index.html",
-          "hash": "tY0WMgtLqi5S/KKNqvlLtfINPp9oYLeN+5QaiIXvMUo="
+          "hash": "OT8YbKmQFahJASgwEvbL7Q/VsaNVK47Z+jBIZV7To6E="
         }
       },
       "version": ""
@@ -669,7 +669,7 @@
       "output": {
         ".html": {
           "relative_path": "spec/docfx_document_schema.html",
-          "hash": "NmAbSSXfikl6uk8hJE/VpvcM+jxVERWwBGLbp4oZF2M="
+          "hash": "Qc+mH4oeiN6nFvWs1iQdKDpLkHQKAuoNGIF/g9lN+7o="
         }
       },
       "version": ""
@@ -742,7 +742,7 @@
       "output": {
         ".html": {
           "relative_path": "spec/metadata_format_spec.html",
-          "hash": "8XQEtktHH9fCIUxU9r9728q1GAGzDp0sKFCgbM973fM="
+          "hash": "O0CxSs3f7ElS+ikNaduA+zYzxvoOTjbGMUy8L9nwMqM="
         }
       },
       "version": ""
@@ -753,7 +753,7 @@
       "output": {
         ".html": {
           "relative_path": "spec/sdp_design_spec.html",
-          "hash": "iaujrYX+x7IyPNrIXtsLDSdQvNbh6iZLdOmJHC3nftw="
+          "hash": "XRaod6f6AuMbJqwFYlK4DnRIdNcYZq90EwJCDMZBHds="
         }
       },
       "version": ""
@@ -790,7 +790,7 @@
       "output": {
         ".html": {
           "relative_path": "tutorial/advanced_support_hyperlink.html",
-          "hash": "1K4yQ1AEYPf1owueApy3Wq1ekIQ/08NKej7+mJUM3+w="
+          "hash": "dt1vnv7dj0y2xzCqwaE6jCNMx7tmyZKCxmXhuVMqcUQ="
         }
       },
       "version": ""
@@ -801,7 +801,7 @@
       "output": {
         ".html": {
           "relative_path": "tutorial/docfx.exe_user_manual.html",
-          "hash": "BEl5WZtf+ach43gkg36iHdVYDMAndRnL4I2aW1QkAOg="
+          "hash": "WxD9Iq85Fbfv5LH6APGOdqX9NEZ97u3uy4W/Zx8rKek="
         }
       },
       "version": ""
@@ -823,7 +823,7 @@
       "output": {
         ".html": {
           "relative_path": "tutorial/howto_add_a_customized_post_processor.html",
-          "hash": "nj8E+KfGDj4OwpwMw6B0s1yhcQGxCupNIRG4bNh/Auw="
+          "hash": "dd1qmgzMBaJIhOHNUUBNKZ9WhpRWFXRqrdAO+2GqJoc="
         }
       },
       "version": ""
@@ -834,7 +834,7 @@
       "output": {
         ".html": {
           "relative_path": "tutorial/howto_build_your_own_type_of_documentation_with_custom_plug-in.html",
-          "hash": "hHZPpkKLUDNqMlByamKB8hNeFu7NHJ56g1wfExNWcek="
+          "hash": "bb5z2T9PLiUt3NWtxoy4u1GYJ/KUTAvrub7vgrmnVFI="
         }
       },
       "version": ""
@@ -845,7 +845,7 @@
       "output": {
         ".html": {
           "relative_path": "tutorial/howto_create_custom_template.html",
-          "hash": "YLB4zTxWFAae1cIAMDbGoiN9Dc24uOGqalilPex5pIM="
+          "hash": "bI1lIihLIGVA8VUNl78EehZY4xvwRe8uaEQxgyC5fyM="
         }
       },
       "version": ""
@@ -897,7 +897,7 @@
       "output": {
         ".html": {
           "relative_path": "tutorial/intro_overwrite_files.html",
-          "hash": "7X4H8nPeQEjuuOm4vcsTSfRW+0DOiXCzPmkZSFfproo="
+          "hash": "g/rZFeSfrsER5utzOLFUZzoXW3lM7rWCkI/hMK1hujU="
         }
       },
       "version": ""
@@ -919,7 +919,7 @@
       "output": {
         ".html": {
           "relative_path": "tutorial/intro_template.html",
-          "hash": "2LDBQG//+DwthFmcMhd7xWJH4l+coXnJyYkLr0kfoIw="
+          "hash": "BLTiuQZguP5TAOIVNCZ0Cr1CvaKdimYJJjYO3zpjIfs="
         }
       },
       "version": ""
@@ -941,7 +941,7 @@
       "output": {
         ".html": {
           "relative_path": "tutorial/links_and_cross_references.html",
-          "hash": "I+WjVgx+lWT2+khQyQeqxnb65cj5MzZDCAlIrHcDTxY="
+          "hash": "YyIjkClwBZX5TocOnpZsqON9ahaycU1XNSIw8aHCvjc="
         }
       },
       "version": ""
@@ -952,7 +952,7 @@
       "output": {
         ".html": {
           "relative_path": "tutorial/universalreference/gen_doc_for_js.html",
-          "hash": "/QYMwvkmMJQsuOfxS2syYt3yfqqeTCfR/QSkfZUNkrY="
+          "hash": "LHLvkxvMa+ouSNKh9gfBNOb0uQbWF0Q2VDMmS52sv1w="
         }
       },
       "version": ""
@@ -963,7 +963,7 @@
       "output": {
         ".html": {
           "relative_path": "tutorial/universalreference/gen_doc_for_ts.html",
-          "hash": "z/s5vmoAr7LUdGSSL7wJH4WFE/z61qEe7rhA5sYlcmg="
+          "hash": "HmV3I24+YU6LLYUjDSKfDnUUXbAL2tx89AeLD4fpAkU="
         }
       },
       "version": ""
@@ -974,7 +974,7 @@
       "output": {
         ".html": {
           "relative_path": "tutorial/universalreference/intro_multiple_langs_support.html",
-          "hash": "uxEYl6GNX5F18u5/8WxvM7ysyxKZoaw2Qzk1CqiYsEY="
+          "hash": "BEqG25BhazoHEW/x7ZocBBcGR+jGSR6NDy0bWz12NeA="
         }
       },
       "version": ""
