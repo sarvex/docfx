@@ -22,7 +22,6 @@ namespace Microsoft.DocAsCode.MarkdigEngine
         public string Name => "markdig";
 
         private readonly MarkdownServiceParameters _parameters;
-        private readonly MarkdownValidatorBuilder _mvb;
         private readonly MarkdownContext _context;
         private readonly Func<MarkdownPipelineBuilder, MarkdownPipelineBuilder> _configureMarkdig;
 
@@ -33,7 +32,6 @@ namespace Microsoft.DocAsCode.MarkdigEngine
         {
             _parameters = parameters;
             _configureMarkdig = configureMarkdig;
-            _mvb = MarkdownValidatorBuilder.Create(parameters, container);
             _context = new MarkdownContext(
                 key => _parameters.Tokens.TryGetValue(key, out var value) ? value : null,
                 (code, message, origin, line) => Logger.LogInfo(message, null, InclusionContext.File.ToString(), line?.ToString(), code),
@@ -152,11 +150,6 @@ namespace Microsoft.DocAsCode.MarkdigEngine
             if (enableSourceInfo)
             {
                 builder.UseLineNumber(file => ((RelativePath)file).RemoveWorkingFolder());
-            }
-
-            if (enableValidation)
-            {
-                builder.Extensions.Add(new ValidationExtension(_mvb, _context));
             }
 
             if (isInline)
