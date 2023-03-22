@@ -6,16 +6,15 @@ using Markdig;
 
 #nullable enable
 
-namespace Microsoft.DocAsCode
+namespace Microsoft.DocAsCode;
+
+/// <summary>
+/// Provides options to be used with <see cref="Docset.Build(string, BuildOptions)"/>.
+/// </summary>
+public class BuildOptions
 {
     /// <summary>
-    /// Provides options to be used with <see cref="Docset.Build(string, BuildOptions)"/>.
+    /// Configures the markdig markdown pipeline.
     /// </summary>
-    public class BuildOptions
-    {
-        /// <summary>
-        /// Configures the markdig markdown pipeline.
-        /// </summary>
-        public Func<MarkdownPipelineBuilder, MarkdownPipelineBuilder>? ConfigureMarkdig { get; init; }
-    }
+    public Func<MarkdownPipelineBuilder, MarkdownPipelineBuilder>? ConfigureMarkdig { get; init; }
 }

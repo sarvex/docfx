@@ -1,13 +1,12 @@
-﻿namespace Microsoft.DocAsCode.MarkdigEngine.Extensions
-{
-    using Markdig.Renderers;
-    using Markdig.Renderers.Html;
+﻿namespace Microsoft.DocAsCode.MarkdigEngine.Extensions;
 
-    public class NolocRender : HtmlObjectRenderer<NolocInline>
+using Markdig.Renderers;
+using Markdig.Renderers.Html;
+
+public class NolocRender : HtmlObjectRenderer<NolocInline>
+{
+    protected override void Write(HtmlRenderer renderer, NolocInline obj)
     {
-        protected override void Write(HtmlRenderer renderer, NolocInline obj)
-        {
-            renderer.Write(obj.Text);
-        }
+        renderer.Write(obj.Text);
     }
 }
