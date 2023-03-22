@@ -13,20 +13,22 @@ namespace Microsoft.DocAsCode.Build.SchemaDriven.Tests;
     [Fact]
     public void TestJsonPointerSpec()
     {
-        var root = ConvertToObjectHelper.ConvertToDynamic(ConvertToObjectHelper.ConvertJObjectToObject(JsonUtility.FromJsonString<object>(@"
-{
-      ""foo"": [""bar"", ""baz""],
-      """": 0,
-      ""a/b"": 1,
-      ""c%d"": 2,
-      ""e^f"": 3,
-      ""g|h"": 4,
-      ""i\\j"": 5,
-      ""k\""l"": 6,
-      "" "": 7,
-      ""m~n"": 8
-   }
-")));
+        var root = ConvertToObjectHelper.ConvertToDynamic(ConvertToObjectHelper.ConvertJObjectToObject(JsonUtility.FromJsonString<object>("""
+
+            {
+                  "foo": ["bar", "baz"],
+                  "": 0,
+                  "a/b": 1,
+                  "c%d": 2,
+                  "e^f": 3,
+                  "g|h": 4,
+                  "i\\j": 5,
+                  "k\"l": 6,
+                  " ": 7,
+                  "m~n": 8
+               }
+
+            """)));
 
         Assert.Equal(root, new JsonPointer("").GetValue(root));
         Assert.Equal(((dynamic)root).foo, new JsonPointer("/foo").GetValue(root));
@@ -45,26 +47,28 @@ namespace Microsoft.DocAsCode.Build.SchemaDriven.Tests;
     [Fact]
     public void TestJsonPointerWithComplexObject()
     {
-        var root = ConvertToObjectHelper.ConvertToDynamic(ConvertToObjectHelper.ConvertJObjectToObject(JsonUtility.FromJsonString<object>(@"
-{
-      ""dict"": {
-        ""key1"": ""value1"",
-        ""key2"": [""arr1"", ""arr2""],
-        ""key3"": {
-            ""key1"": ""value1"",
-            ""key2"": [""arr1"", ""arr2""],
-            ""key3"": {
-                ""key1"": ""value1"",
-                ""key2"": [""arr1"", ""arr2""],
-                ""key3"": {
-                   ""key1"": ""value1""
-                }
-            }
-        }
-    },
-      ""array"": [""bar"", ""baz""]
-   }
-")));
+        var root = ConvertToObjectHelper.ConvertToDynamic(ConvertToObjectHelper.ConvertJObjectToObject(JsonUtility.FromJsonString<object>("""
+
+            {
+                  "dict": {
+                    "key1": "value1",
+                    "key2": ["arr1", "arr2"],
+                    "key3": {
+                        "key1": "value1",
+                        "key2": ["arr1", "arr2"],
+                        "key3": {
+                            "key1": "value1",
+                            "key2": ["arr1", "arr2"],
+                            "key3": {
+                               "key1": "value1"
+                            }
+                        }
+                    }
+                },
+                  "array": ["bar", "baz"]
+               }
+
+            """)));
 
         Assert.Equal(root, new JsonPointer("").GetValue(root));
         Assert.Equal("value1", new JsonPointer("/dict/key1").GetValue(root));

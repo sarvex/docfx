@@ -120,31 +120,45 @@ public class SwaggerJsonParserTest
         var action = actionJObject.ToObject<OperationObject>();
         var schemaJObject = (JObject)action.Parameters[0].Metadata["schema"];
         var schemaObj = schemaJObject.ToString(Formatting.Indented);
-        Assert.Equal(@"{
-  ""properties"": {
-    ""provisioningErrors"": {
-      ""type"": ""array"",
-      ""items"": {
-        ""properties"": {
-          ""errorDetail"": {
-            ""type"": ""array"",
-            ""items"": {
-              ""x-internal-loop-ref-name"": ""contact"",
-              ""x-internal-loop-token"": {}
+        Assert.Equal("""
+            {
+              "properties": {
+                "provisioningErrors": {
+                  "type": "array",
+                  "items": {
+                    "properties": {
+                      "errorDetail": {
+                        "type": "array",
+                        "items": {
+                          "x-internal-loop-ref-name": "contact",
+                          "x-internal-loop-token": {}
+                        }
+                      }
+                    },
+                    "x-internal-ref-name": "ProvisioningError"
+                  },
+                  "readOnly": true
+                }
+              },
+              "x-internal-ref-name": "contact",
+              "example": {
+                "department": "Sales",
+                "jobTitle": "Sales Rep"
+              }
             }
-          }
-        },
-        ""x-internal-ref-name"": ""ProvisioningError""
-      },
-      ""readOnly"": true
-    }
-  },
-  ""x-internal-ref-name"": ""contact"",
-  ""example"": {
-    ""department"": ""Sales"",
-    ""jobTitle"": ""Sales Rep""
-  }
-}".Replace("\r\n", "\n"), schemaObj.Replace("\r\n", "\n"));
+            """.Replace("""
+
+
+            """, """
+
+
+"""), schemaObj.Replace("""
+
+
+                         """, """
+
+
+"""));
     }
 
     [Fact]
@@ -159,31 +173,45 @@ public class SwaggerJsonParserTest
         var action = actionJObject.ToObject<OperationObject>();
         var schemaJObject = (JObject)action.Parameters[0].Metadata["schema"];
         var schemaObj = schemaJObject.ToString(Formatting.Indented);
-        Assert.Equal(@"{
-  ""properties"": {
-    ""provisioningErrors"": {
-      ""type"": ""array"",
-      ""items"": {
-        ""properties"": {
-          ""errorDetail"": {
-            ""type"": ""array"",
-            ""items"": {
-              ""x-internal-loop-ref-name"": ""contact"",
-              ""x-internal-loop-token"": {}
+        Assert.Equal("""
+            {
+              "properties": {
+                "provisioningErrors": {
+                  "type": "array",
+                  "items": {
+                    "properties": {
+                      "errorDetail": {
+                        "type": "array",
+                        "items": {
+                          "x-internal-loop-ref-name": "contact",
+                          "x-internal-loop-token": {}
+                        }
+                      }
+                    },
+                    "x-internal-ref-name": "Provision%ing|Error"
+                  },
+                  "readOnly": true
+                }
+              },
+              "x-internal-ref-name": "contact",
+              "example": {
+                "department": "Sales",
+                "jobTitle": "Sales Rep"
+              }
             }
-          }
-        },
-        ""x-internal-ref-name"": ""Provision%ing|Error""
-      },
-      ""readOnly"": true
-    }
-  },
-  ""x-internal-ref-name"": ""contact"",
-  ""example"": {
-    ""department"": ""Sales"",
-    ""jobTitle"": ""Sales Rep""
-  }
-}".Replace("\r\n", "\n"), schemaObj.Replace("\r\n", "\n"));
+            """.Replace("""
+
+
+            """, """
+
+
+"""), schemaObj.Replace("""
+
+
+                         """, """
+
+
+"""));
     }
     [Fact]
     public void ParseKeyWordSwaggerJsonShouldSucceed()

@@ -14,38 +14,52 @@ public class AggregatorTest
     [Theory]
     [InlineData(
 @"# Test",
-@"<h1>Test</h1>
-")]
+"""
+<h1>Test</h1>
+
+""")]
     [InlineData(
-@"# Test
-- - -",
-@"<h2>Test</h2>
-")]
+"""
+# Test
+- - -
+""",
+"""
+<h2>Test</h2>
+
+""")]
     [InlineData(
-@"# Test1
+"""
+# Test1
 # Test2
 - - -
 # Test3
 * * *
-# Test4",
-@"<h1>Test1</h1>
+# Test4
+""",
+"""
+<h1>Test1</h1>
 <h2>Test2</h2>
 <h2>Test3</h2>
 <h1>Test4</h1>
-")]
+
+""")]
     [InlineData(
-@"# Test1
+"""
+# Test1
 ## Test2
 - - -
 # Test3
 * * *
-# Test4",
-@"<h1>Test1</h1>
+# Test4
+""",
+"""
+<h1>Test1</h1>
 <h2>Test2</h2>
 <hr />
 <h2>Test3</h2>
 <h1>Test4</h1>
-")]
+
+""")]
     public void TestAggregateHead1_Hr_To_Head2(string content, string expected)
     {
         TestAggregator(content, expected, new Head1HrAggregateToHead2());
@@ -53,36 +67,48 @@ public class AggregatorTest
 
     [Theory]
     [InlineData(
-@"P1
+"""
+P1
 
-P2",
-@"<p>P1
+P2
+""",
+"""
+<p>P1
 P2</p>
-")]
+
+""")]
     [InlineData(
-@"P1
+"""
+P1
 
 P2
 
-P3",
-@"<p>P1
+P3
+""",
+"""
+<p>P1
 P2
 P3</p>
-")]
+
+""")]
     [InlineData(
-@"P1
+"""
+P1
 
 P2
 ***
 P3
 
-P4",
-@"<p>P1
+P4
+""",
+"""
+<p>P1
 P2</p>
 <hr />
 <p>P3
 P4</p>
-")]
+
+""")]
     public void TestAggregatePara_Para_To_Para(string content, string expected)
     {
         TestAggregator(content, expected, new ParaParaAggregateToPara());
@@ -135,6 +161,12 @@ P4</p>
         var pipeline = pipelineBuilder.Build();
         var html = Markdown.ToHtml(content, pipeline);
 
-        Assert.Equal(expected.Replace("\r\n", "\n"), html);
+        Assert.Equal(expected.Replace("""
+
+
+            """, """
+
+
+            """), html);
     }
 }

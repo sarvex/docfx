@@ -13,22 +13,24 @@ public class JsonConverterTest
     [Trait("Related", "docfx")]
     public void TestJObjectDictionaryToObjectDictionaryConverterSerializeAndDeserialize()
     {
-        string jsonString = @"
-{
-    ""baseUrl"": ""https://dotnet.github.io/docfx"",
-    ""priority"": 0.5,
-    ""changefreq"": ""monthly"",
-    ""fileOptions"":{
-        ""**/api/**.yml"": {
-            ""priority"": 0.3
-        },
-        ""**.md"": {
-            ""baseUrl"": ""https://dotnet.github.io/docfx/1"",
-            ""priority"": 0.8
-        }
-    }
-}
-";
+        string jsonString = """
+
+            {
+                "baseUrl": "https://dotnet.github.io/docfx",
+                "priority": 0.5,
+                "changefreq": "monthly",
+                "fileOptions":{
+                    "**/api/**.yml": {
+                        "priority": 0.3
+                    },
+                    "**.md": {
+                        "baseUrl": "https://dotnet.github.io/docfx/1",
+                        "priority": 0.8
+                    }
+                }
+            }
+
+            """;
         var settings = new JsonSerializerSettings
         {
             Converters =

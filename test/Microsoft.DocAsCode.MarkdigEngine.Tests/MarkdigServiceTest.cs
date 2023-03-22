@@ -16,11 +16,13 @@ public class MarkdigServiceTest
     [Trait("Related", "MarkdigService")]
     public void MarkdigServiceTest_ParseAndRender_Simple()
     {
-        var markdown = @"# title
+        var markdown = """
+            # title
 
-```yaml
-key: value
-```";
+            ```yaml
+            key: value
+            ```
+            """;
         var service = TestUtility.CreateMarkdownService();
         var document = service.Parse(markdown, "topic.md");
 
@@ -29,11 +31,19 @@ key: value
         Assert.IsType<FencedCodeBlock>(document[1]);
 
         var mr = service.Render(document);
-        var expected = @"<h1 id=""title"">title</h1>
-<pre><code class=""lang-yaml"">key: value
-</code></pre>
-";
-        Assert.Equal(expected.Replace("\r\n", "\n"), mr.Html);
+        var expected = """
+            <h1 id="title">title</h1>
+            <pre><code class="lang-yaml">key: value
+            </code></pre>
+
+            """;
+        Assert.Equal(expected.Replace("""
+
+
+            """, """
+
+
+            """), mr.Html);
     }
 
     [Fact]
@@ -56,7 +66,10 @@ key: value
         Assert.IsType<InclusionBlock>(document[0]);
 
         var mr = service.Render(document);
-        var expected = @"<p>Paragraph1</p>" + "\n";
+        var expected = @"<p>Paragraph1</p>" + """
+
+
+            """;
         Assert.Equal(expected, mr.Html);
 
         var expectedDependency = new List<string> { "b/linkAndRefRoot.md" };

@@ -57,8 +57,18 @@ public static class TestUtility
             if (html != null)
             {
                 Assert.Equal(
-                    html.Replace("\r", "").Replace("\n", ""),
-                    actualHtml.Replace("\r", "").Replace("\n", ""));
+                    html.Replace("""
+
+                        """, "").Replace("""
+
+
+                        """, ""),
+                    actualHtml.Replace("""
+
+                        """, "").Replace("""
+
+
+                        """, ""));
             }
 
             Assert.Equal(errors.OrderBy(_ => _), actualErrors.OrderBy(_ => _));

@@ -13,64 +13,68 @@ public class RenderZoneTest
     public void KitchenSink()
     {
         //arrange
-        var content = @"# Article 2
+        var content = """
+            # Article 2
 
-Shared content.
+            Shared content.
 
-## Section 1
+            ## Section 1
 
-Shared content.
+            Shared content.
 
-::: zone target=""chromeless""
-## Section for chromeless only
+            ::: zone target="chromeless"
+            ## Section for chromeless only
 
-Some chromeless-specific content here...
+            Some chromeless-specific content here...
 
-::: nested moniker zone is not allowed. So this line is in plain text.
-Inline ::: should not end moniker zone.
+            ::: nested moniker zone is not allowed. So this line is in plain text.
+            Inline ::: should not end moniker zone.
 
-::: zone-end
+            ::: zone-end
 
-## Section 2
+            ## Section 2
 
-Shared content.
+            Shared content.
 
-:::  zone  pivot=""foo""
-a pivot
-:::    zone-end
+            :::  zone  pivot="foo"
+            a pivot
+            :::    zone-end
 
-:::  zone  pivot="" foo,bar ""    target=""docs""
-a pivot with target 
-:::    zone-end
+            :::  zone  pivot=" foo,bar "    target="docs"
+            a pivot with target 
+            :::    zone-end
 
-::: zone target=""docs"" pivot=""csharp7-is-great""
-hello
-::: zone-end
-";
+            ::: zone target="docs" pivot="csharp7-is-great"
+            hello
+            ::: zone-end
+
+            """;
 
         // assert
-        var expected = @"<h1 id=""article-2"" sourceFile=""fake.md"" sourceStartLineNumber=""1"">Article 2</h1>
-<p sourceFile=""fake.md"" sourceStartLineNumber=""3"">Shared content.</p>
-<h2 id=""section-1"" sourceFile=""fake.md"" sourceStartLineNumber=""5"">Section 1</h2>
-<p sourceFile=""fake.md"" sourceStartLineNumber=""7"">Shared content.</p>
-<div class=""zone has-target"" data-target=""chromeless"" sourceFile=""fake.md"" sourceStartLineNumber=""9"">
-<h2 id=""section-for-chromeless-only"" sourceFile=""fake.md"" sourceStartLineNumber=""10"">Section for chromeless only</h2>
-<p sourceFile=""fake.md"" sourceStartLineNumber=""12"">Some chromeless-specific content here...</p>
-<p sourceFile=""fake.md"" sourceStartLineNumber=""14"">::: nested moniker zone is not allowed. So this line is in plain text.
-Inline ::: should not end moniker zone.</p>
-</div>
-<h2 id=""section-2"" sourceFile=""fake.md"" sourceStartLineNumber=""19"">Section 2</h2>
-<p sourceFile=""fake.md"" sourceStartLineNumber=""21"">Shared content.</p>
-<div class=""zone has-pivot"" data-pivot=""foo"" sourceFile=""fake.md"" sourceStartLineNumber=""23"">
-<p sourceFile=""fake.md"" sourceStartLineNumber=""24"">a pivot</p>
-</div>
-<div class=""zone has-target has-pivot"" data-target=""docs"" data-pivot=""foo bar"" sourceFile=""fake.md"" sourceStartLineNumber=""27"">
-<p sourceFile=""fake.md"" sourceStartLineNumber=""28"">a pivot with target</p>
-</div>
-<div class=""zone has-target has-pivot"" data-target=""docs"" data-pivot=""csharp7-is-great"" sourceFile=""fake.md"" sourceStartLineNumber=""31"">
-<p sourceFile=""fake.md"" sourceStartLineNumber=""32"">hello</p>
-</div>
-";
+        var expected = """
+            <h1 id="article-2" sourceFile="fake.md" sourceStartLineNumber="1">Article 2</h1>
+            <p sourceFile="fake.md" sourceStartLineNumber="3">Shared content.</p>
+            <h2 id="section-1" sourceFile="fake.md" sourceStartLineNumber="5">Section 1</h2>
+            <p sourceFile="fake.md" sourceStartLineNumber="7">Shared content.</p>
+            <div class="zone has-target" data-target="chromeless" sourceFile="fake.md" sourceStartLineNumber="9">
+            <h2 id="section-for-chromeless-only" sourceFile="fake.md" sourceStartLineNumber="10">Section for chromeless only</h2>
+            <p sourceFile="fake.md" sourceStartLineNumber="12">Some chromeless-specific content here...</p>
+            <p sourceFile="fake.md" sourceStartLineNumber="14">::: nested moniker zone is not allowed. So this line is in plain text.
+            Inline ::: should not end moniker zone.</p>
+            </div>
+            <h2 id="section-2" sourceFile="fake.md" sourceStartLineNumber="19">Section 2</h2>
+            <p sourceFile="fake.md" sourceStartLineNumber="21">Shared content.</p>
+            <div class="zone has-pivot" data-pivot="foo" sourceFile="fake.md" sourceStartLineNumber="23">
+            <p sourceFile="fake.md" sourceStartLineNumber="24">a pivot</p>
+            </div>
+            <div class="zone has-target has-pivot" data-target="docs" data-pivot="foo bar" sourceFile="fake.md" sourceStartLineNumber="27">
+            <p sourceFile="fake.md" sourceStartLineNumber="28">a pivot with target</p>
+            </div>
+            <div class="zone has-target has-pivot" data-target="docs" data-pivot="csharp7-is-great" sourceFile="fake.md" sourceStartLineNumber="31">
+            <p sourceFile="fake.md" sourceStartLineNumber="32">hello</p>
+            </div>
+
+            """;
         TestUtility.VerifyMarkup(content, expected, lineNumber: true, filePath: "fake.md");
     }
 
@@ -81,8 +85,10 @@ Inline ::: should not end moniker zone.</p>
         var source = @"::: zone target=""chromeless";
 
         // assert
-        var expected = @"<p>::: zone target=&quot;chromeless</p>
-";
+        var expected = """
+            <p>::: zone target=&quot;chromeless</p>
+
+            """;
         TestUtility.VerifyMarkup(source, expected, new[] { "invalid-zone" });
     }
 
@@ -90,14 +96,20 @@ Inline ::: should not end moniker zone.</p>
     public void MissingEndTag()
     {
         //arrange
-        var source1 = @"::: zone target=""chromeless""";
-        var source2 = @"::: zone target=""chromeless""
-::: zone-end";
+        var source1 = """
+            ::: zone target="chromeless"
+            """;
+        var source2 = """
+            ::: zone target="chromeless"
+            ::: zone-end
+            """;
 
         // assert
-        var expected = @"<div class=""zone has-target"" data-target=""chromeless"">
-</div>
-";
+        var expected = """
+            <div class="zone has-target" data-target="chromeless">
+            </div>
+
+            """;
 
         TestUtility.VerifyMarkup(source2, expected);
         TestUtility.VerifyMarkup(source1, expected, new[] { "invalid-zone" });
@@ -107,11 +119,13 @@ Inline ::: should not end moniker zone.</p>
     public void NotNested()
     {
         //arrange
-        var content = @"::: zone target=""chromeless""
-::: zone target=""pdf""
-::: zone-end
-::: zone-end
-";
+        var content = """
+            ::: zone target="chromeless"
+            ::: zone target="pdf"
+            ::: zone-end
+            ::: zone-end
+
+            """;
 
         TestUtility.VerifyMarkup(content, null, new[] { "invalid-zone" });
     }
@@ -119,21 +133,25 @@ Inline ::: should not end moniker zone.</p>
     [Fact]
     public void PermitsNestedBlocks()
     {
-        var source = @"::: zone target=""chromeless""
-* foo
-* bar
-* baz
-::: zone-end
-";
+        var source = """
+            ::: zone target="chromeless"
+            * foo
+            * bar
+            * baz
+            ::: zone-end
 
-        var expected = @"<div class=""zone has-target"" data-target=""chromeless"">
-<ul>
-<li>foo</li>
-<li>bar</li>
-<li>baz</li>
-</ul>
-</div>
-";
+            """;
+
+        var expected = """
+            <div class="zone has-target" data-target="chromeless">
+            <ul>
+            <li>foo</li>
+            <li>bar</li>
+            <li>baz</li>
+            </ul>
+            </div>
+
+            """;
         TestUtility.VerifyMarkup(source, expected);
     }
 
@@ -144,8 +162,10 @@ Inline ::: should not end moniker zone.</p>
         var source = @"::: zone target = ""pdf""  pivot = ""foo""  ";
 
         // assert
-        var expected = @"<p>::: zone target = &quot;pdf&quot;  pivot = &quot;foo&quot;</p>
-";
+        var expected = """
+            <p>::: zone target = &quot;pdf&quot;  pivot = &quot;foo&quot;</p>
+
+            """;
         TestUtility.VerifyMarkup(source, expected, new[] { "invalid-zone" });
     }
 
@@ -153,11 +173,17 @@ Inline ::: should not end moniker zone.</p>
     public void PivotInvalid()
     {
         //arrange
-        var source = @"::: zone pivot = ""**""
-::: zone-end";
+        var source = """
+            ::: zone pivot = "**"
+            ::: zone-end
+            """;
 
         // assert
-        var expected = "<p>::: zone pivot = &quot;**&quot;\n::: zone-end</p>\n";
+        var expected = """
+            <p>::: zone pivot = &quot;**&quot;
+            ::: zone-end</p>
+
+            """;
 
         TestUtility.VerifyMarkup(source, expected, new[] { "invalid-zone" });
     }
@@ -166,11 +192,17 @@ Inline ::: should not end moniker zone.</p>
     public void PivotInvalid2()
     {
         //arrange
-        var source = @"::: zone pivot = ""a b""
-::: zone-end";
+        var source = """
+            ::: zone pivot = "a b"
+            ::: zone-end
+            """;
 
         // assert
-        var expected = "<p>::: zone pivot = &quot;a b&quot;\n::: zone-end</p>\n";
+        var expected = """
+            <p>::: zone pivot = &quot;a b&quot;
+            ::: zone-end</p>
+
+            """;
 
         TestUtility.VerifyMarkup(source, expected, new[] { "invalid-zone" });
     }
@@ -179,11 +211,17 @@ Inline ::: should not end moniker zone.</p>
     public void PivotCommaDelimited()
     {
         //arrange
-        var source = @"::: zone pivot = ""a,b""
-::: zone-end";
+        var source = """
+            ::: zone pivot = "a,b"
+            ::: zone-end
+            """;
 
         // assert
-        var expected = "<div class=\"zone has-pivot\" data-pivot=\"a b\">\n</div>\n";
+        var expected = """
+            <div class="zone has-pivot" data-pivot="a b">
+            </div>
+
+            """;
 
         TestUtility.VerifyMarkup(source, expected);
     }
@@ -195,8 +233,10 @@ Inline ::: should not end moniker zone.</p>
         var source = @"::: zone target=""pdf"" something";
 
         // assert
-        var expected = @"<p>::: zone target=&quot;pdf&quot; something</p>
-";
+        var expected = """
+            <p>::: zone target=&quot;pdf&quot; something</p>
+
+            """;
         TestUtility.VerifyMarkup(source, expected, new[] { "invalid-zone" });
     }
 
@@ -204,11 +244,15 @@ Inline ::: should not end moniker zone.</p>
     public void DuplicateAttribute()
     {
         //arrange
-        var source = @"::: zone target=""pdf"" target=""docs""";
+        var source = """
+            ::: zone target="pdf" target="docs"
+            """;
 
         // assert
-        var expected = @"<p>::: zone target=&quot;pdf&quot; target=&quot;docs&quot;</p>
-";
+        var expected = """
+            <p>::: zone target=&quot;pdf&quot; target=&quot;docs&quot;</p>
+
+            """;
         TestUtility.VerifyMarkup(source, expected, new[] { "invalid-zone" });
     }
 
@@ -216,11 +260,15 @@ Inline ::: should not end moniker zone.</p>
     public void InvalidAttribute()
     {
         //arrange
-        var source = @"::: zone *=""pdf""";
+        var source = """
+            ::: zone *="pdf"
+            """;
 
         // assert
-        var expected = @"<p>::: zone *=&quot;pdf&quot;</p>
-";
+        var expected = """
+            <p>::: zone *=&quot;pdf&quot;</p>
+
+            """;
         TestUtility.VerifyMarkup(source, expected, new[] { "invalid-zone" });
     }
 
@@ -228,11 +276,17 @@ Inline ::: should not end moniker zone.</p>
     public void TextAfterEndTag()
     {
         //arrange
-        var source = @":::zone
-:::zone-end asdjklf";
+        var source = """
+            :::zone
+            :::zone-end asdjklf
+            """;
 
         // assert
-        var expected = "<p>:::zone\n:::zone-end asdjklf</p>\n";
+        var expected = """
+            <p>:::zone
+            :::zone-end asdjklf</p>
+
+            """;
 
         TestUtility.VerifyMarkup(source, expected, new[] { "invalid-zone" });
     }

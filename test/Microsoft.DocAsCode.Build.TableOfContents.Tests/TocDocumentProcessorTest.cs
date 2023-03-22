@@ -80,13 +80,15 @@ public class TocDocumentProcessorTest : TestBase
     [Fact]
     public void ProcessMarkdownTocWithAbsoluteHrefShouldSucceed()
     {
-        var content = @"
-#[Topic1 Language](/href1) #
-##Topic1.1 Language C#
-###[Topic1.1.1](/href1.1.1) ###
-##[Topic1.2]() ##
-#[Topic2](http://href.com) #
-";
+        var content = """
+
+            #[Topic1 Language](/href1) #
+            ##Topic1.1 Language C#
+            ###[Topic1.1.1](/href1.1.1) ###
+            ##[Topic1.2]() ##
+            #[Topic2](http://href.com) #
+
+            """;
         var toc = _fileCreator.CreateFile(content, FileType.MarkdownToc);
         FileCollection files = new(_inputFolder);
         files.Add(DocumentType.Article, new[] { toc });
@@ -345,9 +347,11 @@ items:
 - name: NotExistTopic
   href: a/b/c.md
 ", FileType.YamlToc, "sub1/sub2");
-        var sub1sub3tocmd = _fileCreator.CreateFile(@"
-#[Not-existed-md](sub2/notexist.md)
-", FileType.MarkdownToc, "sub1/sub3");
+        var sub1sub3tocmd = _fileCreator.CreateFile("""
+
+            #[Not-existed-md](sub2/notexist.md)
+
+            """, FileType.MarkdownToc, "sub1/sub3");
         var sub1tocmd = _fileCreator.CreateFile($@"
 #[Topic]({Path.GetFileName(file2)})
 #[ReferencedToc](sub2/toc.yml)
@@ -539,14 +543,18 @@ items:
     [Fact]
     public void ProcessTocWithCircularReferenceShouldFail()
     {
-        var referencedToc = _fileCreator.CreateFile(@"
-- name: Topic
-  href: toc.md
-", FileType.YamlToc, "sub1");
-        var subToc = _fileCreator.CreateFile(@"
-#Topic
-##[ReferencedToc](toc.yml)
-", FileType.MarkdownToc, "sub1");
+        var referencedToc = _fileCreator.CreateFile("""
+
+            - name: Topic
+              href: toc.md
+
+            """, FileType.YamlToc, "sub1");
+        var subToc = _fileCreator.CreateFile("""
+
+            #Topic
+            ##[ReferencedToc](toc.yml)
+
+            """, FileType.MarkdownToc, "sub1");
         var content = $@"
 - name: Topic1
   href: {subToc}
@@ -743,12 +751,14 @@ items:
     [Fact]
     public void ProcessYamlTocWithTocHrefAndHomepageShouldFail()
     {
-        var content = @"
-- name: Topic1
-  tocHref: /Topic1/
-  href: /Topic1/index.html
-  homepage: /Topic1/index.html
-";
+        var content = """
+
+            - name: Topic1
+              tocHref: /Topic1/
+              href: /Topic1/index.html
+              homepage: /Topic1/index.html
+
+            """;
         var toc = _fileCreator.CreateFile(content, FileType.YamlToc);
         FileCollection files = new(_inputFolder);
         files.Add(DocumentType.Article, new[] { toc });
@@ -759,13 +769,15 @@ items:
     [Fact]
     public void LoadBadTocYamlFileShouldGiveLineNumber()
     {
-        var content = @"
-- name: x
-    items:
-    - name: x1
-      href: x1.md
-    - name: x2
-      href: x2.md";
+        var content = """
+
+            - name: x
+                items:
+                - name: x1
+                  href: x1.md
+                - name: x2
+                  href: x2.md
+            """;
         var toc = _fileCreator.CreateFile(content, FileType.YamlToc);
         var ex = Assert.Throws<DocumentException>(() => TocHelper.LoadSingleToc(toc));
         Assert.Equal("toc.yml is not a valid TOC File: toc.yml is not a valid TOC file, detail: (Line: 3, Col: 10, Idx: 22) - (Line: 3, Col: 10, Idx: 22): While scanning a plain scalar value, found invalid mapping..", ex.Message);
@@ -775,10 +787,12 @@ items:
     public void LoadTocYamlWithEmptyNodeShouldSucceed()
     {
         // Arrange
-        var content = @"
-- name: x
-  href: a.md
--";
+        var content = """
+
+            - name: x
+              href: a.md
+            -
+            """;
         var files = new FileCollection(_inputFolder);
         var file = _fileCreator.CreateFile(content, FileType.YamlToc);
         files.Add(DocumentType.Article, new[] { file });
@@ -797,14 +811,18 @@ items:
     public void WarningShouldBeFromIncludedToc()
     {
         // Arrange
-        var masterContent = @"
-- name: TOC2
-  href: ../included/toc.yml";
-        var includedContent = @"
-- name: Article2
-  href: not-existing2.md
-- name: Article3ByUid
-  uid: not-existing-uid";
+        var masterContent = """
+
+            - name: TOC2
+              href: ../included/toc.yml
+            """;
+        var includedContent = """
+
+            - name: Article2
+              href: not-existing2.md
+            - name: Article3ByUid
+              uid: not-existing-uid
+            """;
         var files = new FileCollection(_inputFolder);
         var masterFile = _fileCreator.CreateFile(masterContent, FileType.YamlToc, "master");
         var includedFile = _fileCreator.CreateFile(includedContent, FileType.YamlToc, "included");
@@ -833,9 +851,11 @@ items:
     public void UrlDecodeHrefInYamlToc()
     {
         // Arrange
-        var tocContent = @"
-- name: NAME
-  href: a%20b.md";
+        var tocContent = """
+
+            - name: NAME
+              href: a%20b.md
+            """;
         var files = new FileCollection(_inputFolder);
         var tocFile = _fileCreator.CreateFile(tocContent, FileType.YamlToc);
         var markdownFile = _fileCreator.CreateFile(string.Empty, FileType.MarkdownContent, fileNameWithoutExtension:"a b");

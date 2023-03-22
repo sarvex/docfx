@@ -19,14 +19,16 @@ public class OverwriteDocumentModelCreaterTest
     [Fact]
     public void YamlCodeBlockTest()
     {
-        var yamlCodeBlockString = @"name: name overwrite
-definitions:
-- name: Application 1
-  properties:
-  - name: id
-    description: overwrite in yaml block
-  - name: displayName
-    description: overwrite in yaml block";
+        var yamlCodeBlockString = """
+            name: name overwrite
+            definitions:
+            - name: Application 1
+              properties:
+              - name: id
+                description: overwrite in yaml block
+              - name: displayName
+                description: overwrite in yaml block
+            """;
         var testYamlCodeBlock = Markdown.Parse($"```\n{yamlCodeBlockString}\n```")[0];
         var actual = JObject.FromObject(OverwriteDocumentModelCreater.ConvertYamlCodeBlock(yamlCodeBlockString, testYamlCodeBlock));
         Assert.Equal("name overwrite", actual["name"].ToString());
@@ -121,14 +123,16 @@ definitions:
     public void DuplicateOPathsInYamlCodeBlockAndContentsBlockTest()
     {
         // Yaml section
-        var yamlCodeBlockString = @"name: name overwrite
-definitions:
-- name: Application 1
-  properties:
-  - name: id
-    description: overwrite in yaml block
-  - name: displayName
-    description: overwrite in yaml block";
+        var yamlCodeBlockString = """
+            name: name overwrite
+            definitions:
+            - name: Application 1
+              properties:
+              - name: id
+                description: overwrite in yaml block
+              - name: displayName
+                description: overwrite in yaml block
+            """;
         var testYamlCodeBlock = Markdown.Parse($"```\n{yamlCodeBlockString}\n```")[0];
         var yamlMetadata = OverwriteDocumentModelCreater.ConvertYamlCodeBlock(yamlCodeBlockString, testYamlCodeBlock);
 

@@ -14,104 +14,104 @@ public class ApiFilterUnitTest
     [Fact]
     public void TestApiFilter()
     {
-        string code = @"
-using System;
-using System.ComponentModel;
+        string code = """
+            using System;
+            using System.ComponentModel;
 
-namespace Test1
-{
-    /// <summary>
-    /// This is a test
-    /// </summary>
-    /// <seealso cref=""Func1(int)""/>
-    [Serializable]
-    public class Class1
-    {
-        /// <summary>
-        /// This is a function
-        /// </summary>
-        /// <param name=""i"">This is a param as <see cref=""int""/></param>
-        /// <seealso cref=""int""/>
-        public void Func1(int i)
-        {
-            return;
-        }
-    }
-
-    namespace Test2
-    {
-        public class Class2
-        {
-        }
-    }
-    
-    public class Class3
-    {
-        public int A { get; set; }
-        internal int B { get; set; }
-        public void Func2()
-        {
-            return;
-        }
-        public void Func2(int i)
-        {
-            return;
-        }
-        public class Class4
-        {
-            public int Func2()
+            namespace Test1
             {
-                return 0;
+                /// <summary>
+                /// This is a test
+                /// </summary>
+                /// <seealso cref="Func1(int)"/>
+                [Serializable]
+                public class Class1
+                {
+                    /// <summary>
+                    /// This is a function
+                    /// </summary>
+                    /// <param name="i">This is a param as <see cref="int"/></param>
+                    /// <seealso cref="int"/>
+                    public void Func1(int i)
+                    {
+                        return;
+                    }
+                }
+
+                namespace Test2
+                {
+                    public class Class2
+                    {
+                    }
+                }
+
+                public class Class3
+                {
+                    public int A { get; set; }
+                    internal int B { get; set; }
+                    public void Func2()
+                    {
+                        return;
+                    }
+                    public void Func2(int i)
+                    {
+                        return;
+                    }
+                    public class Class4
+                    {
+                        public int Func2()
+                        {
+                            return 0;
+                        }
+                    }
+                }
+
+                namespace Test2.Test3
+                {
+                    public class Class5
+                    {
+                    }
+                }
+
+                public class Class6 : IFoo
+                {
+                    [EditorBrowsable(EditorBrowsableState.Never)]
+                    public int C { get; set; }
+                    [EditorBrowsable(EditorBrowsableState.Always)]
+                    public int D { get; set; }
+
+                    void IFoo.Bar() {}
+
+                    [Obsolete("Some text.")]
+                    public void ObsoleteTest()
+                    {
+                    }
+
+
+                    [EnumDisplay(Test = null)]
+                    public void Test(string a = null)
+                    {
+                    }
+                }
+
+                [EditorBrowsable(EditorBrowsableState.Never)]
+                public interface IFoo
+                {
+                    void Bar();
+                }
+
+                public class EnumDisplayAttribute : Attribute
+                {
+                    public string Test { get; set; } = null;
+                    public string Description { get; private set; }
+
+                    public EnumDisplayAttribute(string description = null)
+                    {
+                        Description = description;
+                    }
+                }
             }
-        }
-    }
-    
-    namespace Test2.Test3
-    {
-        public class Class5
-        {
-        }
-    }
-
-    public class Class6 : IFoo
-    {
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public int C { get; set; }
-        [EditorBrowsable(EditorBrowsableState.Always)]
-        public int D { get; set; }
-
-        void IFoo.Bar() {}
-
-        [Obsolete(""Some text."")]
-        public void ObsoleteTest()
-        {
-        }
-
-
-        [EnumDisplay(Test = null)]
-        public void Test(string a = null)
-        {
-        }
-    }
-
-    [EditorBrowsable(EditorBrowsableState.Never)]
-    public interface IFoo
-    {
-        void Bar();
-    }
-
-    public class EnumDisplayAttribute : Attribute
-    {
-        public string Test { get; set; } = null;
-        public string Description { get; private set; }
-
-        public EnumDisplayAttribute(string description = null)
-        {
-            Description = description;
-        }
-    }
-}
-";
+            """;
         string configFile = "TestData/filterconfig.yml";
         MetadataItem output = Verify(code, new() { FilterConfigFile = configFile });
         Assert.Single(output.Items);
@@ -150,22 +150,23 @@ namespace Test1
     [Fact]
     public void TestAttributeFilter()
     {
-        string code = @"
-using System;
-using System.Runtime.InteropServices;
+        string code = """
+            using System;
+            using System.Runtime.InteropServices;
 
-namespace Test1
-{
-    [Serializable]
-    [ComVisibleAttribute(true)]
-    public class Class1
-    {
-        public void Func1(int i)
-        {
-            return;
-        }
-    }
-}";
+            namespace Test1
+            {
+                [Serializable]
+                [ComVisibleAttribute(true)]
+                public class Class1
+                {
+                    public void Func1(int i)
+                    {
+                        return;
+                    }
+                }
+            }
+            """;
         string configFile = "TestData/filterconfig_attribute.yml";
         MetadataItem output = Verify(code, new() { FilterConfigFile = configFile });
         var @namespace = output.Items[0];
@@ -177,29 +178,30 @@ namespace Test1
     [Fact]
     public void TestDefaultFilter()
     {
-        string code = @"
-using System;
-using System.ComponentModel;
-using System.CodeDom.Compiler;
+        string code = """
+            using System;
+            using System.ComponentModel;
+            using System.CodeDom.Compiler;
 
-namespace Test1
-{
-    [Serializable]
-    [GeneratedCode(""xsd"", ""1.0.0.0"")]
-    public class Class1
-    {
-        public void Func1(int i)
-        {
-            return;
-        }
-    }
+            namespace Test1
+            {
+                [Serializable]
+                [GeneratedCode("xsd", "1.0.0.0")]
+                public class Class1
+                {
+                    public void Func1(int i)
+                    {
+                        return;
+                    }
+                }
 
-    [EditorBrowsable(EditorBrowsableState.Never)]
-    public interface Interface1
-    {
-        void Bar();
-    }
-}";
+                [EditorBrowsable(EditorBrowsableState.Never)]
+                public interface Interface1
+                {
+                    void Bar();
+                }
+            }
+            """;
         MetadataItem output = Verify(code);
         var @namespace = output.Items[0];
         Assert.Single(@namespace.Items);
@@ -211,32 +213,34 @@ namespace Test1
     [Fact]
     public void TestFilterBugIssue2547()
     {
-        string code = @"using System;
+        string code = """
+            using System;
 
-namespace Test1
-{
-    [Flags]
-    public enum ExecutionMode
-    {
-        None = 0,
-        Runtime = 1,
-        Editor = 2,
-        Thumbnail = 4,
-        Preview = 8,
-        EffectCompile = 16,
-        All = Runtime | Editor | Thumbnail | Preview | EffectCompile,
-    }
+            namespace Test1
+            {
+                [Flags]
+                public enum ExecutionMode
+                {
+                    None = 0,
+                    Runtime = 1,
+                    Editor = 2,
+                    Thumbnail = 4,
+                    Preview = 8,
+                    EffectCompile = 16,
+                    All = Runtime | Editor | Thumbnail | Preview | EffectCompile,
+                }
 
-    public class Test1Attribute : Attribute
-    {
-        public ExecutionMode ExecutionMode { get; set; } = ExecutionMode.All;
-    }
+                public class Test1Attribute : Attribute
+                {
+                    public ExecutionMode ExecutionMode { get; set; } = ExecutionMode.All;
+                }
 
-    [Test1(ExecutionMode = ExecutionMode.Runtime | ExecutionMode.Thumbnail | ExecutionMode.Preview)]
-    public class Test2
-    {
-    }
-}";
+                [Test1(ExecutionMode = ExecutionMode.Runtime | ExecutionMode.Thumbnail | ExecutionMode.Preview)]
+                public class Test2
+                {
+                }
+            }
+            """;
         MetadataItem output = Verify(code);
         var @namespace = output.Items[0];
         Assert.NotNull(@namespace);
@@ -246,30 +250,31 @@ namespace Test1
     [Fact]
     public void TestSymbolFilterOptions()
     {
-        var code = @"
-using System;
-using System.Runtime.InteropServices;
+        var code = """
+            using System;
+            using System.Runtime.InteropServices;
 
-namespace Test1
-{
-    [Serializable]
-    [ComVisible(true)]
-    [A1, A2, C.A3]
-    public class Class1 : IClass1
-    {
-        public void M1() { }
-        public void M2() { }
-    }
+            namespace Test1
+            {
+                [Serializable]
+                [ComVisible(true)]
+                [A1, A2, C.A3]
+                public class Class1 : IClass1
+                {
+                    public void M1() { }
+                    public void M2() { }
+                }
 
-    public class A1 : Attribute { public A1() {} }
-    public class A2 : Attribute { public A2() {} }
-    public class C
-    {
-        public class A3 : Attribute { public A3() {} }
-    }
+                public class A1 : Attribute { public A1() {} }
+                public class A2 : Attribute { public A2() {} }
+                public class C
+                {
+                    public class A3 : Attribute { public A3() {} }
+                }
 
-    interface IClass1 { }
-}";
+                interface IClass1 { }
+            }
+            """;
         var output = Verify(code, new(), new() { IncludeApi = IncludeApi, IncludeAttribute = IncludeAttribute });
         var class1 = output.Items[0].Items[0];
         Assert.Equal(
@@ -306,19 +311,20 @@ namespace Test1
     [Fact]
     public void TestExcludeInterface_ExcludesExplicitInterfaceImplementations()
     {
-        var code = @"
-namespace Test1
-{
-    public class Class1 : IClass1
-    {
-        void IClass1.M() { }
-    }
+        var code = """
+            namespace Test1
+            {
+                public class Class1 : IClass1
+                {
+                    void IClass1.M() { }
+                }
 
-    public interface IClass1
-    {
-        void M();
-    }
-}";
+                public interface IClass1
+                {
+                    void M();
+                }
+            }
+            """;
         var output = Verify(
             code,
             new() { IncludePrivateMembers = true },

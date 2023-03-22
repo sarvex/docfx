@@ -61,21 +61,25 @@ public class SchemaDrivenProcessorTest : TestBase
         var inputFileName = "co/active.yml";
         var includeFile = CreateFile("a b/inc.md", @"[root](../co/active.yml)", _inputFolder);
         var includeFile2 = CreateFile("c/d/inc.md", @"../../a b/toc.md", _inputFolder);
-        var inputFile = CreateFile(inputFileName, @"### YamlMime:ContextObject
-breadcrumb_path: https://ppe.docs.microsoft.com/absolute/toc.json
-toc_rel: ../a b/toc.md
-file_include: ../a b/inc.md
-file_include2: ../c/d/inc.md
-uhfHeaderId: MSDocsHeader-DotNet
-empty:
-searchScope:
-  - .NET
-", _inputFolder);
+        var inputFile = CreateFile(inputFileName, """
+            ### YamlMime:ContextObject
+            breadcrumb_path: https://ppe.docs.microsoft.com/absolute/toc.json
+            toc_rel: ../a b/toc.md
+            file_include: ../a b/inc.md
+            file_include2: ../c/d/inc.md
+            uhfHeaderId: MSDocsHeader-DotNet
+            empty:
+            searchScope:
+              - .NET
+
+            """, _inputFolder);
 
         var inputFileName2 = "co/active2.yml";
-        var inputFile2 = CreateFile(inputFileName2, @"### YamlMime:ContextObject
-breadcrumb_path: https://live.docs.microsoft.com/absolute/toc.json
-", _inputFolder);
+        var inputFile2 = CreateFile(inputFileName2, """
+            ### YamlMime:ContextObject
+            breadcrumb_path: https://live.docs.microsoft.com/absolute/toc.json
+
+            """, _inputFolder);
 
         FileCollection files = new(_defaultFiles);
         files.Add(DocumentType.Article, new[] { inputFile, inputFile2 }, _inputFolder);
@@ -131,41 +135,45 @@ breadcrumb_path: https://live.docs.microsoft.com/absolute/toc.json
     {
         using var listener = new TestListenerScope("TestRef");
         var schemaFile = CreateFile("template/schemas/general.test.schema.json", File.ReadAllText("TestData/schemas/general.test.schema.json"), _templateFolder);
-        var templateFile = CreateFile("template/General.html.tmpl", @"{{#items}}
-{{#aggregatedExceptions}}
-   {{{message}}}
-   {{{inner.message}}}
-   {{{inner.inner.message}}}
-{{/aggregatedExceptions}}
-{{#exception}}
-   {{{message}}}
-{{/exception}}
-{{{description}}}
-{{/items}}
-", _templateFolder);
+        var templateFile = CreateFile("template/General.html.tmpl", """
+            {{#items}}
+            {{#aggregatedExceptions}}
+               {{{message}}}
+               {{{inner.message}}}
+               {{{inner.inner.message}}}
+            {{/aggregatedExceptions}}
+            {{#exception}}
+               {{{message}}}
+            {{/exception}}
+            {{{description}}}
+            {{/items}}
+
+            """, _templateFolder);
         var inputFileName = "inputs/exp1.yml";
-        var inputFile = CreateFile(inputFileName, @"### YamlMime:General
-items:
-  - exception:
-      message: ""**Hello**""
-  - aggregatedExceptions:
-      - message: ""1**Hello**""
-        inner:
-          message: ""1.1**Hello**""
-          inner:
-            message: ""1.1.1**Hello**""
-      - message: ""2**Hello**""
-        inner:
-          message: ""2.1**Hello**""
-          inner:
-            message: ""2.1.1**Hello**""
-      - message: ""3**Hello**""
-        inner:
-          message: ""3.1**Hello**""
-          inner:
-            message: ""3.1.1**Hello**""
-  - description: ""**outside**""
-", _inputFolder);
+        var inputFile = CreateFile(inputFileName, """
+            ### YamlMime:General
+            items:
+              - exception:
+                  message: "**Hello**"
+              - aggregatedExceptions:
+                  - message: "1**Hello**"
+                    inner:
+                      message: "1.1**Hello**"
+                      inner:
+                        message: "1.1.1**Hello**"
+                  - message: "2**Hello**"
+                    inner:
+                      message: "2.1**Hello**"
+                      inner:
+                        message: "2.1.1**Hello**"
+                  - message: "3**Hello**"
+                    inner:
+                      message: "3.1**Hello**"
+                      inner:
+                        message: "3.1.1**Hello**"
+              - description: "**outside**"
+
+            """, _inputFolder);
         FileCollection files = new(_defaultFiles);
         files.Add(DocumentType.Article, new[] { inputFile }, _inputFolder);
         BuildDocument(files);
@@ -181,20 +189,28 @@ items:
         var outputFilePath = Path.Combine(_outputFolder, outputFileName);
         Assert.True(File.Exists(outputFilePath));
 
-        Assert.Equal(@"
-<p><strong>Hello</strong></p>
-<p>1<strong>Hello</strong></p>
-<p>1.1<strong>Hello</strong></p>
-<p>1.1.1<strong>Hello</strong></p>
-<p>2<strong>Hello</strong></p>
-<p>2.1<strong>Hello</strong></p>
-<p>2.1.1<strong>Hello</strong></p>
-<p>3<strong>Hello</strong></p>
-<p>3.1<strong>Hello</strong></p>
-<p>3.1.1<strong>Hello</strong></p>
-<p><strong>outside</strong></p>
-"
-                .Split(new string[] { "\r\n", "\n" }, StringSplitOptions.RemoveEmptyEntries),
+        Assert.Equal("""
+
+            <p><strong>Hello</strong></p>
+            <p>1<strong>Hello</strong></p>
+            <p>1.1<strong>Hello</strong></p>
+            <p>1.1.1<strong>Hello</strong></p>
+            <p>2<strong>Hello</strong></p>
+            <p>2.1<strong>Hello</strong></p>
+            <p>2.1.1<strong>Hello</strong></p>
+            <p>3<strong>Hello</strong></p>
+            <p>3.1<strong>Hello</strong></p>
+            <p>3.1.1<strong>Hello</strong></p>
+            <p><strong>outside</strong></p>
+
+            """
+                .Split(new string[] { """
+
+
+                    """, """
+
+
+                    """ }, StringSplitOptions.RemoveEmptyEntries),
             File.ReadAllLines(outputFilePath).Where(s => !string.IsNullOrWhiteSpace(s)).Select(s => s.Trim()).ToArray());
     }
 
@@ -207,13 +223,15 @@ items:
         var templateXref = CreateFile(
             "template/partials/overview.tmpl", @"{{name}}:{{{summary}}}|{{#boolProperty}}{{intProperty}}{{/boolProperty}}|{{#monikers}}<span>{{.}}</span>{{/monikers}}", 
             _templateFolder);
-        var templateFile = CreateFile("template/ManagedReference.html.tmpl", @"
-{{#items}}
-{{#children}}
-<xref uid={{.}} template=""partials/overview.tmpl""/>
-{{/children}}
-{{/items}}
-", _templateFolder);
+        var templateFile = CreateFile("template/ManagedReference.html.tmpl", """
+
+            {{#items}}
+            {{#children}}
+            <xref uid={{.}} template="partials/overview.tmpl"/>
+            {{/children}}
+            {{/items}}
+
+            """, _templateFolder);
         var inputFileName = "inputs/CatLibrary.ICat.yml";
         var inputFile = CreateFile(inputFileName, File.ReadAllText("TestData/inputs/CatLibrary.ICat.yml"), _inputFolder);
         FileCollection files = new(_defaultFiles);
@@ -241,10 +259,18 @@ items:
         var outputFilePath = Path.Combine(_outputFolder, outputFileName);
         Assert.True(File.Exists(outputFilePath));
         var outputFileContent = File.ReadAllLines(outputFilePath);
-        Assert.Equal(@"
-eat:<p>eat event of cat. Every cat must implement this event.
-This method is within <a class=""xref"" href=""CatLibrary.ICat.html"">ICat</a></p>
-|666|<span>net472</span><span>netstandard2_0</span>".Split(new string[] { "\r\n", "\n" }, StringSplitOptions.None),
+        Assert.Equal("""
+
+            eat:<p>eat event of cat. Every cat must implement this event.
+            This method is within <a class="xref" href="CatLibrary.ICat.html">ICat</a></p>
+            |666|<span>net472</span><span>netstandard2_0</span>
+            """.Split(new string[] { """
+
+
+            """, """
+
+
+            """ }, StringSplitOptions.None),
             outputFileContent);
     }
 
@@ -271,48 +297,54 @@ This method is within <a class=""xref"" href=""CatLibrary.ICat.html"">ICat</a></
     public void TestValidMetadataReferenceWithIncremental()
     {
         using var listener = new TestListenerScope("TestGeneralFeaturesInSDP");
-        var schemaFile = CreateFile("template/schemas/mta.reference.test.schema.json", @"
-{
-  ""$schema"": ""http://dotnet.github.io/docfx/schemas/v1.0/schema.json#"",
-  ""version"": ""1.0.0"",
-  ""title"": ""MetadataReferenceTest"",
-  ""description"": ""A simple test schema for sdp"",
-  ""type"": ""object"",
-  ""properties"": {
-      ""metadata"": {
-            ""type"": ""object""
-      },
-      ""href"": {
-            ""type"": ""string"",
-            ""contentType"": ""href""
-      }
-  },
-  ""metadata"": ""/metadata""
-}
-", _templateFolder);
+        var schemaFile = CreateFile("template/schemas/mta.reference.test.schema.json", """
+
+            {
+              "$schema": "http://dotnet.github.io/docfx/schemas/v1.0/schema.json#",
+              "version": "1.0.0",
+              "title": "MetadataReferenceTest",
+              "description": "A simple test schema for sdp",
+              "type": "object",
+              "properties": {
+                  "metadata": {
+                        "type": "object"
+                  },
+                  "href": {
+                        "type": "string",
+                        "contentType": "href"
+                  }
+              },
+              "metadata": "/metadata"
+            }
+
+            """, _templateFolder);
         var inputFileName1 = "page1.yml";
-        var inputFile1 = CreateFile(inputFileName1, @"### YamlMime:MetadataReferenceTest
-title: Web Apps Documentation
-metadata:
-  title: Azure Web Apps Documentation - Tutorials, API Reference
-  meta.description: Learn how to use App Service Web Apps to build and host websites and web applications.
-  ms.service: app-service
-  ms.tgt_pltfrm: na
-  ms.author: carolz
-href: toc.md
-sections:
-- title: 5-Minute Quickstarts
-toc_rel: ../a b/toc.md
-uhfHeaderId: MSDocsHeader-DotNet
-searchScope:
-  - .NET
-", _inputFolder);
+        var inputFile1 = CreateFile(inputFileName1, """
+            ### YamlMime:MetadataReferenceTest
+            title: Web Apps Documentation
+            metadata:
+              title: Azure Web Apps Documentation - Tutorials, API Reference
+              meta.description: Learn how to use App Service Web Apps to build and host websites and web applications.
+              ms.service: app-service
+              ms.tgt_pltfrm: na
+              ms.author: carolz
+            href: toc.md
+            sections:
+            - title: 5-Minute Quickstarts
+            toc_rel: ../a b/toc.md
+            uhfHeaderId: MSDocsHeader-DotNet
+            searchScope:
+              - .NET
+
+            """, _inputFolder);
         var dependentMarkdown = CreateFile("toc.md", "# Hello", _inputFolder);
 
         var inputFileName2 = "page2.yml";
-        var inputFile2 = CreateFile(inputFileName2, @"### YamlMime:MetadataReferenceTest
-title: Web Apps Documentation
-", _inputFolder);
+        var inputFile2 = CreateFile(inputFileName2, """
+            ### YamlMime:MetadataReferenceTest
+            title: Web Apps Documentation
+
+            """, _inputFolder);
 
         FileCollection files = new(_defaultFiles);
         files.Add(DocumentType.Article, new[] { inputFile1, inputFile2, dependentMarkdown }, _inputFolder);
@@ -368,27 +400,31 @@ title: Web Apps Documentation
     {
         // Json.NET schema has limitation of 1000 calls per hour
         using var listener = new TestListenerScope("TestInvalidMetadataReference");
-        var schemaFile = CreateFile("template/schemas/mta.reference.test.schema.json", @"
-{
-  ""$schema"": ""http://dotnet.github.io/docfx/schemas/v1.0/schema.json#"",
-  ""version"": ""1.0.0"",
-  ""title"": ""MetadataReferenceTest"",
-  ""description"": ""A simple test schema for sdp"",
-  ""type"": ""object"",
-  ""properties"": {
-      ""metadata"": {
-            ""type"": ""string"",
-            ""contentType"": ""unknown""
-      }
-  }
-}
-", _templateFolder);
+        var schemaFile = CreateFile("template/schemas/mta.reference.test.schema.json", """
+
+            {
+              "$schema": "http://dotnet.github.io/docfx/schemas/v1.0/schema.json#",
+              "version": "1.0.0",
+              "title": "MetadataReferenceTest",
+              "description": "A simple test schema for sdp",
+              "type": "object",
+              "properties": {
+                  "metadata": {
+                        "type": "string",
+                        "contentType": "unknown"
+                  }
+              }
+            }
+
+            """, _templateFolder);
 
         var inputFiles = Enumerable.Range(0, 1)
             .Select(s =>
-                CreateFile($"normal{s}.yml", @"### YamlMime:MetadataReferenceTest
-metadata: Web Apps Documentation
-", _inputFolder)).ToArray();
+                CreateFile($"normal{s}.yml", """
+                ### YamlMime:MetadataReferenceTest
+                metadata: Web Apps Documentation
+
+                """, _inputFolder)).ToArray();
 
         FileCollection files = new(_defaultFiles);
         files.Add(DocumentType.Article, inputFiles, _inputFolder);
@@ -399,25 +435,29 @@ metadata: Web Apps Documentation
     public void TestUidWithPatternedTag()
     {
         using var listener = new TestListenerScope("TestUidWithPatternedTag");
-        var schemaFile = CreateFile("template/schemas/patterned.uid.test.schema.json", @"
-{
-  ""$schema"": ""http://dotnet.github.io/docfx/schemas/v1.0/schema.json#"",
-  ""version"": ""1.0.0"",
-  ""title"": ""PatternedUid"",
-  ""description"": ""A simple test schema for sdp's patterned uid"",
-  ""type"": ""object"",
-  ""properties"": {
-      ""uid"": {
-            ""type"": ""string"",
-            ""tags"": [ ""patterned:uid"" ] 
-      }
-  }
-}
-", _templateFolder);
+        var schemaFile = CreateFile("template/schemas/patterned.uid.test.schema.json", """
 
-        var inputFile = CreateFile("PatternedUid.yml", @"### YamlMime:PatternedUid
-uid: azure.hello1
-", _inputFolder);
+            {
+              "$schema": "http://dotnet.github.io/docfx/schemas/v1.0/schema.json#",
+              "version": "1.0.0",
+              "title": "PatternedUid",
+              "description": "A simple test schema for sdp's patterned uid",
+              "type": "object",
+              "properties": {
+                  "uid": {
+                        "type": "string",
+                        "tags": [ "patterned:uid" ] 
+                  }
+              }
+            }
+
+            """, _templateFolder);
+
+        var inputFile = CreateFile("PatternedUid.yml", """
+            ### YamlMime:PatternedUid
+            uid: azure.hello1
+
+            """, _inputFolder);
 
         FileCollection files = new(_defaultFiles);
         files.Add(DocumentType.Article, new[] { inputFile }, _inputFolder);
@@ -437,15 +477,19 @@ uid: azure.hello1
         Assert.NotNull(listener.Items.FirstOrDefault(s => s.Message.StartsWith("There is no template processing document type(s): PatternedUid")));
         listener.Items.Clear();
 
-        inputFile = CreateFile("PatternedUid2.yml", @"### YamlMime:PatternedUid
-uid: invalid.hello1
-", _inputFolder);
+        inputFile = CreateFile("PatternedUid2.yml", """
+            ### YamlMime:PatternedUid
+            uid: invalid.hello1
+
+            """, _inputFolder);
 
         files.Add(DocumentType.Article, new[] { inputFile }, _inputFolder);
 
-        inputFile = CreateFile("PatternedUid3.yml", @"### YamlMime:PatternedUid
-uid: invalid.azure.hello2
-", _inputFolder);
+        inputFile = CreateFile("PatternedUid3.yml", """
+            ### YamlMime:PatternedUid
+            uid: invalid.azure.hello2
+
+            """, _inputFolder);
 
         files.Add(DocumentType.Article, new[] { inputFile }, _inputFolder);
         var exception = Assert.Throws<DocumentException>(() => BuildDocument(files, new DocumentBuildParameters
@@ -467,26 +511,30 @@ uid: invalid.azure.hello2
     public void TestInvalidObjectAgainstSchema()
     {
         using var listener = new TestListenerScope("TestInvalidMetadataReference");
-        var schemaFile = CreateFile("template/schemas/mta.reference.test.schema.json", @"
-{
-  ""$schema"": ""http://dotnet.github.io/docfx/schemas/v1.0/schema.json#"",
-  ""id"": ""https://contoso.com/template/schemas/mta.reference.test.schema.json"",
-  ""version"": ""1.0.0"",
-  ""title"": ""MetadataReferenceTest"",
-  ""description"": ""A simple test schema for sdp"",
-  ""type"": ""object"",
-  ""properties"": {
-      ""metadata"": {
-            ""type"": ""object""
-      }
-            },
-  ""metadata"": ""/metadata""
-}
-", _templateFolder);
+        var schemaFile = CreateFile("template/schemas/mta.reference.test.schema.json", """
 
-        var inputFile = CreateFile("invalid.yml", @"### YamlMime:MetadataReferenceTest
-metadata: Web Apps Documentation
-", _inputFolder);
+            {
+              "$schema": "http://dotnet.github.io/docfx/schemas/v1.0/schema.json#",
+              "id": "https://contoso.com/template/schemas/mta.reference.test.schema.json",
+              "version": "1.0.0",
+              "title": "MetadataReferenceTest",
+              "description": "A simple test schema for sdp",
+              "type": "object",
+              "properties": {
+                  "metadata": {
+                        "type": "object"
+                  }
+                        },
+              "metadata": "/metadata"
+            }
+
+            """, _templateFolder);
+
+        var inputFile = CreateFile("invalid.yml", """
+            ### YamlMime:MetadataReferenceTest
+            metadata: Web Apps Documentation
+
+            """, _inputFolder);
 
         FileCollection files = new(_defaultFiles);
         files.Add(DocumentType.Article, new[] { inputFile }, _inputFolder);
@@ -499,37 +547,41 @@ metadata: Web Apps Documentation
     public void TestInvalidMetadataReference()
     {
         using var listener = new TestListenerScope("TestGeneralFeaturesInSDP");
-        var schemaFile = CreateFile("template/schemas/mta.reference.test.schema.json", @"
-{
-  ""$schema"": ""http://dotnet.github.io/docfx/schemas/v1.0/schema.json#"",
-  ""version"": ""1.0.0"",
-  ""title"": ""MetadataReferenceTest"",
-  ""description"": ""A simple test schema for sdp"",
-  ""type"": ""object"",
-  ""properties"": {
-      ""metadata"": {
-            ""type"": ""string""
-      }
-            },
-  ""metadata"": ""/metadata""
-}
-", _templateFolder);
+        var schemaFile = CreateFile("template/schemas/mta.reference.test.schema.json", """
+
+            {
+              "$schema": "http://dotnet.github.io/docfx/schemas/v1.0/schema.json#",
+              "version": "1.0.0",
+              "title": "MetadataReferenceTest",
+              "description": "A simple test schema for sdp",
+              "type": "object",
+              "properties": {
+                  "metadata": {
+                        "type": "string"
+                  }
+                        },
+              "metadata": "/metadata"
+            }
+
+            """, _templateFolder);
         var inputFileName1 = "page1.yml";
-        var inputFile1 = CreateFile(inputFileName1, @"### YamlMime:MetadataReferenceTest
-title: Web Apps Documentation
-metadata:
-  title: Azure Web Apps Documentation - Tutorials, API Reference
-  meta.description: Learn how to use App Service Web Apps to build and host websites and web applications.
-  ms.service: app-service
-  ms.tgt_pltfrm: na
-  ms.author: carolz
-sections:
-- title: 5-Minute Quickstarts
-toc_rel: ../a b/toc.md
-uhfHeaderId: MSDocsHeader-DotNet
-searchScope:
-  - .NET
-", _inputFolder);
+        var inputFile1 = CreateFile(inputFileName1, """
+            ### YamlMime:MetadataReferenceTest
+            title: Web Apps Documentation
+            metadata:
+              title: Azure Web Apps Documentation - Tutorials, API Reference
+              meta.description: Learn how to use App Service Web Apps to build and host websites and web applications.
+              ms.service: app-service
+              ms.tgt_pltfrm: na
+              ms.author: carolz
+            sections:
+            - title: 5-Minute Quickstarts
+            toc_rel: ../a b/toc.md
+            uhfHeaderId: MSDocsHeader-DotNet
+            searchScope:
+              - .NET
+
+            """, _inputFolder);
 
         FileCollection files = new(_defaultFiles);
         files.Add(DocumentType.Article, new[] { inputFile1 }, _inputFolder);

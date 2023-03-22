@@ -59,7 +59,10 @@ public class SplitRestApiToOperationLevelTest : TestBase
             Assert.Empty(model.Children);
             Assert.True((bool)model.Metadata["_isSplittedByOperation"]);
             Assert.Empty(model.Tags);
-            Assert.Equal("<p sourcefile=\"TestData/swagger/petstore.json\" sourcestartlinenumber=\"1\">Find out more about Swagger</p>\n", ((JObject)model.Metadata["externalDocs"])["description"]);
+            Assert.Equal("""
+                <p sourcefile="TestData/swagger/petstore.json" sourcestartlinenumber="1">Find out more about Swagger</p>
+
+                """, ((JObject)model.Metadata["externalDocs"])["description"]);
         }
         {
             // Verify splitted operation page
@@ -70,7 +73,10 @@ public class SplitRestApiToOperationLevelTest : TestBase
             Assert.Equal("petstore.swagger.io/v2/Swagger Petstore/1.0.0/addPet", model.Uid);
             Assert.Null(model.HtmlId);
             Assert.Equal("addPet", model.Name);
-            Assert.Equal("<p sourcefile=\"TestData/swagger/petstore.json\" sourcestartlinenumber=\"1\">Add a new pet to the store</p>\n", model.Summary);
+            Assert.Equal("""
+                <p sourcefile="TestData/swagger/petstore.json" sourcestartlinenumber="1">Add a new pet to the store</p>
+
+                """, model.Summary);
             Assert.Empty(model.Tags);
             Assert.Equal("swagger/petstore/addPet.html", model.Metadata["_path"]);
             Assert.Equal("TestData/swagger/petstore/addPet.json", model.Metadata["_key"]);
@@ -80,7 +86,10 @@ public class SplitRestApiToOperationLevelTest : TestBase
             Assert.Empty(model.Tags);
 
             // Test overwritten metadata
-            Assert.Equal("<p sourcefile=\"TestData/swagger/petstore.json\" sourcestartlinenumber=\"1\">Find out more about addPet</p>\n", ((JObject)model.Metadata["externalDocs"])["description"]);
+            Assert.Equal("""
+                <p sourcefile="TestData/swagger/petstore.json" sourcestartlinenumber="1">Find out more about addPet</p>
+
+                """, ((JObject)model.Metadata["externalDocs"])["description"]);
 
             var child = model.Children[0];
             Assert.Equal("petstore.swagger.io/v2/Swagger Petstore/1.0.0/addPet/operation", child.Uid);
@@ -116,7 +125,10 @@ public class SplitRestApiToOperationLevelTest : TestBase
             Assert.Equal("petstore.swagger.io/v2/Swagger Petstore/1.0.0/addPet", model.Uid);
             Assert.Null(model.HtmlId);
             Assert.Equal("addPet", model.Name);
-            Assert.Equal("<p sourcefile=\"TestData/swagger/petstore.json\" sourcestartlinenumber=\"1\">Add a new pet to the store</p>\n", model.Summary);
+            Assert.Equal("""
+                <p sourcefile="TestData/swagger/petstore.json" sourcestartlinenumber="1">Add a new pet to the store</p>
+
+                """, model.Summary);
             Assert.Empty(model.Tags);
             Assert.Equal("swagger/petstore/addPet.html", model.Metadata["_path"]);
             Assert.Equal("TestData/swagger/petstore/addPet.json", model.Metadata["_key"]);
@@ -174,7 +186,10 @@ public class SplitRestApiToOperationLevelTest : TestBase
             Assert.NotNull(model);
             Assert.Equal("petstore.swagger.io/v2/Swagger Petstore/1.0.0/tag/pet", model.Uid);
             Assert.Equal("pet", model.Name);
-            Assert.Equal("<p sourcefile=\"TestData/swagger/petstore.json\" sourcestartlinenumber=\"1\">Everything about your Pets</p>\n", model.Description);
+            Assert.Equal("""
+                <p sourcefile="TestData/swagger/petstore.json" sourcestartlinenumber="1">Everything about your Pets</p>
+
+                """, model.Description);
             Assert.Empty(model.Children);
             Assert.Empty(model.Tags);
             Assert.Equal("swagger/petstore/pet.html", model.Metadata["_path"]);
@@ -192,7 +207,10 @@ public class SplitRestApiToOperationLevelTest : TestBase
             Assert.Equal("petstore.swagger.io/v2/Swagger Petstore/1.0.0/addPet", model.Uid);
             Assert.Null(model.HtmlId);
             Assert.Equal("addPet", model.Name);
-            Assert.Equal("<p sourcefile=\"TestData/swagger/petstore.json\" sourcestartlinenumber=\"1\">Add a new pet to the store</p>\n", model.Summary);
+            Assert.Equal("""
+                <p sourcefile="TestData/swagger/petstore.json" sourcestartlinenumber="1">Add a new pet to the store</p>
+
+                """, model.Summary);
             Assert.Empty(model.Tags);
             Assert.Equal("swagger/petstore/pet/addPet.html", model.Metadata["_path"]);
             Assert.Equal("TestData/swagger/petstore/pet/addPet.json", model.Metadata["_key"]);

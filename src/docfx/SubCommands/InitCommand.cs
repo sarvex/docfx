@@ -298,29 +298,41 @@ internal sealed class InitCommand : ISubCommand
         // e. .gitignore
         // f. api/.gitignore
         // TODO: move api/index.md out to some other folder
-        var tocYaml = Tuple.Create("toc.yml", @"- name: Articles
-  href: articles/
-- name: Api Documentation
-  href: api/
-  homepage: api/index.md
-");
-        var indexMarkdownFile = Tuple.Create("index.md", @"# This is the **HOMEPAGE**.
-Refer to [Markdown](http://daringfireball.net/projects/markdown/) for how to write markdown files.
-## Quick Start Notes:
-1. Add images to the *images* folder if the file is referencing an image.
-");
-        var apiTocFile = Tuple.Create("api/toc.yml", @"- name: TO BE REPLACED
-  href: index.md
-");
-        var apiIndexFile = Tuple.Create("api/index.md", @"# PLACEHOLDER
-TODO: Add .NET projects to the *src* folder and run `docfx` to generate **REAL** *API Documentation*!
-");
+        var tocYaml = Tuple.Create("toc.yml", """
+            - name: Articles
+              href: articles/
+            - name: Api Documentation
+              href: api/
+              homepage: api/index.md
 
-        var articleTocFile = Tuple.Create("articles/toc.yml", @"- name: Introduction
-  href: intro.md
-");
-        var articleMarkdownFile = Tuple.Create("articles/intro.md", @"# Add your introductions here!
-");
+            """);
+        var indexMarkdownFile = Tuple.Create("index.md", """
+            # This is the **HOMEPAGE**.
+            Refer to [Markdown](http://daringfireball.net/projects/markdown/) for how to write markdown files.
+            ## Quick Start Notes:
+            1. Add images to the *images* folder if the file is referencing an image.
+
+            """);
+        var apiTocFile = Tuple.Create("api/toc.yml", """
+            - name: TO BE REPLACED
+              href: index.md
+
+            """);
+        var apiIndexFile = Tuple.Create("api/index.md", """
+            # PLACEHOLDER
+            TODO: Add .NET projects to the *src* folder and run `docfx` to generate **REAL** *API Documentation*!
+
+            """);
+
+        var articleTocFile = Tuple.Create("articles/toc.yml", """
+            - name: Introduction
+              href: intro.md
+
+            """);
+        var articleMarkdownFile = Tuple.Create("articles/intro.md", """
+            # Add your introductions here!
+
+            """);
         var gitignore = Tuple.Create(".gitignore", $@"###############
 #    folder   #
 ###############
@@ -331,12 +343,14 @@ TODO: Add .NET projects to the *src* folder and run `docfx` to generate **REAL**
 /**/obj/
 {config.Build.Destination}
 ");
-        var apiGitignore = Tuple.Create("api/.gitignore", @"###############
-#  temp file  #
-###############
-*.yml
-.manifest
-");
+        var apiGitignore = Tuple.Create("api/.gitignore", """
+            ###############
+            #  temp file  #
+            ###############
+            *.yml
+            .manifest
+
+            """);
         var files = new Tuple<string, string>[] { tocYaml, indexMarkdownFile, apiTocFile, apiIndexFile, articleTocFile, articleMarkdownFile, gitignore, apiGitignore };
         foreach (var file in files)
         {

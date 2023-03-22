@@ -16,15 +16,17 @@ public class TocRestructureTest : TestBase
     [Fact]
     public void TestTocRestructureWithLeafNode()
     {
-        var toc = GetTocItem(@"
-root
-    node1
-        leaf1
-        node2
-            leaf2
-            leaf3
-    leaf3
-");
+        var toc = GetTocItem("""
+
+            root
+                node1
+                    leaf1
+                    node2
+                        leaf2
+                        leaf3
+                leaf3
+
+            """);
         var restructures = new List<TreeItemRestructure>
         {
             GetRestructure(TreeItemActionType.AppendChild, "leaf2", new string[] { "leaf2.1", "leaf2.2" }),
@@ -35,42 +37,46 @@ root
             GetRestructure(TreeItemActionType.ReplaceSelf, "leaf3", new string[] { "leaf6" }),
         };
         TocRestructureUtility.Restructure(toc, restructures);
-        var expected = GetTocItem(@"
-root
-    node1
-        leaf1
-        node2
-            node2
-            node3
-            leaf2
-                leaf2.3
-                leaf2.4
-                leaf2.1
-                leaf2.2
-            leaf4
-            leaf5
-");
+        var expected = GetTocItem("""
+
+            root
+                node1
+                    leaf1
+                    node2
+                        node2
+                        node3
+                        leaf2
+                            leaf2.3
+                            leaf2.4
+                            leaf2.1
+                            leaf2.2
+                        leaf4
+                        leaf5
+
+            """);
         AssertTocEqual(expected, toc);
     }
 
     [Fact]
     public void TestTocRestructureWithContainerNode()
     {
-        var toc = GetTocItem(@"
-root
-    node1
-        leaf1
-        node2
-            leaf2
-            leaf3
-    node3
-        leaf3.1
-        leaf3.2
-    node4
-        node5
-        leaf4.1
-        leaf4.2
-");
+        var toc = GetTocItem("""
+
+            root
+                node1
+                    leaf1
+                    node2
+                        leaf2
+                        leaf3
+                node3
+                    leaf3.1
+                    leaf3.2
+                node4
+                    node5
+                    leaf4.1
+                    leaf4.2
+
+            """);
         var restructures = new List<TreeItemRestructure>
         {
             GetRestructure(TreeItemActionType.AppendChild, "node2", new string[] { "leaf2.1" }),
@@ -82,38 +88,42 @@ root
             GetRestructure(TreeItemActionType.ReplaceSelf, "node4", new string[] { "leaf6" }),
         };
         TocRestructureUtility.Restructure(toc, restructures);
-        var expected = GetTocItem(@"
-root
-    node1
-        leaf1
-        node2
-        node3
-        node2
-            leaf2.3
-            leaf2.4
-            leaf2
-            leaf3
-            leaf2.1
-            leaf2.2
-        leaf4
-        leaf5
-    leaf6
-");
+        var expected = GetTocItem("""
+
+            root
+                node1
+                    leaf1
+                    node2
+                    node3
+                    node2
+                        leaf2.3
+                        leaf2.4
+                        leaf2
+                        leaf3
+                        leaf2.1
+                        leaf2.2
+                    leaf4
+                    leaf5
+                leaf6
+
+            """);
         AssertTocEqual(expected, toc);
     }
 
     [Fact]
     public void TestTocRestructureWithNoMatchNode()
     {
-        var layout = @"
-root
-    node1
-        leaf1
-        node2
-            leaf2
-            leaf3
-    leaf3
-";
+        var layout = """
+
+            root
+                node1
+                    leaf1
+                    node2
+                        leaf2
+                        leaf3
+                leaf3
+
+            """;
         var toc = GetTocItem(layout);
         var restructures = new List<TreeItemRestructure>
         {
@@ -132,15 +142,17 @@ root
     [Fact]
     public void TestReplaceNodeWithMultipleNodesThrows()
     {
-        var toc = GetTocItem(@"
-root
-    node1
-        leaf1
-        leaf2
-    leaf3
-    node2
-        node1
-");
+        var toc = GetTocItem("""
+
+            root
+                node1
+                    leaf1
+                    leaf2
+                leaf3
+                node2
+                    node1
+
+            """);
         var restructures = new List<TreeItemRestructure>
         {
             GetRestructure(TreeItemActionType.ReplaceSelf, "node2", new string[] {"leaf4", "leaf5" }),
@@ -151,15 +163,17 @@ root
     [Fact]
     public void TestTocRestructureWithRestructureConflicts()
     {
-        var toc = GetTocItem(@"
-root
-    node1
-        leaf1
-        leaf2
-    leaf3
-    node2
-        node1
-");
+        var toc = GetTocItem("""
+
+            root
+                node1
+                    leaf1
+                    leaf2
+                leaf3
+                node2
+                    node1
+
+            """);
         var restructures = new List<TreeItemRestructure>
         {
             GetRestructure(TreeItemActionType.InsertAfter, "node2", new string[] {"leaf4", "leaf5" }),
@@ -168,30 +182,34 @@ root
             GetRestructure(TreeItemActionType.InsertBefore, "node2", new string[] {"leaf10", "leaf11" }),
         };
         TocRestructureUtility.Restructure(toc, restructures);
-        var expected = GetTocItem(@"
-root
-    node1
-        leaf1
-        leaf2
-    leaf3
-    leaf4
-    leaf5
-");
+        var expected = GetTocItem("""
+
+            root
+                node1
+                    leaf1
+                    leaf2
+                leaf3
+                leaf4
+                leaf5
+
+            """);
         AssertTocEqual(expected, toc);
     }
 
     [Fact]
     public void TestTocRestructureAppliesToAllMatchedNodes()
     {
-        var toc = GetTocItem(@"
-root
-    node1
-        leaf1
-        leaf3
-    leaf3
-    node2
-        node1
-");
+        var toc = GetTocItem("""
+
+            root
+                node1
+                    leaf1
+                    leaf3
+                leaf3
+                node2
+                    node1
+
+            """);
         var restructures = new List<TreeItemRestructure>
         {
             GetRestructure(TreeItemActionType.AppendChild, "node1", new string[] {"leaf3", "leaf4" }),
@@ -200,27 +218,29 @@ root
 
         // After leaf3 is appended as child, leaf3.1 and leaf3.2 should insert before leaf3.
         TocRestructureUtility.Restructure(toc, restructures);
-        var expected = GetTocItem(@"
-root
-    node1
-        leaf1
-        leaf3.1
-        leaf3.2
-        leaf3
-        leaf3.1
-        leaf3.2
-        leaf3
-        leaf4
-    leaf3.1
-    leaf3.2
-    leaf3
-    node2
-        node1
-            leaf3.1
-            leaf3.2
-            leaf3
-            leaf4
-");
+        var expected = GetTocItem("""
+
+            root
+                node1
+                    leaf1
+                    leaf3.1
+                    leaf3.2
+                    leaf3
+                    leaf3.1
+                    leaf3.2
+                    leaf3
+                    leaf4
+                leaf3.1
+                leaf3.2
+                leaf3
+                node2
+                    node1
+                        leaf3.1
+                        leaf3.2
+                        leaf3
+                        leaf4
+
+            """);
         AssertTocEqual(expected, toc);
     }
 
@@ -292,8 +312,14 @@ root
 
     private IEnumerable<LineInfo> GetLines(string layout)
     {
-        return layout.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries)
-            .SelectMany(s => s.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries))
+        return layout.Split(new string[] { """
+
+
+            """ }, StringSplitOptions.RemoveEmptyEntries)
+            .SelectMany(s => s.Split(new string[] { """
+
+
+                """ }, StringSplitOptions.RemoveEmptyEntries))
             .Where(s => !string.IsNullOrWhiteSpace(s)).Select(GetLineInfo);
     }
 

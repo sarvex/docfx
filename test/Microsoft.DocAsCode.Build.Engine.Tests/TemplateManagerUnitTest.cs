@@ -68,12 +68,14 @@ public class TemplateManagerUnitTest : TestBase
     {
         // 1. Prepare template
         var templateName = "NoScript";
-        string template = @"
-{{#model}}
-name1={{name1}},
-name2={{name2}};
-{{/model}}
-";
+        string template = """
+
+            {{#model}}
+            name1={{name1}},
+            name2={{name2}};
+            {{/model}}
+
+            """;
         var model = new
         {
             model = new object[]
@@ -95,12 +97,14 @@ name2={{name2}};
 
         var outputFile = Path.Combine(_outputFolder, Path.ChangeExtension(modelFileName, null));
         Assert.True(File.Exists(outputFile));
-        AssertEqualIgnoreCrlf(@"
-name1=test1,
-name2=;
-name1=,
-name2=test2;
-", File.ReadAllText(outputFile));
+        AssertEqualIgnoreCrlf("""
+
+            name1=test1,
+            name2=;
+            name1=,
+            name2=test2;
+
+            """, File.ReadAllText(outputFile));
     }
 
     [Trait("Related", "TemplateProcessor")]
@@ -110,19 +114,25 @@ name2=test2;
     {
         // 1. Prepare template
         var templateName = "Subfolder/NoScriptWithPartial";
-        string template = @"
-{{#model}}
-{{name}}
-{{/model}}
-{{>partial1}}
-";
-        string partial1 = @"partial 1:
-{{>partial2}}";
-        string partial2 = @"partial 2:
-{{#model}}
-{{name}}
-{{/model}}
-";
+        string template = """
+
+            {{#model}}
+            {{name}}
+            {{/model}}
+            {{>partial1}}
+
+            """;
+        string partial1 = """
+            partial 1:
+            {{>partial2}}
+            """;
+        string partial2 = """
+            partial 2:
+            {{#model}}
+            {{name}}
+            {{/model}}
+
+            """;
         var model = new
         {
             model = new[]
@@ -152,14 +162,16 @@ name2=test2;
 
         var outputFile = Path.Combine(_outputFolder, Path.ChangeExtension(modelFileName, null));
         Assert.True(File.Exists(outputFile));
-        AssertEqualIgnoreCrlf(@"
-test1
-test2
-partial 1:
-partial 2:
-test1
-test2
-", File.ReadAllText(outputFile));
+        AssertEqualIgnoreCrlf("""
+
+            test1
+            test2
+            partial 1:
+            partial 2:
+            test1
+            test2
+
+            """, File.ReadAllText(outputFile));
     }
 
     [Trait("Related", "TemplateProcessor")]
@@ -169,30 +181,38 @@ test2
     {
         // 1. Prepare template
         var templateName = "Subfolder/WithMasterPage";
-        string template = @"
-{{!master('_layout/master.html')}}
-{{!master(' _layout/invalid1.html ')}}
-{{#model}}
-{{name}}
-{{/model}}
-{{>partial1}}
-{{!master( _layout/invalid2.html )}}
-";
-        string partial1 = @"partial 1:
-{{>partial2}}";
-        string partial2 = @"partial 2:
-{{#model}}
-{{name}}
-{{/model}}
-";
+        string template = """
 
-        string master = @"
-{{ !include('reference1.html') }}
-Hello Master
-{{!body}}
-Hello Body
-{{!body}}
-";
+            {{!master('_layout/master.html')}}
+            {{!master(' _layout/invalid1.html ')}}
+            {{#model}}
+            {{name}}
+            {{/model}}
+            {{>partial1}}
+            {{!master( _layout/invalid2.html )}}
+
+            """;
+        string partial1 = """
+            partial 1:
+            {{>partial2}}
+            """;
+        string partial2 = """
+            partial 2:
+            {{#model}}
+            {{name}}
+            {{/model}}
+
+            """;
+
+        string master = """
+
+            {{ !include('reference1.html') }}
+            Hello Master
+            {{!body}}
+            Hello Body
+            {{!body}}
+
+            """;
         var model = new
         {
             model = new[]
@@ -225,24 +245,26 @@ Hello Body
         var outputFile = Path.Combine(_outputFolder, Path.ChangeExtension(modelFileName, null));
         Assert.True(File.Exists(Path.Combine(_outputFolder, "reference1.html")));
         Assert.True(File.Exists(outputFile));
-        AssertEqualIgnoreCrlf(@"
-Hello Master
+        AssertEqualIgnoreCrlf("""
 
-test1
-test2
-partial 1:
-partial 2:
-test1
-test2
-Hello Body
+            Hello Master
 
-test1
-test2
-partial 1:
-partial 2:
-test1
-test2
-", File.ReadAllText(outputFile));
+            test1
+            test2
+            partial 1:
+            partial 2:
+            test1
+            test2
+            Hello Body
+
+            test1
+            test2
+            partial 1:
+            partial 2:
+            test1
+            test2
+
+            """, File.ReadAllText(outputFile));
     }
 
     [Trait("Related", "TemplateProcessor")]
@@ -275,18 +297,22 @@ test2
     {
         var templateName = "WithIncludes.html";
 
-        string template = @"
-{{ !include('reference1.html') }}
-{{ !include('reference2.html') }}
-{{#model}}
-{{name}}
-{{/model}}
-";
-        string script = @"
-exports.transform = function (model){
-    model.model.push({name:'test2'});
-    return model;
-}";
+        string template = """
+
+            {{ !include('reference1.html') }}
+            {{ !include('reference2.html') }}
+            {{#model}}
+            {{name}}
+            {{/model}}
+
+            """;
+        string script = """
+
+            exports.transform = function (model){
+                model.model.push({name:'test2'});
+                return model;
+            }
+            """;
 
         var model = new
         {
@@ -315,10 +341,12 @@ exports.transform = function (model){
         Assert.True(File.Exists(outputFilePath));
         Assert.True(File.Exists(Path.Combine(_outputFolder, "reference1.html")));
         Assert.True(File.Exists(Path.Combine(_outputFolder, "reference2.html")));
-        AssertEqualIgnoreCrlf(@"
-test1
-test2
-", File.ReadAllText(outputFilePath));
+        AssertEqualIgnoreCrlf("""
+
+            test1
+            test2
+
+            """, File.ReadAllText(outputFilePath));
     }
 
     [Trait("Related", "TemplateProcessor")]
@@ -327,30 +355,36 @@ test2
     {
         var templateName = "WithRequireScript.html";
 
-        string template = @"
-{{#model}}
-{{#result1}}result1 = true{{/result1}}
-{{#result2}}result2 = true{{/result2}}
-{{#result3}}result3 = true{{/result3}}
-{{/model}}
-";
-        string mainScript = @"
-var util = require('./util.js');
+        string template = """
 
-exports.transform = function (model){
-    var url = 'https://www.microsoft.com';
-    model.model.result1 = util.isAbsolutePath(url);
-    model.model.result2 = util.isAbsolutePath(url);
-    model.model.result3 = util.isAbsolutePath(url);
-    return model;
-}";
-        string utilScript = @"
-exports.isAbsolutePath = isAbsolutePath;
+            {{#model}}
+            {{#result1}}result1 = true{{/result1}}
+            {{#result2}}result2 = true{{/result2}}
+            {{#result3}}result3 = true{{/result3}}
+            {{/model}}
 
-function isAbsolutePath(path) {
-    return /^(\w+:)?\/\//g.test(path);
-}
-";
+            """;
+        string mainScript = """
+
+            var util = require('./util.js');
+
+            exports.transform = function (model){
+                var url = 'https://www.microsoft.com';
+                model.model.result1 = util.isAbsolutePath(url);
+                model.model.result2 = util.isAbsolutePath(url);
+                model.model.result3 = util.isAbsolutePath(url);
+                return model;
+            }
+            """;
+        string utilScript = """
+
+            exports.isAbsolutePath = isAbsolutePath;
+
+            function isAbsolutePath(path) {
+                return /^(\w+:)?\/\//g.test(path);
+            }
+
+            """;
 
         var model = new
         {
@@ -373,11 +407,13 @@ function isAbsolutePath(path) {
             );
         var outputFilePath = Path.Combine(_outputFolder, Path.ChangeExtension(modelFileName, "html"));
         Assert.True(File.Exists(outputFilePath));
-        AssertEqualIgnoreCrlf(@"
-result1 = true
-result2 = true
-result3 = true
-", File.ReadAllText(outputFilePath));
+        AssertEqualIgnoreCrlf("""
+
+            result1 = true
+            result2 = true
+            result3 = true
+
+            """, File.ReadAllText(outputFilePath));
     }
 
     [Trait("Related", "TemplateProcessor")]
@@ -386,23 +422,29 @@ result3 = true
     public void TestMustacheTemplateProcessTemplateFolderWithDifferentTypeShouldWork()
     {
         var templateName = "TemplateFolder.html";
-        string defaultTemplate = @"
-default:
-{{#model}}
-{{name}}
-{{/model}}
-";
-        string conceptualTemplate = @"
-conceptual:
-{{#model}}
-{{name}}
-{{/model}}
-";
-        string script = @"
-exports.transform = function (model){
-    model.model.push({name:'test2'});
-    return model;
-}";
+        string defaultTemplate = """
+
+            default:
+            {{#model}}
+            {{name}}
+            {{/model}}
+
+            """;
+        string conceptualTemplate = """
+
+            conceptual:
+            {{#model}}
+            {{name}}
+            {{/model}}
+
+            """;
+        string script = """
+
+            exports.transform = function (model){
+                model.model.push({name:'test2'});
+                return model;
+            }
+            """;
 
         var model = new
         {
@@ -435,18 +477,22 @@ exports.transform = function (model){
             );
         var outputFilePath1 = Path.Combine(_outputFolder, "TestTemplateProcessor_TemplateFolderWithDifferentType1.md");
         Assert.True(File.Exists(outputFilePath1));
-        AssertEqualIgnoreCrlf(@"
-conceptual:
-test1
-test2
-", File.ReadAllText(outputFilePath1));
+        AssertEqualIgnoreCrlf("""
+
+            conceptual:
+            test1
+            test2
+
+            """, File.ReadAllText(outputFilePath1));
         var outputFilePath2 = Path.Combine(_outputFolder, "TestTemplateProcessor_TemplateFolderWithDifferentType2.html");
         Assert.True(File.Exists(outputFilePath2));
-        AssertEqualIgnoreCrlf(@"
-default:
-test1
-test2
-", File.ReadAllText(outputFilePath2));
+        AssertEqualIgnoreCrlf("""
+
+            default:
+            test1
+            test2
+
+            """, File.ReadAllText(outputFilePath2));
     }
 
     [Trait("Related", "TemplateProcessor")]
@@ -460,12 +506,14 @@ test2
         string defaultTemplate = @"{{name}}";
         var name = "this is a looooooooooooooooooooooooooooooooooooog name";
         var longName = string.Concat(Enumerable.Repeat(name, 20000));
-        string script = @"
-exports.transform = function (model){
-    return {
-        name: JSON.stringify(model)
-    };
-}";
+        string script = """
+
+            exports.transform = function (model){
+                return {
+                    name: JSON.stringify(model)
+                };
+            }
+            """;
 
         var model = new
         {
@@ -499,21 +547,23 @@ exports.transform = function (model){
 
         var templateName = "TemplateFolder.html";
         string defaultTemplate = @"{{result1}},{{result2}}";
-        string script = @"
-exports.transform = function (model){
-    var url = 'https://www.example.com';
-    var result1 = isAbsolutePath(url);
-    var result2 = isAbsolutePath(url);
+        string script = """
 
-    function isAbsolutePath(path) {
-        return /^(\w+:)?\/\//g.test(path);
-    }
+            exports.transform = function (model){
+                var url = 'https://www.example.com';
+                var result1 = isAbsolutePath(url);
+                var result2 = isAbsolutePath(url);
 
-    return {
-        result1: result1,
-        result2: result2
-    };
-}";
+                function isAbsolutePath(path) {
+                    return /^(\w+:)?\/\//g.test(path);
+                }
+
+                return {
+                    result1: result1,
+                    result2: result2
+                };
+            }
+            """;
 
         var model = new object();
         var item1 = new InternalManifestItem
@@ -537,12 +587,14 @@ exports.transform = function (model){
     {
         var templateName = "TemplateFolder.html";
         string defaultTemplate = @"{{date}}";
-        string script = @"
-exports.transform = function (model){
-    return {
-        date: new Date(new Date('2019-08-19T05:40:30.4629999Z')).toISOString()
-    };
-}";
+        string script = """
+
+            exports.transform = function (model){
+                return {
+                    date: new Date(new Date('2019-08-19T05:40:30.4629999Z')).toISOString()
+                };
+            }
+            """;
 
         var model = new object();
         var item1 = new InternalManifestItem
@@ -620,6 +672,18 @@ exports.transform = function (model){
 
     private static void AssertEqualIgnoreCrlf(string expected, string actual)
     {
-        Assert.Equal(expected.Replace("\r\n", "\n"), actual.Replace("\r\n", "\n"));
+        Assert.Equal(expected.Replace("""
+
+
+            """, """
+
+
+            """), actual.Replace("""
+
+
+            """, """
+
+
+            """));
     }
 }

@@ -11,13 +11,25 @@ public static class TestUtility
     public static void AssertEqual(string expected, string actual, Func<string, MarkupResult> markup)
     {
         var result = markup(actual);
-        Assert.Equal(expected.Replace("\r\n", "\n"), result.Html);
+        Assert.Equal(expected.Replace("""
+
+
+            """, """
+
+
+            """), result.Html);
     }
 
     public static void AssertEqual(string expected, string actual, Func<string, string, MarkupResult> markup)
     {
         var result = markup(actual, null);
-        Assert.Equal(expected.Replace("\r\n", "\n"), result.Html);
+        Assert.Equal(expected.Replace("""
+
+
+            """, """
+
+
+            """), result.Html);
     }
 
     public static MarkupResult Markup(string content, string filePath = null)

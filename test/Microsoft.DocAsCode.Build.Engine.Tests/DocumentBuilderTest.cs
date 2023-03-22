@@ -143,20 +143,22 @@ public class DocumentBuilderTest : TestBase
                 "Test xrefmap with duplicate uid in different fiels: XRef2 should be recorded with file test/test.md"
             },
             _inputFolder);
-        File.WriteAllText(MarkdownSytleConfig.MarkdownStyleFileName, @"{
-rules : [
-    ""foo"",
-    { name: ""bar"", disable: true}
-],
-tagRules : [
-    {
-        tagNames: [""p""],
-        behavior: ""Warning"",
-        messageFormatter: ""Tag {0} is not valid."",
-        openingTagOnly: true
-    }
-]
-}");
+        File.WriteAllText(MarkdownSytleConfig.MarkdownStyleFileName, """
+            {
+            rules : [
+                "foo",
+                { name: "bar", disable: true}
+            ],
+            tagRules : [
+                {
+                    tagNames: ["p"],
+                    behavior: "Warning",
+                    messageFormatter: "Tag {0} is not valid.",
+                    openingTagOnly: true
+                }
+            ]
+            }
+            """);
 
         FileCollection files = new(Directory.GetCurrentDirectory());
         files.Add(DocumentType.Article, new[] { tocFile, conceptualFile, conceptualFile2, conceptualFile3, conceptualFile4 });
@@ -225,7 +227,10 @@ tagRules : [
                     model["rawTitle"]);
                 Assert.Equal(
                     string.Join(
-                        "\n",
+                        """
+
+
+                        """,
                         "<!-- I'm comment -->",
                         "<!-- I'm not title-->",
                         "<!-- Raw title is in the line below -->",
@@ -258,7 +263,10 @@ tagRules : [
                     model["conceptual"]);
                 Assert.Equal(
                     string.Join(
-                        "\n",
+                        """
+
+
+                        """,
                         "<!-- I'm comment -->",
                         "<!-- I'm not title-->",
                         "<!-- Raw title is in the line below -->",
@@ -393,51 +401,57 @@ tagRules : [
             _inputFolder);
 
         File.WriteAllText(resourceMetaFile, @"{ abc: ""xyz"", uid: ""r1"" }");
-        File.WriteAllText(MarkdownSytleConfig.MarkdownStyleFileName, @"{
-settings : [
-    { category: ""div"", disable: true},
-    { category: ""p"", id: ""p-3"", disable: true}
-],
-}");
+        File.WriteAllText(MarkdownSytleConfig.MarkdownStyleFileName, """
+            {
+            settings : [
+                { category: "div", disable: true},
+                { category: "p", id: "p-3", disable: true}
+            ],
+            }
+            """);
         CreateFile(
             MarkdownSytleDefinition.MarkdownStyleDefinitionFolderName + "/p" + MarkdownSytleDefinition.MarkdownStyleDefinitionFilePostfix,
-            @"{
-    tagRules : {
-        ""p-1"": {
-            tagNames: [""p""],
-            behavior: ""Warning"",
-            messageFormatter: ""Tag {0} is not valid."",
-            openingTagOnly: true
-        },
-        ""p-2"": {
-            tagNames: [""p""],
-            behavior: ""Warning"",
-            messageFormatter: ""Tag {0} is not valid."",
-            openingTagOnly: false,
-            disable: true
-        },
-        ""p-3"": {
-            tagNames: [""p""],
-            behavior: ""Warning"",
-            messageFormatter: ""Tag {0} is not valid."",
-            openingTagOnly: false,
-        }
-    }
-}
-", _templateFolder);
+            """
+            {
+                tagRules : {
+                    "p-1": {
+                        tagNames: ["p"],
+                        behavior: "Warning",
+                        messageFormatter: "Tag {0} is not valid.",
+                        openingTagOnly: true
+                    },
+                    "p-2": {
+                        tagNames: ["p"],
+                        behavior: "Warning",
+                        messageFormatter: "Tag {0} is not valid.",
+                        openingTagOnly: false,
+                        disable: true
+                    },
+                    "p-3": {
+                        tagNames: ["p"],
+                        behavior: "Warning",
+                        messageFormatter: "Tag {0} is not valid.",
+                        openingTagOnly: false,
+                    }
+                }
+            }
+
+            """, _templateFolder);
         CreateFile(
             MarkdownSytleDefinition.MarkdownStyleDefinitionFolderName + "/div" + MarkdownSytleDefinition.MarkdownStyleDefinitionFilePostfix,
-            @"{
-    tagRules : {
-        ""div-1"": {
-            tagNames: [""div""],
-            behavior: ""Warning"",
-            messageFormatter: ""Tag {0} is not valid."",
-            openingTagOnly: true
-        }
-    }
-}
-", _templateFolder);
+            """
+            {
+                tagRules : {
+                    "div-1": {
+                        tagNames: ["div"],
+                        behavior: "Warning",
+                        messageFormatter: "Tag {0} is not valid.",
+                        openingTagOnly: true
+                    }
+                }
+            }
+
+            """, _templateFolder);
 
         FileCollection files = new(Directory.GetCurrentDirectory());
         files.Add(DocumentType.Article, new[] { tocFile, conceptualFile, conceptualFile2 });
@@ -480,19 +494,23 @@ settings : [
     [Fact]
     public void TestBuildConceptualWithTemplateShouldSucceed()
     {
-        CreateFile("conceptual.html.js", @"
-exports.transform = function (model){
-  return JSON.stringify(model, null, '  ');
-};
-exports.xref = null;
-", _templateFolder);
-        CreateFile("toc.tmpl.js", @"
-exports.getOptions = function (){
-    return {
-        isShared: true
-    };
-};
-", _templateFolder);
+        CreateFile("conceptual.html.js", """
+
+            exports.transform = function (model){
+              return JSON.stringify(model, null, '  ');
+            };
+            exports.xref = null;
+
+            """, _templateFolder);
+        CreateFile("toc.tmpl.js", """
+
+            exports.getOptions = function (){
+                return {
+                    isShared: true
+                };
+            };
+
+            """, _templateFolder);
         CreateFile("conceptual.html.tmpl", "{{.}}", _templateFolder);
         var conceptualFile = CreateFile("test.md",
             new[]
@@ -769,7 +787,10 @@ exports.getOptions = function (){
                     model["rawTitle"]);
                 Assert.Equal(
                     string.Join(
-                        "\n",
+                        """
+
+
+                        """,
                         "",
                         $"<p sourcefile=\"{_inputFolder}/test.md\" sourcestartlinenumber=\"2\">Test link: <a href=\"~/{_inputFolder}/test/test.md\" sourcefile=\"{_inputFolder}/test.md\" sourcestartlinenumber=\"2\">link 1</a>",
                         $"Test link: <a href=\"http://www.microsoft.com\" sourcefile=\"{_inputFolder}/test.md\" sourcestartlinenumber=\"3\">link 2</a>",
@@ -782,10 +803,15 @@ exports.getOptions = function (){
                         $"Test link: <a href=\"a.md#top\" sourcefile=\"{_inputFolder}/test.md\" sourcestartlinenumber=\"10\">link 9</a>",
                         $"Test link: <a href=\"#top\" sourcefile=\"{_inputFolder}/test.md\" sourcestartlinenumber=\"11\">link 10</a></p>",
                         ""),
-                    model["conceptual"].ToString().Replace("\r", ""));
+                    model["conceptual"].ToString().Replace("""
+
+                        """, ""));
                 Assert.Equal(
                     string.Join(
-                        "\n",
+                        """
+
+
+                        """,
                         "",
                         "<p>Test link: <a href=\"test/test.html\">link 1</a>",
                         "Test link: <a href=\"http://www.microsoft.com\">link 2</a>",
@@ -848,7 +874,10 @@ exports.getOptions = function (){
             Assert.True(File.Exists(Path.Combine(_outputFolder, Path.ChangeExtension("a.md", RawModelFileExtension))));
             Assert.Equal(
                 string.Join(
-                    "\n",
+                    """
+
+
+                    """,
                     "<p><a href=\"invalid-a.md\">link a</a>",
                     "<a href=\"../b/invalid-b.md\">link b</a></p>",
                     "<p><a href=\"invalid-a.md\">link a</a>",

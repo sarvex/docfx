@@ -11,25 +11,24 @@ public class DefinitionMergeUnitTest
     public void InterfaceWithTemplateDoesNotCrash()
     {
         // arrange
-        string code = @"
-namespace A {
-  public interface IInterface
-  {
-    /// <summary>
-    /// Summary
-    /// </summary>
-    void Function<T>();
-  }
+        string code = """
+            namespace A {
+              public interface IInterface
+              {
+                /// <summary>
+                /// Summary
+                /// </summary>
+                void Function<T>();
+              }
 
-  public class Implementation : IInterface
-  {
-    public void Function<T>()
-    {
-    }
-  }
-}
-
-";
+              public class Implementation : IInterface
+              {
+                public void Function<T>()
+                {
+                }
+              }
+            }
+            """;
         // act
         var output = CompilationHelper.CreateCompilationFromCSharpCode(code, "test.dll").Assembly.GenerateMetadataItem();
 

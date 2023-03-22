@@ -17,13 +17,21 @@ public class MarkdownReaderTest
     [Fact]
     public void TestReadMarkdownAsOverwrite()
     {
-        var content = @"---
-uid: Test
-remarks: Hello
----
+        var content = """
+            ---
+            uid: Test
+            remarks: Hello
+            ---
 
-This is unit test!";
-        content = Regex.Replace(content, "\r?\n", "\r\n");
+            This is unit test!
+            """;
+        content = Regex.Replace(content, """
+            ?
+
+            """, """
+
+
+            """);
         var baseDir = Directory.GetCurrentDirectory();
         var fileName = "ut_ReadMarkdownAsOverwrite.md";
         var fullPath = Path.Combine(baseDir, fileName);
@@ -40,21 +48,33 @@ This is unit test!";
         Assert.Single(results);
         Assert.Equal("Test", results[0].Uid);
         Assert.Equal("Hello", results[0].Metadata["remarks"]);
-        Assert.Equal("\n<p sourcefile=\"ut_ReadMarkdownAsOverwrite.md\" sourcestartlinenumber=\"6\">This is unit test!</p>\n", results[0].Conceptual);
+        Assert.Equal("""
+
+            <p sourcefile="ut_ReadMarkdownAsOverwrite.md" sourcestartlinenumber="6">This is unit test!</p>
+
+            """, results[0].Conceptual);
         File.Delete(fileName);
 
         // Test conceptual content between two yamlheader
-        content = @"---
-uid: Test1
-remarks: Hello
----
-This is unit test!
+        content = """
+            ---
+            uid: Test1
+            remarks: Hello
+            ---
+            This is unit test!
 
----
-uid: Test2
----
-";
-        content = Regex.Replace(content, "\r?\n", "\r\n");
+            ---
+            uid: Test2
+            ---
+
+            """;
+        content = Regex.Replace(content, """
+            ?
+
+            """, """
+
+
+            """);
         File.WriteAllText(fileName, content);
         results = MarkdownReader.ReadMarkdownAsOverwrite(host, ft).ToList();
         Assert.NotNull(results);
@@ -62,46 +82,70 @@ uid: Test2
         Assert.Equal("Test1", results[0].Uid);
         Assert.Equal("Test2", results[1].Uid);
         Assert.Equal("Hello", results[0].Metadata["remarks"]);
-        Assert.Equal("\n<p sourcefile=\"ut_ReadMarkdownAsOverwrite.md\" sourcestartlinenumber=\"5\">This is unit test!</p>\n", results[0].Conceptual);
+        Assert.Equal("""
+
+            <p sourcefile="ut_ReadMarkdownAsOverwrite.md" sourcestartlinenumber="5">This is unit test!</p>
+
+            """, results[0].Conceptual);
         Assert.Equal(string.Empty, results[1].Conceptual);
         File.Delete(fileName);
 
-        content = @"---
-uid: Test1
-remarks: Hello
----
-This is unit test!
----
-uid: Test2
----
-";
-        content = Regex.Replace(content, "\r?\n", "\r\n");
+        content = """
+            ---
+            uid: Test1
+            remarks: Hello
+            ---
+            This is unit test!
+            ---
+            uid: Test2
+            ---
+
+            """;
+        content = Regex.Replace(content, """
+            ?
+
+            """, """
+
+
+            """);
         File.WriteAllText(fileName, content);
         results = MarkdownReader.ReadMarkdownAsOverwrite(host, ft).ToList();
         Assert.NotNull(results);
         Assert.Equal(2, results.Count);
         Assert.Equal("Test1", results[0].Uid);
         Assert.Equal("Hello", results[0].Metadata["remarks"]);
-        Assert.Equal("\n<p sourcefile=\"ut_ReadMarkdownAsOverwrite.md\" sourcestartlinenumber=\"5\">This is unit test!</p>\n", results[0].Conceptual);
+        Assert.Equal("""
+
+            <p sourcefile="ut_ReadMarkdownAsOverwrite.md" sourcestartlinenumber="5">This is unit test!</p>
+
+            """, results[0].Conceptual);
         Assert.Equal("Test2", results[1].Uid);
         Assert.Equal("", results[1].Conceptual);
         File.Delete(fileName);
 
         // Test conceptual content with extra empty line between two yamlheader
-        content = @"---
-uid: Test1
-remarks: Hello
----
+        content = """
+            ---
+            uid: Test1
+            remarks: Hello
+            ---
 
 
-This is unit test!
+            This is unit test!
 
 
----
-uid: Test2
----
-";
-        content = Regex.Replace(content, "\r?\n", "\r\n");
+            ---
+            uid: Test2
+            ---
+
+            """;
+        content = Regex.Replace(content, """
+            ?
+
+            """, """
+
+
+            """);
         File.WriteAllText(fileName, content);
         results = MarkdownReader.ReadMarkdownAsOverwrite(host, ft).ToList();
         Assert.NotNull(results);
@@ -109,33 +153,56 @@ uid: Test2
         Assert.Equal("Test1", results[0].Uid);
         Assert.Equal("Test2", results[1].Uid);
         Assert.Equal("Hello", results[0].Metadata["remarks"]);
-        Assert.Equal("\n<p sourcefile=\"ut_ReadMarkdownAsOverwrite.md\" sourcestartlinenumber=\"7\">This is unit test!</p>\n", results[0].Conceptual);
+        Assert.Equal("""
+
+            <p sourcefile="ut_ReadMarkdownAsOverwrite.md" sourcestartlinenumber="7">This is unit test!</p>
+
+            """, results[0].Conceptual);
         Assert.Equal(string.Empty, results[1].Conceptual);
         File.Delete(fileName);
 
         // Test different line ending
-        content = "---\nuid: Test\nremarks: Hello\n---\nThis is unit test!\n";
+        content = """
+            ---
+            uid: Test
+            remarks: Hello
+            ---
+            This is unit test!
+
+            """;
         File.WriteAllText(fileName, content);
         results = MarkdownReader.ReadMarkdownAsOverwrite(host, ft).ToList();
         Assert.NotNull(results);
         Assert.Single(results);
         Assert.Equal("Test", results[0].Uid);
         Assert.Equal("Hello", results[0].Metadata["remarks"]);
-        Assert.Equal("\n<p sourcefile=\"ut_ReadMarkdownAsOverwrite.md\" sourcestartlinenumber=\"5\">This is unit test!</p>\n", results[0].Conceptual);
+        Assert.Equal("""
+
+            <p sourcefile="ut_ReadMarkdownAsOverwrite.md" sourcestartlinenumber="5">This is unit test!</p>
+
+            """, results[0].Conceptual);
         File.Delete(fileName);
 
         // Test link to files and Uids in overwrite document
-        content = @"---
-uid: Test
-remarks: Hello
----
-@NotExistUid
+        content = """
+            ---
+            uid: Test
+            remarks: Hello
+            ---
+            @NotExistUid
 
-[Not exist link](link.md)
-[Not exist link2](link2.md)
+            [Not exist link](link.md)
+            [Not exist link2](link2.md)
 
-This is unit test!";
-        content = Regex.Replace(content, "\r?\n", "\r\n");
+            This is unit test!
+            """;
+        content = Regex.Replace(content, """
+            ?
+
+            """, """
+
+
+            """);
         File.WriteAllText(fileName, content);
         results = MarkdownReader.ReadMarkdownAsOverwrite(host, ft).ToList();
         Assert.NotNull(results);

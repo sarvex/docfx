@@ -20,16 +20,20 @@ public class YamlDeserializerWithFallbackTest
             Assert.Equal("A", a);
         }
         {
-            var obj = deserialzer.Deserialize(() => new StringReader(@"- A
-- B"));
+            var obj = deserialzer.Deserialize(() => new StringReader("""
+                - A
+                - B
+                """));
             Assert.NotNull(obj);
             var a = Assert.IsType<List<string>>(obj);
             Assert.Equal("A", a[0]);
             Assert.Equal("B", a[1]);
         }
         {
-            var ex = Assert.Throws<YamlException>(() => deserialzer.Deserialize(() => new StringReader(@"- A
-- A: abc")));
+            var ex = Assert.Throws<YamlException>(() => deserialzer.Deserialize(() => new StringReader("""
+                - A
+                - A: abc
+                """)));
             Assert.Equal(2, ex.Start.Line);
             Assert.Equal(3, ex.Start.Column);
         }
@@ -54,16 +58,20 @@ public class YamlDeserializerWithFallbackTest
             Assert.Equal("A", a);
         }
         {
-            var obj = deserialzer.Deserialize(() => new StringReader(@"- A
-- B"));
+            var obj = deserialzer.Deserialize(() => new StringReader("""
+                - A
+                - B
+                """));
             Assert.NotNull(obj);
             var a = Assert.IsType<string[]>(obj);
             Assert.Equal("A", a[0]);
             Assert.Equal("B", a[1]);
         }
         {
-            var ex = Assert.Throws<YamlException>(() => deserialzer.Deserialize(() => new StringReader(@"- A
-- A: abc")));
+            var ex = Assert.Throws<YamlException>(() => deserialzer.Deserialize(() => new StringReader("""
+                - A
+                - A: abc
+                """)));
             Assert.Equal(2, ex.Start.Line);
             Assert.Equal(3, ex.Start.Column);
         }

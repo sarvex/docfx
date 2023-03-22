@@ -13,9 +13,20 @@ namespace Microsoft.DocAsCode.Common.Tests;
 public class YamlSerializationTest
 {
     [Theory]
-    [InlineData(" Add --globalMetadata, --globalMetadataFile and --fileMetadataFile\n")]
-    [InlineData("\r\n Hello\n")]
-    [InlineData("  \r\n Hello\n")]
+    [InlineData("""
+         Add --globalMetadata, --globalMetadataFile and --fileMetadataFile
+
+        """)]
+    [InlineData("""
+
+         Hello
+
+        """)]
+    [InlineData("""
+          
+         Hello
+
+        """)]
     [InlineData("True")]
     [InlineData("true")]
     [InlineData("TRUE")]
@@ -71,10 +82,24 @@ public class YamlSerializationTest
         var sw = new StringWriter();
         YamlUtility.Serialize(sw, new BasicClass { B = 1, C = "Good!" }, YamlMime.YamlMimePrefix + "Test-Yaml-Mime");
         var yaml = sw.ToString();
-        Assert.Equal(@"### YamlMime:Test-Yaml-Mime
-B: 1
-C: Good!
-".Replace("\r\n", "\n"), yaml.Replace("\r\n", "\n"));
+        Assert.Equal("""
+            ### YamlMime:Test-Yaml-Mime
+            B: 1
+            C: Good!
+
+            """.Replace("""
+
+
+            """, """
+
+
+"""), yaml.Replace("""
+
+
+                         """, """
+
+
+"""));
         Assert.Equal("YamlMime:Test-Yaml-Mime", YamlMime.ReadMime(new StringReader(yaml)));
         var value = YamlUtility.Deserialize<BasicClass>(new StringReader(yaml));
         Assert.NotNull(value);
@@ -88,10 +113,24 @@ C: Good!
         var sw = new StringWriter();
         YamlUtility.Serialize(sw, new BasicClass { B = 1, C = "~" }, YamlMime.YamlMimePrefix + "Test-Yaml-Mime");
         var yaml = sw.ToString();
-        Assert.Equal(@"### YamlMime:Test-Yaml-Mime
-B: 1
-C: ""~""
-".Replace("\r\n", "\n"), yaml.Replace("\r\n", "\n"));
+        Assert.Equal("""
+            ### YamlMime:Test-Yaml-Mime
+            B: 1
+            C: "~"
+
+            """.Replace("""
+
+
+            """, """
+
+
+"""), yaml.Replace("""
+
+
+                         """, """
+
+
+"""));
         Assert.Equal("YamlMime:Test-Yaml-Mime", YamlMime.ReadMime(new StringReader(yaml)));
         var value = YamlUtility.Deserialize<BasicClass>(new StringReader(yaml));
         Assert.NotNull(value);
@@ -105,24 +144,40 @@ C: ""~""
         var sw = new StringWriter();
         YamlUtility.Serialize(sw, new object[] { true, false }, YamlMime.YamlMimePrefix + "Test-Yaml-Mime");
         var yaml = sw.ToString();
-        Assert.Equal(@"### YamlMime:Test-Yaml-Mime
-- true
-- false
-".Replace("\r\n", "\n"), yaml.Replace("\r\n", "\n"));
+        Assert.Equal("""
+            ### YamlMime:Test-Yaml-Mime
+            - true
+            - false
+
+            """.Replace("""
+
+
+            """, """
+
+
+"""), yaml.Replace("""
+
+
+                         """, """
+
+
+"""));
         Assert.Equal("YamlMime:Test-Yaml-Mime", YamlMime.ReadMime(new StringReader(yaml)));
         var value = YamlUtility.Deserialize<object[]>(new StringReader(yaml));
         Assert.NotNull(value);
         Assert.Equal(2, value.Length);
         Assert.Equal(true, value[0]);
         Assert.Equal(false, value[1]);
-        var value2 = YamlUtility.Deserialize<object[]>(new StringReader(@"### YamlMime:Test-Yaml-Mime
-- true
-- True
-- TRUE
-- false
-- False
-- FALSE
-"));
+        var value2 = YamlUtility.Deserialize<object[]>(new StringReader("""
+            ### YamlMime:Test-Yaml-Mime
+            - true
+            - True
+            - TRUE
+            - false
+            - False
+            - FALSE
+
+            """));
         Assert.NotNull(value2);
         Assert.Equal(new[] { true, true, true, false, false, false }, value2.Cast<bool>());
     }
@@ -133,12 +188,26 @@ C: ""~""
         var sw = new StringWriter();
         YamlUtility.Serialize(sw, new object[] { 1234567890000L, 9876543210000L, long.MaxValue, ulong.MaxValue }, YamlMime.YamlMimePrefix + "Test-Yaml-Mime");
         var yaml = sw.ToString();
-        Assert.Equal(@"### YamlMime:Test-Yaml-Mime
-- 1234567890000
-- 9876543210000
-- 9223372036854775807
-- 18446744073709551615
-".Replace("\r\n", "\n"), yaml.Replace("\r\n", "\n"));
+        Assert.Equal("""
+            ### YamlMime:Test-Yaml-Mime
+            - 1234567890000
+            - 9876543210000
+            - 9223372036854775807
+            - 18446744073709551615
+
+            """.Replace("""
+
+
+            """, """
+
+
+"""), yaml.Replace("""
+
+
+                         """, """
+
+
+"""));
         Assert.Equal("YamlMime:Test-Yaml-Mime", YamlMime.ReadMime(new StringReader(yaml)));
         var value = YamlUtility.Deserialize<object[]>(new StringReader(yaml));
         Assert.NotNull(value);
@@ -219,16 +288,30 @@ C: ""~""
                 }
             });
         var yaml = sw.ToString();
-        Assert.Equal(@"B: 1
-C: Good!
-s.a: aaa
-s.b: bbb
-i.x: 1
-i.y: 2
-foo:
-- foo1
-bar: bar
-".Replace("\r\n", "\n"), yaml.Replace("\r\n", "\n"));
+        Assert.Equal("""
+            B: 1
+            C: Good!
+            s.a: aaa
+            s.b: bbb
+            i.x: 1
+            i.y: 2
+            foo:
+            - foo1
+            bar: bar
+
+            """.Replace("""
+
+
+            """, """
+
+
+"""), yaml.Replace("""
+
+
+                         """, """
+
+
+"""));
         var value = YamlUtility.Deserialize<ClassWithExtensibleMembers>(new StringReader(yaml));
         Assert.NotNull(value);
         Assert.Equal(1, value.B);
@@ -247,16 +330,24 @@ bar: bar
     [Fact]
     public void TestClassWithExtensibleMembersByDeserializeThenSerialize()
     {
-        var yaml = @"B: 1
-C: Good!
-s.a: aaa
-s.b: bbb
-i.x: 1
-i.y: 2
-foo:
-- foo1
-bar: bar
-".Replace("\r\n", "\n");
+        var yaml = """
+            B: 1
+            C: Good!
+            s.a: aaa
+            s.b: bbb
+            i.x: 1
+            i.y: 2
+            foo:
+            - foo1
+            bar: bar
+
+            """.Replace("""
+
+
+            """, """
+
+
+""");
         var value = YamlUtility.Deserialize<ClassWithExtensibleMembers>(new StringReader(yaml));
         Assert.NotNull(value);
         Assert.Equal(1, value.B);
@@ -273,7 +364,13 @@ bar: bar
 
         var sw = new StringWriter();
         YamlUtility.Serialize(sw, value);
-        Assert.Equal(yaml, sw.ToString().Replace("\r\n", "\n"));
+        Assert.Equal(yaml, sw.ToString().Replace("""
+
+
+            """, """
+
+
+            """));
     }
 
     [Fact]
@@ -374,23 +471,37 @@ bar: bar
             ReadOnlyDictionary = new SortedDictionary<string, string> { ["k2"] = "v2" },
             Set = new SortedSet<string> { "s" },
         });
-        Assert.Equal(@"List:
-- a
-ReadOnlyList:
-- b
-Collection:
-- c
-ReadOnlyCollection:
-- d
-Enumerable:
-- 1
-Dictionary:
-  k1: v1
-ReadOnlyDictionary:
-  k2: v2
-Set:
-- s
-".Replace("\r\n", "\n"), sw.ToString().Replace("\r\n", "\n"));
+        Assert.Equal("""
+            List:
+            - a
+            ReadOnlyList:
+            - b
+            Collection:
+            - c
+            ReadOnlyCollection:
+            - d
+            Enumerable:
+            - 1
+            Dictionary:
+              k1: v1
+            ReadOnlyDictionary:
+              k2: v2
+            Set:
+            - s
+
+            """.Replace("""
+
+
+            """, """
+
+
+"""), sw.ToString().Replace("""
+
+
+                         """, """
+
+
+"""));
 
         var obj = YamlUtility.Deserialize<ClassWithInterfaceMember>(new StringReader(sw.ToString()));
         Assert.NotNull(obj);

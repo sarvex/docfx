@@ -21,24 +21,52 @@ public class JsonConverterTest
     public void TestJObjectDictionaryToObjectDictionaryConverterSerializeAndDeserialize()
     {
         string jsonString = "{" +
-            "\"globalMetadata\":{" +
-                "\"layout\":\"Conceptual\"," +
-                "\"breadcrumb_path\":\"/enterprise-mobility/toc.json\"," +
-                "\"product_feedback_displaytext\":\"IntuneFeedback\"," +
-                "\"product_feedback_url\":\"https://microsoftintune.uservoice.com/\"," +
-                "\"contributors_to_exclude\":" +
+            """
+            "globalMetadata":{
+            """ +
+                """
+                "layout":"Conceptual",
+                """ +
+                """
+                "breadcrumb_path":"/enterprise-mobility/toc.json",
+                """ +
+                """
+                "product_feedback_displaytext":"IntuneFeedback",
+                """ +
+                """
+                "product_feedback_url":"https://microsoftintune.uservoice.com/",
+                """ +
+                """
+                "contributors_to_exclude":
+                """ +
                     "[\"herohua\",\"fenxu\"]," +
-                "\"searchScope\":[\"Intune\"]," +
-                "\"_op_documentIdPathDepotMapping\":{" +
-                    "\"./\":{" +
-                        "\"depot_name\":\"Azure.EndUser\"," +
-                        "\"folder_relative_path_in_docset\":\".\"" +
+                """
+                "searchScope":["Intune"],
+                """ +
+                """
+                "_op_documentIdPathDepotMapping":{
+                """ +
+                    """
+                    "./":{
+                    """ +
+                        """
+                        "depot_name":"Azure.EndUser",
+                        """ +
+                        """
+                        "folder_relative_path_in_docset":"."
+                        """ +
                     "}" +
                 "}" +
             "}," +
-            "\"noLangKeyword\":false," +
-            "\"keepFileLink\":false," +
-            "\"disableGitFeatures\":false" +
+            """
+            "noLangKeyword":false,
+            """ +
+            """
+            "keepFileLink":false,
+            """ +
+            """
+            "disableGitFeatures":false
+            """ +
         "}";
 
         BuildJsonConfig buildOptions = JsonConvert.DeserializeObject<BuildJsonConfig>(jsonString);

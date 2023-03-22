@@ -25,42 +25,46 @@ public class GenerateMetadataFromCSUnitTest
     [Trait("Related", "Attribute")]
     public void TestGenerateMetadataAsyncWithFuncVoidReturn()
     {
-        string code = @"
-using System;
+        string code = """
+            using System;
 
-namespace Test1
-{
-    /// <summary>
-    /// This is a test
-    /// </summary>
-    /// <seealso cref=""Func1(int)""/>
-    [Serializable]
-    public class Class1
-    {
-        /// <summary>
-        /// This is a function
-        /// </summary>
-        /// <param name=""i"">This is a param as <see cref=""int""/></param>
-        /// <seealso cref=""int""/>
-        public void Func1(int i)
-        {
-            return;
-        }
-    }
-}
-";
+            namespace Test1
+            {
+                /// <summary>
+                /// This is a test
+                /// </summary>
+                /// <seealso cref="Func1(int)"/>
+                [Serializable]
+                public class Class1
+                {
+                    /// <summary>
+                    /// This is a function
+                    /// </summary>
+                    /// <param name="i">This is a param as <see cref="int"/></param>
+                    /// <seealso cref="int"/>
+                    public void Func1(int i)
+                    {
+                        return;
+                    }
+                }
+            }
+            """;
         MetadataItem output = Verify(code);
         var @class = output.Items[0].Items[0];
         Assert.NotNull(@class);
         Assert.Equal("Class1", @class.DisplayNames.First().Value);
         Assert.Equal("Class1", @class.DisplayNamesWithType.First().Value);
         Assert.Equal("Test1.Class1", @class.DisplayQualifiedNames.First().Value);
-        Assert.Equal(@"
-This is a test
-".Replace("\r\n", "\n"), @class.Summary);
+        Assert.Equal("""
+
+            This is a test
+
+            """, @class.Summary);
         Assert.Equal("Test1.Class1.Func1(System.Int32)", @class.SeeAlsos[0].LinkId);
-        Assert.Equal(@"[Serializable]
-public class Class1", @class.Syntax.Content[SyntaxLanguage.CSharp]);
+        Assert.Equal("""
+            [Serializable]
+            public class Class1
+            """, @class.Syntax.Content[SyntaxLanguage.CSharp]);
 
         var function = output.Items[0].Items[0].Items[0];
         Assert.NotNull(function);
@@ -68,9 +72,11 @@ public class Class1", @class.Syntax.Content[SyntaxLanguage.CSharp]);
         Assert.Equal("Class1.Func1(int)", function.DisplayNamesWithType.First().Value);
         Assert.Equal("Test1.Class1.Func1(int)", function.DisplayQualifiedNames.First().Value);
         Assert.Equal("Test1.Class1.Func1(System.Int32)", function.Name);
-        Assert.Equal(@"
-This is a function
-".Replace("\r\n", "\n"), function.Summary);
+        Assert.Equal("""
+
+            This is a function
+
+            """, function.Summary);
         Assert.Equal("System.Int32", function.SeeAlsos[0].LinkId);
         Assert.Equal("This is a param as <xref href=\"System.Int32\" data-throw-if-not-resolved=\"false\"></xref>", function.Syntax.Parameters[0].Description);
         Assert.Single(output.Items);
@@ -84,15 +90,15 @@ This is a function
     [Fact]
     public void TestGenerateMetadataAsyncWithNamespace()
     {
-        string code = @"
-namespace Test1.Test2
-{
-    /// <seealso cref=""Class1""/>
-    public class Class1
-    {
-    }
-}
-";
+        string code = """
+            namespace Test1.Test2
+            {
+                /// <seealso cref="Class1"/>
+                public class Class1
+                {
+                }
+            }
+            """;
         MetadataItem output = Verify(code);
         Assert.Single(output.Items);
         var ns = output.Items[0];
@@ -107,27 +113,27 @@ namespace Test1.Test2
     [Fact]
     public void TestGenerateMetadataWithGenericClass()
     {
-        string code = @"
-using System.Collections.Generic
-namespace Test1
-{
-    /// <summary>
-    /// class1 <see cref=""Dictionary{TKey,TValue}""/>
-    /// </summary>
-    /// <typeparam name=""T"">The type</typeparam>
-    public sealed class Class1<T> where T : struct, IEnumerable<T>
-    {
-        public TResult? Func1<TResult>(T? x, IEnumerable<T> y) where TResult : struct
-        {
-            return null;
-        }
-        public IEnumerable<T> Items { get; set; }
-        public event EventHandler Event1;
-        public static bool operator ==(Class1<T> x, Class1<T> y) { return false; }
-        public IEnumerable<T> Items2 { get; private set; }
-    }
-}
-";
+        string code = """
+            using System.Collections.Generic
+            namespace Test1
+            {
+                /// <summary>
+                /// class1 <see cref="Dictionary{TKey,TValue}"/>
+                /// </summary>
+                /// <typeparam name="T">The type</typeparam>
+                public sealed class Class1<T> where T : struct, IEnumerable<T>
+                {
+                    public TResult? Func1<TResult>(T? x, IEnumerable<T> y) where TResult : struct
+                    {
+                        return null;
+                    }
+                    public IEnumerable<T> Items { get; set; }
+                    public event EventHandler Event1;
+                    public static bool operator ==(Class1<T> x, Class1<T> y) { return false; }
+                    public IEnumerable<T> Items2 { get; private set; }
+                }
+            }
+            """;
         MetadataItem output = Verify(code);
         Assert.Single(output.Items);
         {
@@ -249,17 +255,17 @@ namespace Test1
     [Fact]
     public void TestGenerateMetadataWithInterface()
     {
-        string code = @"
-namespace Test1
-{
-    public interface IFoo
-    {
-        string Bar(int x);
-        int Count { get; }
-        event EventHandler FooBar;
-    }
-}
-";
+        string code = """
+            namespace Test1
+            {
+                public interface IFoo
+                {
+                    string Bar(int x);
+                    int Count { get; }
+                    event EventHandler FooBar;
+                }
+            }
+            """;
         MetadataItem output = Verify(code);
         Assert.Single(output.Items);
         {
@@ -306,14 +312,14 @@ namespace Test1
     [Fact]
     public void TestGenerateMetadataWithInterfaceAndInherits()
     {
-        string code = @"
-namespace Test1
-{
-    public interface IFoo { }
-    public interface IBar : IFoo { }
-    public interface IFooBar : IBar { }
-}
-";
+        string code = """
+            namespace Test1
+            {
+                public interface IFoo { }
+                public interface IBar : IFoo { }
+                public interface IFooBar : IBar { }
+            }
+            """;
         MetadataItem output = Verify(code);
         Assert.Single(output.Items);
 
@@ -342,13 +348,13 @@ namespace Test1
     [Fact]
     public void TestGenerateMetadataWithInternalInterfaceAndInherits()
     {
-        string code = @"
-namespace Test1
-{
-    public class Foo : IFoo { }
-    internal interface IFoo { }
-}
-";
+        string code = """
+            namespace Test1
+            {
+                public class Foo : IFoo { }
+                internal interface IFoo { }
+            }
+            """;
         MetadataItem output = Verify(code);
         Assert.Single(output.Items);
 
@@ -364,15 +370,15 @@ namespace Test1
     [Fact]
     public void TestGenerateMetadataWithProtectedInterfaceAndInherits()
     {
-        string code = @"
-namespace Test1
-{
-    public class Foo {
-       protected interface IFoo { }
-       public class SubFoo : IFoo { }
-    }
-}
-";
+        string code = """
+            namespace Test1
+            {
+                public class Foo {
+                   protected interface IFoo { }
+                   public class SubFoo : IFoo { }
+                }
+            }
+            """;
         MetadataItem output = Verify(code);
         Assert.Single(output.Items);
 
@@ -389,16 +395,16 @@ namespace Test1
     [Fact]
     public void TestGenerateMetadataWithPublicInterfaceNestedInternal()
     {
-        string code = @"
-namespace Test1
-{
-    internal class FooInternal
-    {
-        public interface IFoo { }
-    }
-    public class Foo : FooInternal.IFoo { }
-}
-";
+        string code = """
+            namespace Test1
+            {
+                internal class FooInternal
+                {
+                    public interface IFoo { }
+                }
+                public class Foo : FooInternal.IFoo { }
+            }
+            """;
         MetadataItem output = Verify(code);
         Assert.Single(output.Items);
 
@@ -417,17 +423,17 @@ namespace Test1
     [Fact]
     public void TestGenerateMetadataWithClassAndInherits()
     {
-        string code = @"
-namespace Test1
-{
-    public class Foo<T> : IFoo { }
-    public class Bar<T> : Foo<T[]>, IBar { }
-    public class FooBar : Bar<string>, IFooBar { }
-    public interface IFoo { }
-    public interface IBar { }
-    public interface IFooBar : IFoo, IBar { }
-}
-";
+        string code = """
+            namespace Test1
+            {
+                public class Foo<T> : IFoo { }
+                public class Bar<T> : Foo<T[]>, IBar { }
+                public class FooBar : Bar<string>, IFooBar { }
+                public interface IFoo { }
+                public interface IBar { }
+                public interface IFooBar : IFoo, IBar { }
+            }
+            """;
         MetadataItem output = Verify(code);
         Assert.Single(output.Items);
 
@@ -536,14 +542,14 @@ namespace Test1
     [Fact]
     public void TestGenerateMetadataWithEnum()
     {
-        string code = @"
-namespace Test1
-{
-    public enum ABC{A,B,C}
-    public enum YN : byte {Y=1, N=0}
-    public enum XYZ:int{X,Y,Z}
-}
-";
+        string code = """
+            namespace Test1
+            {
+                public enum ABC{A,B,C}
+                public enum YN : byte {Y=1, N=0}
+                public enum XYZ:int{X,Y,Z}
+            }
+            """;
         MetadataItem output = Verify(code);
         Assert.Single(output.Items);
         {
@@ -579,19 +585,19 @@ namespace Test1
     [Fact]
     public void TestGenerateMetadataWithStruct()
     {
-        string code = @"
-using System.Collections
-using System.Collections.Generic
-namespace Test1
-{
-    public struct Foo{}
-    public struct Bar<T> : IEnumerable<T>
-    {
-        public IEnumerator<T> GetEnumerator() => null;
-        IEnumerator IEnumerable.GetEnumerator() => null;
-    }
-}
-";
+        string code = """
+            using System.Collections
+            using System.Collections.Generic
+            namespace Test1
+            {
+                public struct Foo{}
+                public struct Bar<T> : IEnumerable<T>
+                {
+                    public IEnumerator<T> GetEnumerator() => null;
+                    IEnumerator IEnumerable.GetEnumerator() => null;
+                }
+            }
+            """;
         MetadataItem output = Verify(code);
         Assert.Single(output.Items);
         {
@@ -636,17 +642,17 @@ namespace Test1
     [Fact]
     public void TestGenerateMetadataWithDelegate()
     {
-        string code = @"
-using System.Collections.Generic
-namespace Test1
-{
-    public delegate void Foo();
-    public delegate T Bar<T>(IEnumerable<T> x = null) where T : class;
-    public delegate void FooBar(ref int x, out string y, in bool z, params byte[] w);
-    public delegate ref int Ref();
-    public delegate ref readonly int RefReadonly();
-}
-";
+        string code = """
+            using System.Collections.Generic
+            namespace Test1
+            {
+                public delegate void Foo();
+                public delegate T Bar<T>(IEnumerable<T> x = null) where T : class;
+                public delegate void FooBar(ref int x, out string y, in bool z, params byte[] w);
+                public delegate ref int Ref();
+                public delegate ref readonly int RefReadonly();
+            }
+            """;
         MetadataItem output = Verify(code);
         Assert.Single(output.Items);
         {
@@ -727,34 +733,34 @@ namespace Test1
     [Fact]
     public void TestGenerateMetadataWithMethod()
     {
-        string code = @"
-using System.Threading.Tasks
-namespace Test1
-{
-    public abstract class Foo<T>
-    {
-        public abstract void M1();
-        protected virtual Foo<T> M2<TArg>(TArg arg) where TArg : Foo<T> => this;
-        public static TResult M3<TResult>(string x) where TResult : class => null;
-        public void M4(int x){}
-        public void M5(ref int x, out string y, in bool z){}
-        public ref int M6(){}
-        public ref readonly int M7(){}
-    }
-    public class Bar : Foo<string>, IFooBar
-    {
-        public override void M1(){}
-        protected sealed override Foo<T> M2<TArg>(TArg arg) where TArg : Foo<string> => this;
-        public int M8<TArg>(TArg arg) where TArg : struct, new() => 2;
-    }
-    public interface IFooBar
-    {
-        void M1();
-        Foo<T> M2<TArg>(TArg arg) where TArg : Foo<string>;
-        int M8<TArg>(TArg arg) where TArg : struct, new();
-    }
-}
-";
+        string code = """
+            using System.Threading.Tasks
+            namespace Test1
+            {
+                public abstract class Foo<T>
+                {
+                    public abstract void M1();
+                    protected virtual Foo<T> M2<TArg>(TArg arg) where TArg : Foo<T> => this;
+                    public static TResult M3<TResult>(string x) where TResult : class => null;
+                    public void M4(int x){}
+                    public void M5(ref int x, out string y, in bool z){}
+                    public ref int M6(){}
+                    public ref readonly int M7(){}
+                }
+                public class Bar : Foo<string>, IFooBar
+                {
+                    public override void M1(){}
+                    protected sealed override Foo<T> M2<TArg>(TArg arg) where TArg : Foo<string> => this;
+                    public int M8<TArg>(TArg arg) where TArg : struct, new() => 2;
+                }
+                public interface IFooBar
+                {
+                    void M1();
+                    Foo<T> M2<TArg>(TArg arg) where TArg : Foo<string>;
+                    int M8<TArg>(TArg arg) where TArg : struct, new();
+                }
+            }
+            """;
         MetadataItem output = Verify(code);
         Assert.Single(output.Items);
         // Foo<T>
@@ -888,36 +894,36 @@ namespace Test1
     [Fact]
     public void TestGenerateMetadataWithEii()
     {
-        string code = @"
-using System.Collections.Generic
-namespace Test1
-{
-    public class Foo<T> : IFoo, IFoo<string>, IFoo<T> where T : class
-    {
-        object IFoo.Bar(ref int x) => null;
-        string IFoo<string>.Bar<TArg>(TArg[] x) => "";
-        T IFoo<T>.Bar<TArg>(TArg[] x) => null;
-        string IFoo<string>.P { get; set; }
-        T IFoo<T>.P { get; set; }
-        int IFoo<string>.this[string x] { get { return 1; } }
-        int IFoo<T>.this[T x] { get { return 1; } }
-        event EventHandler IFoo.E { add { } remove { } }
-        public bool IFoo.Global { get; set; }
-    }
-    public interface IFoo
-    {
-        object Bar(ref int x);
-        event EventHandler E;
-        bool Global { get; set;}
-    }
-    public interface IFoo<out T>
-    {
-        T Bar<TArg>(TArg[] x)
-        T P { get; set; }
-        int this[T x] { get; }
-    }
-}
-";
+        string code = """
+            using System.Collections.Generic
+            namespace Test1
+            {
+                public class Foo<T> : IFoo, IFoo<string>, IFoo<T> where T : class
+                {
+                    object IFoo.Bar(ref int x) => null;
+                    string IFoo<string>.Bar<TArg>(TArg[] x) => ";
+                    T IFoo<T>.Bar<TArg>(TArg[] x) => null;
+                    string IFoo<string>.P { get; set; }
+                    T IFoo<T>.P { get; set; }
+                    int IFoo<string>.this[string x] { get { return 1; } }
+                    int IFoo<T>.this[T x] { get { return 1; } }
+                    event EventHandler IFoo.E { add { } remove { } }
+                    public bool IFoo.Global { get; set; }
+                }
+                public interface IFoo
+                {
+                    object Bar(ref int x);
+                    event EventHandler E;
+                    bool Global { get; set;}
+                }
+                public interface IFoo<out T>
+                {
+                    T Bar<TArg>(TArg[] x)
+                    T P { get; set; }
+                    int this[T x] { get; }
+                }
+            }
+            """;
         MetadataItem output = Verify(code, new() { IncludePrivateMembers = true });
         Assert.Single(output.Items);
         {
@@ -1027,28 +1033,28 @@ namespace Test1
     [Fact]
     public void TestGenerateMetadataWithEditorBrowsableNeverEii()
     {
-        string code = @"
-namespace Test
-{
-    using System.ComponentModel;
-    public interface IInterface
-    {
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        bool Method();
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        bool Property { get; }
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        event EventHandler Event;
-    }
+        string code = """
+            namespace Test
+            {
+                using System.ComponentModel;
+                public interface IInterface
+                {
+                    [EditorBrowsable(EditorBrowsableState.Never)]
+                    bool Method();
+                    [EditorBrowsable(EditorBrowsableState.Never)]
+                    bool Property { get; }
+                    [EditorBrowsable(EditorBrowsableState.Never)]
+                    event EventHandler Event;
+                }
 
-    public class Class : IInterface
-    {
-        bool IInterface.Method() { return false; }
-        bool IInterface.Property { get { return false; } }
-        event EventHandler IInterface.Event { add {} remove {} }
-    }
-}
-";
+                public class Class : IInterface
+                {
+                    bool IInterface.Method() { return false; }
+                    bool IInterface.Property { get { return false; } }
+                    event EventHandler IInterface.Event { add {} remove {} }
+                }
+            }
+            """;
         MetadataItem output = Verify(code);
         Assert.Single(output.Items);
         var ns = output.Items[0];
@@ -1084,39 +1090,39 @@ namespace Test
     [Fact]
     public void TestGenerateMetadataWithExtensionMethod()
     {
-        string code = @"
-namespace Test1
-{
-    public abstract class Foo<T>
-    {
-    }
-    public class FooImple<T> : Foo<T[]>
-    {
-        public void M1<U>(T a, U b) { }
-    }
-    public class FooImple2<T> : Foo<dynamic>
-    {
-    }
-    public class FooImple3<T> : Foo<Foo<T[]>>
-    {
-    }
-    public class Doll
-    {
-    }
+        string code = """
+            namespace Test1
+            {
+                public abstract class Foo<T>
+                {
+                }
+                public class FooImple<T> : Foo<T[]>
+                {
+                    public void M1<U>(T a, U b) { }
+                }
+                public class FooImple2<T> : Foo<dynamic>
+                {
+                }
+                public class FooImple3<T> : Foo<Foo<T[]>>
+                {
+                }
+                public class Doll
+                {
+                }
 
-    public static class Extension
-    {
-        public static void Eat<Tool>(this FooImple<Tool> impl)
-        { }
-        public static void Play<Tool, Way>(this Foo<Tool> foo, Tool t, Way w)
-        { }
-        public static void Rain(this Doll d)
-        { }
-        public static void Rain(this Doll d, Doll another)
-        { }
-    }
-}
-";
+                public static class Extension
+                {
+                    public static void Eat<Tool>(this FooImple<Tool> impl)
+                    { }
+                    public static void Play<Tool, Way>(this Foo<Tool> foo, Tool t, Way w)
+                    { }
+                    public static void Rain(this Doll d)
+                    { }
+                    public static void Rain(this Doll d, Doll another)
+                    { }
+                }
+            }
+            """;
         MetadataItem output = Verify(code);
         Assert.Single(output.Items);
         // FooImple<T>
@@ -1193,45 +1199,45 @@ namespace Test1
     [Fact]
     public void TestGenerateMetadataWithOperator()
     {
-        string code = @"
-using System.Collections.Generic
-namespace Test1
-{
-    public class Foo
-    {
-        // unary
-        public static Foo operator +(Foo x) => x;
-        public static Foo operator -(Foo x) => x;
-        public static Foo operator !(Foo x) => x;
-        public static Foo operator ~(Foo x) => x;
-        public static Foo operator ++(Foo x) => x;
-        public static Foo operator --(Foo x) => x;
-        public static Foo operator true(Foo x) => x;
-        public static Foo operator false(Foo x) => x;
-        // binary
-        public static Foo operator +(Foo x, int y) => x;
-        public static Foo operator -(Foo x, int y) => x;
-        public static Foo operator *(Foo x, int y) => x;
-        public static Foo operator /(Foo x, int y) => x;
-        public static Foo operator %(Foo x, int y) => x;
-        public static Foo operator &(Foo x, int y) => x;
-        public static Foo operator |(Foo x, int y) => x;
-        public static Foo operator ^(Foo x, int y) => x;
-        public static Foo operator >>(Foo x, int y) => x;
-        public static Foo operator <<(Foo x, int y) => x;
-        // comparison
-        public static bool operator ==(Foo x, int y) => false;
-        public static bool operator !=(Foo x, int y) => false;
-        public static bool operator >(Foo x, int y) => false;
-        public static bool operator <(Foo x, int y) => false;
-        public static bool operator >=(Foo x, int y) => false;
-        public static bool operator <=(Foo x, int y) => false;
-        // convertion
-        public static implicit operator Foo (int x) => null;
-        public static explicit operator int (Foo x) => 0;
-    }
-}
-";
+        string code = """
+            using System.Collections.Generic
+            namespace Test1
+            {
+                public class Foo
+                {
+                    // unary
+                    public static Foo operator +(Foo x) => x;
+                    public static Foo operator -(Foo x) => x;
+                    public static Foo operator !(Foo x) => x;
+                    public static Foo operator ~(Foo x) => x;
+                    public static Foo operator ++(Foo x) => x;
+                    public static Foo operator --(Foo x) => x;
+                    public static Foo operator true(Foo x) => x;
+                    public static Foo operator false(Foo x) => x;
+                    // binary
+                    public static Foo operator +(Foo x, int y) => x;
+                    public static Foo operator -(Foo x, int y) => x;
+                    public static Foo operator *(Foo x, int y) => x;
+                    public static Foo operator /(Foo x, int y) => x;
+                    public static Foo operator %(Foo x, int y) => x;
+                    public static Foo operator &(Foo x, int y) => x;
+                    public static Foo operator |(Foo x, int y) => x;
+                    public static Foo operator ^(Foo x, int y) => x;
+                    public static Foo operator >>(Foo x, int y) => x;
+                    public static Foo operator <<(Foo x, int y) => x;
+                    // comparison
+                    public static bool operator ==(Foo x, int y) => false;
+                    public static bool operator !=(Foo x, int y) => false;
+                    public static bool operator >(Foo x, int y) => false;
+                    public static bool operator <(Foo x, int y) => false;
+                    public static bool operator >=(Foo x, int y) => false;
+                    public static bool operator <=(Foo x, int y) => false;
+                    // convertion
+                    public static implicit operator Foo (int x) => null;
+                    public static explicit operator int (Foo x) => 0;
+                }
+            }
+            """;
         MetadataItem output = Verify(code);
         Assert.Single(output.Items);
         // unary
@@ -1478,23 +1484,23 @@ namespace Test1
     [Fact]
     public void TestGenerateMetadataWithConstructor()
     {
-        string code = @"
-namespace Test1
-{
-    public class Foo<T>
-    {
-        static Foo(){}
-        public Foo(){}
-        public Foo(int x) : base(x){}
-        protected internal Foo(string x) : base(0){}
-    }
-    public class Bar
-    {
-        public Bar(){}
-        protected Bar(int x){}
-    }
-}
-";
+        string code = """
+            namespace Test1
+            {
+                public class Foo<T>
+                {
+                    static Foo(){}
+                    public Foo(){}
+                    public Foo(int x) : base(x){}
+                    protected internal Foo(string x) : base(0){}
+                }
+                public class Bar
+                {
+                    public Bar(){}
+                    protected Bar(int x){}
+                }
+            }
+            """;
         MetadataItem output = Verify(code);
         Assert.Single(output.Items);
         {
@@ -1548,25 +1554,25 @@ namespace Test1
     [Fact]
     public void TestGenerateMetadataWithField()
     {
-        string code = @"
-namespace Test1
-{
-    public class Foo<T>
-    {
-        public volatile int X;
-        protected static readonly Foo<T> Y = null;
-        protected internal const string Z = """";
-    }
-    public enum Bar
-    {
-        Black,
-        Red,
-        Blue = 2,
-        Green = 4,
-        White = Red | Blue | Green,
-    }
-}
-";
+        string code = """
+            namespace Test1
+            {
+                public class Foo<T>
+                {
+                    public volatile int X;
+                    protected static readonly Foo<T> Y = null;
+                    protected internal const string Z = "";
+                }
+                public enum Bar
+                {
+                    Black,
+                    Red,
+                    Blue = 2,
+                    Green = 4,
+                    White = Red | Blue | Green,
+                }
+            }
+            """;
         MetadataItem output = Verify(code);
         Assert.Single(output.Items);
         {
@@ -1594,7 +1600,9 @@ namespace Test1
             Assert.Equal("Foo<T>.Z", field.DisplayNamesWithType[SyntaxLanguage.CSharp]);
             Assert.Equal("Test1.Foo<T>.Z", field.DisplayQualifiedNames[SyntaxLanguage.CSharp]);
             Assert.Equal("Test1.Foo`1.Z", field.Name);
-            Assert.Equal("protected const string Z = \"\"", field.Syntax.Content[SyntaxLanguage.CSharp]);
+            Assert.Equal("""
+                protected const string Z = ""
+                """, field.Syntax.Content[SyntaxLanguage.CSharp]);
         }
         {
             var field = output.Items[0].Items[1].Items[0];
@@ -1647,30 +1655,30 @@ namespace Test1
     [Fact]
     public void TestGenerateMetadataWithCSharpCodeAndEvent()
     {
-        string code = @"
-using System;
-namespace Test1
-{
-    public abstract class Foo<T> where T : EventArgs
-    {
-        public event EventHandler A;
-        protected static event EventHandler B { add {} remove {}}
-        protected internal abstract event EventHandler<T> C;
-        public virtual event EventHandler<T> D { add {} remove {}}
-    }
-    public class Bar<T> : Foo<T> where T : EventArgs
-    {
-        public new event EventHandler A;
-        protected internal sealed override event EventHandler<T> C;
-        public override event EventHandler<T> D;
-    }
-    public interface IFooBar<T> where T : EventArgs
-    {
-        event EventHandler A;
-        event EventHandler<T> D;
-    }
-}
-";
+        string code = """
+            using System;
+            namespace Test1
+            {
+                public abstract class Foo<T> where T : EventArgs
+                {
+                    public event EventHandler A;
+                    protected static event EventHandler B { add {} remove {}}
+                    protected internal abstract event EventHandler<T> C;
+                    public virtual event EventHandler<T> D { add {} remove {}}
+                }
+                public class Bar<T> : Foo<T> where T : EventArgs
+                {
+                    public new event EventHandler A;
+                    protected internal sealed override event EventHandler<T> C;
+                    public override event EventHandler<T> D;
+                }
+                public interface IFooBar<T> where T : EventArgs
+                {
+                    event EventHandler A;
+                    event EventHandler<T> D;
+                }
+            }
+            """;
         MetadataItem output = Verify(code);
         Assert.Single(output.Items);
         {
@@ -1762,34 +1770,34 @@ namespace Test1
     [Fact]
     public void TestGenerateMetadataWithProperty()
     {
-        string code = @"
-namespace Test1
-{
-    public abstract class Foo<T> where T : class
-    {
-        public int A { get; set; }
-        public virtual int B { get { return 1; } }
-        public abstract int C { set; }
-        protected int D { get; private set; }
-        public T E { get; protected set; }
-        protected internal static int F { get; protected set; }
-        public ref int G { get => throw null; }
-        public ref readonly int H { get => throw null; }
-    }
-    public class Bar : Foo<string>, IFooBar
-    {
-        public new virtual int A { get; set; }
-        public override int B { get { return 2; } }
-        public sealed override int C { set; }
-    }
-    public interface IFooBar
-    {
-        int A { get; set; }
-        int B { get; }
-        int C { set; }
-    }
-}
-";
+        string code = """
+            namespace Test1
+            {
+                public abstract class Foo<T> where T : class
+                {
+                    public int A { get; set; }
+                    public virtual int B { get { return 1; } }
+                    public abstract int C { set; }
+                    protected int D { get; private set; }
+                    public T E { get; protected set; }
+                    protected internal static int F { get; protected set; }
+                    public ref int G { get => throw null; }
+                    public ref readonly int H { get => throw null; }
+                }
+                public class Bar : Foo<string>, IFooBar
+                {
+                    public new virtual int A { get; set; }
+                    public override int B { get { return 2; } }
+                    public sealed override int C { set; }
+                }
+                public interface IFooBar
+                {
+                    int A { get; set; }
+                    int B { get; }
+                    int C { set; }
+                }
+            }
+            """;
         MetadataItem output = Verify(code);
         Assert.Single(output.Items);
         {
@@ -1926,33 +1934,33 @@ namespace Test1
     [Fact]
     public void TestGenerateMetadataWithIndexer()
     {
-        string code = @"
-using System;
-namespace Test1
-{
-    public abstract class Foo<T> where T : class
-    {
-        public int this[int x] { get { return 0; } set { } }
-        public virtual int this[string x] { get { return 1; } }
-        public abstract int this[object x] { set; }
-        protected int this[DateTime x] { get { return 0; } private set { } }
-        public int this[T t] { get { return 0; } protected set { } }
-        protected internal int this[int x, T t] { get; protected set; }
-    }
-    public class Bar : Foo<string>, IFooBar
-    {
-        public new virtual int this[int x] { get { return 0; } set { } }
-        public override int this[string x] { get { return 2; } }
-        public sealed override int this[object x] { set; }
-    }
-    public interface IFooBar
-    {
-        int this[int x] { get; set; }
-        int this[string x] { get; }
-        int this[object x] { set; }
-    }
-}
-";
+        string code = """
+            using System;
+            namespace Test1
+            {
+                public abstract class Foo<T> where T : class
+                {
+                    public int this[int x] { get { return 0; } set { } }
+                    public virtual int this[string x] { get { return 1; } }
+                    public abstract int this[object x] { set; }
+                    protected int this[DateTime x] { get { return 0; } private set { } }
+                    public int this[T t] { get { return 0; } protected set { } }
+                    protected internal int this[int x, T t] { get; protected set; }
+                }
+                public class Bar : Foo<string>, IFooBar
+                {
+                    public new virtual int this[int x] { get { return 0; } set { } }
+                    public override int this[string x] { get { return 2; } }
+                    public sealed override int this[object x] { set; }
+                }
+                public interface IFooBar
+                {
+                    int this[int x] { get; set; }
+                    int this[string x] { get; }
+                    int this[object x] { set; }
+                }
+            }
+            """;
         MetadataItem output = Verify(code);
         Assert.Single(output.Items);
         // Foo<T>
@@ -2076,23 +2084,23 @@ namespace Test1
     [Fact]
     public void TestGenerateMetadataWithMethodUsingDefaultValue()
     {
-        string code = @"
-namespace Test1
-{
-    public class Foo
-    {
-        public void Test(
-            int a = 1, uint b = 1,
-            short c = 1, ushort d = 1,
-            long e = 1, ulong f= 1,
-            byte g = 1, sbyte h = 1,
-            char i = '1', string j = ""1"",
-            bool k = true, object l = null)
-        {
-        }
-    }
-}
-";
+        string code = """
+            namespace Test1
+            {
+                public class Foo
+                {
+                    public void Test(
+                        int a = 1, uint b = 1,
+                        short c = 1, ushort d = 1,
+                        long e = 1, ulong f= 1,
+                        byte g = 1, sbyte h = 1,
+                        char i = '1', string j = "1",
+                        bool k = true, object l = null)
+                    {
+                    }
+                }
+            }
+            """;
         MetadataItem output = Verify(code);
         Assert.Single(output.Items);
         {
@@ -2105,41 +2113,41 @@ namespace Test1
     [Fact]
     public void TestGenerateMetadataAsyncWithAssemblyInfoAndCrossReference()
     {
-        string referenceCode = @"
-namespace Test1
-{
-    public class Class1
-    {
-        public void Func1(int i)
-        {
-            return;
-        }
-    }
-}
-";
+        string referenceCode = """
+            namespace Test1
+            {
+                public class Class1
+                {
+                    public void Func1(int i)
+                    {
+                        return;
+                    }
+                }
+            }
+            """;
 
-        string code = @"
-namespace Test2
-{
-    public class Class2 : Test1.Class1
-    {
-        public void Func1(Test1.Class1 i)
-        {
-            return;
-        }
-    }
-}
-namespace Test1
-{
-    public class Class2 : Test1.Class1
-    {
-        public void Func1(Test1.Class1 i)
-        {
-            return;
-        }
-    }
-}
-";
+        string code = """
+            namespace Test2
+            {
+                public class Class2 : Test1.Class1
+                {
+                    public void Func1(Test1.Class1 i)
+                    {
+                        return;
+                    }
+                }
+            }
+            namespace Test1
+            {
+                public class Class2 : Test1.Class1
+                {
+                    public void Func1(Test1.Class1 i)
+                    {
+                        return;
+                    }
+                }
+            }
+            """;
         Directory.CreateDirectory(nameof(TestGenerateMetadataAsyncWithAssemblyInfoAndCrossReference));
         var referencedAssembly = CreateAssemblyFromCSharpCode(referenceCode, $"{nameof(TestGenerateMetadataAsyncWithAssemblyInfoAndCrossReference)}/reference.dll");
         var compilation = CreateCompilationFromCSharpCode(code, MetadataReference.CreateFromFile(referencedAssembly.Location));
@@ -2158,21 +2166,21 @@ namespace Test1
     [Trait("Related", "Generic")]
     public void TestGenerateMetadataAsyncWithMultilanguage()
     {
-        string code = @"
-namespace Test1
-{
-    public class Foo<T>
-    {
-        public void Bar<K>(int i)
-        {
-        }
-        public int this[int index]
-        {
-            get { return index; }
-        }
-    }
-}
-";
+        string code = """
+            namespace Test1
+            {
+                public class Foo<T>
+                {
+                    public void Bar<K>(int i)
+                    {
+                    }
+                    public int this[int index]
+                    {
+                        get { return index; }
+                    }
+                }
+            }
+            """;
         MetadataItem output = Verify(code);
         var type = output.Items[0].Items[0];
         Assert.NotNull(type);
@@ -2227,20 +2235,20 @@ namespace Test1
     [Trait("Related", "Inheritance")]
     public void TestGenerateMetadataAsyncWithGenericInheritance()
     {
-        string code = @"
-using System.Collections.Generic;
-namespace Test1
-{
-    public class Foo<T>
-        : Dictionary<string, T>
-    {
-    }
-    public class Foo<T1, T2, T3>
-        : List<T3>
-    {
-    }
-}
-";
+        string code = """
+            using System.Collections.Generic;
+            namespace Test1
+            {
+                public class Foo<T>
+                    : Dictionary<string, T>
+                {
+                }
+                public class Foo<T1, T2, T3>
+                    : List<T3>
+                {
+                }
+            }
+            """;
         MetadataItem output = Verify(code);
         {
             var type = output.Items[0].Items[0];
@@ -2275,18 +2283,18 @@ namespace Test1
     [Fact]
     public void TestGenerateMetadataWithDynamic()
     {
-        string code = @"
-namespace Test1
-{
-    public abstract class Foo
-    {
-        public dynamic F = 1;
-        public dynamic M(dynamic arg) => null;
-        public dynamic P { get; protected set; } = "";
-        public dynamic this[dynamic index] { get; } => 1;
-    }
-}
-";
+        string code = """
+            namespace Test1
+            {
+                public abstract class Foo
+                {
+                    public dynamic F = 1;
+                    public dynamic M(dynamic arg) => null;
+                    public dynamic P { get; protected set; } = ";
+                    public dynamic this[dynamic index] { get; } => 1;
+                }
+            }
+            """;
         MetadataItem output = Verify(code);
         Assert.Single(output.Items);
         {
@@ -2348,15 +2356,15 @@ namespace Test1
     [Trait("Related", "Multilanguage")]
     public void TestGenerateMetadataWithStaticClass()
     {
-        string code = @"
-using System.Collections.Generic;
-namespace Test1
-{
-    public static class Foo
-    {
-    }
-}
-";
+        string code = """
+            using System.Collections.Generic;
+            namespace Test1
+            {
+                public static class Foo
+                {
+                }
+            }
+            """;
         MetadataItem output = Verify(code);
         {
             var type = output.Items[0].Items[0];
@@ -2378,17 +2386,17 @@ namespace Test1
     [Trait("Related", "Generic")]
     public void TestGenerateMetadataAsyncWithNestedGeneric()
     {
-        string code = @"
-using System.Collections.Generic;
-namespace Test1
-{
-    public class Foo<T1, T2>
-    {
-        public class Bar<T3> { }
-        public class FooBar { }
-    }
-}
-";
+        string code = """
+            using System.Collections.Generic;
+            namespace Test1
+            {
+                public class Foo<T1, T2>
+                {
+                    public class Bar<T3> { }
+                    public class FooBar { }
+                }
+            }
+            """;
         MetadataItem output = Verify(code);
         {
             var type = output.Items[0].Items[0];
@@ -2435,45 +2443,47 @@ namespace Test1
     [Trait("Related", "Attribute")]
     public void TestGenerateMetadataAsyncWithAttributes()
     {
-        string code = @"
-using System;
-using System.ComponentModel;
+        string code = """
+            using System;
+            using System.ComponentModel;
 
-namespace Test1
-{
-    [Serializable]
-    [AttributeUsage(AttributeTargets.All, Inherited = true, AllowMultiple = true)]
-    [TypeConverter(typeof(TestAttribute))]
-    [TypeConverter(typeof(TestAttribute[]))]
-    [Test(""test"")]
-    [Test(new int[]{1,2,3})]
-    [Test(new object[]{null, ""abc"", 'd', 1.1f, 1.2, (sbyte)2, (byte)3, (short)4, (ushort)5, 6, 7u, 8l, 9ul, new int[]{ 10, 11, 12 }, new byte[0]{}})]
-    [Test(new Type[]{ typeof(Func<>), typeof(Func<,>), typeof(Func<string, string>) })]
-    public class TestAttribute : Attribute
-    {
-        [Test(1)]
-        [Test(2)]
-        public TestAttribute([Test(3), Test(4)] object obj){}
-        [Test(5)]
-        public object Property { [Test(6)] get; [Test(7), Test(8)] set; }
-    }
-}
-";
+            namespace Test1
+            {
+                [Serializable]
+                [AttributeUsage(AttributeTargets.All, Inherited = true, AllowMultiple = true)]
+                [TypeConverter(typeof(TestAttribute))]
+                [TypeConverter(typeof(TestAttribute[]))]
+                [Test("test")]
+                [Test(new int[]{1,2,3})]
+                [Test(new object[]{null, "abc", 'd', 1.1f, 1.2, (sbyte)2, (byte)3, (short)4, (ushort)5, 6, 7u, 8l, 9ul, new int[]{ 10, 11, 12 }, new byte[0]{}})]
+                [Test(new Type[]{ typeof(Func<>), typeof(Func<,>), typeof(Func<string, string>) })]
+                public class TestAttribute : Attribute
+                {
+                    [Test(1)]
+                    [Test(2)]
+                    public TestAttribute([Test(3), Test(4)] object obj){}
+                    [Test(5)]
+                    public object Property { [Test(6)] get; [Test(7), Test(8)] set; }
+                }
+            }
+            """;
         MetadataItem output = Verify(code);
         var @class = output.Items[0].Items[0];
         Assert.NotNull(@class);
         Assert.Equal("TestAttribute", @class.DisplayNames[SyntaxLanguage.CSharp]);
         Assert.Equal("TestAttribute", @class.DisplayNamesWithType[SyntaxLanguage.CSharp]);
         Assert.Equal("Test1.TestAttribute", @class.DisplayQualifiedNames[SyntaxLanguage.CSharp]);
-        Assert.Equal(@"[Serializable]
-[AttributeUsage(AttributeTargets.All, Inherited = true, AllowMultiple = true)]
-[TypeConverter(typeof(TestAttribute))]
-[TypeConverter(typeof(TestAttribute[]))]
-[Test(""test"")]
-[Test(new int[] { 1, 2, 3 })]
-[Test(new object[] { null, ""abc"", 'd', 1.1, 1.2, 2, 3, 4, 5, 6, 7, 8, 9, new int[] { 10, 11, 12 }, new byte[] { } })]
-[Test(new Type[] { typeof(Func<>), typeof(Func<,>), typeof(Func<string, string>) })]
-public class TestAttribute : Attribute", @class.Syntax.Content[SyntaxLanguage.CSharp]);
+        Assert.Equal("""
+            [Serializable]
+            [AttributeUsage(AttributeTargets.All, Inherited = true, AllowMultiple = true)]
+            [TypeConverter(typeof(TestAttribute))]
+            [TypeConverter(typeof(TestAttribute[]))]
+            [Test("test")]
+            [Test(new int[] { 1, 2, 3 })]
+            [Test(new object[] { null, "abc", 'd', 1.1, 1.2, 2, 3, 4, 5, 6, 7, 8, 9, new int[] { 10, 11, 12 }, new byte[] { } })]
+            [Test(new Type[] { typeof(Func<>), typeof(Func<,>), typeof(Func<string, string>) })]
+            public class TestAttribute : Attribute
+            """, @class.Syntax.Content[SyntaxLanguage.CSharp]);
 
         Assert.NotNull(@class.Attributes);
         Assert.Equal(5, @class.Attributes.Count);
@@ -2525,31 +2535,35 @@ public class TestAttribute : Attribute", @class.Syntax.Content[SyntaxLanguage.CS
 
         var ctor = @class.Items[0];
         Assert.NotNull(ctor);
-        Assert.Equal(@"[Test(1)]
-[Test(2)]
-public TestAttribute(object obj)", ctor.Syntax.Content[SyntaxLanguage.CSharp]);
+        Assert.Equal("""
+            [Test(1)]
+            [Test(2)]
+            public TestAttribute(object obj)
+            """, ctor.Syntax.Content[SyntaxLanguage.CSharp]);
 
         var property = @class.Items[1];
         Assert.NotNull(property);
-        Assert.Equal(@"[Test(5)]
-public object Property { get; set; }", property.Syntax.Content[SyntaxLanguage.CSharp]);
+        Assert.Equal("""
+            [Test(5)]
+            public object Property { get; set; }
+            """, property.Syntax.Content[SyntaxLanguage.CSharp]);
     }
 
     [Fact]
     public void TestGenerateMetadataWithDefaultParameterEnumFlagsValues()
     {
-        string code = @"
-using System;
+        string code = """
+            using System;
 
-namespace Test1
-{
-    public class Test
-    {
-        public void Defined(Base64FormattingOptions options = Base64FormattingOptions.None) { }
-        public void Undefined(AttributeTargets targets = (AttributeTargets)0) { }
-    }
-}
-";
+            namespace Test1
+            {
+                public class Test
+                {
+                    public void Defined(Base64FormattingOptions options = Base64FormattingOptions.None) { }
+                    public void Undefined(AttributeTargets targets = (AttributeTargets)0) { }
+                }
+            }
+            """;
         MetadataItem output = Verify(code);
 
         var defined = output.Items[0].Items[0].Items[0];
@@ -2564,18 +2578,18 @@ namespace Test1
     [Fact]
     public void TestGenerateMetadataWithDefaultParameterEnumValues()
     {
-        string code = @"
-using System;
+        string code = """
+            using System;
 
-namespace Test1
-{
-    public class Test
-    {
-        public void Defined(ConsoleSpecialKey key = ConsoleSpecialKey.ControlC) { }
-        public void Undefined(ConsoleKey key = (ConsoleKey)0) { }
-    }
-}
-";
+            namespace Test1
+            {
+                public class Test
+                {
+                    public void Defined(ConsoleSpecialKey key = ConsoleSpecialKey.ControlC) { }
+                    public void Undefined(ConsoleKey key = (ConsoleKey)0) { }
+                }
+            }
+            """;
         MetadataItem output = Verify(code);
 
         var defined = output.Items[0].Items[0].Items[0];
@@ -2590,19 +2604,19 @@ namespace Test1
     [Fact]
     public void TestGenerateMetadataWithDefaultParameterNullablePrimitive()
     {
-        string code = @"
-using System;
+        string code = """
+            using System;
 
-namespace Test1
-{
-    public class Test
-    {
-        public void PrimitiveNull(int? i = null) { }
-        public void PrimitiveDefault(int? i = 0) { }
-        public void PrimitiveValue(int? i = 123) { }
-    }
-}
-";
+            namespace Test1
+            {
+                public class Test
+                {
+                    public void PrimitiveNull(int? i = null) { }
+                    public void PrimitiveDefault(int? i = 0) { }
+                    public void PrimitiveValue(int? i = 123) { }
+                }
+            }
+            """;
         MetadataItem output = Verify(code);
 
         var primitiveNull = output.Items[0].Items[0].Items[0];
@@ -2621,21 +2635,21 @@ namespace Test1
     [Fact]
     public void TestGenerateMetadataWithDefaultParameterNullableEnum()
     {
-        string code = @"
-using System;
+        string code = """
+            using System;
 
-namespace Test1
-{
-    public class Test
-    {
-        public void EnumNull(ConsoleSpecialKey? key = null) { }
-        public void EnumDefault(ConsoleSpecialKey? key = ConsoleSpecialKey.ControlC) { }
-        public void EnumValue(ConsoleSpecialKey? key = ConsoleSpecialKey.ControlBreak) { }
-        public void EnumUndefinedDefault(ConsoleKey? key = (ConsoleKey)0) { }
-        public void EnumUndefinedValue(ConsoleKey? key = (ConsoleKey)999) { }
-    }
-}
-";
+            namespace Test1
+            {
+                public class Test
+                {
+                    public void EnumNull(ConsoleSpecialKey? key = null) { }
+                    public void EnumDefault(ConsoleSpecialKey? key = ConsoleSpecialKey.ControlC) { }
+                    public void EnumValue(ConsoleSpecialKey? key = ConsoleSpecialKey.ControlBreak) { }
+                    public void EnumUndefinedDefault(ConsoleKey? key = (ConsoleKey)0) { }
+                    public void EnumUndefinedValue(ConsoleKey? key = (ConsoleKey)999) { }
+                }
+            }
+            """;
         MetadataItem output = Verify(code);
 
         var flagsNull = output.Items[0].Items[0].Items[0];
@@ -2662,21 +2676,21 @@ namespace Test1
     [Fact]
     public void TestGenerateMetadataWithDefaultParameterNullableEnumFlags()
     {
-        string code = @"
-using System;
+        string code = """
+            using System;
 
-namespace Test1
-{
-    public class Test
-    {
-        public void FlagsNull(Base64FormattingOptions? options = null) { }
-        public void FlagsDefault(Base64FormattingOptions? options = Base64FormattingOptions.None) { }
-        public void FlagsValue(Base64FormattingOptions? options = Base64FormattingOptions.InsertLineBreaks) { }
-        public void FlagsUndefinedDefault(AttributeTargets? targets = (AttributeTargets)0) { }
-        public void FlagsUndefinedValue(AttributeTargets? targets = (AttributeTargets)65536) { }
-    }
-}
-";
+            namespace Test1
+            {
+                public class Test
+                {
+                    public void FlagsNull(Base64FormattingOptions? options = null) { }
+                    public void FlagsDefault(Base64FormattingOptions? options = Base64FormattingOptions.None) { }
+                    public void FlagsValue(Base64FormattingOptions? options = Base64FormattingOptions.InsertLineBreaks) { }
+                    public void FlagsUndefinedDefault(AttributeTargets? targets = (AttributeTargets)0) { }
+                    public void FlagsUndefinedValue(AttributeTargets? targets = (AttributeTargets)65536) { }
+                }
+            }
+            """;
         MetadataItem output = Verify(code);
 
         var enumNull = output.Items[0].Items[0].Items[0];
@@ -2703,22 +2717,22 @@ namespace Test1
     [Fact]
     public void TestGenerateMetadataWithDefaultParameterValueAttribute()
     {
-        string code = @"
-using System;
-using System.Runtime.InteropServices;
+        string code = """
+            using System;
+            using System.Runtime.InteropServices;
 
-namespace Test1
-{
-    public class Test
-    {
-        public void Double([Optional][DefaultParameterValue(0)]double i) { }
-        public void Float([Optional][DefaultParameterValue(0)]float i) { }
-        public void Decimal([Optional][DefaultParameterValue(0)]decimal i) { }
-        public void Long([Optional][DefaultParameterValue(0)]long i) { }
-        public void Uint([Optional][DefaultParameterValue(0)]uint i) { }
-    }
-}
-";
+            namespace Test1
+            {
+                public class Test
+                {
+                    public void Double([Optional][DefaultParameterValue(0)]double i) { }
+                    public void Float([Optional][DefaultParameterValue(0)]float i) { }
+                    public void Decimal([Optional][DefaultParameterValue(0)]decimal i) { }
+                    public void Long([Optional][DefaultParameterValue(0)]long i) { }
+                    public void Uint([Optional][DefaultParameterValue(0)]uint i) { }
+                }
+            }
+            """;
         MetadataItem output = Verify(code);
 
         Assert.Collection(
@@ -2733,15 +2747,15 @@ namespace Test1
     [Fact]
     public void TestGenerateMetadataWithFieldHasDefaultValue()
     {
-        string code = @"
-namespace Test1
-{
-    public class Foo
-    {
-        public const ushort Test = 123;
-    }
-}
-";
+        string code = """
+            namespace Test1
+            {
+                public class Foo
+                {
+                    public const ushort Test = 123;
+                }
+            }
+            """;
         MetadataItem output = Verify(code);
         Assert.Single(output.Items);
         {
@@ -2755,15 +2769,15 @@ namespace Test1
     [Trait("Related", "Multilanguage")]
     public void TestGenerateMetadataWithFieldHasDefaultValue_SpecialCharacter()
     {
-        string code = @"
-namespace Test1
-{
-    public class Foo
-    {
-        public const char Test = '\uDBFF';
-    }
-}
-";
+        string code = """
+            namespace Test1
+            {
+                public class Foo
+                {
+                    public const char Test = '\uDBFF';
+                }
+            }
+            """;
         MetadataItem output = Verify(code);
         Assert.Single(output.Items);
         {
@@ -2779,15 +2793,15 @@ namespace Test1
     [Trait("Related", "Multilanguage")]
     public void TestGenerateMetadataAsyncWithExtensionMethods()
     {
-        string code = @"
-namespace Test1
-{
-    public static class Class1
-    {
-        public static void Method1(this object obj) {}
-    }
-}
-";
+        string code = """
+            namespace Test1
+            {
+                public static class Class1
+                {
+                    public static void Method1(this object obj) {}
+                }
+            }
+            """;
         MetadataItem output = Verify(code);
         Assert.Single(output.Items);
         var ns = output.Items[0];
@@ -2803,16 +2817,16 @@ namespace Test1
     [Trait("Related", "Generic")]
     public void TestGenerateMetadataAsyncWithInheritedFromGenericClass()
     {
-        string code = @"
-namespace Test1
-{
-    public interface I1<T>
-    {
-        public void M1(T obj) {}
-    }
-    public interface I2<T> : I1<string>, I1<T> {}
-}
-";
+        string code = """
+            namespace Test1
+            {
+                public interface I1<T>
+                {
+                    public void M1(T obj) {}
+                }
+                public interface I2<T> : I1<string>, I1<T> {}
+            }
+            """;
         MetadataItem output = Verify(code);
         Assert.Single(output.Items);
         var ns = output.Items[0];
@@ -2845,15 +2859,15 @@ namespace Test1
     [Trait("Related", "Generic")]
     public void TestCSharpFeature_Default_7_1Class()
     {
-        string code = @"
-namespace Test1
-{
-    public class Foo
-    {
-        public int Bar(int x = default) => 1;
-    }
-}
-";
+        string code = """
+            namespace Test1
+            {
+                public class Foo
+                {
+                    public int Bar(int x = default) => 1;
+                }
+            }
+            """;
         MetadataItem output = Verify(code);
         Assert.Single(output.Items);
         var ns = output.Items[0];
@@ -2871,17 +2885,17 @@ namespace Test1
     [Trait("Related", "ValueTuple")]
     public void TestGenerateMetadataAsyncWithTupleParameter()
     {
-        string code = @"
-namespace Test1
-{
-    public class Foo
-    {
-        public int Bar((string prefix, string uri) @namespace) => 1;
+        string code = """
+            namespace Test1
+            {
+                public class Foo
+                {
+                    public int Bar((string prefix, string uri) @namespace) => 1;
 
-        public (int x, int y) M() => (1, 2);
-    }
-}
-";
+                    public (int x, int y) M() => (1, 2);
+                }
+            }
+            """;
         MetadataItem output = Verify(code);
         Assert.Single(output.Items);
         var ns = output.Items[0];
@@ -2902,15 +2916,15 @@ namespace Test1
     [Trait("Related", "ValueTuple")]
     public void TestGenerateMetadataAsyncWithUnnamedTupleParameter()
     {
-        string code = @"
-namespace Test1
-{
-    public class Foo
-    {
-        public int Bar((string, string) @namespace) => 1;
-    }
-}
-";
+        string code = """
+            namespace Test1
+            {
+                public class Foo
+                {
+                    public int Bar((string, string) @namespace) => 1;
+                }
+            }
+            """;
         MetadataItem output = Verify(code);
         Assert.Single(output.Items);
         var ns = output.Items[0];
@@ -2928,15 +2942,15 @@ namespace Test1
     [Trait("Related", "ValueTuple")]
     public void TestGenerateMetadataAsyncWithPartiallyUnnamedTupleParameter()
     {
-        string code = @"
-namespace Test1
-{
-    public class Foo
-    {
-        public int Bar((string, string uri) @namespace) => 1;
-    }
-}
-";
+        string code = """
+            namespace Test1
+            {
+                public class Foo
+                {
+                    public int Bar((string, string uri) @namespace) => 1;
+                }
+            }
+            """;
         MetadataItem output = Verify(code);
         Assert.Single(output.Items);
         var ns = output.Items[0];
@@ -2954,15 +2968,15 @@ namespace Test1
     [Trait("Related", "ValueTuple")]
     public void TestGenerateMetadataAsyncWithTupleArrayParameter()
     {
-        string code = @"
-namespace Test1
-{
-    public class Foo
-    {
-        public int Bar((string prefix, string uri)[] namespaces) => 1;
-    }
-}
-";
+        string code = """
+            namespace Test1
+            {
+                public class Foo
+                {
+                    public int Bar((string prefix, string uri)[] namespaces) => 1;
+                }
+            }
+            """;
         MetadataItem output = Verify(code);
         Assert.Single(output.Items);
         var ns = output.Items[0];
@@ -2980,17 +2994,17 @@ namespace Test1
     [Trait("Related", "ValueTuple")]
     public void TestGenerateMetadataAsyncWithTupleEnumerableParameter()
     {
-        string code = @"
-using System.Collections.Generic;
+        string code = """
+            using System.Collections.Generic;
 
-namespace Test1
-{
-    public class Foo
-    {
-        public int Bar(IEnumerable<(string prefix, string uri)> namespaces) => 1;
-    }
-}
-";
+            namespace Test1
+            {
+                public class Foo
+                {
+                    public int Bar(IEnumerable<(string prefix, string uri)> namespaces) => 1;
+                }
+            }
+            """;
         MetadataItem output = Verify(code);
         Assert.Single(output.Items);
         var ns = output.Items[0];
@@ -3008,15 +3022,15 @@ namespace Test1
     [Trait("Related", "ValueTuple")]
     public void TestGenerateMetadataAsyncWithTupleResult()
     {
-        string code = @"
-namespace Test1
-{
-    public class Foo
-    {
-        public (string prefix, string uri) Bar() => (string.Empty, string.Empty);
-    }
-}
-";
+        string code = """
+            namespace Test1
+            {
+                public class Foo
+                {
+                    public (string prefix, string uri) Bar() => (string.Empty, string.Empty);
+                }
+            }
+            """;
         MetadataItem output = Verify(code);
         Assert.Single(output.Items);
         var ns = output.Items[0];
@@ -3034,15 +3048,15 @@ namespace Test1
     [Trait("Related", "ValueTuple")]
     public void TestGenerateMetadataAsyncWithUnnamedTupleResult()
     {
-        string code = @"
-namespace Test1
-{
-    public class Foo
-    {
-        public (string, string) Bar() => (string.Empty, string.Empty);
-    }
-}
-";
+        string code = """
+            namespace Test1
+            {
+                public class Foo
+                {
+                    public (string, string) Bar() => (string.Empty, string.Empty);
+                }
+            }
+            """;
         MetadataItem output = Verify(code);
         Assert.Single(output.Items);
         var ns = output.Items[0];
@@ -3060,15 +3074,15 @@ namespace Test1
     [Trait("Related", "ValueTuple")]
     public void TestGenerateMetadataAsyncWithPartiallyUnnamedTupleResult()
     {
-        string code = @"
-namespace Test1
-{
-    public class Foo
-    {
-        public (string, string uri) Bar() => (string.Empty, string.Empty);
-    }
-}
-";
+        string code = """
+            namespace Test1
+            {
+                public class Foo
+                {
+                    public (string, string uri) Bar() => (string.Empty, string.Empty);
+                }
+            }
+            """;
         MetadataItem output = Verify(code);
         Assert.Single(output.Items);
         var ns = output.Items[0];
@@ -3086,17 +3100,17 @@ namespace Test1
     [Trait("Related", "ValueTuple")]
     public void TestGenerateMetadataAsyncWithEnumerableTupleResult()
     {
-        string code = @"
-using System.Collections.Generic;
+        string code = """
+            using System.Collections.Generic;
 
-namespace Test1
-{
-    public class Foo
-    {
-        public IEnumerable<(string prefix, string uri)> Bar() => new (string.Empty, string.Empty)[0];
-    }
-}
-";
+            namespace Test1
+            {
+                public class Foo
+                {
+                    public IEnumerable<(string prefix, string uri)> Bar() => new (string.Empty, string.Empty)[0];
+                }
+            }
+            """;
         MetadataItem output = Verify(code);
         Assert.Single(output.Items);
         var ns = output.Items[0];
@@ -3133,20 +3147,20 @@ namespace Test1
     [Trait("Related", "NativeInteger")]
     public void TestGenerateMetadataWithMethodUsingNativeInteger()
     {
-        string code = @"
-namespace Test1
-{
-    public class Foo
-    {
-        public void Test(
-            IntPtr a, UIntPtr b,
-            nint c, nuint d,
-            nint e = -1, nuint f = 1)
-        {
-        }
-    }
-}
-";
+        string code = """
+            namespace Test1
+            {
+                public class Foo
+                {
+                    public void Test(
+                        IntPtr a, UIntPtr b,
+                        nint c, nuint d,
+                        nint e = -1, nuint f = 1)
+                    {
+                    }
+                }
+            }
+            """;
         MetadataItem output = Verify(code);
         Assert.Single(output.Items);
         {
@@ -3160,21 +3174,21 @@ namespace Test1
     [Trait("Related", "FunctionPointer")]
     public void TestGenerateMetadataWithImplicitManagedFunctionPointer()
     {
-        string code = @"
-namespace Test1
-{
-    public class Foo
-    {
-        public delegate*<void> a;
-        public delegate*<int, void> b;
-        public delegate*<ref int, void> c;
-        public delegate*<out int, void> d;
-        public delegate*<in int, void> e;
-        public delegate*<int* , void> f;
-        public delegate*<ref readonly int> g;
-    }
-}
-";
+        string code = """
+            namespace Test1
+            {
+                public class Foo
+                {
+                    public delegate*<void> a;
+                    public delegate*<int, void> b;
+                    public delegate*<ref int, void> c;
+                    public delegate*<out int, void> d;
+                    public delegate*<in int, void> e;
+                    public delegate*<int* , void> f;
+                    public delegate*<ref readonly int> g;
+                }
+            }
+            """;
         MetadataItem output = Verify(code);
         Assert.Single(output.Items);
         {
@@ -3212,21 +3226,21 @@ namespace Test1
     [Trait("Related", "FunctionPointer")]
     public void TestGenerateMetadataWithExplicitManagedFunctionPointer()
     {
-        string code = @"
-namespace Test1
-{
-    public class Foo
-    {
-        public delegate* managed<void> a;
-        public delegate* managed<int, void> b;
-        public delegate* managed<ref int, void> c;
-        public delegate* managed<out int, void> d;
-        public delegate* managed<in int, void> e;
-        public delegate* managed<int* , void> f;
-        public delegate* managed<ref readonly int> g;
-    }
-}
-";
+        string code = """
+            namespace Test1
+            {
+                public class Foo
+                {
+                    public delegate* managed<void> a;
+                    public delegate* managed<int, void> b;
+                    public delegate* managed<ref int, void> c;
+                    public delegate* managed<out int, void> d;
+                    public delegate* managed<in int, void> e;
+                    public delegate* managed<int* , void> f;
+                    public delegate* managed<ref readonly int> g;
+                }
+            }
+            """;
         MetadataItem output = Verify(code);
         Assert.Single(output.Items);
         {
@@ -3264,21 +3278,21 @@ namespace Test1
     [Trait("Related", "FunctionPointer")]
     public void TestGenerateMetadataWithUnmanagedFunctionPointer()
     {
-        string code = @"
-namespace Test1
-{
-    public class Foo
-    {
-        public delegate* unmanaged<void> a;
-        public delegate* unmanaged<int, void> b;
-        public delegate* unmanaged<ref int, void> c;
-        public delegate* unmanaged<out int, void> d;
-        public delegate* unmanaged<in int, void> e;
-        public delegate* unmanaged<int* , void> f;
-        public delegate* unmanaged<ref readonly int> g;
-    }
-}
-";
+        string code = """
+            namespace Test1
+            {
+                public class Foo
+                {
+                    public delegate* unmanaged<void> a;
+                    public delegate* unmanaged<int, void> b;
+                    public delegate* unmanaged<ref int, void> c;
+                    public delegate* unmanaged<out int, void> d;
+                    public delegate* unmanaged<in int, void> e;
+                    public delegate* unmanaged<int* , void> f;
+                    public delegate* unmanaged<ref readonly int> g;
+                }
+            }
+            """;
         MetadataItem output = Verify(code);
         Assert.Single(output.Items);
         {
@@ -3316,21 +3330,21 @@ namespace Test1
     [Trait("Related", "FunctionPointer")]
     public void TestGenerateMetadataWithSingleCallConvFunctionPointer()
     {
-        string code = @"
-namespace Test1
-{
-    public class Foo
-    {
-        public delegate* unmanaged[Stdcall]<void> a;
-        public delegate* unmanaged[Stdcall]<int, void> b;
-        public delegate* unmanaged[Stdcall]<ref int, void> c;
-        public delegate* unmanaged[Stdcall]<out int, void> d;
-        public delegate* unmanaged[Stdcall]<in int, void> e;
-        public delegate* unmanaged[Stdcall]<int* , void> f;
-        public delegate* unmanaged[Stdcall]<ref readonly int> g;
-    }
-}
-";
+        string code = """
+            namespace Test1
+            {
+                public class Foo
+                {
+                    public delegate* unmanaged[Stdcall]<void> a;
+                    public delegate* unmanaged[Stdcall]<int, void> b;
+                    public delegate* unmanaged[Stdcall]<ref int, void> c;
+                    public delegate* unmanaged[Stdcall]<out int, void> d;
+                    public delegate* unmanaged[Stdcall]<in int, void> e;
+                    public delegate* unmanaged[Stdcall]<int* , void> f;
+                    public delegate* unmanaged[Stdcall]<ref readonly int> g;
+                }
+            }
+            """;
         MetadataItem output = Verify(code);
         Assert.Single(output.Items);
         {
@@ -3368,21 +3382,21 @@ namespace Test1
     [Trait("Related", "FunctionPointer")]
     public void TestGenerateMetadataWithMultiCallConvFunctionPointer()
     {
-        string code = @"
-namespace Test1
-{
-    public class Foo
-    {
-        public delegate* unmanaged[Stdcall, Thiscall]<void> a;
-        public delegate* unmanaged[Stdcall, Thiscall]<int, void> b;
-        public delegate* unmanaged[Stdcall, Thiscall]<ref int, void> c;
-        public delegate* unmanaged[Stdcall, Thiscall]<out int, void> d;
-        public delegate* unmanaged[Stdcall, Thiscall]<in int, void> e;
-        public delegate* unmanaged[Stdcall, Thiscall]<int* , void> f;
-        public delegate* unmanaged[Stdcall, Thiscall]<ref readonly int> g;
-    }
-}
-";
+        string code = """
+            namespace Test1
+            {
+                public class Foo
+                {
+                    public delegate* unmanaged[Stdcall, Thiscall]<void> a;
+                    public delegate* unmanaged[Stdcall, Thiscall]<int, void> b;
+                    public delegate* unmanaged[Stdcall, Thiscall]<ref int, void> c;
+                    public delegate* unmanaged[Stdcall, Thiscall]<out int, void> d;
+                    public delegate* unmanaged[Stdcall, Thiscall]<in int, void> e;
+                    public delegate* unmanaged[Stdcall, Thiscall]<int* , void> f;
+                    public delegate* unmanaged[Stdcall, Thiscall]<ref readonly int> g;
+                }
+            }
+            """;
         MetadataItem output = Verify(code);
         Assert.Single(output.Items);
         {
@@ -3420,18 +3434,18 @@ namespace Test1
     [Trait("Related", "FunctionPointer")]
     public void TestGenerateMetadataWithNestedFunctionPointer()
     {
-        string code = @"
-namespace Test1
-{
-    public class Foo
-    {
-        public delegate*<delegate*<void>> a;
-        public delegate*<delegate* unmanaged<void>> b;
-        public delegate*<delegate* unmanaged[Stdcall]<void>> c;
-        public delegate*<delegate* unmanaged[Stdcall, Thiscall]<void>> d;
-    }
-}
-";
+        string code = """
+            namespace Test1
+            {
+                public class Foo
+                {
+                    public delegate*<delegate*<void>> a;
+                    public delegate*<delegate* unmanaged<void>> b;
+                    public delegate*<delegate* unmanaged[Stdcall]<void>> c;
+                    public delegate*<delegate* unmanaged[Stdcall, Thiscall]<void>> d;
+                }
+            }
+            """;
         MetadataItem output = Verify(code);
         Assert.Single(output.Items);
         {
@@ -3457,25 +3471,25 @@ namespace Test1
     [Fact]
     public void TestGenerateMetadataWithReadonlyMember()
     {
-        string code = @"
-namespace Test1
-{
-    public struct S
-    {
-        public readonly void M() {}
+        string code = """
+            namespace Test1
+            {
+                public struct S
+                {
+                    public readonly void M() {}
 
-        public readonly int P1 { get => throw null; set => throw null; }
-    
-        public readonly int P2 { get => throw null; }
-    
-        public readonly int P3 { set => throw null; }
-    
-        public int P4 { readonly get => throw null; set => throw null; }
+                    public readonly int P1 { get => throw null; set => throw null; }
 
-        public int P5 { get => throw null; readonly set => throw null; }
-    }
-}
-";
+                    public readonly int P2 { get => throw null; }
+
+                    public readonly int P3 { set => throw null; }
+
+                    public int P4 { readonly get => throw null; set => throw null; }
+
+                    public int P5 { get => throw null; readonly set => throw null; }
+                }
+            }
+            """;
         MetadataItem output = Verify(code);
         Assert.Single(output.Items);
         {
@@ -3538,14 +3552,14 @@ namespace Test1
     [Fact]
     public void TestGenerateMetadataWithReadonlyStruct()
     {
-        string code = @"
-namespace Test1
-{
-    public readonly struct S
-    {
-    }
-}
-";
+        string code = """
+            namespace Test1
+            {
+                public readonly struct S
+                {
+                }
+            }
+            """;
         MetadataItem output = Verify(code);
         Assert.Single(output.Items);
         {
@@ -3564,14 +3578,14 @@ namespace Test1
     [Fact]
     public void TestGenerateMetadataWithRefStruct()
     {
-        string code = @"
-namespace Test1
-{
-    public ref struct S
-    {
-    }
-}
-";
+        string code = """
+            namespace Test1
+            {
+                public ref struct S
+                {
+                }
+            }
+            """;
         MetadataItem output = Verify(code);
         Assert.Single(output.Items);
         {

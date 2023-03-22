@@ -13,12 +13,14 @@ public class TabGroupTest
     {
         var groupId = "bHGHmlrG6S";
         TestMarkupInGeneral(
-            @"Tab group test case
-# [title-a](#tab/a)
-content-a
-# [title-b](#tab/b/c)
-content-b
-- - -",
+            """
+            Tab group test case
+            # [title-a](#tab/a)
+            content-a
+            # [title-b](#tab/b/c)
+            content-b
+            - - -
+            """,
             $@"<p sourceFile=""Topic.md"" sourceStartLineNumber=""1"">Tab group test case</p>
 <div class=""tabGroup"" id=""tabgroup_{groupId}"" sourceFile=""Topic.md"" sourceStartLineNumber=""2"">
 <ul role=""tablist"">
@@ -48,16 +50,18 @@ content-b
     {
         var groupId = "bHGHmlrG6S";
         TestMarkupInGeneral(
-            @"# [title-a or b](#tab/a+b)
-content-a or b
-# [title-c](#tab/c)
-content-c
-- - -
-# [title-a](#tab/a)
-content-a
-# [title-b or c](#tab/b+c)
-content-b or c
-- - -",
+            """
+            # [title-a or b](#tab/a+b)
+            content-a or b
+            # [title-c](#tab/c)
+            content-c
+            - - -
+            # [title-a](#tab/a)
+            content-a
+            # [title-b or c](#tab/b+c)
+            content-b or c
+            - - -
+            """,
             $@"<div class=""tabGroup"" id=""tabgroup_{groupId}"" sourceFile=""Topic.md"" sourceStartLineNumber=""1"">
 <ul role=""tablist"">
 <li role=""presentation"">
@@ -100,11 +104,13 @@ content-b or c
     public void TestTableInTabGroup()
     {
         var groupId = "bHGHmlrG6S";
-        TestMarkupInGeneral(@"# [title](#tab/id)
+        TestMarkupInGeneral("""
+            # [title](#tab/id)
 
-a | b
-- | -
-c | d",
+            a | b
+            - | -
+            c | d
+            """,
 $@"<div class=""tabGroup"" id=""tabgroup_{groupId}"" sourceFile=""Topic.md"" sourceStartLineNumber=""1"">
 <ul role=""tablist"">
 <li role=""presentation"">

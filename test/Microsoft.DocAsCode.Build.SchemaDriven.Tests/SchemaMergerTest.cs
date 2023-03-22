@@ -124,98 +124,102 @@ public class SchemaMergerTest : TestBase
         };
         var schemaFile = CreateFile("template/schemas/testmerger.schema.json", JsonUtility.Serialize(schema), _templateFolder);
         var inputFileName = "src.yml";
-        var inputFile = CreateFile(inputFileName, @"### YamlMime:testmerger
-uid: uid1
-intValue: 1
-boolValue: true
-stringValue: string
-ignoreValue: abc
-empty:
-stringArrayValue:
-  - .NET
-intArrayValue:
-  - 1
-  - 2
-emptyArray: []
-array:
-    - type: type1
-      intValue: 1
-      boolValue: true
-      stringValue: string
-      ignoreValue: abc
-      empty:
-      stringArrayValue:
-          - .NET
-      intArrayValue:
-          - 1
-          - 2
-      emptyArray: []
-dict:
-    uid: uid1.uid1
-    intValue: 1
-    boolValue: true
-    stringValue: string
-    empty:
-    stringArrayValue:
-      - .NET
-    intArrayValue:
-      - 1
-      - 2
-    emptyArray: []
-    dict:
-        uid: uid1.uid1.uid1
-        summary: ""*Hello* [self](src.yml)""
-        href: src.yml
-        xref: uid1
-", _inputFolder);
-        var overwriteFile = CreateFile("overwrite/a.md", @"---
-uid: uid1
-ignoreValue: Should ignore
-intValue: 2
-stringValue: string1
-empty: notEmpty
-stringArrayValue:
-  - Java
-intArrayValue:
-  - 1
-emptyArray: [ 1 ]
-summary: *content
-array:
-    - type: type1
-      intValue: 2
-      boolValue: false
-      stringValue: *content
-      ignoreValue: abcdef
-      empty: 3
-      stringArrayValue:
-          - *content
-      intArrayValue:
-          - 3
-dict:
-    intValue: 3
-    boolValue: false
-    stringValue: *content
-    empty: 4
-    stringArrayValue:
-      - .NET
-    intArrayValue:
-      - 4
----
-Nice
+        var inputFile = CreateFile(inputFileName, """
+            ### YamlMime:testmerger
+            uid: uid1
+            intValue: 1
+            boolValue: true
+            stringValue: string
+            ignoreValue: abc
+            empty:
+            stringArrayValue:
+              - .NET
+            intArrayValue:
+              - 1
+              - 2
+            emptyArray: []
+            array:
+                - type: type1
+                  intValue: 1
+                  boolValue: true
+                  stringValue: string
+                  ignoreValue: abc
+                  empty:
+                  stringArrayValue:
+                      - .NET
+                  intArrayValue:
+                      - 1
+                      - 2
+                  emptyArray: []
+            dict:
+                uid: uid1.uid1
+                intValue: 1
+                boolValue: true
+                stringValue: string
+                empty:
+                stringArrayValue:
+                  - .NET
+                intArrayValue:
+                  - 1
+                  - 2
+                emptyArray: []
+                dict:
+                    uid: uid1.uid1.uid1
+                    summary: "*Hello* [self](src.yml)"
+                    href: src.yml
+                    xref: uid1
 
----
-uid: uid1
-dict:
-    another: *content
----
-Cool
+            """, _inputFolder);
+        var overwriteFile = CreateFile("overwrite/a.md", """
+            ---
+            uid: uid1
+            ignoreValue: Should ignore
+            intValue: 2
+            stringValue: string1
+            empty: notEmpty
+            stringArrayValue:
+              - Java
+            intArrayValue:
+              - 1
+            emptyArray: [ 1 ]
+            summary: *content
+            array:
+                - type: type1
+                  intValue: 2
+                  boolValue: false
+                  stringValue: *content
+                  ignoreValue: abcdef
+                  empty: 3
+                  stringArrayValue:
+                      - *content
+                  intArrayValue:
+                      - 3
+            dict:
+                intValue: 3
+                boolValue: false
+                stringValue: *content
+                empty: 4
+                stringArrayValue:
+                  - .NET
+                intArrayValue:
+                  - 4
+            ---
+            Nice
 
----
-uid: uid1.uid1
-summary: *content
----
-Overwrite with content
-", _inputFolder);
+            ---
+            uid: uid1
+            dict:
+                another: *content
+            ---
+            Cool
+
+            ---
+            uid: uid1.uid1
+            summary: *content
+            ---
+            Overwrite with content
+
+            """, _inputFolder);
         FileCollection files = new(_defaultFiles);
         files.Add(DocumentType.Article, new[] { inputFile }, _inputFolder);
         files.Add(DocumentType.Overwrite, new[] { overwriteFile }, _inputFolder);
@@ -224,11 +228,21 @@ Overwrite with content
         // One plugin warning for yml and one plugin warning for overwrite file
         Assert.Equal(6, listener.Items.Count);
         Assert.NotNull(listener.Items.FirstOrDefault(s => s.Message.StartsWith("There is no template processing document type(s): testmerger")));
-        Assert.Equal(1, listener.Items.Count(s => s.Message.StartsWith("\"/stringArrayValue/0\" in overwrite object fails to overwrite \"/stringArrayValue\" for \"uid1\" because it does not match any existing item.")));
-        Assert.Equal(1, listener.Items.Count(s => s.Message.StartsWith("\"/intArrayValue/0\" in overwrite object fails to overwrite \"/intArrayValue\" for \"uid1\" because it does not match any existing item.")));
-        Assert.Equal(1, listener.Items.Count(s => s.Message.StartsWith("\"/emptyArray/0\" in overwrite object fails to overwrite \"/emptyArray\" for \"uid1\" because it does not match any existing item.")));
-        Assert.Equal(1, listener.Items.Count(s => s.Message.StartsWith("\"/array/0/stringArrayValue/0\" in overwrite object fails to overwrite \"/array/0/stringArrayValue\" for \"uid1\" because it does not match any existing item.")));
-        Assert.Equal(1, listener.Items.Count(s => s.Message.StartsWith("\"/dict/stringArrayValue/0\" in overwrite object fails to overwrite \"/dict/stringArrayValue\" for \"uid1\" because it does not match any existing item.")));
+        Assert.Equal(1, listener.Items.Count(s => s.Message.StartsWith("""
+            "/stringArrayValue/0" in overwrite object fails to overwrite "/stringArrayValue" for "uid1" because it does not match any existing item.
+            """)));
+        Assert.Equal(1, listener.Items.Count(s => s.Message.StartsWith("""
+            "/intArrayValue/0" in overwrite object fails to overwrite "/intArrayValue" for "uid1" because it does not match any existing item.
+            """)));
+        Assert.Equal(1, listener.Items.Count(s => s.Message.StartsWith("""
+            "/emptyArray/0" in overwrite object fails to overwrite "/emptyArray" for "uid1" because it does not match any existing item.
+            """)));
+        Assert.Equal(1, listener.Items.Count(s => s.Message.StartsWith("""
+            "/array/0/stringArrayValue/0" in overwrite object fails to overwrite "/array/0/stringArrayValue" for "uid1" because it does not match any existing item.
+            """)));
+        Assert.Equal(1, listener.Items.Count(s => s.Message.StartsWith("""
+            "/dict/stringArrayValue/0" in overwrite object fails to overwrite "/dict/stringArrayValue" for "uid1" because it does not match any existing item.
+            """)));
 
         listener.Items.Clear();
 
@@ -325,24 +339,28 @@ Overwrite with content
         };
         var schemaFile = CreateFile("template/schemas/testmerger2.schema.json", JsonUtility.Serialize(schema), _templateFolder);
         var inputFileName = "src/src.yml";
-        var inputFile = CreateFile(inputFileName, @"### YamlMime:testmerger2
-uid: uid1
-summary: ""*Hello* [self](src.yml)""
-href:
-xref: uid1
-reference: ../inc/inc.md
-", _inputFolder);
+        var inputFile = CreateFile(inputFileName, """
+            ### YamlMime:testmerger2
+            uid: uid1
+            summary: "*Hello* [self](src.yml)"
+            href:
+            xref: uid1
+            reference: ../inc/inc.md
+
+            """, _inputFolder);
         var includeFile = CreateFile("inc/inc.md", @"[parent](../src/src.yml)", _inputFolder);
         var includeFile2 = CreateFile("inc/inc2.md", @"[overwrite](../src/src.yml)", _inputFolder);
-        var overwriteFile = CreateFile("overwrite/a.md", @"---
-uid: uid1
-summary: *content
-href: ../src/src.yml
-xref: uid1
-reference: ../inc/inc2.md
----
-Nice
-", _inputFolder);
+        var overwriteFile = CreateFile("overwrite/a.md", """
+            ---
+            uid: uid1
+            summary: *content
+            href: ../src/src.yml
+            xref: uid1
+            reference: ../inc/inc2.md
+            ---
+            Nice
+
+            """, _inputFolder);
         FileCollection files = new(_defaultFiles);
         files.Add(DocumentType.Article, new[] { inputFile }, _inputFolder);
         files.Add(DocumentType.Overwrite, new[] { overwriteFile }, _inputFolder);

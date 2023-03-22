@@ -27,9 +27,11 @@ public class TemplateProcessorUnitTest : TestBase
     public void TestXrefWithTemplate()
     {
         CreateFile("partials/xref.html.tmpl", @"<h2>{{uid}}</h2><p>{{summary}}</p>{{#isGood}}Good!{{/isGood}}", _templateFolder);
-        CreateFile("index.html.tmpl", @"
-<xref uid=""{{reference}}"" template=""partials/xref.html.tmpl"" />
-", _templateFolder);
+        CreateFile("index.html.tmpl", """
+
+            <xref uid="{{reference}}" template="partials/xref.html.tmpl" />
+
+            """, _templateFolder);
 
         var xref = new XRefSpec
         {
@@ -41,9 +43,11 @@ public class TemplateProcessorUnitTest : TestBase
         var output = Process("index", "input", new { reference = "reference" }, xref);
 
         Assert.Equal($"{_outputFolder}/input.html".ToNormalizedFullPath(), output.OutputFiles[".html"].RelativePath.ToNormalizedPath());
-        Assert.Equal(@"
-<h2>reference</h2><p>hello world</p>Good!
-", File.ReadAllText(Path.Combine(_outputFolder, "input.html")));
+        Assert.Equal("""
+
+            <h2>reference</h2><p>hello world</p>Good!
+
+            """, File.ReadAllText(Path.Combine(_outputFolder, "input.html")));
 
     }
 

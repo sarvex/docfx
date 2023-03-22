@@ -18,107 +18,108 @@ public class XmlCommentUnitTest
     {
         string inputFolder = Path.GetRandomFileName();
         Directory.CreateDirectory(inputFolder);
-        File.WriteAllText(Path.Combine(inputFolder, "Example.cs"), @"
-using System;
+        File.WriteAllText(Path.Combine(inputFolder, "Example.cs"), """
+            using System;
 
-namespace Example
-{
-#region Example
-    static class Program
-    {
-        public int Main(string[] args)
-        {
-            Console.HelloWorld();
-        }
-    }
-#endregion
-}
-");
-        string input = @"
-<member name='T:TestClass1.Partial1'>
-    <summary>
-        Partial classes <see cref='T:System.AccessViolationException'/><see cref='T:System.AccessViolationException'/>can not cross assemblies, Test <see langword='null'/>
+            namespace Example
+            {
+            #region Example
+                static class Program
+                {
+                    public int Main(string[] args)
+                    {
+                        Console.HelloWorld();
+                    }
+                }
+            #endregion
+            }
+            """);
+        string input = """
+            <member name='T:TestClass1.Partial1'>
+                <summary>
+                    Partial classes <see cref='T:System.AccessViolationException'/><see cref='T:System.AccessViolationException'/>can not cross assemblies, Test <see langword='null'/>
 
-        ```
-        Classes in assemblies are by definition complete.
-        ```
-    </summary>
-    <remarks>
-    <see href=""https://example.org""/>
-    <see href=""https://example.org"">example</see>
-    <para>This is <paramref name='ref'/> <paramref />a sample of exception node</para>
-    <list type='bullet'>
-        <item>
-            <description>
-                <code language = 'c#'>
-                public class XmlElement
-                    : XmlLinkedNode
-                </code>
-                <list type='number'>
+                    ```
+                    Classes in assemblies are by definition complete.
+                    ```
+                </summary>
+                <remarks>
+                <see href="https://example.org"/>
+                <see href="https://example.org">example</see>
+                <para>This is <paramref name='ref'/> <paramref />a sample of exception node</para>
+                <list type='bullet'>
                     <item>
                         <description>
-                            word inside list->listItem->list->listItem->para.>
-                            the second line.
+                            <code language = 'c#'>
+                            public class XmlElement
+                                : XmlLinkedNode
+                            </code>
+                            <list type='number'>
+                                <item>
+                                    <description>
+                                        word inside list->listItem->list->listItem->para.>
+                                        the second line.
+                                    </description>
+                                </item>
+                                <item>
+                                    <description>item2 in numbered list</description>
+                                </item>
+                            </list>
                         </description>
                     </item>
                     <item>
-                        <description>item2 in numbered list</description>
+                        <description>item2 in bullet list</description>
+                    </item>
+                    <item>
+                        loose text <i>not</i> wrapped in description
                     </item>
                 </list>
-            </description>
-        </item>
-        <item>
-            <description>item2 in bullet list</description>
-        </item>
-        <item>
-            loose text <i>not</i> wrapped in description
-        </item>
-    </list>
-    </remarks>
-    <returns>Task<see cref='T:System.AccessViolationException'/> returns</returns>
+                </remarks>
+                <returns>Task<see cref='T:System.AccessViolationException'/> returns</returns>
 
-        <param name='input'>This is <see cref='T:System.AccessViolationException'/>the input</param>
+                    <param name='input'>This is <see cref='T:System.AccessViolationException'/>the input</param>
 
-        <param name = 'output' > This is the output </param >
-        <exception cref='T:System.Xml.XmlException'>This is a sample of exception node. Ref <see href=""http://exception.com"">Exception</see></exception>
-        <exception cref='System.Xml.XmlException'>This is a sample of exception node with invalid cref</exception>
-        <exception cref=''>This is a sample of invalid exception node</exception>
-        <exception >This is a sample of another invalid exception node</exception>
+                    <param name = 'output' > This is the output </param >
+                    <exception cref='T:System.Xml.XmlException'>This is a sample of exception node. Ref <see href="http://exception.com">Exception</see></exception>
+                    <exception cref='System.Xml.XmlException'>This is a sample of exception node with invalid cref</exception>
+                    <exception cref=''>This is a sample of invalid exception node</exception>
+                    <exception >This is a sample of another invalid exception node</exception>
 
-    <example>
-    This sample shows how to call the <see cref=""M: Microsoft.DocAsCode.EntityModel.XmlCommentParser.GetExceptions(System.String, Microsoft.DocAsCode.EntityModel.XmlCommentParserContext)""/> method.
-    <code>
-   class TestClass
-    {
-        static int Main()
-        {
-            return GetExceptions(null, null).Count();
-        }
-    } 
-    </code>
-    </example>
+                <example>
+                This sample shows how to call the <see cref="M: Microsoft.DocAsCode.EntityModel.XmlCommentParser.GetExceptions(System.String, Microsoft.DocAsCode.EntityModel.XmlCommentParserContext)"/> method.
+                <code>
+               class TestClass
+                {
+                    static int Main()
+                    {
+                        return GetExceptions(null, null).Count();
+                    }
+                } 
+                </code>
+                </example>
 
-    <example>
-    This is another example
-    </example>
-    <example>
-    Check empty code.
-    <code></code>
-    </example>
-    <example>
-    This is an example using source reference.
-    <code source='Example.cs' region='Example'/>
-    </example>
-    <see cref=""T:Microsoft.DocAsCode.EntityModel.SpecIdHelper""/>
-    <see cref=""T:System.Diagnostics.SourceSwitch""/>
-    <see cref=""Overload:System.String.Compare""/>
-    <see href=""http://exception.com"">Global See section</see>
-    <see href=""http://exception.com""/>
-    <seealso cref=""T:System.IO.WaitForChangedResult""/>
-    <seealso cref=""!:http://google.com"">ABCS</seealso>
-    <seealso href=""http://www.bing.com"">Hello Bing</seealso>
-    <seealso href=""http://www.bing.com""/>
-</member>";
+                <example>
+                This is another example
+                </example>
+                <example>
+                Check empty code.
+                <code></code>
+                </example>
+                <example>
+                This is an example using source reference.
+                <code source='Example.cs' region='Example'/>
+                </example>
+                <see cref="T:Microsoft.DocAsCode.EntityModel.SpecIdHelper"/>
+                <see cref="T:System.Diagnostics.SourceSwitch"/>
+                <see cref="Overload:System.String.Compare"/>
+                <see href="http://exception.com">Global See section</see>
+                <see href="http://exception.com"/>
+                <seealso cref="T:System.IO.WaitForChangedResult"/>
+                <seealso cref="!:http://google.com">ABCS</seealso>
+                <seealso href="http://www.bing.com">Hello Bing</seealso>
+                <seealso href="http://www.bing.com"/>
+            </member>
+            """;
         var context = new XmlCommentParserContext
         {
             AddReferenceDelegate = null,
@@ -133,13 +134,19 @@ namespace Example
         Assert.True(commentModel.InheritDoc == null, nameof(commentModel.InheritDoc));
 
         var summary = commentModel.Summary;
-        Assert.Equal(@"
-Partial classes <xref href=""System.AccessViolationException"" data-throw-if-not-resolved=""false""></xref><xref href=""System.AccessViolationException"" data-throw-if-not-resolved=""false""></xref>can not cross assemblies, Test <xref uid=""langword_csharp_null"" name=""null"" href=""""></xref>
+        Assert.Equal("""
+            Partial classes <xref href="System.AccessViolationException" data-throw-if-not-resolved="false"></xref><xref href="System.AccessViolationException" data-throw-if-not-resolved="false"></xref>can not cross assemblies, Test <xref uid="langword_csharp_null" name="null" href=""></xref>
 
-```
-Classes in assemblies are by definition complete.
-```
-".Replace("\r\n", "\n"), summary);
+            ```
+            Classes in assemblies are by definition complete.
+            ```
+            """.Replace("""
+
+
+            """, """
+
+
+            """), summary.Trim());
 
         var returns = commentModel.Returns;
         Assert.Equal("Task<xref href=\"System.AccessViolationException\" data-throw-if-not-resolved=\"false\"></xref> returns", returns);
@@ -148,22 +155,28 @@ Classes in assemblies are by definition complete.
         Assert.Equal("This is <xref href=\"System.AccessViolationException\" data-throw-if-not-resolved=\"false\"></xref>the input", paramInput);
 
         var remarks = commentModel.Remarks;
-        Assert.Equal(@"
-<a href=""https://example.org"">https://example.org</a>
-<a href=""https://example.org"">example</a>
-<p>This is <code data-dev-comment-type=""paramref"" class=""paramref"">ref</code> a sample of exception node</p>
-<ul><li>
-<pre><code class=""lang-c#"">public class XmlElement
-    : XmlLinkedNode</code></pre>
-<ol><li>
-            word inside list->listItem->list->listItem->para.>
-            the second line.
-</li><li>item2 in numbered list</li></ol>
-</li><li>item2 in bullet list</li><li>
-loose text <em>not</em> wrapped in description
-</li></ul>
-".Replace("\r\n", "\n"),
-remarks);
+        Assert.Equal("""
+            <a href="https://example.org">https://example.org</a>
+            <a href="https://example.org">example</a>
+            <p>This is <code data-dev-comment-type="paramref" class="paramref">ref</code> a sample of exception node</p>
+            <ul><li>
+            <pre><code class="lang-c#">public class XmlElement
+                : XmlLinkedNode</code></pre>
+            <ol><li>
+                        word inside list->listItem->list->listItem->para.>
+                        the second line.
+            </li><li>item2 in numbered list</li></ol>
+            </li><li>item2 in bullet list</li><li>
+            loose text <em>not</em> wrapped in description
+            </li></ul>
+            """.Replace("""
+
+
+            """, """
+
+
+            """),
+            remarks.Trim());
 
         var exceptions = commentModel.Exceptions;
         Assert.Single(exceptions);
@@ -172,8 +185,9 @@ remarks);
 
         var example = commentModel.Examples;
         var expected = new List<string> {
-@"
-This sample shows how to call the <see cref=""M: Microsoft.DocAsCode.EntityModel.XmlCommentParser.GetExceptions(System.String, Microsoft.DocAsCode.EntityModel.XmlCommentParserContext)""></see> method.
+"""
+
+This sample shows how to call the <see cref="M: Microsoft.DocAsCode.EntityModel.XmlCommentParser.GetExceptions(System.String, Microsoft.DocAsCode.EntityModel.XmlCommentParserContext)"></see> method.
 <pre><code>class TestClass
 {
     static int Main()
@@ -181,24 +195,55 @@ This sample shows how to call the <see cref=""M: Microsoft.DocAsCode.EntityModel
         return GetExceptions(null, null).Count();
     }
 } </code></pre>
-".Replace("\r\n", "\n"),
-@"
+
+""".Replace("""
+
+
+    """, """
+
+
+"""),
+"""
+
 This is another example
-".Replace("\r\n", "\n"),
-@"
+
+""".Replace("""
+
+
+    """, """
+
+
+"""),
+"""
+
 Check empty code.
 <pre><code></code></pre>
-".Replace("\r\n", "\n"),
-@"
+
+""".Replace("""
+
+
+    """, """
+
+
+"""),
+"""
+
 This is an example using source reference.
-<pre><code source=""Example.cs"" region=""Example"">    static class Program
+<pre><code source="Example.cs" region="Example">    static class Program
 {
     public int Main(string[] args)
     {
         Console.HelloWorld();
     }
 }</code></pre>
-".Replace("\r\n", "\n")};
+
+""".Replace("""
+
+
+    """, """
+
+
+""")};
         Assert.Equal(expected, example);
 
         context.PreserveRawInlineComments = true;
@@ -230,18 +275,19 @@ This is an example using source reference.
     {
         string inputFolder = Path.GetRandomFileName();
         Directory.CreateDirectory(inputFolder);
-        string input = @"
-<member name='T:TestClass1.Partial1'>
-    <summary>
-        Class summary <see cref='T:System.AccessViolationException'>Exception type</see>
-    </summary>
-    <remarks>
-    See <see cref='T:System.Int'>Integer</see>.
-    </remarks>
-    <returns>Returns an <see cref='T:System.AccessViolationException'>Exception</see>.</returns>
+        string input = """
+            <member name='T:TestClass1.Partial1'>
+                <summary>
+                    Class summary <see cref='T:System.AccessViolationException'>Exception type</see>
+                </summary>
+                <remarks>
+                See <see cref='T:System.Int'>Integer</see>.
+                </remarks>
+                <returns>Returns an <see cref='T:System.AccessViolationException'>Exception</see>.</returns>
 
-        <param name='input'>This is an <see cref='T:System.AccessViolationException'>Exception</see>.</param>
-</member>";
+                    <param name='input'>This is an <see cref='T:System.AccessViolationException'>Exception</see>.</param>
+            </member>
+            """;
         var context = new XmlCommentParserContext
         {
             AddReferenceDelegate = null,
@@ -256,7 +302,11 @@ This is an example using source reference.
         Assert.True(commentModel.InheritDoc == null, nameof(commentModel.InheritDoc));
 
         var summary = commentModel.Summary;
-        Assert.Equal("\nClass summary <xref href=\"System.AccessViolationException?text=Exception+type\" data-throw-if-not-resolved=\"false\"></xref>\n", summary);
+        Assert.Equal("""
+
+            Class summary <xref href="System.AccessViolationException?text=Exception+type" data-throw-if-not-resolved="false"></xref>
+
+            """, summary);
 
         var returns = commentModel.Returns;
         Assert.Equal("Returns an <xref href=\"System.AccessViolationException?text=Exception\" data-throw-if-not-resolved=\"false\"></xref>.", returns);
@@ -265,16 +315,21 @@ This is an example using source reference.
         Assert.Equal("This is an <xref href=\"System.AccessViolationException?text=Exception\" data-throw-if-not-resolved=\"false\"></xref>.", paramInput);
 
         var remarks = commentModel.Remarks;
-        Assert.Equal("\nSee <xref href=\"System.Int?text=Integer\" data-throw-if-not-resolved=\"false\"></xref>.\n", remarks);
+        Assert.Equal("""
+
+            See <xref href="System.Int?text=Integer" data-throw-if-not-resolved="false"></xref>.
+
+            """, remarks);
     }
 
     [Fact]
     public void InheritDoc()
     {
-        const string input = @"
-<member name=""M:ClassLibrary1.MyClass.DoThing"">
-    <inheritdoc />
-</member>";
+        const string input = """
+            <member name="M:ClassLibrary1.MyClass.DoThing">
+                <inheritdoc />
+            </member>
+            """;
         var context = new XmlCommentParserContext
         {
             AddReferenceDelegate = null,
@@ -288,10 +343,11 @@ This is an example using source reference.
     [Fact]
     public void InheritDocWithCref()
     {
-        const string input = @"
-<member name=""M:ClassLibrary1.MyClass.DoThing"">
-    <inheritdoc cref=""M:ClassLibrary1.MyClass.DoThing""/>
-</member>";
+        const string input = """
+            <member name="M:ClassLibrary1.MyClass.DoThing">
+                <inheritdoc cref="M:ClassLibrary1.MyClass.DoThing"/>
+            </member>
+            """;
         var context = new XmlCommentParserContext
         {
             AddReferenceDelegate = null,
@@ -307,9 +363,11 @@ This is an example using source reference.
     {
         string inputFolder = Path.GetRandomFileName();
         Directory.CreateDirectory(inputFolder);
-        var expectedExampleContent = @"                <Grid>
-                  <TextBlock Text=""Hello World"" />
-                </Grid>";
+        var expectedExampleContent = """
+                            <Grid>
+                              <TextBlock Text="Hello World" />
+                            </Grid>
+            """;
 
         File.WriteAllText(Path.Combine(inputFolder, "Example.xaml"), $@"
 <UserControl x:Class=""Examples""
@@ -325,17 +383,18 @@ This is an example using source reference.
 {expectedExampleContent}
                 <!-- </Example> -->
 ");
-        string input = @"
-<member name='T:TestClass1.Partial1'>
-    <summary>
-    </summary>
-    <returns>Something</returns>
+        string input = """
+            <member name='T:TestClass1.Partial1'>
+                <summary>
+                </summary>
+                <returns>Something</returns>
 
-    <example>
-    This is an example using source reference in a xaml file.
-    <code source='Example.xaml' region='Example'/>
-    </example>
-</member>";
+                <example>
+                This is an example using source reference in a xaml file.
+                <code source='Example.xaml' region='Example'/>
+                </example>
+            </member>
+            """;
         var context = new XmlCommentParserContext
         {
             AddReferenceDelegate = null,
@@ -353,7 +412,13 @@ This is an example using source reference.
         var doc = XDocument.Parse($"<root>{example}</root>");
         var codeNode = doc.Descendants("code").Single();
         var actual = NormalizeWhitespace(codeNode.Value);
-        var expected = NormalizeWhitespace(expectedExampleContent.Replace("\r\n", "\n"));
+        var expected = NormalizeWhitespace(expectedExampleContent.Replace("""
+
+
+            """, """
+
+
+            """));
         Assert.Equal(expected, actual);
     }
 

@@ -22,20 +22,20 @@ public class GenerateMetadataFromVBUnitTest
     [Fact]
     public void TestGenereateMetadataWithClass()
     {
-        string code = @"
-Imports System.Collections.Generic
-Namespace Test1
-    Public Class Class1
-    End Class
-    Public Class Class2(Of T)
-        Inherits List(Of T)
-    End Class
-    Public Class Class3(Of T1, T2 As T1)
-    End Class
-    Public Class Class4(Of T1 As { Structure, IEnumerable(Of T2) }, T2 As { Class, New })
-    End Class
-End Namespace
-";
+        string code = """
+            Imports System.Collections.Generic
+            Namespace Test1
+                Public Class Class1
+                End Class
+                Public Class Class2(Of T)
+                    Inherits List(Of T)
+                End Class
+                Public Class Class3(Of T1, T2 As T1)
+                End Class
+                Public Class Class4(Of T1 As { Structure, IEnumerable(Of T2) }, T2 As { Class, New })
+                End Class
+            End Namespace
+            """;
         MetadataItem output = Verify(code);
         Assert.Single(output.Items);
         {
@@ -75,16 +75,16 @@ End Namespace
     [Fact]
     public void TestGenereateMetadataWithEnum()
     {
-        string code = @"
-Namespace Test1
-    Public Enum Enum1
-    End Enum
-    Public Enum Enum2 As Byte
-    End Enum
-    Public Enum Enum3 As Integer
-    End Enum
-End Namespace
-";
+        string code = """
+            Namespace Test1
+                Public Enum Enum1
+                End Enum
+                Public Enum Enum2 As Byte
+                End Enum
+                Public Enum Enum3 As Integer
+                End Enum
+            End Namespace
+            """;
         MetadataItem output = Verify(code);
         Assert.Single(output.Items);
         {
@@ -117,17 +117,17 @@ End Namespace
     [Fact]
     public void TestGenereateMetadataWithInterface()
     {
-        string code = @"
-Namespace Test1
-    Public Interface IA
-    End Interface
-    Public Interface IB(Of T As Class)
-    End Interface
-    Public Interface IC(Of TItem As {IA, New})
-        Inherits IA, IB(Of TItem())
-    End Interface
-End Namespace
-";
+        string code = """
+            Namespace Test1
+                Public Interface IA
+                End Interface
+                Public Interface IB(Of T As Class)
+                End Interface
+                Public Interface IC(Of TItem As {IA, New})
+                    Inherits IA, IB(Of TItem())
+                End Interface
+            End Namespace
+            """;
         MetadataItem output = Verify(code);
         Assert.Single(output.Items);
         {
@@ -160,21 +160,21 @@ End Namespace
     [Fact]
     public void TestGenereateMetadataWithStructure()
     {
-        string code = @"
-Namespace Test1
-    Public Structure S1
-    End Structure
-    Public Structure S2(Of T As Class)
-    End Structure
-    Public Structure S3(Of T1 As {Class, IA, New}, T2 As IB(Of T1))
-        Implements IA, IB(Of T1())
-    End Structure
-    Public Interface IA
-    End Interface
-    Public Interface IB(Of T As Class)
-    End Interface
-End Namespace
-";
+        string code = """
+            Namespace Test1
+                Public Structure S1
+                End Structure
+                Public Structure S2(Of T As Class)
+                End Structure
+                Public Structure S3(Of T1 As {Class, IA, New}, T2 As IB(Of T1))
+                    Implements IA, IB(Of T1())
+                End Structure
+                Public Interface IA
+                End Interface
+                Public Interface IB(Of T As Class)
+                End Interface
+            End Namespace
+            """;
         MetadataItem output = Verify(code);
         Assert.Single(output.Items);
         {
@@ -206,14 +206,14 @@ End Namespace
     [Fact]
     public void TestGenerateMetadataWithInternalInterfaceAndInherits()
     {
-        string code = @"
-Namespace Test1
-    Public Class Foo
-       Implements IFoo 
-    End Class
-    Internal Interface IFoo
-    End Interface
-";
+        string code = """
+            Namespace Test1
+                Public Class Foo
+                   Implements IFoo 
+                End Class
+                Internal Interface IFoo
+                End Interface
+            """;
         MetadataItem output = Verify(code);
         Assert.Single(output.Items);
 
@@ -229,17 +229,16 @@ Namespace Test1
     [Fact]
     public void TestGenerateMetadataWithProtectedInterfaceAndInherits()
     {
-        string code = @"
-Namespace Test1
-    Public Class Foo
-       Protected Interface IFoo
-       End Interface
-       Public Class SubFoo 
-          Implements IFoo 
-       End Class
-    End Class
-
-";
+        string code = """
+            Namespace Test1
+                Public Class Foo
+                   Protected Interface IFoo
+                   End Interface
+                   Public Class SubFoo 
+                      Implements IFoo 
+                   End Class
+                End Class
+            """;
         MetadataItem output = Verify(code);
         Assert.Single(output.Items);
 
@@ -256,16 +255,16 @@ Namespace Test1
     [Fact]
     public void TestGenerateMetadataWithPublicInterfaceNestedInternal()
     {
-        string code = @"
-Namespace Test1
-    Internal Class FooInternal
-        Public Interface IFoo
-        End Interface
-    End Class
-    Public Class Foo
-       Implements FooInternal.IFoo 
-    End Class
-";
+        string code = """
+            Namespace Test1
+                Internal Class FooInternal
+                    Public Interface IFoo
+                    End Interface
+                End Class
+                Public Class Foo
+                   Implements FooInternal.IFoo 
+                End Class
+            """;
         MetadataItem output = Verify(code);
         Assert.Single(output.Items);
 
@@ -282,13 +281,13 @@ Namespace Test1
     [Fact]
     public void TestGenereateMetadataWithDelegate()
     {
-        string code = @"
-Namespace Test1
-    Public Delegate Sub D1
-    Public Delegate Sub D2(Of T As Class)(x() as integer)
-    Public Delegate Function D3(Of T1 As Class, T2 As {T1, New})(ByRef x As T1) As T2
-End Namespace
-";
+        string code = """
+            Namespace Test1
+                Public Delegate Sub D1
+                Public Delegate Sub D2(Of T As Class)(x() as integer)
+                Public Delegate Function D3(Of T1 As Class, T2 As {T1, New})(ByRef x As T1) As T2
+            End Namespace
+            """;
         MetadataItem output = Verify(code);
         Assert.Single(output.Items);
         {
@@ -320,12 +319,12 @@ End Namespace
     [Fact]
     public void TestGenereateMetadataWithModule()
     {
-        string code = @"
-Namespace Test1
-    Public Module M1
-    End Module
-End Namespace
-";
+        string code = """
+            Namespace Test1
+                Public Module M1
+                End Module
+            End Namespace
+            """;
         MetadataItem output = Verify(code);
         Assert.Single(output.Items);
         {
@@ -343,35 +342,35 @@ End Namespace
     [Fact]
     public void TestGenereateMetadataWithMethod()
     {
-        string code = @"
-Namespace Test1
-    Public MustInherit Class Foo(Of T)
-        Public Overridable Sub M1(x As Integer, ParamArray y() As Integer)
-        End Sub
-        Public MustOverride Sub M2(Of T1 As Class, T2 As Foo(Of T1))(x As T1, ByRef y As T2())
-        Public Sub M3
-        End Sub
-        Protected Friend Shared Function M4(Of T1 As Class)(x As T) As T1
-            Return Nothing
-        End Function
-    End Class
-    Public MustInherit Class Bar
-        Inherits Foo(Of String)
-        Implements IFooBar
-        Public Overrides Sub M1(x As Integer, y() As Integer)
-        End Sub
-        Public NotOverridable Overrides Sub M2(Of T1 As Class, T2 As Foo(Of T1))(x As T1, ByRef y() As T2)
-        End Sub
-        Public Shadows Sub M3()
-        End Sub
-    End Class
-    Public Interface IFooBar
-        Sub M1(x As Integer, ParamArray y() As Integer)
-        Sub M2(Of T1 As Class, T2 As Foo(Of T1))(x As T1, ByRef y() As T2)
-        Sub M3()
-    End Interface
-End Namespace
-";
+        string code = """
+            Namespace Test1
+                Public MustInherit Class Foo(Of T)
+                    Public Overridable Sub M1(x As Integer, ParamArray y() As Integer)
+                    End Sub
+                    Public MustOverride Sub M2(Of T1 As Class, T2 As Foo(Of T1))(x As T1, ByRef y As T2())
+                    Public Sub M3
+                    End Sub
+                    Protected Friend Shared Function M4(Of T1 As Class)(x As T) As T1
+                        Return Nothing
+                    End Function
+                End Class
+                Public MustInherit Class Bar
+                    Inherits Foo(Of String)
+                    Implements IFooBar
+                    Public Overrides Sub M1(x As Integer, y() As Integer)
+                    End Sub
+                    Public NotOverridable Overrides Sub M2(Of T1 As Class, T2 As Foo(Of T1))(x As T1, ByRef y() As T2)
+                    End Sub
+                    Public Shadows Sub M3()
+                    End Sub
+                End Class
+                Public Interface IFooBar
+                    Sub M1(x As Integer, ParamArray y() As Integer)
+                    Sub M2(Of T1 As Class, T2 As Foo(Of T1))(x As T1, ByRef y() As T2)
+                    Sub M3()
+                End Interface
+            End Namespace
+            """;
         MetadataItem output = Verify(code);
         Assert.Single(output.Items);
         // Foo<T>
@@ -499,84 +498,84 @@ End Namespace
     [Fact]
     public void TestGenereateMetadataWithOperator()
     {
-        string code = @"
-Namespace Test1
-    Public Class Foo
-        Public Shared Operator +(x As Foo) As Foo
-            Return x
-        End Operator
-        Public Shared Operator -(x As Foo) As Foo
-            Return x
-        End Operator
-        Public Shared Operator Not(x As Foo) As Foo
-            Return x
-        End Operator
-        Public Shared Operator IsTrue(x As Foo) As Boolean
-            Return True
-        End Operator
-        Public Shared Operator IsFalse(x As Foo) As Boolean
-            Return False
-        End Operator
+        string code = """
+            Namespace Test1
+                Public Class Foo
+                    Public Shared Operator +(x As Foo) As Foo
+                        Return x
+                    End Operator
+                    Public Shared Operator -(x As Foo) As Foo
+                        Return x
+                    End Operator
+                    Public Shared Operator Not(x As Foo) As Foo
+                        Return x
+                    End Operator
+                    Public Shared Operator IsTrue(x As Foo) As Boolean
+                        Return True
+                    End Operator
+                    Public Shared Operator IsFalse(x As Foo) As Boolean
+                        Return False
+                    End Operator
 
-        Public Shared Operator +(x As Foo, y As Foo) As Foo
-            Return x
-        End Operator
-        Public Shared Operator -(x As Foo, y As Foo) As Foo
-            Return x
-        End Operator
-        Public Shared Operator *(x As Foo, y As Foo) As Foo
-            Return x
-        End Operator
-        Public Shared Operator /(x As Foo, y As Foo) As Foo
-            Return x
-        End Operator
-        Public Shared Operator Mod(x As Foo, y As Foo) As Foo
-            Return x
-        End Operator
-        Public Shared Operator And(x As Foo, y As Foo) As Foo
-            Return x
-        End Operator
-        Public Shared Operator Or(x As Foo, y As Foo) As Foo
-            Return x
-        End Operator
-        Public Shared Operator Xor(x As Foo, y As Foo) As Foo
-            Return x
-        End Operator
-        Public Shared Operator >>(x As Foo, y As Integer) As Foo
-            Return x
-        End Operator
-        Public Shared Operator <<(x As Foo, y As Integer) As Foo
-            Return x
-        End Operator
+                    Public Shared Operator +(x As Foo, y As Foo) As Foo
+                        Return x
+                    End Operator
+                    Public Shared Operator -(x As Foo, y As Foo) As Foo
+                        Return x
+                    End Operator
+                    Public Shared Operator *(x As Foo, y As Foo) As Foo
+                        Return x
+                    End Operator
+                    Public Shared Operator /(x As Foo, y As Foo) As Foo
+                        Return x
+                    End Operator
+                    Public Shared Operator Mod(x As Foo, y As Foo) As Foo
+                        Return x
+                    End Operator
+                    Public Shared Operator And(x As Foo, y As Foo) As Foo
+                        Return x
+                    End Operator
+                    Public Shared Operator Or(x As Foo, y As Foo) As Foo
+                        Return x
+                    End Operator
+                    Public Shared Operator Xor(x As Foo, y As Foo) As Foo
+                        Return x
+                    End Operator
+                    Public Shared Operator >>(x As Foo, y As Integer) As Foo
+                        Return x
+                    End Operator
+                    Public Shared Operator <<(x As Foo, y As Integer) As Foo
+                        Return x
+                    End Operator
 
-        Public Shared Operator =(x As Foo, y As Integer) As Boolean
-            Return True
-        End Operator
-        Public Shared Operator <>(x As Foo, y As Integer) As Boolean
-            Return True
-        End Operator
-        Public Shared Operator >(x As Foo, y As Integer) As Boolean
-            Return True
-        End Operator
-        Public Shared Operator <(x As Foo, y As Integer) As Boolean
-            Return True
-        End Operator
-        Public Shared Operator >=(x As Foo, y As Integer) As Boolean
-            Return True
-        End Operator
-        Public Shared Operator <=(x As Foo, y As Integer) As Boolean
-            Return True
-        End Operator
+                    Public Shared Operator =(x As Foo, y As Integer) As Boolean
+                        Return True
+                    End Operator
+                    Public Shared Operator <>(x As Foo, y As Integer) As Boolean
+                        Return True
+                    End Operator
+                    Public Shared Operator >(x As Foo, y As Integer) As Boolean
+                        Return True
+                    End Operator
+                    Public Shared Operator <(x As Foo, y As Integer) As Boolean
+                        Return True
+                    End Operator
+                    Public Shared Operator >=(x As Foo, y As Integer) As Boolean
+                        Return True
+                    End Operator
+                    Public Shared Operator <=(x As Foo, y As Integer) As Boolean
+                        Return True
+                    End Operator
 
-        Public Shared Widening Operator CType(x As Integer) As Foo
-            Return Nothing
-        End Operator
-        Public Shared Narrowing Operator CType(x As Foo) As Integer
-            Return 1
-        End Operator
-    End Class
-End Namespace
-";
+                    Public Shared Widening Operator CType(x As Integer) As Foo
+                        Return Nothing
+                    End Operator
+                    Public Shared Narrowing Operator CType(x As Foo) As Integer
+                        Return 1
+                    End Operator
+                End Class
+            End Namespace
+            """;
         MetadataItem output = Verify(code);
         Assert.Single(output.Items);
         // unary
@@ -773,22 +772,22 @@ End Namespace
     [Fact]
     public void TestGenereateMetadataWithConstructor()
     {
-        string code = @"
-Namespace Test1
-    Public MustInherit Class Foo(Of T)
-        Protected Sub New(x As T())
-        End Sub
-    End Class
-    Public Class Bar
-        Inherits Foo(Of String)
-        Protected Friend Sub New()
-            MyBase.New(New String() {})
-        End Sub
-        Public Sub New(x As String())
-        End Sub
-    End Class
-End Namespace
-";
+        string code = """
+            Namespace Test1
+                Public MustInherit Class Foo(Of T)
+                    Protected Sub New(x As T())
+                    End Sub
+                End Class
+                Public Class Bar
+                    Inherits Foo(Of String)
+                    Protected Friend Sub New()
+                        MyBase.New(New String() {})
+                    End Sub
+                    Public Sub New(x As String())
+                    End Sub
+                End Class
+            End Namespace
+            """;
         MetadataItem output = Verify(code);
         Assert.Single(output.Items);
         // Foo<T>
@@ -823,22 +822,22 @@ End Namespace
     [Fact]
     public void TestGenereateMetadataWithField()
     {
-        string code = @"
-Namespace Test1
-    Public Class Foo(Of T)
-        Public X As Integer
-        Protected Shared ReadOnly Y As Foo(Of T) = Nothing
-        Protected Friend Const Z As String = """"
-    End Class
-    Public Enum Bar
-        Black,
-        Red,
-        Blue = 2,
-        Green = 4,
-        White = Red Or Blue Or Green,
-    End Enum
-End Namespace
-";
+        string code = """
+            Namespace Test1
+                Public Class Foo(Of T)
+                    Public X As Integer
+                    Protected Shared ReadOnly Y As Foo(Of T) = Nothing
+                    Protected Friend Const Z As String = ""
+                End Class
+                Public Enum Bar
+                    Black,
+                    Red,
+                    Blue = 2,
+                    Green = 4,
+                    White = Red Or Blue Or Green,
+                End Enum
+            End Namespace
+            """;
         MetadataItem output = Verify(code);
         Assert.Single(output.Items);
         {
@@ -863,7 +862,9 @@ End Namespace
             Assert.Equal("Z", field.DisplayNames[SyntaxLanguage.VB]);
             Assert.Equal("Test1.Foo(Of T).Z", field.DisplayQualifiedNames[SyntaxLanguage.VB]);
             Assert.Equal("Test1.Foo`1.Z", field.Name);
-            Assert.Equal(@"Protected Const Z As String = """"", field.Syntax.Content[SyntaxLanguage.VB]);
+            Assert.Equal("""
+                Protected Const Z As String = ""
+                """, field.Syntax.Content[SyntaxLanguage.VB]);
         }
         {
             var field = output.Items[0].Items[1].Items[0];
@@ -911,27 +912,27 @@ End Namespace
     [Fact]
     public void TestGenereateMetadataWithEvent()
     {
-        string code = @"
-Imports System
-Namespace Test1
-    Public MustInherit Class Foo(Of T As EventArgs)
-        Implements IFooBar(Of T)
-        Public Event A As EventHandler
-        Protected Shared Custom Event B As EventHandler
-            AddHandler(value As EventHandler)
-            End AddHandler
-            RemoveHandler(value As EventHandler)
-            End RemoveHandler
-            RaiseEvent(sender As Object, e As EventArgs)
-            End RaiseEvent
-        End Event
-        Private Event C As EventHandler(Of T) Implements IFooBar(Of T).Bar
-    End Class
-    Public Interface IFooBar(Of TEventArgs As EventArgs)
-        Event Bar As EventHandler(Of TEventArgs)
-    End Interface
-End Namespace
-";
+        string code = """
+            Imports System
+            Namespace Test1
+                Public MustInherit Class Foo(Of T As EventArgs)
+                    Implements IFooBar(Of T)
+                    Public Event A As EventHandler
+                    Protected Shared Custom Event B As EventHandler
+                        AddHandler(value As EventHandler)
+                        End AddHandler
+                        RemoveHandler(value As EventHandler)
+                        End RemoveHandler
+                        RaiseEvent(sender As Object, e As EventArgs)
+                        End RaiseEvent
+                    End Event
+                    Private Event C As EventHandler(Of T) Implements IFooBar(Of T).Bar
+                End Class
+                Public Interface IFooBar(Of TEventArgs As EventArgs)
+                    Event Bar As EventHandler(Of TEventArgs)
+                End Interface
+            End Namespace
+            """;
         MetadataItem output = Verify(code, new() { IncludePrivateMembers = true });
         Assert.Single(output.Items);
         {
@@ -972,58 +973,58 @@ End Namespace
     [Fact]
     public void TestGenereateMetadataWithProperty()
     {
-        string code = @"
-Namespace Test1
-    Public MustInherit Class Foo(Of T As Class)
-        Public Property A As Integer
-        Public Overridable ReadOnly Property B As Integer
-            Get
-                Return 1
-            End Get
-        End Property
-        Public MustOverride WriteOnly Property C As Integer
-        Protected Property D As Integer
-            Get
-                Return 1
-            End Get
-            Private Set(value As Integer)
-            End Set
-        End Property
-        Public Property E As T
-            Get
-                Return Nothing
-            End Get
-            Protected Set(value As T)
-            End Set
-        End Property
-        Protected Friend Shared Property F As Integer
-            Get
-                Return 1
-            End Get
-            Protected Set(value As Integer)
-            End Set
-        End Property
-    End Class
-    Public Class Bar
-        Inherits Foo(Of String)
-        Public Overridable Shadows Property A As Integer
-        Public Overrides ReadOnly Property B As Integer
-            Get
-                Return 2
-            End Get
-        End Property
-        Public Overrides WriteOnly Property C As Integer
-            Set(value As Integer)
-            End Set
-        End Property
-    End Class
-    Public Interface IFooBar
-        Property A As Integer
-        ReadOnly Property B As Integer
-        WriteOnly Property C As Integer
-    End Interface
-End Namespace
-";
+        string code = """
+            Namespace Test1
+                Public MustInherit Class Foo(Of T As Class)
+                    Public Property A As Integer
+                    Public Overridable ReadOnly Property B As Integer
+                        Get
+                            Return 1
+                        End Get
+                    End Property
+                    Public MustOverride WriteOnly Property C As Integer
+                    Protected Property D As Integer
+                        Get
+                            Return 1
+                        End Get
+                        Private Set(value As Integer)
+                        End Set
+                    End Property
+                    Public Property E As T
+                        Get
+                            Return Nothing
+                        End Get
+                        Protected Set(value As T)
+                        End Set
+                    End Property
+                    Protected Friend Shared Property F As Integer
+                        Get
+                            Return 1
+                        End Get
+                        Protected Set(value As Integer)
+                        End Set
+                    End Property
+                End Class
+                Public Class Bar
+                    Inherits Foo(Of String)
+                    Public Overridable Shadows Property A As Integer
+                    Public Overrides ReadOnly Property B As Integer
+                        Get
+                            Return 2
+                        End Get
+                    End Property
+                    Public Overrides WriteOnly Property C As Integer
+                        Set(value As Integer)
+                        End Set
+                    End Property
+                End Class
+                Public Interface IFooBar
+                    Property A As Integer
+                    ReadOnly Property B As Integer
+                    WriteOnly Property C As Integer
+                End Interface
+            End Namespace
+            """;
         MetadataItem output = Verify(code);
         Assert.Single(output.Items);
         // Foo
@@ -1131,71 +1132,71 @@ End Namespace
     [Fact]
     public void TestGenereateMetadataWithIndex()
     {
-        string code = @"
-Imports System
-Namespace Test1
-    Public MustInherit Class Foo(Of T As Class)
-        Public Property A(x As Integer) As Integer
-            Get
-                Return 0
-            End Get
-            Set(value As Integer)
-            End Set
-        End Property
-        Public Overridable ReadOnly Property B(x As String) As Integer
-            Get
-                Return 1
-            End Get
-        End Property
-        Public MustOverride WriteOnly Property C(x As Object) As Integer
-        Protected Property D(x As Date) As Integer
-            Get
-                Return 1
-            End Get
-            Private Set(value As Integer)
-            End Set
-        End Property
-        Public Property E(t As T) As Integer
-            Get
-                Return 0
-            End Get
-            Protected Set(value As Integer)
-            End Set
-        End Property
-        Protected Friend Shared Property F(x As Integer, t As T) As Integer
-            Get
-                Return 1
-            End Get
-            Protected Set(value As Integer)
-            End Set
-        End Property
-    End Class
-    Public Class Bar
-        Inherits Foo(Of String)
-        Public Overridable Shadows Property A(x As Integer) As Integer
-            Get
-                Return 1
-            End Get
-            Set(value As Integer)
-            End Set
-        End Property
-        Public Overrides ReadOnly Property B(x As String) As Integer
-            Get
-                Return 2
-            End Get
-        End Property
-        Public Overrides WriteOnly Property C(x As Object) As Integer
-            Set(value As Integer)
-            End Set
-        End Property
-    End Class
-    Public Interface IFooBar
-        Property A(x As Integer) As Integer
-        ReadOnly Property B(x As String) As Integer
-        WriteOnly Property C(x As Object) As Integer
-    End Interface
-End Namespace
-";
+        string code = """
+            Imports System
+            Namespace Test1
+                Public MustInherit Class Foo(Of T As Class)
+                    Public Property A(x As Integer) As Integer
+                        Get
+                            Return 0
+                        End Get
+                        Set(value As Integer)
+                        End Set
+                    End Property
+                    Public Overridable ReadOnly Property B(x As String) As Integer
+                        Get
+                            Return 1
+                        End Get
+                    End Property
+                    Public MustOverride WriteOnly Property C(x As Object) As Integer
+                    Protected Property D(x As Date) As Integer
+                        Get
+                            Return 1
+                        End Get
+                        Private Set(value As Integer)
+                        End Set
+                    End Property
+                    Public Property E(t As T) As Integer
+                        Get
+                            Return 0
+                        End Get
+                        Protected Set(value As Integer)
+                        End Set
+                    End Property
+                    Protected Friend Shared Property F(x As Integer, t As T) As Integer
+                        Get
+                            Return 1
+                        End Get
+                        Protected Set(value As Integer)
+                        End Set
+                    End Property
+                End Class
+                Public Class Bar
+                    Inherits Foo(Of String)
+                    Public Overridable Shadows Property A(x As Integer) As Integer
+                        Get
+                            Return 1
+                        End Get
+                        Set(value As Integer)
+                        End Set
+                    End Property
+                    Public Overrides ReadOnly Property B(x As String) As Integer
+                        Get
+                            Return 2
+                        End Get
+                    End Property
+                    Public Overrides WriteOnly Property C(x As Object) As Integer
+                        Set(value As Integer)
+                        End Set
+                    End Property
+                End Class
+                Public Interface IFooBar
+                    Property A(x As Integer) As Integer
+                    ReadOnly Property B(x As String) As Integer
+                    WriteOnly Property C(x As Object) As Integer
+                End Interface
+            End Namespace
+            """;
         MetadataItem output = Verify(code);
         Assert.Single(output.Items);
         // Foo
@@ -1304,14 +1305,14 @@ End Namespace
     [Fact]
     public void TestGenereateMetadataAsyncWithMultilanguage()
     {
-        string code = @"
-Namespace Test1
-    Public Class Foo(Of T)
-        Public Sub Bar(Of K)(i as Integer)
-        End Sub
-    End Class
-End Namespace
-";
+        string code = """
+            Namespace Test1
+                Public Class Foo(Of T)
+                    Public Sub Bar(Of K)(i as Integer)
+                    End Sub
+                End Class
+            End Namespace
+            """;
         MetadataItem output = Verify(code);
         var type = output.Items[0].Items[0];
         Assert.NotNull(type);
@@ -1340,59 +1341,63 @@ End Namespace
     [Fact]
     public void TestGenerateMetadataWithAttribute()
     {
-        string code = @"
-Imports System
-Imports System.ComponentModel
+        string code = """
+            Imports System
+            Imports System.ComponentModel
 
-Namespace Test1
-    <Serializable>
-    <AttributeUsage(AttributeTargets.All, Inherited := true, AllowMultiple := true)>
-    <TypeConverter(GetType(TestAttribute))>
-    <Test(""test"")>
-    <Test(New Integer(){1,2,3})>
-    <Test(New Object(){Nothing, ""abc"", ""d""c, 1.1f, 1.2, CType(2, SByte), CType(3, Byte), 4s, 5us, 6, 8L, 9UL, New Integer(){ 10, 11, 12 }})>
-    <Test(New Type(){GetType(Func(Of )), GetType(Func(Of ,)), GetType(Func(Of String, String))})>
-    Public Class TestAttribute
-        Inherits Attribute
+            Namespace Test1
+                <Serializable>
+                <AttributeUsage(AttributeTargets.All, Inherited := true, AllowMultiple := true)>
+                <TypeConverter(GetType(TestAttribute))>
+                <Test("test")>
+                <Test(New Integer(){1,2,3})>
+                <Test(New Object(){Nothing, "abc", "d"c, 1.1f, 1.2, CType(2, SByte), CType(3, Byte), 4s, 5us, 6, 8L, 9UL, New Integer(){ 10, 11, 12 }})>
+                <Test(New Type(){GetType(Func(Of )), GetType(Func(Of ,)), GetType(Func(Of String, String))})>
+                Public Class TestAttribute
+                    Inherits Attribute
 
-        <Test(1)>
-        <Test(2)>
-        Public Sub New(o As Object)
-        End Sub
-    End Class
-End Namespace
-";
+                    <Test(1)>
+                    <Test(2)>
+                    Public Sub New(o As Object)
+                    End Sub
+                End Class
+            End Namespace
+            """;
         MetadataItem output = Verify(code);
         Assert.Single(output.Items);
         var type = output.Items[0].Items[0];
         Assert.NotNull(type);
-        Assert.Equal(@"<Serializable>
-<AttributeUsage(AttributeTargets.All, Inherited:=True, AllowMultiple:=True)>
-<TypeConverter(GetType(TestAttribute))>
-<Test(""test"")>
-<Test(New Integer() { 1, 2, 3 })>
-<Test(New Object() { Nothing, ""abc"", ""d""c, 1.1, 1.2, 2, 3, 4, 5, 6, 8, 9, New Integer() { 10, 11, 12 } })>
-<Test(New Type() { GetType(Func(Of )), GetType(Func(Of ,)), GetType(Func(Of String, String)) })>
-Public Class TestAttribute Inherits Attribute", type.Syntax.Content[SyntaxLanguage.VB]);
+        Assert.Equal("""
+            <Serializable>
+            <AttributeUsage(AttributeTargets.All, Inherited:=True, AllowMultiple:=True)>
+            <TypeConverter(GetType(TestAttribute))>
+            <Test("test")>
+            <Test(New Integer() { 1, 2, 3 })>
+            <Test(New Object() { Nothing, "abc", "d"c, 1.1, 1.2, 2, 3, 4, 5, 6, 8, 9, New Integer() { 10, 11, 12 } })>
+            <Test(New Type() { GetType(Func(Of )), GetType(Func(Of ,)), GetType(Func(Of String, String)) })>
+            Public Class TestAttribute Inherits Attribute
+            """, type.Syntax.Content[SyntaxLanguage.VB]);
         var ctor = type.Items[0];
         Assert.NotNull(type);
-        Assert.Equal(@"<Test(1)>
-<Test(2)>
-Public Sub New(o As Object)", ctor.Syntax.Content[SyntaxLanguage.VB]);
+        Assert.Equal("""
+            <Test(1)>
+            <Test(2)>
+            Public Sub New(o As Object)
+            """, ctor.Syntax.Content[SyntaxLanguage.VB]);
     }
 
     [Fact]
     [Trait("Related", "ValueTuple")]
     public void TestGenerateMetadataAsyncWithTupleParameter()
     {
-        string code = @"
-Namespace Test1
-    Public Class Foo
-        Public Sub Bar(tuple As (prefix As String, uri As String))
-        End Sub
-    End Class
-End Namespace
-";
+        string code = """
+            Namespace Test1
+                Public Class Foo
+                    Public Sub Bar(tuple As (prefix As String, uri As String))
+                    End Sub
+                End Class
+            End Namespace
+            """;
         MetadataItem output = Verify(code);
         Assert.Single(output.Items);
         var ns = output.Items[0];
@@ -1410,14 +1415,14 @@ End Namespace
     [Trait("Related", "ValueTuple")]
     public void TestGenerateMetadataAsyncWithUnnamedTupleParameter()
     {
-        string code = @"
-Namespace Test1
-    Public Class Foo
-        Public Sub Bar(tuple As (String, String))
-        End Sub
-    End Class
-End Namespace
-";
+        string code = """
+            Namespace Test1
+                Public Class Foo
+                    Public Sub Bar(tuple As (String, String))
+                    End Sub
+                End Class
+            End Namespace
+            """;
         MetadataItem output = Verify(code);
         Assert.Single(output.Items);
         var ns = output.Items[0];
@@ -1435,14 +1440,14 @@ End Namespace
     [Trait("Related", "ValueTuple")]
     public void TestGenerateMetadataAsyncWithPartiallyUnnamedTupleParameter()
     {
-        string code = @"
-Namespace Test1
-    Public Class Foo
-        Public Sub Bar(tuple As (String, uri As String))
-        End Sub
-    End Class
-End Namespace
-";
+        string code = """
+            Namespace Test1
+                Public Class Foo
+                    Public Sub Bar(tuple As (String, uri As String))
+                    End Sub
+                End Class
+            End Namespace
+            """;
         MetadataItem output = Verify(code);
         Assert.Single(output.Items);
         var ns = output.Items[0];
@@ -1460,14 +1465,14 @@ End Namespace
     [Trait("Related", "ValueTuple")]
     public void TestGenerateMetadataAsyncWithTupleArrayParameter()
     {
-        string code = @"
-Namespace Test1
-    Public Class Foo
-        Public Sub Bar(tuples As (String, String)())
-        End Sub
-    End Class
-End Namespace
-";
+        string code = """
+            Namespace Test1
+                Public Class Foo
+                    Public Sub Bar(tuples As (String, String)())
+                    End Sub
+                End Class
+            End Namespace
+            """;
         MetadataItem output = Verify(code);
         Assert.Single(output.Items);
         var ns = output.Items[0];
@@ -1485,16 +1490,16 @@ End Namespace
     [Trait("Related", "ValueTuple")]
     public void TestGenerateMetadataAsyncWithTupleEnumerableParameter()
     {
-        string code = @"
-Imports System.Collections.Generic
+        string code = """
+            Imports System.Collections.Generic
 
-Namespace Test1
-    Public Class Foo
-        Public Sub Bar(tuples As IEnumerable(Of (prefix As String, uri As String)))
-        End Sub
-    End Class
-End Namespace
-";
+            Namespace Test1
+                Public Class Foo
+                    Public Sub Bar(tuples As IEnumerable(Of (prefix As String, uri As String)))
+                    End Sub
+                End Class
+            End Namespace
+            """;
         MetadataItem output = Verify(code);
         Assert.Single(output.Items);
         var ns = output.Items[0];
@@ -1512,15 +1517,15 @@ End Namespace
     [Trait("Related", "ValueTuple")]
     public void TestGenerateMetadataAsyncWithTupleResult()
     {
-        string code = @"
-Namespace Test1
-    Public Class Foo
-        Public Function Bar As (prefix As String, uri As String)
-            Return (string.Empty, string.Empty)
-        End Function
-    End Class
-End Namespace
-";
+        string code = """
+            Namespace Test1
+                Public Class Foo
+                    Public Function Bar As (prefix As String, uri As String)
+                        Return (string.Empty, string.Empty)
+                    End Function
+                End Class
+            End Namespace
+            """;
         MetadataItem output = Verify(code);
         Assert.Single(output.Items);
         var ns = output.Items[0];
@@ -1538,15 +1543,15 @@ End Namespace
     [Trait("Related", "ValueTuple")]
     public void TestGenerateMetadataAsyncWithUnnamedTupleResult()
     {
-        string code = @"
-Namespace Test1
-    Public Class Foo
-        Public Function Bar As (String, String)
-            Return (string.Empty, string.Empty)
-        End Function
-    End Class
-End Namespace
-";
+        string code = """
+            Namespace Test1
+                Public Class Foo
+                    Public Function Bar As (String, String)
+                        Return (string.Empty, string.Empty)
+                    End Function
+                End Class
+            End Namespace
+            """;
         MetadataItem output = Verify(code);
         Assert.Single(output.Items);
         var ns = output.Items[0];
@@ -1564,15 +1569,15 @@ End Namespace
     [Trait("Related", "ValueTuple")]
     public void TestGenerateMetadataAsyncWithPartiallyUnnamedTupleResult()
     {
-        string code = @"
-Namespace Test1
-    Public Class Foo
-        Public Function Bar As (String, uri As String)
-            Return (string.Empty, string.Empty)
-        End Function
-    End Class
-End Namespace
-";
+        string code = """
+            Namespace Test1
+                Public Class Foo
+                    Public Function Bar As (String, uri As String)
+                        Return (string.Empty, string.Empty)
+                    End Function
+                End Class
+            End Namespace
+            """;
         MetadataItem output = Verify(code);
         Assert.Single(output.Items);
         var ns = output.Items[0];
@@ -1590,17 +1595,17 @@ End Namespace
     [Trait("Related", "ValueTuple")]
     public void TestGenerateMetadataAsyncWithEnumerableTupleResult()
     {
-        string code = @"
-Imports System.Collections.Generic
+        string code = """
+            Imports System.Collections.Generic
 
-Namespace Test1
-    Public Class Foo
-        Public Function Bar As IEnumerable(Of (prefix As String, uri As String))
-            Return Null
-        End Function
-    End Class
-End Namespace
-";
+            Namespace Test1
+                Public Class Foo
+                    Public Function Bar As IEnumerable(Of (prefix As String, uri As String))
+                        Return Null
+                    End Function
+                End Class
+            End Namespace
+            """;
         MetadataItem output = Verify(code);
         Assert.Single(output.Items);
         var ns = output.Items[0];

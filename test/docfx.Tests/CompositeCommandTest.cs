@@ -31,25 +31,27 @@ public class CompositeCommandTest : TestBase
     public void TestCommandFromCSCodeToHtml()
     {
         // Create source file
-        var sourceCode = @"
-namespace Hello{
-/// <summary>
-/// The class &lt; &gt; > description goes here...
-/// </summary>
-/// <example>
-/// Here is some &lt; encoded &gt; example...
-/// > [!NOTE]
-/// > This is *note*
-///
-/// <code>
-/// var handler = DateTimeHandler();
-/// for (var i = 0; i &lt; 10; i++){
-///     date = date.AddMonths(1);
-/// }
-/// </code>
-/// </example>
-public class HelloWorld(){}}
-";
+        var sourceCode = """
+
+            namespace Hello{
+            /// <summary>
+            /// The class &lt; &gt; > description goes here...
+            /// </summary>
+            /// <example>
+            /// Here is some &lt; encoded &gt; example...
+            /// > [!NOTE]
+            /// > This is *note*
+            ///
+            /// <code>
+            /// var handler = DateTimeHandler();
+            /// for (var i = 0; i &lt; 10; i++){
+            ///     date = date.AddMonths(1);
+            /// }
+            /// </code>
+            /// </example>
+            public class HelloWorld(){}}
+
+            """;
         var sourceFile = Path.Combine(_projectFolder, "src", "test.cs");
         CreateFile(sourceFile, sourceCode, "src");
 
@@ -93,12 +95,23 @@ public class HelloWorld(){}}
         var summary = html.DocumentNode.SelectSingleNode("//div[contains(@class, 'summary')]/p").InnerHtml;
         Assert.Equal("The class &lt; &gt; &gt; description goes here...", summary.Trim());
         var note = html.DocumentNode.SelectSingleNode("//div[@class='NOTE']").InnerHtml;
-        Assert.Equal("<h5>Note</h5>\n<p>This is <em>note</em></p>", note.Trim());
+        Assert.Equal("""
+            <h5>Note</h5>
+            <p>This is <em>note</em></p>
+            """, note.Trim());
         var code = html.DocumentNode.SelectNodes("//pre/code")[1].InnerHtml;
-        Assert.Equal(@"var handler = DateTimeHandler();
-for (var i = 0; i &lt; 10; i++){
-    date = date.AddMonths(1);
-}".Replace("\r\n", "\n"), code);
+        Assert.Equal("""
+            var handler = DateTimeHandler();
+            for (var i = 0; i &lt; 10; i++){
+                date = date.AddMonths(1);
+            }
+            """.Replace("""
+
+
+            """, """
+
+
+"""), code);
         var sitemap = Path.Combine(_outputFolder, "site", "sitemap.xml");
         Assert.True(File.Exists(sitemap));
 

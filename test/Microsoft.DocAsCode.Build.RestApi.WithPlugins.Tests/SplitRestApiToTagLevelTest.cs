@@ -58,7 +58,10 @@ public class SplitRestApiToTagLevelTest : TestBase
             Assert.Empty(model.Children);
             Assert.Empty(model.Tags);
             Assert.True((bool)model.Metadata["_isSplittedByTag"]);
-            Assert.Equal("<p sourcefile=\"TestData/swagger/petstore.json\" sourcestartlinenumber=\"1\">Find out more about Swagger</p>\n", ((JObject)model.Metadata["externalDocs"])["description"]);
+            Assert.Equal("""
+                <p sourcefile="TestData/swagger/petstore.json" sourcestartlinenumber="1">Find out more about Swagger</p>
+
+                """, ((JObject)model.Metadata["externalDocs"])["description"]);
         }
         {
             // Verify splitted tag page
@@ -68,7 +71,10 @@ public class SplitRestApiToTagLevelTest : TestBase
             Assert.NotNull(model);
             Assert.Equal("petstore.swagger.io/v2/Swagger Petstore/1.0.0/tag/pet", model.Uid);
             Assert.Equal("pet", model.Name);
-            Assert.Equal("<p sourcefile=\"TestData/swagger/petstore.json\" sourcestartlinenumber=\"1\">Everything about your Pets</p>\n", model.Description);
+            Assert.Equal("""
+                <p sourcefile="TestData/swagger/petstore.json" sourcestartlinenumber="1">Everything about your Pets</p>
+
+                """, model.Description);
             Assert.Equal(8, model.Children.Count);
             Assert.Empty(model.Tags);
             Assert.Empty(model.Children[0].Tags);
@@ -78,7 +84,10 @@ public class SplitRestApiToTagLevelTest : TestBase
             Assert.True((bool)model.Metadata["_isSplittedToTag"]);
 
             // Test overwritten metadata
-            Assert.Equal("<p sourcefile=\"TestData/swagger/petstore.json\" sourcestartlinenumber=\"1\">Find out more about pets</p>\n", ((JObject)model.Metadata["externalDocs"])["description"]);
+            Assert.Equal("""
+                <p sourcefile="TestData/swagger/petstore.json" sourcestartlinenumber="1">Find out more about pets</p>
+
+                """, ((JObject)model.Metadata["externalDocs"])["description"]);
         }
     }
 
@@ -107,7 +116,10 @@ public class SplitRestApiToTagLevelTest : TestBase
             Assert.NotNull(model);
             Assert.Equal("petstore.swagger.io/v2/Swagger Petstore/1.0.0/tag/pet", model.Uid);
             Assert.Equal("pet", model.Name);
-            Assert.Equal("<p sourcefile=\"TestData/swagger/petstore.json\" sourcestartlinenumber=\"1\">Everything about your Pets</p>\n", model.Description);
+            Assert.Equal("""
+                <p sourcefile="TestData/swagger/petstore.json" sourcestartlinenumber="1">Everything about your Pets</p>
+
+                """, model.Description);
             Assert.Equal(8, model.Children.Count);
             Assert.Empty(model.Tags);
             Assert.Empty(model.Children[0].Tags);

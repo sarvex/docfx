@@ -15,7 +15,10 @@ public class NolocTest
         // Escape syntax
         TestUtility.VerifyMarkup(
             "使用 :::no-loc text=\"Find a \\\"Quotation\\\"\"::: 方法.",
-            "<p>使用 Find a \"Quotation\" 方法.</p>\n");
+            """
+            <p>使用 Find a "Quotation" 方法.</p>
+
+            """);
 
         // Markdown in noloc
         TestUtility.VerifyMarkup(
@@ -29,8 +32,10 @@ public class NolocTest
     {
         // MultipleLines
         TestUtility.VerifyMarkup(
-            @":::no-loc text=""I am crossing\
-a line"":::", 
+            """
+            :::no-loc text="I am crossing\
+            a line":::
+            """, 
             @"<p>:::no-loc text=&quot;I am crossing<br />a line&quot;:::</p>");
 
         // Spaces not exactly match

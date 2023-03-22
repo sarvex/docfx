@@ -18,48 +18,62 @@ public class InclusionTest
     [Trait("Related", "Inclusion")]
     public void TestBlockLevelInclusion_General()
     {
-        var root = @"
-# Hello World
+        var root = """
 
-Test Include File
+            # Hello World
 
-[!include[refa](a.md)]
+            Test Include File
 
-[!include[refa](a.md) ]
+            [!include[refa](a.md)]
 
-";
+            [!include[refa](a.md) ]
 
-        var refa = @"---
-title: include file
-description: include file
----
 
-# Hello Include File A
+            """;
 
-This is a file A included by another file. [!include[refb](b.md)] [!include[refb](b.md) ]
+        var refa = """
+            ---
+            title: include file
+            description: include file
+            ---
 
-";
+            # Hello Include File A
 
-        var refb = @"---
-title: include file
-description: include file
----
+            This is a file A included by another file. [!include[refb](b.md)] [!include[refb](b.md) ]
 
-# Hello Include File B
-";
+
+            """;
+
+        var refb = """
+            ---
+            title: include file
+            description: include file
+            ---
+
+            # Hello Include File B
+
+            """;
         TestUtility.WriteToFile("r/root.md", root);
         TestUtility.WriteToFile("r/a.md", refa);
         TestUtility.WriteToFile("r/b.md", refb);
 
         var result = TestUtility.MarkupWithoutSourceInfo(root, "r/root.md");
-        var expected = @"<h1 id=""hello-world"">Hello World</h1>
-<p>Test Include File</p>
-<h1 id=""hello-include-file-a"">Hello Include File A</h1>
-<p>This is a file A included by another file. # Hello Include File B [!include<a href=""%7E/r/b.md"">refb</a> ]</p>
+        var expected = """
+            <h1 id="hello-world">Hello World</h1>
+            <p>Test Include File</p>
+            <h1 id="hello-include-file-a">Hello Include File A</h1>
+            <p>This is a file A included by another file. # Hello Include File B [!include<a href="%7E/r/b.md">refb</a> ]</p>
 
-<p>[!include<a href=""a.md"">refa</a> ]</p>
-";
-        Assert.Equal(expected.Replace("\r\n", "\n"), result.Html);
+            <p>[!include<a href="a.md">refa</a> ]</p>
+
+            """;
+        Assert.Equal(expected.Replace("""
+
+
+            """, """
+
+
+            """), result.Html);
 
         var dependency = result.Dependency;
         var expectedDependency = new List<string> { "a.md", "b.md" };
@@ -70,31 +84,43 @@ description: include file
     [Trait("Related", "IncludeFile")]
     public void TestBlockLevelInclusion_Esacape()
     {
-        var root = @"
-# Hello World
+        var root = """
 
-Test Include File
+            # Hello World
 
-[!include[refa](a\(x\).md)]
+            Test Include File
 
-";
+            [!include[refa](a\(x\).md)]
 
-        var refa = @"
-# Hello Include File A
 
-This is a file A included by another file.
-";
+            """;
+
+        var refa = """
+
+            # Hello Include File A
+
+            This is a file A included by another file.
+
+            """;
 
         TestUtility.WriteToFile("r/root.md", root);
         TestUtility.WriteToFile("r/a(x).md", refa);
 
         var result = TestUtility.MarkupWithoutSourceInfo(root, "r/root.md");
-        var expected = @"<h1 id=""hello-world"">Hello World</h1>
-<p>Test Include File</p>
-<h1 id=""hello-include-file-a"">Hello Include File A</h1>
-<p>This is a file A included by another file.</p>
-";
-        Assert.Equal(expected.Replace("\r\n", "\n"), result.Html);
+        var expected = """
+            <h1 id="hello-world">Hello World</h1>
+            <p>Test Include File</p>
+            <h1 id="hello-include-file-a">Hello Include File A</h1>
+            <p>This is a file A included by another file.</p>
+
+            """;
+        Assert.Equal(expected.Replace("""
+
+
+            """, """
+
+
+            """), result.Html);
 
         var dependency = result.Dependency;
         var expectedDependency = new List<string> { "a(x).md" };
@@ -105,31 +131,43 @@ This is a file A included by another file.
     [Trait("Related", "Inclusion")]
     public void TestBlockLevelInclusion_RelativePath()
     {
-        var root = @"
-# Hello World
+        var root = """
 
-Test Include File
+            # Hello World
 
-[!include[refa](~/r/a.md)]
+            Test Include File
 
-";
+            [!include[refa](~/r/a.md)]
 
-        var refa = @"
-# Hello Include File A
 
-This is a file A included by another file.
-";
+            """;
+
+        var refa = """
+
+            # Hello Include File A
+
+            This is a file A included by another file.
+
+            """;
 
         TestUtility.WriteToFile("r/root.md", root);
         TestUtility.WriteToFile("r/a.md", refa);
 
         var result = TestUtility.MarkupWithoutSourceInfo(root, "r/root.md");
-        var expected = @"<h1 id=""hello-world"">Hello World</h1>
-<p>Test Include File</p>
-<h1 id=""hello-include-file-a"">Hello Include File A</h1>
-<p>This is a file A included by another file.</p>
-";
-        Assert.Equal(expected.Replace("\r\n", "\n"), result.Html);
+        var expected = """
+            <h1 id="hello-world">Hello World</h1>
+            <p>Test Include File</p>
+            <h1 id="hello-include-file-a">Hello Include File A</h1>
+            <p>This is a file A included by another file.</p>
+
+            """;
+        Assert.Equal(expected.Replace("""
+
+
+            """, """
+
+
+            """), result.Html);
 
         var dependency = result.Dependency;
         var expectedDependency = new List<string> { "a.md" };
@@ -140,29 +178,35 @@ This is a file A included by another file.
     [Trait("Related", "Inclusion")]
     public void TestBlockLevelInclusion_CycleInclude()
     {
-        var root = @"
-# Hello World
+        var root = """
 
-Test Include File
+            # Hello World
 
-[!include[refa](a.md)]
+            Test Include File
 
-";
+            [!include[refa](a.md)]
 
-        var refa = @"
-# Hello Include File A
 
-This is a file A included by another file.
+            """;
 
-[!include[refb](b.md)]
+        var refa = """
 
-";
+            # Hello Include File A
 
-        var refb = @"
-# Hello Include File B
+            This is a file A included by another file.
 
-[!include[refa](a.md)]
-";
+            [!include[refb](b.md)]
+
+
+            """;
+
+        var refb = """
+
+            # Hello Include File B
+
+            [!include[refa](a.md)]
+
+            """;
         TestUtility.WriteToFile("r/root.md", root);
         TestUtility.WriteToFile("r/a.md", refa);
         TestUtility.WriteToFile("r/b.md", refb);
@@ -172,14 +216,22 @@ This is a file A included by another file.
         using (new LoggerPhaseScope("CircularReferenceTest"))
         {
             var result = TestUtility.MarkupWithoutSourceInfo(root, "r/root.md");
-            var expected = @"<h1 id=""hello-world"">Hello World</h1>
-<p>Test Include File</p>
-<h1 id=""hello-include-file-a"">Hello Include File A</h1>
-<p>This is a file A included by another file.</p>
-<h1 id=""hello-include-file-b"">Hello Include File B</h1>
-[!include[refa](a.md)]";
+            var expected = """
+                <h1 id="hello-world">Hello World</h1>
+                <p>Test Include File</p>
+                <h1 id="hello-include-file-a">Hello Include File A</h1>
+                <p>This is a file A included by another file.</p>
+                <h1 id="hello-include-file-b">Hello Include File B</h1>
+                [!include[refa](a.md)]
+                """;
 
-            Assert.Equal(expected.Replace("\r\n", "\n"), result.Html);
+            Assert.Equal(expected.Replace("""
+
+
+                """, """
+
+
+                """), result.Html);
         }
         Logger.UnregisterListener(listener);
         Assert.Collection(listener.Items, log => Assert.Equal(
@@ -191,13 +243,15 @@ This is a file A included by another file.
     [Trait("Related", "Inclusion")]
     public void TestInlineLevelInclusion_General()
     {
-        var root = @"
-# Hello World
+        var root = """
 
-Test Inline Included File: \\[!include[refa](~/r/a.md)].
+            # Hello World
 
-Test Escaped Inline Included File: \[!include[refa](~/r/a.md)].
-";
+            Test Inline Included File: \\[!include[refa](~/r/a.md)].
+
+            Test Escaped Inline Included File: \[!include[refa](~/r/a.md)].
+
+            """;
 
         var refa = "This is a **included** token";
 
@@ -205,11 +259,19 @@ Test Escaped Inline Included File: \[!include[refa](~/r/a.md)].
         TestUtility.WriteToFile("r/a.md", refa);
 
         var result = TestUtility.MarkupWithoutSourceInfo(root, "r/root.md"); ;
-        var expected = @"<h1 id=""hello-world"">Hello World</h1>
-<p>Test Inline Included File: \This is a <strong>included</strong> token.</p>
-<p>Test Escaped Inline Included File: [!include<a href=""%7E/r/a.md"">refa</a>].</p>
-";
-        Assert.Equal(expected.Replace("\r\n", "\n"), result.Html);
+        var expected = """
+            <h1 id="hello-world">Hello World</h1>
+            <p>Test Inline Included File: \This is a <strong>included</strong> token.</p>
+            <p>Test Escaped Inline Included File: [!include<a href="%7E/r/a.md">refa</a>].</p>
+
+            """;
+        Assert.Equal(expected.Replace("""
+
+
+            """, """
+
+
+            """), result.Html);
 
         var dependency = result.Dependency;
         var expectedDependency = new List<string> { "a.md" };
@@ -220,12 +282,14 @@ Test Escaped Inline Included File: \[!include[refa](~/r/a.md)].
     [Trait("Related", "Inclusion")]
     public void TestInlineLevelInclusion_CycleInclude()
     {
-        var root = @"
-# Hello World
+        var root = """
 
-Test Inline Included File: [!include[refa](~/r/a.md)].
+            # Hello World
 
-";
+            Test Inline Included File: [!include[refa](~/r/a.md)].
+
+
+            """;
 
         var refa = "This is a **included** token with [!include[root](~/r/root.md)]";
 
@@ -233,36 +297,56 @@ Test Inline Included File: [!include[refa](~/r/a.md)].
         TestUtility.WriteToFile("r/a.md", refa);
 
         var result = TestUtility.MarkupWithoutSourceInfo(root, "r/root.md");
-        var expected = @"<h1 id=""hello-world"">Hello World</h1>
-<p>Test Inline Included File: This is a <strong>included</strong> token with [!include[root](~/r/root.md)].</p>
-";
+        var expected = """
+            <h1 id="hello-world">Hello World</h1>
+            <p>Test Inline Included File: This is a <strong>included</strong> token with [!include[root](~/r/root.md)].</p>
 
-        Assert.Equal(expected.Replace("\r\n", "\n"), result.Html);
+            """;
+
+        Assert.Equal(expected.Replace("""
+
+
+            """, """
+
+
+            """), result.Html);
     }
 
     [Fact]
     [Trait("Related", "Inclusion")]
     public void TestInlineLevelInclusion_Block()
     {
-        var root = @"
-# Hello World
+        var root = """
 
-Test Inline Included File: [!include[refa](~/r/a.md)].
+            # Hello World
 
-";
+            Test Inline Included File: [!include[refa](~/r/a.md)].
 
-        var refa = @"## This is a included token
 
-block content in Inline Inclusion.";
+            """;
+
+        var refa = """
+            ## This is a included token
+
+            block content in Inline Inclusion.
+            """;
 
         TestUtility.WriteToFile("r/root.md", root);
         TestUtility.WriteToFile("r/a.md", refa);
 
         var result = TestUtility.MarkupWithoutSourceInfo(root, "r/root.md");
-        var expected = @"<h1 id=""hello-world"">Hello World</h1>
-<p>Test Inline Included File: ## This is a included tokenblock content in Inline Inclusion..</p>
-";
-        Assert.Equal(expected.Replace("\r\n", "\n"), result.Html);
+        var expected = """
+            <h1 id="hello-world">Hello World</h1>
+            <p>Test Inline Included File: ## This is a included tokenblock content in Inline Inclusion..</p>
+
+            """;
+        Assert.Equal(expected.Replace("""
+
+
+            """, """
+
+
+            """), result.Html);
 
         var dependency = result.Dependency;
         var expectedDependency = new List<string> { "a.md" };
@@ -289,19 +373,23 @@ block content in Inline Inclusion.";
         //     |- link2.md
         //     |- md
         //         |- c.md
-        var root = @"
-[!include[linkAndRefRoot](b/linkAndRefRoot.md)]
-[!include[refc](a/refc.md ""This is root"")]
-[!include[refc_using_cache](a/refc.md)]
-[!include[empty](empty.md)]
-[!include[external](http://microsoft.com/a.md)]";
+        var root = """
 
-        var linkAndRefRoot = @"
-Paragraph1
-[link](a.md)
-[!include-[link2](../link/link2.md)]
-![Image](img/img.jpg)
-[!include-[root](../root.md)]";
+            [!include[linkAndRefRoot](b/linkAndRefRoot.md)]
+            [!include[refc](a/refc.md "This is root")]
+            [!include[refc_using_cache](a/refc.md)]
+            [!include[empty](empty.md)]
+            [!include[external](http://microsoft.com/a.md)]
+            """;
+
+        var linkAndRefRoot = """
+
+            Paragraph1
+            [link](a.md)
+            [!include-[link2](../link/link2.md)]
+            ![Image](img/img.jpg)
+            [!include-[root](../root.md)]
+            """;
         var link2 = @"[link](md/c.md)";
         var refc = @"[!include[c](../c/c.md ""This is root"")]";
         var c = @"**Hello**";
@@ -314,14 +402,22 @@ Paragraph1
         TestUtility.WriteToFile("r/empty.md", string.Empty);
         var marked = TestUtility.MarkupWithoutSourceInfo(root, "r/root.md");
         var dependency = marked.Dependency;
-        var expected = @"<p>Paragraph1
-<a href=""%7E/r/b/a.md"">link</a>
-<a href=""%7E/r/link/md/c.md"">link</a>
-<img src=""%7E/r/b/img/img.jpg"" alt=""Image"" />
-[!include[root](../root.md)]</p>
-<p><strong>Hello</strong></p>
-<p><strong>Hello</strong></p>
-[!include[external](http://microsoft.com/a.md)]".Replace("\r\n", "\n");
+        var expected = """
+            <p>Paragraph1
+            <a href="%7E/r/b/a.md">link</a>
+            <a href="%7E/r/link/md/c.md">link</a>
+            <img src="%7E/r/b/img/img.jpg" alt="Image" />
+            [!include[root](../root.md)]</p>
+            <p><strong>Hello</strong></p>
+            <p><strong>Hello</strong></p>
+            [!include[external](http://microsoft.com/a.md)]
+            """.Replace("""
+
+
+            """, """
+
+
+""");
 
         Assert.Equal(expected, marked.Html);
         Assert.Equal(
@@ -352,31 +448,50 @@ Paragraph1
         //        |- d.md
         //  |- img
         //  |  |- img.jpg
-        var r = @"
-[!include[](a/a.md)]
-[!include[](c/d/d.md)]
-";
-        var a = @"
-[!include[](../b/token.md)]";
-        var token = @"
-![](../img/img.jpg)
-[](#anchor)
-[a](../a/a.md)
-[](invalid.md)
-[d](../c/d/d.md#anchor)
-";
-        var d = @"
-[!include[](../../b/token.md)]";
+        var r = """
+
+            [!include[](a/a.md)]
+            [!include[](c/d/d.md)]
+
+            """;
+        var a = """
+
+            [!include[](../b/token.md)]
+            """;
+        var token = """
+
+            ![](../img/img.jpg)
+            [](#anchor)
+            [a](../a/a.md)
+            [](invalid.md)
+            [d](../c/d/d.md#anchor)
+
+            """;
+        var d = """
+
+            [!include[](../../b/token.md)]
+            """;
         TestUtility.WriteToFile("r/r.md", r);
         TestUtility.WriteToFile("r/a/a.md", a);
         TestUtility.WriteToFile("r/b/token.md", token);
         TestUtility.WriteToFile("r/c/d/d.md", d);
         var marked = TestUtility.MarkupWithoutSourceInfo(a, "r/a/a.md");
-        var expected = @"<p><img src=""%7E/r/img/img.jpg"" alt="""" />
-<a href=""#anchor""></a>
-<a href=""%7E/r/a/a.md"">a</a>
-<a href=""%7E/r/b/invalid.md""></a>
-<a href=""%7E/r/c/d/d.md#anchor"">d</a></p>".Replace("\r\n", "\n") + "\n";
+        var expected = """
+            <p><img src="%7E/r/img/img.jpg" alt="" />
+            <a href="#anchor"></a>
+            <a href="%7E/r/a/a.md">a</a>
+            <a href="%7E/r/b/invalid.md"></a>
+            <a href="%7E/r/c/d/d.md#anchor">d</a></p>
+            """.Replace("""
+
+
+            """, """
+
+
+""") + """
+
+
+""";
         var dependency = marked.Dependency;
         Assert.Equal(expected, marked.Html);
         Assert.Equal(
@@ -412,7 +527,10 @@ Paragraph1
         TestUtility.WriteToFile("r/root.md", root);
         TestUtility.WriteToFile("r/b/linkAndRefRoot.md", linkAndRefRoot);
         var marked = TestUtility.MarkupWithoutSourceInfo(root, "r/root.md");
-        var expected = @"<p>Paragraph1</p>" + "\n";
+        var expected = @"<p>Paragraph1</p>" + """
+
+
+            """;
         Assert.Equal(expected, marked.Html);
     }
 
@@ -470,15 +588,23 @@ markdown token1.md content end.";
         var marked = service.Markup("place", "holder");
         var dependency = marked.Dependency;
 
-        Assert.Equal(@"<p>1markdown root.md main content start.</p>
-<p>1markdown a.md main content start.</p>
-<p>1markdown token1.md content start.</p>
-<p><strong>1markdown token2.md main content</strong></p>
-<p>markdown token1.md content end.</p>
-<p><strong>1markdown token2.md main content</strong></p>
-<p>markdown a.md main content end.</p>
-<p>markdown root.md main content end.</p>
-".Replace("\r\n", "\n"), marked.Html);
+        Assert.Equal("""
+            <p>1markdown root.md main content start.</p>
+            <p>1markdown a.md main content start.</p>
+            <p>1markdown token1.md content start.</p>
+            <p><strong>1markdown token2.md main content</strong></p>
+            <p>markdown token1.md content end.</p>
+            <p><strong>1markdown token2.md main content</strong></p>
+            <p>markdown a.md main content end.</p>
+            <p>markdown root.md main content end.</p>
+
+            """.Replace("""
+
+
+            """, """
+
+
+"""), marked.Html);
         Assert.Equal(
             new[] { $"../fallback_folder_{uniqueFolderName}/token_folder_{uniqueFolderName}/token2_{uniqueFolderName}.md", $"a_folder_{uniqueFolderName}/a_{uniqueFolderName}.md", $"token_folder_{uniqueFolderName}/token1_{uniqueFolderName}.md", $"token_folder_{uniqueFolderName}/token2_{uniqueFolderName}.md" },
             dependency.OrderBy(x => x).ToArray());
@@ -501,37 +627,41 @@ markdown token1.md content end.";
         //     |- sample2.cs
 
         // 1. Prepare data
-        var root = @"markdown root.md main content start.
+        var root = """
+            markdown root.md main content start.
 
-mardown a content in root.md content start
+            mardown a content in root.md content start
 
-[!include[a](a_folder/a.md ""This is a.md"")]
+            [!include[a](a_folder/a.md "This is a.md")]
 
-mardown a content in root.md content end
+            mardown a content in root.md content end
 
-sample 1 code in root.md content start
+            sample 1 code in root.md content start
 
-[!CODE-cs[this is sample 1 code](code_folder/sample1.cs)]
+            [!CODE-cs[this is sample 1 code](code_folder/sample1.cs)]
 
-sample 1 code in root.md content end
+            sample 1 code in root.md content end
 
-sample 2 code in root.md content start
+            sample 2 code in root.md content start
 
-[!CODE-cs[this is sample 2 code](code_folder/sample2.cs)]
+            [!CODE-cs[this is sample 2 code](code_folder/sample2.cs)]
 
-sample 2 code in root.md content end
+            sample 2 code in root.md content end
 
-markdown root.md main content end.";
+            markdown root.md main content end.
+            """;
 
-        var a = @"markdown a.md main content start.
+        var a = """
+            markdown a.md main content start.
 
-code_in_a code in a.md content start
+            code_in_a code in a.md content start
 
-[!CODE-cs[this is code_in_a code](code_in_a.cs)]
+            [!CODE-cs[this is code_in_a code](code_in_a.cs)]
 
-code_in_a in a.md content end
+            code_in_a in a.md content end
 
-markdown a.md a.md content end.";
+            markdown a.md a.md content end.
+            """;
 
         var code_in_a = @"namespace code_in_a{}";
 
@@ -557,22 +687,30 @@ markdown a.md a.md content end.";
         //var rootMarked = service.Markup(Path.Combine(Directory.GetCurrentDirectory(), $"{uniqueFolderName}/root_folder"), root, fallbackFolders, "root.md");
         var rootMarked = service.Markup("place", "holder");
         var rootDependency = rootMarked.Dependency;
-        Assert.Equal(@"<p>markdown root.md main content start.</p>
-<p>mardown a content in root.md content start</p>
-<p>markdown a.md main content start.</p>
-<p>code_in_a code in a.md content start</p>
-<pre><code class=""lang-cs"" name=""this is code_in_a code"">namespace code_in_a{}
-</code></pre><p>code_in_a in a.md content end</p>
-<p>markdown a.md a.md content end.</p>
-<p>mardown a content in root.md content end</p>
-<p>sample 1 code in root.md content start</p>
-<pre><code class=""lang-cs"" name=""this is sample 1 code"">namespace sample1{}
-</code></pre><p>sample 1 code in root.md content end</p>
-<p>sample 2 code in root.md content start</p>
-<pre><code class=""lang-cs"" name=""this is sample 2 code"">namespace sample2{}
-</code></pre><p>sample 2 code in root.md content end</p>
-<p>markdown root.md main content end.</p>
-".Replace("\r\n", "\n"), rootMarked.Html);
+        Assert.Equal("""
+            <p>markdown root.md main content start.</p>
+            <p>mardown a content in root.md content start</p>
+            <p>markdown a.md main content start.</p>
+            <p>code_in_a code in a.md content start</p>
+            <pre><code class="lang-cs" name="this is code_in_a code">namespace code_in_a{}
+            </code></pre><p>code_in_a in a.md content end</p>
+            <p>markdown a.md a.md content end.</p>
+            <p>mardown a content in root.md content end</p>
+            <p>sample 1 code in root.md content start</p>
+            <pre><code class="lang-cs" name="this is sample 1 code">namespace sample1{}
+            </code></pre><p>sample 1 code in root.md content end</p>
+            <p>sample 2 code in root.md content start</p>
+            <pre><code class="lang-cs" name="this is sample 2 code">namespace sample2{}
+            </code></pre><p>sample 2 code in root.md content end</p>
+            <p>markdown root.md main content end.</p>
+
+            """.Replace("""
+
+
+            """, """
+
+
+"""), rootMarked.Html);
         Assert.Equal(
             new[] { "../fallback_folder/a_folder/code_in_a.cs", "../fallback_folder/code_folder/sample2.cs", "a_folder/a.md", "a_folder/code_in_a.cs", "code_folder/sample1.cs", "code_folder/sample2.cs" },
             rootDependency.OrderBy(x => x).ToArray());
@@ -581,12 +719,20 @@ markdown a.md a.md content end.";
         //var aMarked = service.Markup(Path.Combine(Directory.GetCurrentDirectory(), $"{uniqueFolderName}/root_folder"), a, fallbackFolders, "a_folder/a.md");
         var aMarked = service.Markup("place", "holder");
         var aDependency = aMarked.Dependency;
-        Assert.Equal(@"<p>markdown a.md main content start.</p>
-<p>code_in_a code in a.md content start</p>
-<pre><code class=""lang-cs"" name=""this is code_in_a code"">namespace code_in_a{}
-</code></pre><p>code_in_a in a.md content end</p>
-<p>markdown a.md a.md content end.</p>
-".Replace("\r\n", "\n"), aMarked.Html);
+        Assert.Equal("""
+            <p>markdown a.md main content start.</p>
+            <p>code_in_a code in a.md content start</p>
+            <pre><code class="lang-cs" name="this is code_in_a code">namespace code_in_a{}
+            </code></pre><p>code_in_a in a.md content end</p>
+            <p>markdown a.md a.md content end.</p>
+
+            """.Replace("""
+
+
+            """, """
+
+
+"""), aMarked.Html);
         Assert.Equal(
             new[] { "../../fallback_folder/a_folder/code_in_a.cs", "code_in_a.cs" },
             aDependency.OrderBy(x => x).ToArray());
@@ -599,10 +745,12 @@ markdown a.md a.md content end.";
     public void TestInclusion_InlineLevel()
     {
         // 1. Prepare data
-        var root = @"
-Inline [!include[ref1](ref1.md ""This is root"")]
-Inline [!include[ref3](ref3.md ""This is root"")]
-";
+        var root = """
+
+            Inline [!include[ref1](ref1.md "This is root")]
+            Inline [!include[ref3](ref3.md "This is root")]
+
+            """;
 
         var ref1 = @"[!include[ref2](ref2.md ""This is root"")]";
         var ref2 = @"## Inline inclusion do not parse header [!include[root](root.md ""This is root"")]";
@@ -614,7 +762,11 @@ Inline [!include[ref3](ref3.md ""This is root"")]
 
         var marked = TestUtility.MarkupWithoutSourceInfo(root, "root.md");
         var dependency = marked.Dependency;
-        var expected = "<p>Inline ## Inline inclusion do not parse header [!include[root](root.md)]\nInline <strong>Hello</strong></p>\n";
+        var expected = """
+            <p>Inline ## Inline inclusion do not parse header [!include[root](root.md)]
+            Inline <strong>Hello</strong></p>
+
+            """;
 
         Assert.Equal(expected, marked.Html);
         Assert.Equal(
@@ -627,17 +779,21 @@ Inline [!include[ref3](ref3.md ""This is root"")]
     public void TestBlockInclude_ShouldExcludeBracketInRegex()
     {
         // 1. Prepare data
-        var root = @"[!INCLUDE [azure-probe-intro-include](inc1.md)].
+        var root = """
+            [!INCLUDE [azure-probe-intro-include](inc1.md)].
 
-[!INCLUDE [azure-arm-classic-important-include](inc2.md)] [Resource Manager model](inc1.md).
+            [!INCLUDE [azure-arm-classic-important-include](inc2.md)] [Resource Manager model](inc1.md).
 
 
-[!INCLUDE [azure-ps-prerequisites-include.md](inc3.md)]";
+            [!INCLUDE [azure-ps-prerequisites-include.md](inc3.md)]
+            """;
 
-        var expected = @"<p>inc1.</p>
-<p>inc2 <a href=""inc1.md"">Resource Manager model</a>.</p>
-<p>inc3</p>
-";
+        var expected = """
+            <p>inc1.</p>
+            <p>inc2 <a href="inc1.md">Resource Manager model</a>.</p>
+            <p>inc3</p>
+
+            """;
 
         var inc1 = @"inc1";
         var inc2 = @"inc2";
@@ -649,7 +805,13 @@ Inline [!include[ref3](ref3.md ""This is root"")]
 
         var marked = TestUtility.MarkupWithoutSourceInfo(root, "root.md");
         var dependency = marked.Dependency;
-        Assert.Equal(expected.Replace("\r\n", "\n"), marked.Html);
+        Assert.Equal(expected.Replace("""
+
+
+            """, """
+
+
+            """), marked.Html);
         Assert.Equal(
           new[] { "inc1.md", "inc2.md", "inc3.md" },
           dependency.OrderBy(x => x).ToArray());
@@ -659,32 +821,44 @@ Inline [!include[ref3](ref3.md ""This is root"")]
     [Trait("Related", "Inclusion")]
     public void TestBlockInclude_ImageRelativePath()
     {
-        var root = @"
-# Hello World
+        var root = """
 
-Test Include File
+            # Hello World
 
-[!include[refa](../../include/a.md)]
+            Test Include File
 
-";
+            [!include[refa](../../include/a.md)]
 
-        var refa = @"
-# Hello Include File A
 
-![img](./media/refb.png)
-";
+            """;
+
+        var refa = """
+
+            # Hello Include File A
+
+            ![img](./media/refb.png)
+
+            """;
 
         var rootPath = "r/parent_folder/child_folder/root.md";
         TestUtility.WriteToFile(rootPath, root);
         TestUtility.WriteToFile("r/include/a.md", refa);
 
         var result = TestUtility.MarkupWithoutSourceInfo(root, rootPath);
-        var expected = @"<h1 id=""hello-world"">Hello World</h1>
-<p>Test Include File</p>
-<h1 id=""hello-include-file-a"">Hello Include File A</h1>
-<p><img src=""%7E/r/include/media/refb.png"" alt=""img"" /></p>
-";
-        Assert.Equal(expected.Replace("\r\n", "\n"), result.Html);
+        var expected = """
+            <h1 id="hello-world">Hello World</h1>
+            <p>Test Include File</p>
+            <h1 id="hello-include-file-a">Hello Include File A</h1>
+            <p><img src="%7E/r/include/media/refb.png" alt="img" /></p>
+
+            """;
+        Assert.Equal(expected.Replace("""
+
+
+            """, """
+
+
+            """), result.Html);
 
         var dependency = result.Dependency;
         var expectedDependency = new List<string> { "../../include/a.md" };
@@ -695,30 +869,42 @@ Test Include File
     [Trait("Related", "Inclusion")]
     public void TestBlockInclude_WithYamlHeader()
     {
-        var root = @"
-# Hello World
+        var root = """
 
-Test Include File
+            # Hello World
 
-[!include[refa](../../include/a.md)]
+            Test Include File
 
-";
+            [!include[refa](../../include/a.md)]
 
-        var refa = @"---
-a: b
----
-body";
+
+            """;
+
+        var refa = """
+            ---
+            a: b
+            ---
+            body
+            """;
 
         var rootPath = "r/parent_folder/child_folder/root.md";
         TestUtility.WriteToFile(rootPath, root);
         TestUtility.WriteToFile("r/include/a.md", refa);
 
         var result = TestUtility.MarkupWithoutSourceInfo(root, rootPath);
-        var expected = @"<h1 id=""hello-world"">Hello World</h1>
-<p>Test Include File</p>
-<p>body</p>
-";
-        Assert.Equal(expected.Replace("\r\n", "\n"), result.Html);
+        var expected = """
+            <h1 id="hello-world">Hello World</h1>
+            <p>Test Include File</p>
+            <p>body</p>
+
+            """;
+        Assert.Equal(expected.Replace("""
+
+
+            """, """
+
+
+            """), result.Html);
 
         var dependency = result.Dependency;
         var expectedDependency = new List<string> { "../../include/a.md" };
@@ -771,71 +957,105 @@ body";
         //  |- b
         //  |  |- token.md
         //  |  |- img.jpg
-        var r = @"
-[!include[](b/token.md)]
-";
-        var token = @"
-:::image source=""example.jpg"" type=""complex"" alt-text=""example"":::
-Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-:::image-end:::
-";
+        var r = """
+
+            [!include[](b/token.md)]
+
+            """;
+        var token = """
+
+            :::image source="example.jpg" type="complex" alt-text="example":::
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+            :::image-end:::
+
+            """;
         TestUtility.WriteToFile("r/r.md", r);
         TestUtility.WriteToFile("r/b/token.md", token);
         var marked = TestUtility.MarkupWithoutSourceInfo(r, "r/r.md");
 
-        var expected = @"<p class=""mx-imgBorder"">
-<img src=""~/r/b/example.jpg"" alt=""example"" aria-describedby=""1-0"">
-<div id=""1-0"" class=""visually-hidden"">
-<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-</div>
-</p>
-";
-        Assert.Equal(expected.Replace("\r\n", "\n"), marked.Html);
+        var expected = """
+            <p class="mx-imgBorder">
+            <img src="~/r/b/example.jpg" alt="example" aria-describedby="1-0">
+            <div id="1-0" class="visually-hidden">
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+            </div>
+            </p>
+
+            """;
+        Assert.Equal(expected.Replace("""
+
+
+            """, """
+
+
+            """), marked.Html);
     }
 
     [Fact]
     public void ImageTestBlockGeneralWithInclude()
     {
         var source = @"[!include[](includes/source.md)]";
-        var includeContent = @":::image type=""content"" source=""../media/example.jpg"" alt-text=""example"" lightbox=""../media/example.jpg"":::
+        var includeContent = """
+            :::image type="content" source="../media/example.jpg" alt-text="example" lightbox="../media/example.jpg":::
 
-:::image type=""content"" source=""~/media/example.jpg"" alt-text=""example"" lightbox=""~/media/example.jpg"":::
+            :::image type="content" source="~/media/example.jpg" alt-text="example" lightbox="~/media/example.jpg":::
 
-:::image type=""content"" source=""~/media/example.jpg"" alt-text=""example"" lightbox=""../media/example.jpg"":::
+            :::image type="content" source="~/media/example.jpg" alt-text="example" lightbox="../media/example.jpg":::
 
-:::image type=""content"" source=""../media/example.jpg"" alt-text=""example"" lightbox=""~/media/example.jpg"":::";
+            :::image type="content" source="../media/example.jpg" alt-text="example" lightbox="~/media/example.jpg":::
+            """;
 
         TestUtility.WriteToFile("a.md", source);
         TestUtility.WriteToFile("includes/source.md", includeContent);
         var marked = TestUtility.MarkupWithoutSourceInfo(source, "a.md");
 
-        var expected = @"<p><span class=""mx-imgBorder"">
-<a href=""~/media/example.jpg#lightbox"" data-linktype=""relative-path"">
-<img src=""~/media/example.jpg"" alt=""example"">
-</a>
-</span>
-</p>
-<p><span class=""mx-imgBorder"">
-<a href=""~/media/example.jpg#lightbox"" data-linktype=""relative-path"">
-<img src=""~/media/example.jpg"" alt=""example"">
-</a>
-</span>
-</p>
-<p><span class=""mx-imgBorder"">
-<a href=""~/media/example.jpg#lightbox"" data-linktype=""relative-path"">
-<img src=""~/media/example.jpg"" alt=""example"">
-</a>
-</span>
-</p>
-<p><span class=""mx-imgBorder"">
-<a href=""~/media/example.jpg#lightbox"" data-linktype=""relative-path"">
-<img src=""~/media/example.jpg"" alt=""example"">
-</a>
-</span>
-</p>
-";
+        var expected = """
+            <p><span class="mx-imgBorder">
+            <a href="~/media/example.jpg#lightbox" data-linktype="relative-path">
+            <img src="~/media/example.jpg" alt="example">
+            </a>
+            </span>
+            </p>
+            <p><span class="mx-imgBorder">
+            <a href="~/media/example.jpg#lightbox" data-linktype="relative-path">
+            <img src="~/media/example.jpg" alt="example">
+            </a>
+            </span>
+            </p>
+            <p><span class="mx-imgBorder">
+            <a href="~/media/example.jpg#lightbox" data-linktype="relative-path">
+            <img src="~/media/example.jpg" alt="example">
+            </a>
+            </span>
+            </p>
+            <p><span class="mx-imgBorder">
+            <a href="~/media/example.jpg#lightbox" data-linktype="relative-path">
+            <img src="~/media/example.jpg" alt="example">
+            </a>
+            </span>
+            </p>
 
-        Assert.Equal(expected.Replace("\r\n", "\n").Replace("\n", ""), marked.Html.Replace("\r\n", "\n").Replace("\n", ""));
+            """;
+
+        Assert.Equal(expected.Replace("""
+
+
+            """, """
+
+
+            """).Replace("""
+
+
+            """, ""), marked.Html.Replace("""
+
+
+            """, """
+
+
+            """).Replace("""
+
+
+            """, ""));
     }
 
     [Fact]
@@ -847,18 +1067,30 @@ Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
         //  |- b
         //  |  |- token.md
         //  |  |- img.jpg
-        var r = @"
-[!include[](b/token.md)]
-";
-        var token = @"
-:::image source=""example.svg"" type=""icon"" alt-text=""example"":::
-";
+        var r = """
+
+            [!include[](b/token.md)]
+
+            """;
+        var token = """
+
+            :::image source="example.svg" type="icon" alt-text="example":::
+
+            """;
         TestUtility.WriteToFile("r/r.md", r);
         TestUtility.WriteToFile("r/b/token.md", token);
         var marked = TestUtility.MarkupWithoutSourceInfo(r, "r/r.md");
-        var expected = @"<p><img src=""~/r/b/example.svg"" role=""presentation"">
-</p>
-";
-        Assert.Equal(expected.Replace("\r\n", "\n"), marked.Html);
+        var expected = """
+            <p><img src="~/r/b/example.svg" role="presentation">
+            </p>
+
+            """;
+        Assert.Equal(expected.Replace("""
+
+
+            """, """
+
+
+            """), marked.Html);
     }
 }

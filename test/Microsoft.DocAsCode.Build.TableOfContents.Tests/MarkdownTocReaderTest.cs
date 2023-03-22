@@ -12,24 +12,26 @@ public class MarkdownTocReaderTest
     [Fact]
     public void TestTocMdReader()
     {
-        var toc = MarkdownTocReader.LoadToc(@"
-# [Article1](article1.md)
-## Container1 ##
-### [Article2](article2.md ""Article 2"") ## 
-### [Article3](article3.md)     
-## Container2
-### [Article4](article4.md)
-#### [Article5](article5.md)
-## [Article6](article6.md)
-<!-- this is comment.
-## [NoNoNo](NotExisted.md) -->
-# [Article7](article7.md)
-## [External](http://www.microsoft.com)
-# [XrefArticles](@xref)
-## @article8
-## <xref:article8>
-## [Article8](xref:article8)
-", "test.md");
+        var toc = MarkdownTocReader.LoadToc("""
+
+            # [Article1](article1.md)
+            ## Container1 ##
+            ### [Article2](article2.md "Article 2") ## 
+            ### [Article3](article3.md)     
+            ## Container2
+            ### [Article4](article4.md)
+            #### [Article5](article5.md)
+            ## [Article6](article6.md)
+            <!-- this is comment.
+            ## [NoNoNo](NotExisted.md) -->
+            # [Article7](article7.md)
+            ## [External](http://www.microsoft.com)
+            # [XrefArticles](@xref)
+            ## @article8
+            ## <xref:article8>
+            ## [Article8](xref:article8)
+
+            """, "test.md");
         Assert.Equal(3, toc.Count);
         Assert.Equal("Article1", toc[0].Name);
         Assert.Equal("article1.md", toc[0].Href);
@@ -90,16 +92,20 @@ public class MarkdownTocReaderTest
     public void TestBadMdToc()
     {
         var ex = Assert.Throws<DocumentException>(() =>
-            MarkdownTocReader.LoadToc(@"
-#[good](test.md)
-[bad]()
->_<
->_<
->_<
-", "test.md"));
-        Assert.Equal(@"Invalid toc file: test.md, Details: Unknown syntax at line 3:
-[bad]()
->_<
->_<", ex.Message, ignoreLineEndingDifferences: true);
+            MarkdownTocReader.LoadToc("""
+
+                #[good](test.md)
+                [bad]()
+                >_<
+                >_<
+                >_<
+
+                """, "test.md"));
+        Assert.Equal("""
+            Invalid toc file: test.md, Details: Unknown syntax at line 3:
+            [bad]()
+            >_<
+            >_<
+            """, ex.Message, ignoreLineEndingDifferences: true);
     }
 }

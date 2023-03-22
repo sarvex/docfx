@@ -90,7 +90,10 @@ public class ConceptualDocumentProcessorTest : TestBase
             var outputHtml = GetOutputFilePath(file2);
             Assert.True(File.Exists(outputHtml));
             var content = File.ReadAllText(outputHtml);
-            Assert.Equal("<p><a href=\"A%23ctor.html\">Constructor</a></p>\n",
+            Assert.Equal("""
+                <p><a href="A%23ctor.html">Constructor</a></p>
+
+                """,
 content);
         }
     }
@@ -109,7 +112,10 @@ content);
             var outputHtml = GetOutputFilePath(file);
             Assert.True(File.Exists(outputHtml));
             var content = File.ReadAllText(outputHtml);
-            Assert.Equal("<p><a href=\"a#b\">Main</a></p>\n", content);
+            Assert.Equal("""
+                <p><a href="a#b">Main</a></p>
+
+                """, content);
         }
     }
 
@@ -129,8 +135,16 @@ content);
             var outputHtml = GetOutputFilePath(file);
             Assert.True(File.Exists(outputHtml));
             var content = File.ReadAllText(outputHtml);
-            Assert.Equal(@"<p><a href=""a#b"">Main</a></p>
-".Replace("\r\n", "\n"),
+            Assert.Equal("""
+                <p><a href="a#b">Main</a></p>
+
+                """.Replace("""
+
+
+                """, """
+
+
+"""),
 content);
         }
     }
@@ -194,9 +208,11 @@ content);
     {
         // arrange
         var fileName = "title.md";
-        var content = @"# This is title
+        var content = """
+            # This is title
 
-Some content";
+            Some content
+            """;
         var file = _fileCreator.CreateFile(content, fileName);
         var files = new FileCollection(_defaultFiles);
         files.Add(DocumentType.Article, new[] { file });
@@ -221,13 +237,15 @@ Some content";
     {
         // arrange
         var fileName = "title.md";
-        var content = @"---
-title: Overwrite title
----
+        var content = """
+            ---
+            title: Overwrite title
+            ---
 
-# This is title
+            # This is title
 
-Some content";
+            Some content
+            """;
         var file = _fileCreator.CreateFile(content, fileName);
         var files = new FileCollection(_defaultFiles);
         files.Add(DocumentType.Article, new[] { file });
@@ -248,13 +266,15 @@ Some content";
     {
         // arrange
         var fileName = "title.md";
-        var content = @"---
-title:
----
+        var content = """
+            ---
+            title:
+            ---
 
-# This is title
+            # This is title
 
-Some content";
+            Some content
+            """;
         var file = _fileCreator.CreateFile(content, fileName);
         var files = new FileCollection(_defaultFiles);
         files.Add(DocumentType.Article, new[] { file });
@@ -275,13 +295,15 @@ Some content";
     {
         // arrange
         var fileName = "title.md";
-        var content = @"---
-title: ''
----
+        var content = """
+            ---
+            title: ''
+            ---
 
-# This is title
+            # This is title
 
-Some content";
+            Some content
+            """;
         var file = _fileCreator.CreateFile(content, fileName);
         var files = new FileCollection(_defaultFiles);
         files.Add(DocumentType.Article, new[] { file });
@@ -303,10 +325,12 @@ Some content";
         // arrange
         var metadata = new Dictionary<string, object> { ["titleOverwriteH1"] = "this title overwrites title from H1" };
         var fileName = "title.md";
-        var content = @"
-# This is title from H1
+        var content = """
 
-Some content";
+            # This is title from H1
+
+            Some content
+            """;
         var file = _fileCreator.CreateFile(content, fileName);
         var files = new FileCollection(_defaultFiles);
         files.Add(DocumentType.Article, new[] { file });
@@ -328,13 +352,15 @@ Some content";
         // arrange
         var metadata = new Dictionary<string, object> { ["titleOverwriteH1"] = "this title overwrites title from H1" };
         var fileName = "title.md";
-        var content = @"---
-title: This is title from YAML header
----
+        var content = """
+            ---
+            title: This is title from YAML header
+            ---
 
-# This is title from H1
+            # This is title from H1
 
-Some content";
+            Some content
+            """;
         var file = _fileCreator.CreateFile(content, fileName);
         var files = new FileCollection(_defaultFiles);
         files.Add(DocumentType.Article, new[] { file });

@@ -19,7 +19,13 @@ public class MarkdownFragmentsCreaterTest
         Assert.Equal(2, model.Count);
         Assert.Equal("System.String", model[0].Uid);
         Assert.NotNull(model[0].UidSource);
-        Assert.Equal("author: rpetrusha\nms.author: ronpet\nmanager: wpickett", model[0].YamlCodeBlock.Replace("\r", ""));
+        Assert.Equal("""
+            author: rpetrusha
+            ms.author: ronpet
+            manager: wpickett
+            """, model[0].YamlCodeBlock.Replace("""
+
+            """, ""));
         Assert.NotNull(model[0].YamlCodeBlockSource);
         Assert.Equal(4, model[0].Contents.Count);
         Assert.Equal("summary", model[0].Contents[0].PropertyName);
@@ -34,11 +40,13 @@ public class MarkdownFragmentsCreaterTest
     [Fact]
     public void MissingStartingH1CodeHeadingShouldFail()
     {
-        var markdown = @"## `summary`
-markdown content
-## `description`
-markdown content
-";
+        var markdown = """
+            ## `summary`
+            markdown content
+            ## `description`
+            markdown content
+
+            """;
         var ast = Markdown.Parse(markdown);
 
         var ex = Assert.Throws<MarkdownFragmentsException>(() => new MarkdownFragmentsCreater().Create(ast).ToList());
@@ -49,16 +57,18 @@ markdown content
     [Fact]
     public void MarkdownContentAfterL1CodeHeadingShouldFail()
     {
-        var markdown = @"# `Lesson_1`
+        var markdown = """
+            # `Lesson_1`
 
-## `Lesson_1_1`
+            ## `Lesson_1_1`
 
-markdown content
+            markdown content
 
-# `Lesson_2`
+            # `Lesson_2`
 
-markdown content
-";
+            markdown content
+
+            """;
         var ast = Markdown.Parse(markdown);
 
         var ex = Assert.Throws<MarkdownFragmentsException>(() => new MarkdownFragmentsCreater().Create(ast).ToList());
@@ -69,16 +79,18 @@ markdown content
     [Fact]
     public void YamlCodeBlockShouldBeNextToL1CodeHeading()
     {
-        var markdown = @"# `YAML`
+        var markdown = """
+            # `YAML`
 
-## `Introduction`
+            ## `Introduction`
 
-This is just a normal yaml fences block:
-``` yaml
-a: b
-c: d
-```
-";
+            This is just a normal yaml fences block:
+            ``` yaml
+            a: b
+            c: d
+            ```
+
+            """;
         var ast = Markdown.Parse(markdown);
         var model = new MarkdownFragmentsCreater().Create(ast).ToList();
 

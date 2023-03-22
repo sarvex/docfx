@@ -46,7 +46,9 @@ public class BuildCommandTest : TestBase
         {
             "{",
             "  \"key\": \"global1.json\",",
-            "  \"global1\": \"1\"",
+            """
+              "global1": "1"
+            """,
             "}",
         });
 
@@ -54,7 +56,9 @@ public class BuildCommandTest : TestBase
         {
             "{",
             "  \"key\": {",
-            "    \"filepattern1\": \"file1.json\"",
+            """
+                "filepattern1": "file1.json"
+            """,
             "  }",
             "}",
         });
@@ -63,7 +67,9 @@ public class BuildCommandTest : TestBase
         {
             "{",
             "  \"key\": \"global2.json\",",
-            "  \"global2\": \"2\"",
+            """
+              "global2": "2"
+            """,
             "}",
         });
 
@@ -71,7 +77,9 @@ public class BuildCommandTest : TestBase
         {
             "{",
             "  \"key\": {",
-            "    \"filepattern1\": \"file2.json\"",
+            """
+                "filepattern1": "file2.json"
+            """,
             "  }",
             "}",
         });
@@ -81,7 +89,9 @@ public class BuildCommandTest : TestBase
             "{",
             "  \"globalMetadata\": {",
             "    \"key\": \"global.deprecated.json\",",
-            "    \"global.deprecated\": \"deprecated\"",
+            """
+                "global.deprecated": "deprecated"
+            """,
             "  }",
             "}",
         });
@@ -91,7 +101,9 @@ public class BuildCommandTest : TestBase
             "{",
             "  \"fileMetadata\": {",
             "    \"key\": {",
-            "      \"filepattern1\": \"file.deprecated.json\"",
+            """
+                  "filepattern1": "file.deprecated.json"
+            """,
             "    }",
             "  }",
             "}",
@@ -106,9 +118,11 @@ public class BuildCommandTest : TestBase
     public void TestGetConfigWithNoInputAndDocfxJsonExists()
     {
         // Create default template
-        var defaultTemplate = @"
-{{{rawTitle}}}{{{conceptual}}}
-";
+        var defaultTemplate = """
+
+            {{{rawTitle}}}{{{conceptual}}}
+
+            """;
         Directory.CreateDirectory(Path.Combine(_templateFolder, "default"));
         Directory.CreateDirectory(_inputFolder);
         Directory.CreateDirectory(_outputFolder);

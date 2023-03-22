@@ -55,7 +55,10 @@ public class RestApiDocumentProcessorTest : TestBase
         // Verify $ref in path
         var item0 = model.Children[0];
         Assert.Equal("graph.windows.net/myorganization/Contacts/1.0/get contacts", item0.Uid);
-        Assert.Equal("<p sourcefile=\"TestData/swagger/contacts.json\" sourcestartlinenumber=\"1\">You can get a collection of contacts from your tenant.</p>\n", item0.Summary);
+        Assert.Equal("""
+            <p sourcefile="TestData/swagger/contacts.json" sourcestartlinenumber="1">You can get a collection of contacts from your tenant.</p>
+
+            """, item0.Summary);
         Assert.Single(item0.Parameters);
         Assert.Equal("1.6", item0.Parameters[0].Metadata["default"]);
         Assert.Single(item0.Responses);
@@ -71,7 +74,10 @@ public class RestApiDocumentProcessorTest : TestBase
         Assert.Equal(3, model.Tags.Count);
         var tag0 = model.Tags[0];
         Assert.Equal("contact", tag0.Name);
-        Assert.Equal("<p sourcefile=\"TestData/swagger/contacts.json\" sourcestartlinenumber=\"1\">Everything about the <strong sourcefile=\"TestData/swagger/contacts.json\" sourcestartlinenumber=\"1\">contacts</strong></p>\n", tag0.Description);
+        Assert.Equal("""
+            <p sourcefile="TestData/swagger/contacts.json" sourcestartlinenumber="1">Everything about the <strong sourcefile="TestData/swagger/contacts.json" sourcestartlinenumber="1">contacts</strong></p>
+
+            """, tag0.Description);
         Assert.Equal("contact-bookmark", tag0.HtmlId);
         Assert.Single(tag0.Metadata);
         var externalDocs = (JObject)tag0.Metadata["externalDocs"];
@@ -114,17 +120,29 @@ public class RestApiDocumentProcessorTest : TestBase
         Assert.Equal("string", parameter2["type"]);
         Assert.Equal("uri", parameter2["format"]);
         // Verify markup result of parameters
-        Assert.Equal("<p sourcefile=\"TestData/swagger/contacts.json\" sourcestartlinenumber=\"1\">The request body <em sourcefile=\"TestData/swagger/contacts.json\" sourcestartlinenumber=\"1\">contains</em> a single property that specifies the URL of the user or contact to add as manager.</p>\n",
+        Assert.Equal("""
+            <p sourcefile="TestData/swagger/contacts.json" sourcestartlinenumber="1">The request body <em sourcefile="TestData/swagger/contacts.json" sourcestartlinenumber="1">contains</em> a single property that specifies the URL of the user or contact to add as manager.</p>
+
+            """,
             item5.Parameters[2].Description);
-        Assert.Equal("<p sourcefile=\"TestData/swagger/contacts.json\" sourcestartlinenumber=\"1\"><strong sourcefile=\"TestData/swagger/contacts.json\" sourcestartlinenumber=\"1\">uri</strong> description.</p>\n",
+        Assert.Equal("""
+            <p sourcefile="TestData/swagger/contacts.json" sourcestartlinenumber="1"><strong sourcefile="TestData/swagger/contacts.json" sourcestartlinenumber="1">uri</strong> description.</p>
+
+            """,
             ((string)parameter2["description"]));
-        Assert.Equal("<p sourcefile=\"TestData/swagger/contacts.json\" sourcestartlinenumber=\"1\">No Content. Indicates <strong sourcefile=\"TestData/swagger/contacts.json\" sourcestartlinenumber=\"1\">success</strong>. No response body is returned.</p>\n",
+        Assert.Equal("""
+            <p sourcefile="TestData/swagger/contacts.json" sourcestartlinenumber="1">No Content. Indicates <strong sourcefile="TestData/swagger/contacts.json" sourcestartlinenumber="1">success</strong>. No response body is returned.</p>
+
+            """,
             item5.Responses[0].Description);
 
         // Verify for markup result of securityDefinitions
         var securityDefinitions = (JObject)model.Metadata.Single(m => m.Key == "securityDefinitions").Value;
         var auth = (JObject)securityDefinitions["auth"];
-        Assert.Equal("<p sourcefile=\"TestData/swagger/contacts.json\" sourcestartlinenumber=\"1\">securityDefinitions <em sourcefile=\"TestData/swagger/contacts.json\" sourcestartlinenumber=\"1\">description</em>.</p>\n",
+        Assert.Equal("""
+            <p sourcefile="TestData/swagger/contacts.json" sourcestartlinenumber="1">securityDefinitions <em sourcefile="TestData/swagger/contacts.json" sourcestartlinenumber="1">description</em>.</p>
+
+            """,
             auth["description"].ToString());
     }
 
@@ -164,7 +182,10 @@ public class RestApiDocumentProcessorTest : TestBase
 
         var operation = model.Children.Single(c => c.OperationId == "update_contact_manager");
         var externalSchema = (JObject)operation.Parameters[2].Metadata["schema"];
-        Assert.Equal("<p sourcefile=\"TestData/swagger/contactsForExternalRef.json\" sourcestartlinenumber=\"1\"><strong sourcefile=\"TestData/swagger/contactsForExternalRef.json\" sourcestartlinenumber=\"1\">uri</strong> description.</p>\n", externalSchema["description"].ToString());
+        Assert.Equal("""
+            <p sourcefile="TestData/swagger/contactsForExternalRef.json" sourcestartlinenumber="1"><strong sourcefile="TestData/swagger/contactsForExternalRef.json" sourcestartlinenumber="1">uri</strong> description.</p>
+
+            """, externalSchema["description"].ToString());
         Assert.Equal("string", externalSchema["type"]);
         Assert.Equal("uri", externalSchema["format"]);
         Assert.Equal("refUrl", externalSchema["x-internal-ref-name"]);
@@ -242,11 +263,20 @@ public class RestApiDocumentProcessorTest : TestBase
             Assert.True(File.Exists(outputRawModelPath));
             var model = JsonUtility.Deserialize<RestApiRootItemViewModel>(outputRawModelPath);
             var tag1 = model.Tags[0];
-            Assert.Equal("<p sourcefile=\"TestData/overwrite/rest.overwrite.tags.md\" sourcestartlinenumber=\"6\">Overwrite <em sourcefile=\"TestData/overwrite/rest.overwrite.tags.md\" sourcestartlinenumber=\"6\">description</em> content</p>\n", tag1.Description);
+            Assert.Equal("""
+                <p sourcefile="TestData/overwrite/rest.overwrite.tags.md" sourcestartlinenumber="6">Overwrite <em sourcefile="TestData/overwrite/rest.overwrite.tags.md" sourcestartlinenumber="6">description</em> content</p>
+
+                """, tag1.Description);
             Assert.Null(tag1.Conceptual);
             var tag2 = model.Tags[1];
-            Assert.Equal("<p sourcefile=\"TestData/swagger/contacts.json\" sourcestartlinenumber=\"1\">Access to Petstore orders</p>\n", tag2.Description);
-            Assert.Equal("<p sourcefile=\"TestData/overwrite/rest.overwrite.tags.md\" sourcestartlinenumber=\"12\">Overwrite <strong sourcefile=\"TestData/overwrite/rest.overwrite.tags.md\" sourcestartlinenumber=\"12\">conceptual</strong> content</p>\n", tag2.Conceptual);
+            Assert.Equal("""
+                <p sourcefile="TestData/swagger/contacts.json" sourcestartlinenumber="1">Access to Petstore orders</p>
+
+                """, tag2.Description);
+            Assert.Equal("""
+                <p sourcefile="TestData/overwrite/rest.overwrite.tags.md" sourcestartlinenumber="12">Overwrite <strong sourcefile="TestData/overwrite/rest.overwrite.tags.md" sourcestartlinenumber="12">conceptual</strong> content</p>
+
+                """, tag2.Conceptual);
         }
     }
 
@@ -261,8 +291,15 @@ public class RestApiDocumentProcessorTest : TestBase
             var outputRawModelPath = GetRawModelFilePath("contacts.json");
             Assert.True(File.Exists(outputRawModelPath));
             var model = JsonUtility.Deserialize<RestApiRootItemViewModel>(outputRawModelPath);
-            Assert.Equal("<p sourcefile=\"TestData/overwrite/rest.overwrite.default.md\" sourcestartlinenumber=\"1\">Overwrite summary</p>\n", model.Summary);
-            Assert.Equal("\n<p sourcefile=\"TestData/overwrite/rest.overwrite.default.md\" sourcestartlinenumber=\"6\">Overwrite content</p>\n", model.Conceptual);
+            Assert.Equal("""
+                <p sourcefile="TestData/overwrite/rest.overwrite.default.md" sourcestartlinenumber="1">Overwrite summary</p>
+
+                """, model.Summary);
+            Assert.Equal("""
+
+                <p sourcefile="TestData/overwrite/rest.overwrite.default.md" sourcestartlinenumber="6">Overwrite content</p>
+
+                """, model.Conceptual);
         }
     }
 
@@ -275,7 +312,11 @@ public class RestApiDocumentProcessorTest : TestBase
         var outputRawModelPath = GetRawModelFilePath("contacts.json");
         Assert.True(File.Exists(outputRawModelPath));
         var model = JsonUtility.Deserialize<RestApiRootItemViewModel>(outputRawModelPath);
-        Assert.Equal("\n<p sourcefile=\"TestData/overwrite/rest.overwrite.simple.md\" sourcestartlinenumber=\"6\">Overwrite content</p>\n", model.Summary);
+        Assert.Equal("""
+
+            <p sourcefile="TestData/overwrite/rest.overwrite.simple.md" sourcestartlinenumber="6">Overwrite content</p>
+
+            """, model.Summary);
         Assert.Null(model.Conceptual);
     }
 
@@ -314,7 +355,10 @@ public class RestApiDocumentProcessorTest : TestBase
 
             var warningsForLinkAForSecond = warningsForLinkA.Where(i => i.File == "TestData/overwrite/rest.overwrite.invalid.links.second.md").ToList();
             Assert.Equal(
-                "<p sourcefile=\"TestData/overwrite/rest.overwrite.invalid.links.second.md\" sourcestartlinenumber=\"5\">Conceptual content <a href=\"a.md\" sourcefile=\"TestData/overwrite/rest.overwrite.invalid.links.second.md\" sourcestartlinenumber=\"5\">Conceptual</a></p>\n<p sourcefile=\"TestData/overwrite/rest.overwrite.invalid.links.second.md\" sourcestartlinenumber=\"7\"><a href=\"a.md\" sourcefile=\"TestData/overwrite/rest.overwrite.invalid.links.second.md\" sourcestartlinenumber=\"7\">Conceptual</a></p>",
+                """
+                <p sourcefile="TestData/overwrite/rest.overwrite.invalid.links.second.md" sourcestartlinenumber="5">Conceptual content <a href="a.md" sourcefile="TestData/overwrite/rest.overwrite.invalid.links.second.md" sourcestartlinenumber="5">Conceptual</a></p>
+                <p sourcefile="TestData/overwrite/rest.overwrite.invalid.links.second.md" sourcestartlinenumber="7"><a href="a.md" sourcefile="TestData/overwrite/rest.overwrite.invalid.links.second.md" sourcestartlinenumber="7">Conceptual</a></p>
+                """,
                 model.Conceptual.Trim());
             Assert.Equal(1, warningsForLinkAForSecond.Count(i => i.Line == "5"));
             Assert.Equal(1, warningsForLinkAForSecond.Count(i => i.Line == "7"));
@@ -344,10 +388,16 @@ public class RestApiDocumentProcessorTest : TestBase
 
         // Verify overwrite parameters
         var parametersForUpdate = model.Children.Single(c => c.OperationId == "update contact").Parameters;
-        Assert.Equal("<p sourcefile=\"TestData/overwrite/rest.overwrite.parameters.md\" sourcestartlinenumber=\"1\">The new object_id description</p>\n",
+        Assert.Equal("""
+            <p sourcefile="TestData/overwrite/rest.overwrite.parameters.md" sourcestartlinenumber="1">The new object_id description</p>
+
+            """,
             parametersForUpdate.Single(p => p.Name == "object_id").Description);
         var bodyparam = parametersForUpdate.Single(p => p.Name == "bodyparam");
-        Assert.Equal("<p sourcefile=\"TestData/overwrite/rest.overwrite.parameters.md\" sourcestartlinenumber=\"1\">The new bodyparam description</p>\n",
+        Assert.Equal("""
+            <p sourcefile="TestData/overwrite/rest.overwrite.parameters.md" sourcestartlinenumber="1">The new bodyparam description</p>
+
+            """,
             bodyparam.Description);
         var properties = (JObject)(((JObject)bodyparam.Metadata["schema"])["properties"]);
         var objectType = properties["objectType"];
@@ -361,7 +411,10 @@ public class RestApiDocumentProcessorTest : TestBase
         var paramForUpdateManager = model.Children.Single(c => c.OperationId == "get contact memberOf links").Parameters.Single(p => p.Name == "bodyparam");
         var paramForAllOf = ((JObject)paramForUpdateManager.Metadata["schema"])["allOf"];
         // First allOf item is not overwritten
-        Assert.Equal("<p sourcefile=\"TestData/swagger/contacts.json\" sourcestartlinenumber=\"1\">original first allOf description</p>\n", paramForAllOf[0]["description"]);
+        Assert.Equal("""
+            <p sourcefile="TestData/swagger/contacts.json" sourcestartlinenumber="1">original first allOf description</p>
+
+            """, paramForAllOf[0]["description"]);
         // Second allOf item is overwritten
         Assert.Equal("this is second overwrite allOf description", paramForAllOf[1]["description"]);
         Assert.Equal("this is overwrite location description", paramForAllOf[1]["properties"]["location"]["description"]);
@@ -384,7 +437,11 @@ public class RestApiDocumentProcessorTest : TestBase
             var outputRawModelPath = GetRawModelFilePath("contacts.json");
             Assert.True(File.Exists(outputRawModelPath));
             var model = JsonUtility.Deserialize<RestApiRootItemViewModel>(outputRawModelPath);
-            Assert.Equal("\n<p sourcefile=\"TestData/overwrite/rest.overwrite.not.predefined.md\" sourcestartlinenumber=\"6\">Overwrite content</p>\n", model.Metadata["not_defined_property"]);
+            Assert.Equal("""
+
+                <p sourcefile="TestData/overwrite/rest.overwrite.not.predefined.md" sourcestartlinenumber="6">Overwrite content</p>
+
+                """, model.Metadata["not_defined_property"]);
             Assert.Null(model.Conceptual);
         }
     }
@@ -421,7 +478,11 @@ public class RestApiDocumentProcessorTest : TestBase
             var outputRawModelPath = GetRawModelFilePath("contacts.json");
             Assert.True(File.Exists(outputRawModelPath));
             var model = JsonUtility.Deserialize<RestApiRootItemViewModel>(outputRawModelPath);
-            Assert.Equal("\n<p sourcefile=\"TestData/overwrite/rest.overwrite.remarks.md\" sourcestartlinenumber=\"6\">Remarks content</p>\n", model.Remarks);
+            Assert.Equal("""
+
+                <p sourcefile="TestData/overwrite/rest.overwrite.remarks.md" sourcestartlinenumber="6">Remarks content</p>
+
+                """, model.Remarks);
         }
     }
 
@@ -437,9 +498,21 @@ public class RestApiDocumentProcessorTest : TestBase
             Assert.True(File.Exists(outputRawModelPath));
             var model = JsonUtility.Deserialize<RestApiRootItemViewModel>(outputRawModelPath);
             Assert.Equal("graph_windows_net_myorganization_Contacts_1_0", model.HtmlId);
-            Assert.Equal("\n<p sourcefile=\"TestData/overwrite/rest.overwrite.multi.uid.md\" sourcestartlinenumber=\"6\">Overwrite content1</p>\n", model.Conceptual);
-            Assert.Equal("\n<p sourcefile=\"TestData/overwrite/rest.overwrite.multi.uid.md\" sourcestartlinenumber=\"13\">Overwrite &quot;content2&quot;</p>\n", model.Summary);
-            Assert.Equal("\n<p sourcefile=\"TestData/overwrite/rest.overwrite.multi.uid.md\" sourcestartlinenumber=\"20\">Overwrite 'content3'</p>\n", model.Metadata["not_defined_property"]);
+            Assert.Equal("""
+
+                <p sourcefile="TestData/overwrite/rest.overwrite.multi.uid.md" sourcestartlinenumber="6">Overwrite content1</p>
+
+                """, model.Conceptual);
+            Assert.Equal("""
+
+                <p sourcefile="TestData/overwrite/rest.overwrite.multi.uid.md" sourcestartlinenumber="13">Overwrite &quot;content2&quot;</p>
+
+                """, model.Summary);
+            Assert.Equal("""
+
+                <p sourcefile="TestData/overwrite/rest.overwrite.multi.uid.md" sourcestartlinenumber="20">Overwrite 'content3'</p>
+
+                """, model.Metadata["not_defined_property"]);
         }
     }
 

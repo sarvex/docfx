@@ -68,9 +68,11 @@ public class MergeMarkdownFragmentsTest : TestBase
         // Arrange
         var mdFile = CreateFile(
             "Suppressions.yml.md",
-            @"## `summary`
-markdown content
-",
+            """
+            ## `summary`
+            markdown content
+
+            """,
             _inputFolder);
 
         // Act
@@ -100,11 +102,13 @@ markdown content
         // Arrange
         var mdFile = CreateFile(
             "Suppressions.yml.md",
-            @"#head_1_without_space
+            """
+            #head_1_without_space
 
-## `summary`
-markdown content
-",
+            ## `summary`
+            markdown content
+
+            """,
             _inputFolder);
 
         // Act
@@ -134,14 +138,16 @@ markdown content
         // Arrange
         var mdFile = CreateFile(
             "Suppressions.yml.md",
-            @"# `management.azure.com.advisor.suppressions`
+            """
+            # `management.azure.com.advisor.suppressions`
 
-## `summary`
-markdown content
+            ## `summary`
+            markdown content
 
-##head_3_without_space
-markdown content
-",
+            ##head_3_without_space
+            markdown content
+
+            """,
             _inputFolder);
 
         // Act
@@ -158,14 +164,16 @@ markdown content
         // Arrange
         var mdFile = CreateFile(
             "Suppressions.yml.md",
-            @"# `management.azure.com.advisor.suppressions`
-```
-author:author_without_space
-```
+            """
+            # `management.azure.com.advisor.suppressions`
+            ```
+            author:author_without_space
+            ```
 
-## `summary`
-markdown content
-",
+            ## `summary`
+            markdown content
+
+            """,
             _inputFolder);
 
         // Act
@@ -195,15 +203,17 @@ markdown content
         // Arrange
         var mdFile = CreateFile(
             "Suppressions.yml.md",
-            @"# `management.azure.com.advisor.suppressions`
+            """
+            # `management.azure.com.advisor.suppressions`
 
-## `operations[id=]/summary`
+            ## `operations[id=]/summary`
 
-markdown_content
+            markdown_content
 
-## `summary`
-markdown content
-",
+            ## `summary`
+            markdown content
+
+            """,
             _inputFolder);
 
         // Act
@@ -233,34 +243,36 @@ markdown content
         // Arrange
         var mdFile = CreateFile(
             "Suppressions.yml.md",
-            @"# `uid_not_exist`
+            """
+            # `uid_not_exist`
 
-## `summary`
-markdown content
+            ## `summary`
+            markdown content
 
-# `management.azure.com.advisor.suppressions`
-```
-author: bob
-```
+            # `management.azure.com.advisor.suppressions`
+            ```
+            author: bob
+            ```
 
-## `operations[id=""management.azure.com.advisor.suppressions.create""]/summary`
-Enables the snoozed or dismissed attribute of a **recommendation**.
+            ## `operations[id="management.azure.com.advisor.suppressions.create"]/summary`
+            Enables the snoozed or dismissed attribute of a **recommendation**.
 
-## `definitions[name=""Application 1""]/description`
+            ## `definitions[name="Application 1"]/description`
 
-## `definitions[name=""Application 1""]/properties[name=""displayName""]/description`
+            ## `definitions[name="Application 1"]/properties[name="displayName"]/description`
 
-## `definitions[name=""Application 1""]/properties[name=""id""]/description`
+            ## `definitions[name="Application 1"]/properties[name="id"]/description`
 
-Some empty lines between H2 and this paragraph is tolerant
+            Some empty lines between H2 and this paragraph is tolerant
 
-## ``summary``
+            ## ``summary``
 
-## `definitions[name=""CloudError""]/description`
+            ## `definitions[name="CloudError"]/description`
 
-## `definitions[name=""CloudError""]/properties[name=""error""]/description`
+            ## `definitions[name="CloudError"]/properties[name="error"]/description`
 
-",
+
+            """,
             _inputFolder);
 
         // Act
@@ -289,21 +301,23 @@ Some empty lines between H2 and this paragraph is tolerant
         // Arrange
         var mdFile = CreateFile(
             "Suppressions.yml.md",
-            @"# `management.azure.com.advisor.suppressions`
-```
-name: name overwrite
-definitions:
-- name: Application 1
-  properties:
-  - name: id
-    description: overwrite in yaml block
-  - name: displayName
-    description: overwrite in yaml block
-```
+            """
+            # `management.azure.com.advisor.suppressions`
+            ```
+            name: name overwrite
+            definitions:
+            - name: Application 1
+              properties:
+              - name: id
+                description: overwrite in yaml block
+              - name: displayName
+                description: overwrite in yaml block
+            ```
 
-## `definitions[name=""Application 1""]/properties[name=""displayName""]/description`
-overwrite in contents block
-",
+            ## `definitions[name="Application 1"]/properties[name="displayName"]/description`
+            overwrite in contents block
+
+            """,
             _inputFolder);
 
         // Act
@@ -334,10 +348,12 @@ overwrite in contents block
         // add fragments
         var mdFile = CreateFile(
             "Suppressions.yml.md",
-            @"# `management.azure.com.advisor.suppressions`
-## ``summary``
-I add a summary.
-With [!include[invalid](invalid.md)]",
+            """
+            # `management.azure.com.advisor.suppressions`
+            ## ``summary``
+            I add a summary.
+            With [!include[invalid](invalid.md)]
+            """,
             _inputFolder);
         using (new LoggerPhaseScope("AddFragments"))
         {

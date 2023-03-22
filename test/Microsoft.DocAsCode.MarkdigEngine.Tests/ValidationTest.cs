@@ -29,18 +29,20 @@ public class ValidationTest
     [Trait("Related", "Validation")]
     public void TestHtmlBlockTagValidation()
     {
-        var content = @"
-<div class='a'>
-    <i>x</i>
-    <EM>y</EM>
-    <h1>
-        z
-        <pre><code>
-            a*b*c
-        </code></pre>
-    </h1>
-</div>
-<script>alert(1);</script>";
+        var content = """
+
+            <div class='a'>
+                <i>x</i>
+                <EM>y</EM>
+                <h1>
+                    z
+                    <pre><code>
+                        a*b*c
+                    </code></pre>
+                </h1>
+            </div>
+            <script>alert(1);</script>
+            """;
 
         var builder = MarkdownValidatorBuilder.Create(
             null,
@@ -93,18 +95,26 @@ public class ValidationTest
         {
             var html = Markup(content, builder.CreateRewriter(DefaultContext), listener);
 
-            Assert.Equal(@"<div class='a'>
-    <i>x</i>
-    <EM>y</EM>
-    <h1>
-        z
-        <pre><code>
-            a*b*c
-        </code></pre>
-    </h1>
-</div>
-<script>alert(1);</script>
-".Replace("\r\n", "\n"), html);
+            Assert.Equal("""
+                <div class='a'>
+                    <i>x</i>
+                    <EM>y</EM>
+                    <h1>
+                        z
+                        <pre><code>
+                            a*b*c
+                        </code></pre>
+                    </h1>
+                </div>
+                <script>alert(1);</script>
+
+                """.Replace("""
+
+
+                """, """
+
+
+"""), html);
         }
         Assert.Equal(8, listener.Items.Count);
         Assert.Equal(new[]
@@ -124,18 +134,20 @@ public class ValidationTest
     [Trait("Related", "Validation")]
     public void TestHtmlBlockTagNotInRelationValidation()
     {
-        var content = @"
-<div class='a'>
-    <i>x</i>
-    <EM>y</EM>
-    <h1>
-        z
-        <pre><code>
-            a*b*c
-        </code></pre>
-    </h1>
-</div>
-<script>alert(1);</script>";
+        var content = """
+
+            <div class='a'>
+                <i>x</i>
+                <EM>y</EM>
+                <h1>
+                    z
+                    <pre><code>
+                        a*b*c
+                    </code></pre>
+                </h1>
+            </div>
+            <script>alert(1);</script>
+            """;
 
         var builder = MarkdownValidatorBuilder.Create(null, null);
         builder.AddTagValidators(new[]
@@ -155,18 +167,26 @@ public class ValidationTest
         {
             var html = Markup(content, builder.CreateRewriter(DefaultContext), listener);
 
-            Assert.Equal(@"<div class='a'>
-    <i>x</i>
-    <EM>y</EM>
-    <h1>
-        z
-        <pre><code>
-            a*b*c
-        </code></pre>
-    </h1>
-</div>
-<script>alert(1);</script>
-".Replace("\r\n", "\n"), html);
+            Assert.Equal("""
+                <div class='a'>
+                    <i>x</i>
+                    <EM>y</EM>
+                    <h1>
+                        z
+                        <pre><code>
+                            a*b*c
+                        </code></pre>
+                    </h1>
+                </div>
+                <script>alert(1);</script>
+
+                """.Replace("""
+
+
+                """, """
+
+
+"""), html);
         }
         Assert.Equal(3, listener.Items.Count);
         Assert.Equal(new[]
@@ -181,9 +201,11 @@ public class ValidationTest
     [Trait("Related", "Validation")]
     public void TestHtmlInlineTagValidation()
     {
-        var content = @"This is inline html: <div class='a'><i>x</i><EM>y</EM><h1>z<pre><code>a*b*c</code></pre></h1></div>
+        var content = """
+            This is inline html: <div class='a'><i>x</i><EM>y</EM><h1>z<pre><code>a*b*c</code></pre></h1></div>
 
-<script>alert(1);</script> end.";
+            <script>alert(1);</script> end.
+            """;
 
         var builder = MarkdownValidatorBuilder.Create(
             null,
@@ -227,9 +249,17 @@ public class ValidationTest
         {
             var html = Markup(content, builder.CreateRewriter(DefaultContext), listener);
 
-            Assert.Equal(@"<p>This is inline html: <div class='a'><i>x</i><EM>y</EM><h1>z<pre><code>a<em>b</em>c</code></pre></h1></div></p>
-<script>alert(1);</script> end.
-".Replace("\r\n", "\n"), html);
+            Assert.Equal("""
+                <p>This is inline html: <div class='a'><i>x</i><EM>y</EM><h1>z<pre><code>a<em>b</em>c</code></pre></h1></div></p>
+                <script>alert(1);</script> end.
+
+                """.Replace("""
+
+
+                """, """
+
+
+"""), html);
         }
         Assert.Equal(7, listener.Items.Count);
         Assert.Equal(new[]
@@ -249,7 +279,10 @@ public class ValidationTest
     public void TestTokenValidator()
     {
         const string content = "# Hello World";
-        const string expected = "<h1>Hello World</h1>\n";
+        const string expected = """
+            <h1>Hello World</h1>
+
+            """;
         const string expectedMessage = "a space is expected after '#'";
         string message = null;
 
@@ -265,7 +298,13 @@ public class ValidationTest
             );
 
         var html = Markup(content, rewriter, null);
-        Assert.Equal(expected.Replace("\r\n", "\n"), html);
+        Assert.Equal(expected.Replace("""
+
+
+            """, """
+
+
+            """), html);
         Assert.Equal(expectedMessage, message);
     }
 
@@ -273,11 +312,15 @@ public class ValidationTest
     [Trait("Related", "Validation")]
     public void TestValidatorWithContext()
     {
-        const string content = @"# Title-1
-# Title-2";
-        const string expected = @"<h1>Title-1</h1>
-<h1>Title-2</h1>
-";
+        const string content = """
+            # Title-1
+            # Title-2
+            """;
+        const string expected = """
+            <h1>Title-1</h1>
+            <h1>Title-2</h1>
+
+            """;
         const string expectedMessage = "expected one title in one document.";
         string message = null;
 
@@ -311,7 +354,13 @@ public class ValidationTest
 
         var rewriter = MarkdownObjectRewriterFactory.FromValidator(validator);
         var html = Markup(content, rewriter, null);
-        Assert.Equal(expected.Replace("\r\n", "\n"), html);
+        Assert.Equal(expected.Replace("""
+
+
+            """, """
+
+
+            """), html);
         Assert.Equal(expectedMessage, message);
     }
 
@@ -320,7 +369,10 @@ public class ValidationTest
     public void TestMarkdownDocumentValidator()
     {
         const string content = "## Hello World";
-        const string expected = "<h2>Hello World</h2>\n";
+        const string expected = """
+            <h2>Hello World</h2>
+
+            """;
         const string expectedMessage = "H1 should be in the first line";
         string message = null;
 
@@ -339,7 +391,13 @@ public class ValidationTest
             );
 
         var html = Markup(content, rewriter, null);
-        Assert.Equal(expected.Replace("\r\n", "\n"), html);
+        Assert.Equal(expected.Replace("""
+
+
+            """, """
+
+
+            """), html);
         Assert.Equal(expectedMessage, message);
     }
 
@@ -349,8 +407,10 @@ public class ValidationTest
     {
         const string expectedSchemaName = "YamlMime:ModuleUnit";
         const string yamlFilename = "moduleunit.yml";
-        const string yamlContent = @"### YamlMime:ModuleUnit
-uid: learn.azure.introduction";
+        const string yamlContent = """
+            ### YamlMime:ModuleUnit
+            uid: learn.azure.introduction
+            """;
         File.WriteAllText(yamlFilename, yamlContent);
         InclusionContext.PushFile(yamlFilename);
         InclusionContext.PushInclusion("introduction-included.md");
