@@ -3,13 +3,6 @@
 
 namespace Microsoft.DocAsCode.Common;
 
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-
 public static class StringExtension
 {
     public static string ForwardSlashCombine(this string baseAddress, string relativeAddress)

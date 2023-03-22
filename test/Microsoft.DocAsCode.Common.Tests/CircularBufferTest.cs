@@ -1,17 +1,12 @@
 ﻿// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.Common.Tests;
-
-using System;
-using System.IO;
 using System.Security.Cryptography;
-using System.Threading.Tasks;
 using Xunit;
 
-using Microsoft.DocAsCode.Common;
+namespace Microsoft.DocAsCode.Common.Tests;
 
-    [Trait("Related", "CircularBuffer")]
+[Trait("Related", "CircularBuffer")]
 public class CircularBufferTest
 {
     [Fact]

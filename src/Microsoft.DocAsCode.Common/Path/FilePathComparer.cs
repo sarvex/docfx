@@ -3,9 +3,6 @@
 
 namespace Microsoft.DocAsCode.Common;
 
-using System;
-using System.Collections.Generic;
-
 public class FilePathComparer
     : IEqualityComparer<string>
 {

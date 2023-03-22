@@ -1,11 +1,7 @@
 // Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.Build.Engine;
-
-using System;
 using System.Collections.Specialized;
-using System.Linq;
 using System.Net;
 using System.Web;
 
@@ -13,6 +9,8 @@ using Microsoft.DocAsCode.Plugins;
 using Microsoft.DocAsCode.Common;
 
 using HtmlAgilityPack;
+
+namespace Microsoft.DocAsCode.Build.Engine;
 
 [Serializable]
 public sealed class XRefDetails

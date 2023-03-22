@@ -1,16 +1,13 @@
 ﻿// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.Common.Tests;
-
-using System.Collections.Generic;
-using System.IO;
-
 using Microsoft.DocAsCode.Common.StreamSegmentSerialization;
 
 using Xunit;
 
-    [Trait("Related", "StreamSegmentSerialization")]
+namespace Microsoft.DocAsCode.Common.Tests;
+
+[Trait("Related", "StreamSegmentSerialization")]
 public class StreamSegmentSerializationTest
 {
     [Fact]

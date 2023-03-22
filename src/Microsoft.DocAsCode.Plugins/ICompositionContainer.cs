@@ -3,8 +3,6 @@
 
 namespace Microsoft.DocAsCode.Plugins;
 
-using System.Collections.Generic;
-
 public interface ICompositionContainer
 {
     T GetExport<T>();

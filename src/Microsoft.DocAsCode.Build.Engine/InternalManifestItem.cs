@@ -3,8 +3,6 @@
 
 namespace Microsoft.DocAsCode.Build.Engine;
 
-using System.Collections.Generic;
-
 internal class InternalManifestItem
 {
     public string DocumentType { get; set; }

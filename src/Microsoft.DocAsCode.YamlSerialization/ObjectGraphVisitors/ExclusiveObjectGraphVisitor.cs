@@ -1,13 +1,12 @@
 // Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.YamlSerialization.ObjectGraphVisitors;
-
-using System;
 using System.ComponentModel;
 using YamlDotNet.Core;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.ObjectGraphVisitors;
+
+namespace Microsoft.DocAsCode.YamlSerialization.ObjectGraphVisitors;
 
 /// <summary>
 /// YamlDotNet behavior has changed since 6.x so a custom version which doesn't check on EnterMapping(IObjectDescriptor).

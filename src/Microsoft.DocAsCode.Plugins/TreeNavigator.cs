@@ -3,9 +3,6 @@
 
 namespace Microsoft.DocAsCode.Plugins;
 
-using System;
-using System.Collections.Generic;
-
 public class TreeNavigator
 {
     private NavigatorTreeItem _tree;

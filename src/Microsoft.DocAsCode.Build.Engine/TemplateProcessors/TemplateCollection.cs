@@ -3,10 +3,6 @@
 
 namespace Microsoft.DocAsCode.Build.Engine;
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-
 public class TemplateCollection : Dictionary<string, TemplateBundle>
 {
     private TemplateBundle _defaultTemplate = null;

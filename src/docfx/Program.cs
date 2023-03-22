@@ -1,9 +1,6 @@
 // Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode;
-
-using System;
 using System.Reflection;
 using Microsoft.DocAsCode.Common;
 using Microsoft.DocAsCode.Exceptions;
@@ -11,6 +8,8 @@ using Microsoft.DocAsCode.Plugins;
 using Microsoft.DocAsCode.SubCommands;
 
 using Newtonsoft.Json;
+
+namespace Microsoft.DocAsCode;
 
 internal class Program
 {

@@ -3,10 +3,6 @@
 
 namespace Microsoft.DocAsCode.HtmlToPdf;
 
-using System;
-using System.Linq;
-using System.Threading;
-
 internal static class RetryHelper
 {
     public static void Retry(

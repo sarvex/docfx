@@ -1,15 +1,12 @@
 ﻿// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.Build.SchemaDriven.Tests;
-
-using System.Collections.Generic;
-using System.IO;
-
 using Microsoft.DocAsCode.Build.OverwriteDocuments;
 
 using Xunit;
 using YamlDotNet.RepresentationModel;
+
+namespace Microsoft.DocAsCode.Build.SchemaDriven.Tests;
 
 public class SchemaFragmentsIteratorTest
 {

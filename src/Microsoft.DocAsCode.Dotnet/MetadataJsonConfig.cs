@@ -3,8 +3,6 @@
 
 namespace Microsoft.DocAsCode;
 
-using System.Collections.Generic;
-
 internal class MetadataJsonConfig : List<MetadataJsonItemConfig>
 {
     public MetadataJsonConfig(IEnumerable<MetadataJsonItemConfig> configs) : base(configs) { }

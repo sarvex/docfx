@@ -1,18 +1,15 @@
 // Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.MarkdigEngine.Extensions;
-
-using System;
-using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 
 using Markdig.Syntax;
 using Markdig.Syntax.Inlines;
+
+namespace Microsoft.DocAsCode.MarkdigEngine.Extensions;
 
 public class TabGroupAggregator : BlockAggregator<HeadingBlock>
 {

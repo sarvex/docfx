@@ -1,21 +1,17 @@
 // Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.MarkdigEngine.Tests;
-
-using System.Collections.Generic;
 using System.Composition.Hosting;
-using System.Linq;
-using System.IO;
-
-using MarkdigEngine.Extensions;
 
 using Markdig;
 using Markdig.Syntax;
 using Microsoft.DocAsCode.Common;
+using Microsoft.DocAsCode.MarkdigEngine.Extensions;
 using Microsoft.DocAsCode.MarkdigEngine.Validators;
 using Microsoft.DocAsCode.Plugins;
 using Xunit;
+
+namespace Microsoft.DocAsCode.MarkdigEngine.Tests;
 
 public class ValidationTest
 {

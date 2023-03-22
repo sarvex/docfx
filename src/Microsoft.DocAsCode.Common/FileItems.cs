@@ -3,9 +3,6 @@
 
 namespace Microsoft.DocAsCode;
 
-using System;
-using System.Collections.Generic;
-
 [Serializable]
 public class FileItems : List<string>
 {

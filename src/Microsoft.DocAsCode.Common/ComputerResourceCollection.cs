@@ -3,9 +3,6 @@
 
 namespace Microsoft.DocAsCode.Common;
 
-using System;
-using System.Threading;
-
 public class ComputerResourceCollection
 {
     public const int DefaultDiskIOThreshold = 2;

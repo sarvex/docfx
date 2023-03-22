@@ -3,8 +3,6 @@
 
 namespace Microsoft.DocAsCode.HtmlToPdf;
 
-using System.Collections.Generic;
-
 public class HtmlModel
 {
     public string Title { get; set; }

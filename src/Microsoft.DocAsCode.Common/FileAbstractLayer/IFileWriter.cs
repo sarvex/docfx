@@ -3,8 +3,6 @@
 
 namespace Microsoft.DocAsCode.Common;
 
-using System.IO;
-
 /// <summary>
 /// File writer.
 /// </summary>

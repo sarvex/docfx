@@ -1,13 +1,12 @@
 // Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-namespace Microsoft.DocAsCode.MarkdigEngine.Extensions;
 
 using Markdig.Renderers;
 using Markdig.Renderers.Html;
 using Markdig.Syntax;
-using System;
-using System.Collections.Generic;
 using System.Net;
+
+namespace Microsoft.DocAsCode.MarkdigEngine.Extensions;
 
 public class ChromelessFormExtension : ITripleColonExtensionInfo
 {
@@ -52,7 +51,6 @@ public class ChromelessFormExtension : ITripleColonExtensionInfo
             logError("Submit text must be specified.");
             return false;
         }
-
 
         htmlAttributes = new HtmlAttributes();
         if (model != string.Empty)

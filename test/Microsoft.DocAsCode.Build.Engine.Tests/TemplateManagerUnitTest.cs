@@ -1,18 +1,13 @@
 // Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.Build.Engine.Tests;
-
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-
 using Microsoft.DocAsCode.Common;
 using Microsoft.DocAsCode.Plugins;
 using Microsoft.DocAsCode.Tests.Common;
 
 using Xunit;
+
+namespace Microsoft.DocAsCode.Build.Engine.Tests;
 
 [Collection("docfx STA")]
 public class TemplateManagerUnitTest : TestBase
@@ -496,7 +491,6 @@ exports.transform = function (model){
         Assert.True(File.Exists(outputFilePath1));
         Assert.Equal($"{{&quot;model&quot;:{{&quot;name&quot;:&quot;{longName}&quot;}},&quot;__global&quot;:{{}}}}", File.ReadAllText(outputFilePath1));
     }
-
 
     [Fact]
     public void JsRegexShouldNotShareStatusAmongFunctions()

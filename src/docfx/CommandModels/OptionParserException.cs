@@ -3,8 +3,6 @@
 
 namespace Microsoft.DocAsCode.SubCommands;
 
-using System;
-
 public class OptionParserException : ArgumentException
 {
     public OptionParserException() : this("Invalid command options!")

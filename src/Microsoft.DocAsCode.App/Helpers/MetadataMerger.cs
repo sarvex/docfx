@@ -1,13 +1,7 @@
 ﻿// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.SubCommands;
-
-using System;
-using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.IO;
-using System.Linq;
 
 using Microsoft.DocAsCode.Common;
 using Microsoft.DocAsCode.Build.Engine;
@@ -16,6 +10,8 @@ using Microsoft.DocAsCode.DataContracts.Common;
 using Microsoft.DocAsCode.DataContracts.ManagedReference;
 using Microsoft.DocAsCode.Plugins;
 using Microsoft.DocAsCode.MarkdigEngine;
+
+namespace Microsoft.DocAsCode.SubCommands;
 
 internal class MetadataMerger
 {
@@ -120,7 +116,7 @@ internal class MetadataMerger
             {
                 var property = GetTableItem(item, metaNames);
 
-                if (property.Count > 0 && item.TryGetValue(Constants.PropertyName.Uid, out object uid))
+                if (property.Count > 0 && item.TryGetValue("uid", out object uid))
                 {
                     _propTable.Add((string)uid, property);
                 }

@@ -3,9 +3,6 @@
 
 namespace Microsoft.DocAsCode.HtmlToPdf;
 
-using System;
-using System.IO;
-
 public static class PdfHelper
 {
     public static string RemoveUrlQueryString(this string url)

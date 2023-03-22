@@ -3,7 +3,6 @@
 
 using Microsoft.DocAsCode.Glob;
 using Newtonsoft.Json;
-using System.Collections.Generic;
 using System.Collections.Immutable;
 using Xunit;
 

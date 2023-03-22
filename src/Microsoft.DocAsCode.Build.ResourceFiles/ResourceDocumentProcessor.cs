@@ -1,15 +1,13 @@
 ﻿// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.Build.ResourceFiles;
-
-using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Composition;
-using System.IO;
 using Microsoft.DocAsCode.Build.Common;
 using Microsoft.DocAsCode.Common;
 using Microsoft.DocAsCode.Plugins;
+
+namespace Microsoft.DocAsCode.Build.ResourceFiles;
 
 [Export(typeof(IDocumentProcessor))]
 public class ResourceDocumentProcessor : DisposableDocumentProcessor

@@ -3,8 +3,6 @@
 
 namespace Microsoft.DocAsCode.Common.EntityMergers;
 
-using System;
-
 public interface IMerger
 {
     void Merge(ref object source, object overrides, Type type, IMergeContext context);

@@ -3,9 +3,6 @@
 
 namespace Microsoft.DocAsCode.Common;
 
-using System;
-using System.Threading;
-
 [Serializable]
 public struct AmbientContext : IDisposable
 {

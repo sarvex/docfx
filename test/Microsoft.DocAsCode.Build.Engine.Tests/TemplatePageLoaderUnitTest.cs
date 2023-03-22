@@ -1,14 +1,11 @@
 // Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.Build.Engine.Tests;
-
-using System.Collections.Generic;
-using System.Linq;
-
 using Microsoft.DocAsCode.Tests.Common;
 
 using Xunit;
+
+namespace Microsoft.DocAsCode.Build.Engine.Tests;
 
 [Collection("docfx STA")]
 public class TemplatePageLoaderUnitTest : TestBase

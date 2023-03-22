@@ -3,8 +3,6 @@
 
 namespace Microsoft.DocAsCode.Dotnet;
 
-using System.Collections.Generic;
-
 internal class MetadataModel
 {
     public MetadataItem TocYamlViewModel { get; set; }

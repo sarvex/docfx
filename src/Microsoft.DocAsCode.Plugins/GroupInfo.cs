@@ -3,8 +3,6 @@
 
 namespace Microsoft.DocAsCode.Plugins;
 
-using System.Collections.Generic;
-
 public class GroupInfo
 {
     public string Name { get; set; }

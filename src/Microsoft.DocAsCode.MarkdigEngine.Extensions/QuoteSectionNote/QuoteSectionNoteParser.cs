@@ -1,15 +1,11 @@
 // Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.MarkdigEngine.Extensions;
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-
 using Markdig.Helpers;
 using Markdig.Parsers;
 using Markdig.Syntax;
+
+namespace Microsoft.DocAsCode.MarkdigEngine.Extensions;
 
 public class QuoteSectionNoteParser : BlockParser
 {

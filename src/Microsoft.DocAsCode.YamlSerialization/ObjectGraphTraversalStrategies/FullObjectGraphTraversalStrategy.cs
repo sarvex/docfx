@@ -1,11 +1,7 @@
 // Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.YamlSerialization.ObjectGraphTraversalStrategies;
-
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
 using System.Reflection;
@@ -19,6 +15,8 @@ using Microsoft.DocAsCode.YamlSerialization.ObjectDescriptors;
 
 using IObjectGraphVisitor = System.Object;
 using IObjectGraphVisitorContext = System.Object;
+
+namespace Microsoft.DocAsCode.YamlSerialization.ObjectGraphTraversalStrategies;
 
 /// <summary>
 /// An implementation of <see cref="IObjectGraphTraversalStrategy"/> that traverses

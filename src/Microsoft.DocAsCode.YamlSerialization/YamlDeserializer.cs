@@ -1,12 +1,6 @@
 // Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.YamlSerialization;
-
-using System;
-using System.Collections.Generic;
-using System.IO;
-
 using YamlDotNet.Core;
 using YamlDotNet.Core.Events;
 using YamlDotNet.Serialization;
@@ -22,6 +16,8 @@ using Microsoft.DocAsCode.YamlSerialization.NodeDeserializers;
 using Microsoft.DocAsCode.YamlSerialization.NodeTypeResolvers;
 using Microsoft.DocAsCode.YamlSerialization.ObjectFactories;
 using Microsoft.DocAsCode.YamlSerialization.TypeInspectors;
+
+namespace Microsoft.DocAsCode.YamlSerialization;
 
 /// <summary>
 /// A facade for the YAML library with the standard configuration.

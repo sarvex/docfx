@@ -3,12 +3,6 @@
 
 using Microsoft.DocAsCode.YamlSerialization.ObjectGraphVisitors;
 
-namespace Microsoft.DocAsCode.YamlSerialization;
-
-using System;
-using System.Collections.Generic;
-using System.IO;
-
 using YamlDotNet.Core;
 using YamlDotNet.Core.Events;
 using YamlDotNet.Serialization;
@@ -22,6 +16,8 @@ using Microsoft.DocAsCode.YamlSerialization.Helpers;
 using Microsoft.DocAsCode.YamlSerialization.ObjectDescriptors;
 using Microsoft.DocAsCode.YamlSerialization.ObjectGraphTraversalStrategies;
 using Microsoft.DocAsCode.YamlSerialization.TypeInspectors;
+
+namespace Microsoft.DocAsCode.YamlSerialization;
 
 public class YamlSerializer
 {

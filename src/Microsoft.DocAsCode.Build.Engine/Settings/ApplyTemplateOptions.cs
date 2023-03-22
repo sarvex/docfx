@@ -3,8 +3,6 @@
 
 namespace Microsoft.DocAsCode.Build.Engine;
 
-using System;
-
 [Flags]
 public enum ApplyTemplateOptions
 {

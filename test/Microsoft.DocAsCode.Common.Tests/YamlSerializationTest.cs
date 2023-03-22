@@ -1,19 +1,14 @@
 ﻿// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.Common.Tests;
-
-using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Collections.ObjectModel;
-using System.IO;
-using System.Linq;
 
 using Xunit;
 using YamlDotNet.Core;
-
-using Microsoft.DocAsCode.Common;
 using Microsoft.DocAsCode.YamlSerialization;
+
+namespace Microsoft.DocAsCode.Common.Tests;
 
 public class YamlSerializationTest
 {

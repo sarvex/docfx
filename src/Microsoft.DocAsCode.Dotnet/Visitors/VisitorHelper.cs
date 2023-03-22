@@ -1,11 +1,7 @@
 // Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.Dotnet;
-
-using System;
 using System.Diagnostics;
-using System.Linq;
 using System.Text.RegularExpressions;
 
 using Microsoft.CodeAnalysis;
@@ -15,6 +11,8 @@ using Microsoft.DocAsCode.Common.Git;
 using Microsoft.DocAsCode.DataContracts.Common;
 using Microsoft.DocAsCode.DataContracts.ManagedReference;
 using Microsoft.DocAsCode.Plugins;
+
+namespace Microsoft.DocAsCode.Dotnet;
 
 internal static class VisitorHelper
 {

@@ -3,8 +3,6 @@
 
 namespace Microsoft.DocAsCode.Common.EntityMergers;
 
-using System;
-
 public abstract class MergerDecorator : IMerger
 {
     private readonly IMerger _inner;

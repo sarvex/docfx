@@ -1,13 +1,11 @@
 ﻿// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.Dotnet.Tests;
-
-using System.Linq;
-
 using Xunit;
 
 using Microsoft.DocAsCode.DataContracts.ManagedReference;
+
+namespace Microsoft.DocAsCode.Dotnet.Tests;
 
 [Collection("docfx STA")]
 public class GenerateMetadataFromAssemblyTest

@@ -1,16 +1,11 @@
 ﻿// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.Build.OverwriteDocuments.Tests;
-
-using System.IO;
-using System.Linq;
-
-using Microsoft.DocAsCode.Build.OverwriteDocuments;
-
 using Markdig;
 using Markdig.Syntax;
 using Xunit;
+
+namespace Microsoft.DocAsCode.Build.OverwriteDocuments.Tests;
 
 public class MarkdownFragmentsCreaterTest
 {

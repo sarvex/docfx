@@ -1,14 +1,11 @@
 // Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.Build.Engine;
-
 using Stubble.Core.Builders;
 using Stubble.Core.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text.RegularExpressions;
+
+namespace Microsoft.DocAsCode.Build.Engine;
 
 internal class MustacheTemplateRenderer : ITemplateRenderer
 {

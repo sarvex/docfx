@@ -1,10 +1,5 @@
 ﻿namespace Microsoft.DocAsCode.Plugins;
 
-using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-
 public static class DocumentExceptionExtensions
 {
     public static TResult[] RunAll<TElement, TResult>(this IReadOnlyList<TElement> elements, Func<TElement, TResult> func)

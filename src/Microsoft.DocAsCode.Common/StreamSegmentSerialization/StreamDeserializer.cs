@@ -3,10 +3,6 @@
 
 namespace Microsoft.DocAsCode.Common.StreamSegmentSerialization;
 
-using System;
-using System.Collections.Generic;
-using System.IO;
-
 public class StreamDeserializer
 {
     public Stream UnderlyingStream { get; }

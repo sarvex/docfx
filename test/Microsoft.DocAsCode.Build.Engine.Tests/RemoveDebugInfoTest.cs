@@ -1,13 +1,12 @@
 ﻿// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.Build.Engine.Tests;
-
-using System.IO;
 using Microsoft.DocAsCode.Plugins;
 using Microsoft.DocAsCode.Tests.Common;
 
 using Xunit;
+
+namespace Microsoft.DocAsCode.Build.Engine.Tests;
 
 [Collection("docfx STA")]
 public class RemoveDebugInfoTest : TestBase

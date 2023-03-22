@@ -3,8 +3,6 @@
 
 namespace Microsoft.DocAsCode.Common;
 
-using System;
-
 public static class ConsoleUtility
 {
     public static void Write(string message, ConsoleColor color)

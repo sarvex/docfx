@@ -3,8 +3,6 @@
 
 namespace Microsoft.DocAsCode.Build.OverwriteDocuments;
 
-using System;
-
 public class MarkdownFragmentsException : Exception
 {
     public int Position { get; } = -1;

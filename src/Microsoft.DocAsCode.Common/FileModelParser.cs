@@ -1,12 +1,10 @@
 // Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode;
-
-using System.Linq;
-
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+
+namespace Microsoft.DocAsCode;
 
 internal static class FileModelParser
 {

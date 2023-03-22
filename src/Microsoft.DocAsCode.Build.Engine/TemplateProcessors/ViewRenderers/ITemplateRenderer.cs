@@ -3,8 +3,6 @@
 
 namespace Microsoft.DocAsCode.Build.Engine;
 
-using System.Collections.Generic;
-
 public interface ITemplateRenderer
 {
     string Render(object model);

@@ -1,6 +1,7 @@
-﻿namespace Microsoft.DocAsCode.MarkdigEngine.Tests;
-
+﻿
 using Xunit;
+
+namespace Microsoft.DocAsCode.MarkdigEngine.Tests;
 
 public class NolocTest
 {

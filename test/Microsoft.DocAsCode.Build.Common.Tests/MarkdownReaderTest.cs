@@ -1,11 +1,7 @@
 ﻿// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.Build.Common.Tests;
-
 using System.Collections.Immutable;
-using System.IO;
-using System.Linq;
 using System.Text.RegularExpressions;
 
 using Xunit;
@@ -13,6 +9,8 @@ using Xunit;
 using Microsoft.DocAsCode.Build.Engine;
 using Microsoft.DocAsCode.Plugins;
 using Microsoft.DocAsCode.MarkdigEngine;
+
+namespace Microsoft.DocAsCode.Build.Common.Tests;
 
 public class MarkdownReaderTest
 {

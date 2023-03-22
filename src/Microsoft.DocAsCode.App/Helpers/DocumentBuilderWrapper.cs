@@ -1,18 +1,9 @@
 ﻿// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.SubCommands;
-
-using System;
-using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.IO;
-using System.Linq;
 using System.Net;
 using System.Reflection;
-using System.Threading;
-
-using Microsoft.DocAsCode;
 using Microsoft.DocAsCode.Build.ConceptualDocuments;
 using Microsoft.DocAsCode.Build.Engine;
 using Microsoft.DocAsCode.Build.ManagedReference;
@@ -23,6 +14,8 @@ using Microsoft.DocAsCode.Build.TableOfContents;
 using Microsoft.DocAsCode.Build.UniversalReference;
 using Microsoft.DocAsCode.Common;
 using Microsoft.DocAsCode.Plugins;
+
+namespace Microsoft.DocAsCode.SubCommands;
 
 internal static class DocumentBuilderWrapper
 {

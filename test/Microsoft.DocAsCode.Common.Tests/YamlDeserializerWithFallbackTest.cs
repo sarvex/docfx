@@ -1,17 +1,12 @@
 ﻿// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.Common.Tests;
-
-using System.Collections.Generic;
-using System.IO;
-
 using Xunit;
-
-using Microsoft.DocAsCode.Common;
 using YamlDotNet.Core;
 
-    public class YamlDeserializerWithFallbackTest
+namespace Microsoft.DocAsCode.Common.Tests;
+
+public class YamlDeserializerWithFallbackTest
 {
     [Fact]
     public void TestYamlDeserializerWithFallback()

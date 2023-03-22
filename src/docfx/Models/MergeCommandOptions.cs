@@ -1,11 +1,9 @@
 // Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode;
-
-using System.Collections.Generic;
-
 using CommandLine;
+
+namespace Microsoft.DocAsCode;
 
 [OptionUsage("merge [<config file path>]")]
 internal class MergeCommandOptions : LogOptions, ICanPrintHelpMessage

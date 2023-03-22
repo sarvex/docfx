@@ -3,10 +3,6 @@
 
 namespace Microsoft.DocAsCode.Common;
 
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-
 public static class FileAbstractLayerExtensions
 {
     public static bool Exists(this FileAbstractLayer fal, string file) =>

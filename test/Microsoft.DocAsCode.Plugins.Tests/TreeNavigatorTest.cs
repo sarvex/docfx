@@ -1,14 +1,11 @@
 ﻿// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.Plugins.Tests;
-
-using System.Collections.Generic;
 using Xunit;
 
-using Microsoft.DocAsCode.Plugins;
+namespace Microsoft.DocAsCode.Plugins.Tests;
 
-    public class TreeNavigatorTest
+public class TreeNavigatorTest
 {
     [Fact]
     public void NavigateSimpleTreeShouldSucceed()

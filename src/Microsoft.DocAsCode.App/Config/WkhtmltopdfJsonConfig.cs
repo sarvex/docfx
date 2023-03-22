@@ -1,10 +1,9 @@
 // Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode;
-
-using System;
 using Newtonsoft.Json;
+
+namespace Microsoft.DocAsCode;
 
 /// <summary>
 ///     Holds configuration options specific to the wkhtmltopdf tooling used by the pdf command.

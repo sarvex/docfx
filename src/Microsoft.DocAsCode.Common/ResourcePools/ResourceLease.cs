@@ -3,8 +3,6 @@
 
 namespace Microsoft.DocAsCode.Common;
 
-using System;
-
 public sealed class ResourceLease<T>
     : IDisposable
     where T : class

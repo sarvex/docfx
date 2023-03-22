@@ -1,14 +1,11 @@
 ﻿// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.Build.SchemaDriven.Processors;
-
-using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using Microsoft.DocAsCode.Common;
 using Microsoft.DocAsCode.Plugins;
+
+namespace Microsoft.DocAsCode.Build.SchemaDriven.Processors;
 
 internal static class Helper
 {

@@ -3,9 +3,6 @@
 
 namespace Microsoft.DocAsCode.Build.RestApi.Swagger;
 
-using System;
-using System.Collections.Generic;
-
 [Serializable]
 public class PathsObject : Dictionary<string, PathItemObject>
 {

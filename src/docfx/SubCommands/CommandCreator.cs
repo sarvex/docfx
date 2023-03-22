@@ -1,17 +1,12 @@
 ﻿// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.SubCommands;
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.IO;
-
 using CommandLine;
 
 using Microsoft.DocAsCode.Common;
 using Microsoft.DocAsCode.Plugins;
+
+namespace Microsoft.DocAsCode.SubCommands;
 
 internal abstract class CommandCreator<TOptions, TCommand> : ISubCommandCreator where TOptions : class where TCommand : ISubCommand
 {

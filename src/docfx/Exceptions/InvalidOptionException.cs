@@ -3,8 +3,6 @@
 
 namespace Microsoft.DocAsCode.Exceptions;
 
-using System;
-
 public class InvalidOptionException : ArgumentException
 {
     public InvalidOptionException(string message) : base(message)

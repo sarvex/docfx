@@ -1,9 +1,6 @@
 ﻿// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.Dotnet;
-
-using System.IO;
 using System.Net;
 using System.Xml;
 using System.Xml.Linq;
@@ -12,6 +9,8 @@ using System.Xml.Xsl;
 
 using Microsoft.DocAsCode.Common;
 using Microsoft.DocAsCode.DataContracts.ManagedReference;
+
+namespace Microsoft.DocAsCode.Dotnet;
 
 internal static class XmlCommentTransformer
 {

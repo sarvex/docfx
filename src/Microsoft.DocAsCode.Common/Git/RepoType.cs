@@ -3,8 +3,6 @@
 
 namespace Microsoft.DocAsCode.Common.Git;
 
-using System;
-
 [Serializable]
 public enum RepoType
 {

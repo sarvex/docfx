@@ -3,8 +3,6 @@
 
 namespace Microsoft.DocAsCode.YamlSerialization;
 
-using System;
-
 /// <summary>Options that control the serialization process.</summary>
 [Flags]
 public enum SerializationOptions

@@ -3,9 +3,6 @@
 
 namespace Microsoft.DocAsCode.Build.SchemaDriven;
 
-using System;
-using System.Linq;
-
 public static class SchemaExtensions
 {
     private const string IsEditableTag = "editable";

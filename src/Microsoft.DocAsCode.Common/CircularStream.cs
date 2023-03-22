@@ -3,10 +3,6 @@
 
 namespace Microsoft.DocAsCode.Common;
 
-using System;
-using System.IO;
-using System.Threading;
-
 public class CircularStream
 {
     private readonly CircularBuffer<byte> _buffer = new CircularBuffer<byte>(4096);

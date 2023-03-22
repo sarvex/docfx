@@ -1,12 +1,7 @@
 // Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.Build.ManagedReference.BuildOutputs;
-
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Web;
 
 using Newtonsoft.Json;
@@ -16,6 +11,8 @@ using Microsoft.DocAsCode.Common;
 using Microsoft.DocAsCode.DataContracts.Common;
 using Microsoft.DocAsCode.DataContracts.ManagedReference;
 using Microsoft.DocAsCode.YamlSerialization;
+
+namespace Microsoft.DocAsCode.Build.ManagedReference.BuildOutputs;
 
 [Serializable]
 public class ApiReferenceBuildOutput

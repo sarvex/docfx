@@ -1,16 +1,13 @@
 // Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.Build.Engine;
-
-using System.Collections.Generic;
-
-using Jint;
 using Jint.Native;
+
+namespace Microsoft.DocAsCode.Build.Engine;
 
 public static class JintProcessorHelper
 {
-    public static JsValue ConvertObjectToJsValue(Engine engine, object raw)
+    public static JsValue ConvertObjectToJsValue(Jint.Engine engine, object raw)
     {
         if (raw is IDictionary<string, object> idict)
         {

@@ -1,8 +1,6 @@
-﻿namespace Microsoft.DocAsCode.Plugins;
+﻿using System.Collections;
 
-using System;
-using System.Collections;
-using System.Collections.Generic;
+namespace Microsoft.DocAsCode.Plugins;
 
 [Serializable]
 public sealed class XRefSpec : IDictionary<string, object>

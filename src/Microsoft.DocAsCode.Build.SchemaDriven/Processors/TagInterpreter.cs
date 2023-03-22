@@ -3,9 +3,6 @@
 
 namespace Microsoft.DocAsCode.Build.SchemaDriven.Processors;
 
-using System.Collections.Generic;
-using System.Linq;
-
 public class TagsInterpreter : IInterpreter
 {
     private readonly IList<ITagInterpreter> _tagInterpreters;

@@ -1,12 +1,11 @@
 // Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.MarkdigEngine.Extensions;
-
 using Markdig;
 using Markdig.Renderers;
 using Markdig.Renderers.Html;
-using System.Linq;
+
+namespace Microsoft.DocAsCode.MarkdigEngine.Extensions;
 
 public class HtmlInclusionBlockRenderer : HtmlObjectRenderer<InclusionBlock>
 {

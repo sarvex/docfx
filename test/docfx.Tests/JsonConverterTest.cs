@@ -1,14 +1,8 @@
 ﻿// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.Tests;
-
-using System;
-using System.IO;
-using System.Linq;
 using System.Reflection;
 using System.Collections;
-using System.Collections.Generic;
 
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -17,6 +11,8 @@ using Xunit;
 
 using Microsoft.DocAsCode.Common;
 using Microsoft.DocAsCode.Plugins;
+
+namespace Microsoft.DocAsCode.Tests;
 
 public class JsonConverterTest
 {

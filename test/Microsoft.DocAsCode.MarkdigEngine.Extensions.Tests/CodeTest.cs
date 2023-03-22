@@ -1,10 +1,9 @@
 // Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.MarkdigEngine.Tests;
-
-using System.Collections.Generic;
 using Xunit;
+
+namespace Microsoft.DocAsCode.MarkdigEngine.Tests;
 
 public class CodeTest
 {
@@ -743,6 +742,7 @@ Application base of MyDomain:
 
 // <snippet2>
 using namespace System;
+
 using namespace System::Reflection;
 
 ref class AppDomain4
@@ -774,6 +774,7 @@ int main()
 // </snippet2>";
     static public string contentCPP2 = @"//<Snippet1>
 using namespace System;
+
 using namespace System::Collections::Generic;
 
 public ref class Example
@@ -979,6 +980,7 @@ Application base of MyDomain:
 
 // <snippet2>
 using namespace System;
+
 using namespace System::Reflection;
 
 ref class AppDomain4
@@ -1238,6 +1240,7 @@ End Class
 ")]
     [InlineData(@":::code source=""source.cpp"" id=""snippet2"":::", @"<pre>
 <code class=""lang-cpp"">using namespace System;
+
 using namespace System::Reflection;
 
 ref class AppDomain4
@@ -1274,6 +1277,7 @@ hi
 :::code source=""source.cpp"" id=""snippet1"":::
 ", @"<pre>
 <code class=""lang-cpp"">using namespace System;
+
 using namespace System::Reflection;
 
 ref class AppDomain4
@@ -1599,6 +1603,7 @@ static async Task HandleChangesAsync(IReadOnlyCollection&lt;ToDoItem&gt; changes
 ")]
     [InlineData(@":::code source=""source2.cpp"" id=""Snippet1"":::", @"<pre>
 <code class=""lang-cpp"">using namespace System;
+
 using namespace System::Collections::Generic;
 
 public ref class Example

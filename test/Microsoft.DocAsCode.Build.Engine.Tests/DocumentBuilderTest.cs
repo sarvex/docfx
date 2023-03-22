@@ -1,16 +1,8 @@
 // Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.Build.Engine.Tests;
-
-using System;
-using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Linq;
 using System.Net;
-using System.Net.Http;
-using System.Threading.Tasks;
-using System.IO;
 using System.Reflection;
 
 using Newtonsoft.Json.Linq;
@@ -24,7 +16,8 @@ using Microsoft.DocAsCode.Common;
 using Microsoft.DocAsCode.DataContracts.Common;
 using Microsoft.DocAsCode.Plugins;
 using Microsoft.DocAsCode.Tests.Common;
-using System.Composition;
+
+namespace Microsoft.DocAsCode.Build.Engine.Tests;
 
 [Collection("docfx STA")]
 public class DocumentBuilderTest : TestBase
@@ -262,7 +255,7 @@ tagRules : [
                         "<p>",
                         @"test",
                         "</p>"),
-                    model[Constants.PropertyName.Conceptual]);
+                    model["conceptual"]);
                 Assert.Equal(
                     string.Join(
                         "\n",
@@ -789,7 +782,7 @@ exports.getOptions = function (){
                         $"Test link: <a href=\"a.md#top\" sourcefile=\"{_inputFolder}/test.md\" sourcestartlinenumber=\"10\">link 9</a>",
                         $"Test link: <a href=\"#top\" sourcefile=\"{_inputFolder}/test.md\" sourcestartlinenumber=\"11\">link 10</a></p>",
                         ""),
-                    model[Constants.PropertyName.Conceptual].ToString().Replace("\r", ""));
+                    model["conceptual"].ToString().Replace("\r", ""));
                 Assert.Equal(
                     string.Join(
                         "\n",

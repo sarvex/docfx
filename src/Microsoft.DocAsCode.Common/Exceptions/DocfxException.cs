@@ -3,8 +3,6 @@
 
 namespace Microsoft.DocAsCode.Exceptions;
 
-using System;
-
 public class DocfxException : Exception
 {
     private const string DefaultMessage = "Error happens when running docfx";

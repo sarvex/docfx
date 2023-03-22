@@ -1,7 +1,5 @@
 ﻿namespace Microsoft.DocAsCode.Common.EntityMergers;
 
-using System.Collections.Generic;
-
 internal sealed class MergeContext : IMergeContext
 {
     private readonly IReadOnlyDictionary<string, object> Data;

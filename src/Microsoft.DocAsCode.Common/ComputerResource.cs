@@ -3,8 +3,6 @@
 
 namespace Microsoft.DocAsCode.Common;
 
-using System;
-
 [Serializable]
 public sealed class ComputerResource : IDisposable
 {

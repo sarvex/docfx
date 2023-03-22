@@ -1,6 +1,7 @@
-﻿namespace Microsoft.DocAsCode.Plugins;
-
+﻿
 using System.ComponentModel;
+
+namespace Microsoft.DocAsCode.Plugins;
 
 public class PropertyChangedEventArgs<T>
     : PropertyChangedEventArgs

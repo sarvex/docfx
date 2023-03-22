@@ -1,17 +1,13 @@
 // Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.DataContracts.Common;
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.IO;
 using System.IO.Compression;
 
 using Microsoft.DocAsCode.Common;
 
 using YamlDotNet.Core;
+
+namespace Microsoft.DocAsCode.DataContracts.Common;
 
 public class ExternalReferencePackageReader : IDisposable
 {

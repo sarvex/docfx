@@ -3,8 +3,6 @@
 
 namespace Microsoft.DocAsCode.Dotnet;
 
-using System.Collections.Generic;
-
 internal class ResolverContext
 {
     public bool PreserveRawInlineComments { get; set; }

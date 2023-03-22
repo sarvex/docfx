@@ -1,17 +1,11 @@
 ﻿// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.Build.Engine.Tests;
-
-using System;
-using System.IO;
-using System.Threading.Tasks;
-
 using Xunit;
 
-using Microsoft.DocAsCode.Build.Engine;
+namespace Microsoft.DocAsCode.Build.Engine.Tests;
 
-    [Trait("Related", "XRefAtchive")]
+[Trait("Related", "XRefAtchive")]
 public class XRefArchiveBuilderTest
 {
     [Fact]

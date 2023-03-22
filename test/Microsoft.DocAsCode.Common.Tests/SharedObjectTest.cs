@@ -1,15 +1,11 @@
 ﻿// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.Common.Tests;
-
-using System.Linq;
-
 using Xunit;
 
-using Microsoft.DocAsCode.Common;
+namespace Microsoft.DocAsCode.Common.Tests;
 
-    [Trait("Related", "StateMachine")]
+[Trait("Related", "StateMachine")]
 public class SharedObjectTest
 {
     [Fact]

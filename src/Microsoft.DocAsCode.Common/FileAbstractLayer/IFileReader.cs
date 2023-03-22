@@ -3,8 +3,6 @@
 
 namespace Microsoft.DocAsCode.Common;
 
-using System.Collections.Generic;
-
 /// <summary>
 /// File reader.
 /// </summary>

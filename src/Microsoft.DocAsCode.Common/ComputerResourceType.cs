@@ -3,8 +3,6 @@
 
 namespace Microsoft.DocAsCode.Common;
 
-using System;
-
 [Flags]
 public enum ComputerResourceType
 {

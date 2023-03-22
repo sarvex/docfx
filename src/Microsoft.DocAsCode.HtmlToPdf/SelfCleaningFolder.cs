@@ -3,9 +3,6 @@
 
 namespace Microsoft.DocAsCode.HtmlToPdf;
 
-using System;
-using System.IO;
-
 public class SelfCleaningFolder : IDisposable
 {
     public string FullPath { get; }

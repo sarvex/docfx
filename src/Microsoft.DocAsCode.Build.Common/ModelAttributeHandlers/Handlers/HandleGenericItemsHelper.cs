@@ -3,10 +3,6 @@
 
 namespace Microsoft.DocAsCode.Build.Common;
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-
 public class HandleGenericItemsHelper
 {
     public static bool EnumerateIEnumerable(object currentObj, Func<object, object> handler)

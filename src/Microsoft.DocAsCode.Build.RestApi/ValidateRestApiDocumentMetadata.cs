@@ -1,16 +1,14 @@
 ﻿// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.Build.RestApi;
-
-using System;
-using System.Collections.Generic;
 using System.Composition;
 using System.Collections.Immutable;
 
 using Microsoft.DocAsCode.Build.Common;
 using Microsoft.DocAsCode.DataContracts.RestApi;
 using Microsoft.DocAsCode.Plugins;
+
+namespace Microsoft.DocAsCode.Build.RestApi;
 
 [Export(nameof(RestApiDocumentProcessor), typeof(IDocumentBuildStep))]
 public class ValidateRestApiDocumentMetadata : BaseDocumentBuildStep

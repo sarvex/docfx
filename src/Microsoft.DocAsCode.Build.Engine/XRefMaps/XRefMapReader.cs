@@ -3,8 +3,6 @@
 
 namespace Microsoft.DocAsCode.Build.Engine;
 
-using System.Collections.Generic;
-
 public sealed class XRefMapReader : XRefRedirectionReader
 {
     private readonly Dictionary<string, IXRefContainer> _maps;

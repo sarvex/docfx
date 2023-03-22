@@ -1,10 +1,6 @@
 // Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.Dotnet.Tests;
-
-using System.IO;
-using System.Linq;
 using System.Reflection;
 using Xunit;
 
@@ -12,6 +8,8 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Emit;
 
 using Microsoft.DocAsCode.DataContracts.ManagedReference;
+
+namespace Microsoft.DocAsCode.Dotnet.Tests;
 
 [Collection("docfx STA")]
 public class GenerateMetadataFromCSUnitTest
@@ -2701,7 +2699,6 @@ namespace Test1
         Assert.NotNull(flagsUndefinedValue);
         Assert.Equal(@"public void FlagsUndefinedValue(AttributeTargets? targets = 65536)", flagsUndefinedValue.Syntax.Content[SyntaxLanguage.CSharp]);
     }
-
 
     [Fact]
     public void TestGenerateMetadataWithDefaultParameterValueAttribute()

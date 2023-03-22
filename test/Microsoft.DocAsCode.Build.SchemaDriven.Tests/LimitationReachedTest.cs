@@ -1,12 +1,7 @@
 ﻿// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.Build.SchemaDriven.Tests;
-
-using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.IO;
-using System.Linq;
 using System.Text.RegularExpressions;
 
 using Microsoft.DocAsCode.Build.Engine;
@@ -14,6 +9,8 @@ using Microsoft.DocAsCode.Build.TableOfContents;
 using Microsoft.DocAsCode.Plugins;
 using Microsoft.DocAsCode.Tests.Common;
 using Xunit;
+
+namespace Microsoft.DocAsCode.Build.SchemaDriven.Tests;
 
 [Collection("docfx STA")]
 public class LimitationReachedTest : TestBase

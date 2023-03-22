@@ -1,14 +1,8 @@
 ﻿// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.Build.RestApi;
-
-using System;
-using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Composition;
-using System.Linq;
-using System.IO;
 
 using Microsoft.DocAsCode.Build.Common;
 using Microsoft.DocAsCode.Build.RestApi.Swagger;
@@ -21,6 +15,8 @@ using Microsoft.DocAsCode.Plugins;
 
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+
+namespace Microsoft.DocAsCode.Build.RestApi;
 
 [Export(typeof(IDocumentProcessor))]
 public class RestApiDocumentProcessor : ReferenceDocumentProcessorBase

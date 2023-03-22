@@ -3,9 +3,6 @@
 
 namespace Microsoft.DocAsCode.Common;
 
-using System;
-using System.Collections.Generic;
-
 public class FolderRedirectionManager
 {
     private List<Rule> _rules = new List<Rule>();

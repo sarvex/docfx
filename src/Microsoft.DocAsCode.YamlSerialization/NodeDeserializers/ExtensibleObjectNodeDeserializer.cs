@@ -1,14 +1,12 @@
 ﻿// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.YamlSerialization.NodeDeserializers;
-
-using System;
-
 using YamlDotNet.Core;
 using YamlDotNet.Core.Events;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.Utilities;
+
+namespace Microsoft.DocAsCode.YamlSerialization.NodeDeserializers;
 
 public sealed class ExtensibleObjectNodeDeserializer : INodeDeserializer
 {

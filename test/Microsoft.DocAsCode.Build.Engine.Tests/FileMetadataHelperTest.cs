@@ -2,9 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using Microsoft.DocAsCode.Glob;
-using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Linq;
 using Xunit;
 
 namespace Microsoft.DocAsCode.Build.Engine.Tests;
@@ -38,7 +36,6 @@ public class FileMetadataHelperTest
                 new FileMetadataItem(new GlobMatcher("**"), "meta", new Dictionary<string, object> { ["key"] = new object[] { "1", "2" } })
             )
         });
-
 
         var actual = FileMetadataHelper.GetChangedGlobs(left, right).ToList();
         Assert.NotNull(actual);

@@ -1,15 +1,10 @@
 ﻿// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.Glob.Tests;
-
-using System.IO;
-using System.Linq;
-
 using Xunit;
-
-using Microsoft.DocAsCode.Glob;
 using Microsoft.DocAsCode.Tests.Common;
+
+namespace Microsoft.DocAsCode.Glob.Tests;
 
 public class GlobFileTest : TestBase
 {

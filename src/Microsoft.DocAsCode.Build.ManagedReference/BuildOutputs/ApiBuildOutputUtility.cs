@@ -1,11 +1,10 @@
 // Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.Build.ManagedReference.BuildOutputs;
-
-using System.Collections.Generic;
 using System.Text;
 using System.Web;
+
+namespace Microsoft.DocAsCode.Build.ManagedReference.BuildOutputs;
 
 public static class ApiBuildOutputUtility
 {

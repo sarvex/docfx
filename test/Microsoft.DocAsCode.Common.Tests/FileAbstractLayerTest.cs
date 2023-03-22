@@ -1,17 +1,12 @@
 ﻿// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.Common.Tests;
-
-using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.IO;
-using System.Linq;
 
 using Xunit;
-
-using Microsoft.DocAsCode.Common;
 using Microsoft.DocAsCode.Tests.Common;
+
+namespace Microsoft.DocAsCode.Common.Tests;
 
 public class FileAbstractLayerTest : TestBase
 {

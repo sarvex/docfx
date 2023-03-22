@@ -3,8 +3,6 @@
 
 namespace Microsoft.DocAsCode.Common;
 
-using System;
-
 public class CircularBuffer<T>
 {
     private T[] _buffer;

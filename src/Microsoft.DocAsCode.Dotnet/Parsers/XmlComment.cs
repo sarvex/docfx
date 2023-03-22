@@ -1,12 +1,6 @@
 // Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.Dotnet;
-
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Web;
@@ -18,6 +12,8 @@ using Microsoft.DocAsCode.Common;
 using Microsoft.DocAsCode.Plugins;
 using Microsoft.DocAsCode.DataContracts.ManagedReference;
 using System.Globalization;
+
+namespace Microsoft.DocAsCode.Dotnet;
 
 internal class XmlComment
 {

@@ -1,13 +1,13 @@
 ﻿// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.Build.RestApi.Tests;
-
 using Microsoft.DocAsCode.Build.RestApi.Swagger;
 
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Xunit;
+
+namespace Microsoft.DocAsCode.Build.RestApi.Tests;
 
 public class SwaggerJsonParserTest
 {
@@ -86,7 +86,6 @@ public class SwaggerJsonParserTest
         Assert.Equal("Find out more", externalDocs["description"]);
         Assert.Equal("http://swagger.io", externalDocs["url"]);
     }
-
 
     [Fact]
     public void ParseSwaggerJsonWithPathParametersShouldSucceed()

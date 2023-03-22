@@ -1,7 +1,8 @@
-﻿namespace Microsoft.DocAsCode.MarkdigEngine.Extensions;
-
+﻿
 using Markdig.Helpers;
 using Markdig.Parsers;
+
+namespace Microsoft.DocAsCode.MarkdigEngine.Extensions;
 
 public class NolocParser : InlineParser
 {

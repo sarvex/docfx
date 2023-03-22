@@ -1,19 +1,14 @@
 ﻿// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.Common.Tests;
-
-using System;
-using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-
-using Microsoft.DocAsCode.Common;
 using Microsoft.DocAsCode.Plugins;
 
 using Xunit;
 
-    [Trait("Related", "UriTemplate")]
+namespace Microsoft.DocAsCode.Common.Tests;
+
+[Trait("Related", "UriTemplate")]
 public class UriTemplateTest
 {
     [Fact]

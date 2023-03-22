@@ -1,17 +1,14 @@
 // Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.MarkdigEngine.Extensions;
-
-using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Net;
 
 using Markdig.Extensions.Yaml;
 using Markdig.Renderers;
 using Markdig.Renderers.Html;
 using Microsoft.DocAsCode.Common;
+
+namespace Microsoft.DocAsCode.MarkdigEngine.Extensions;
 
 public class YamlHeaderRenderer : HtmlObjectRenderer<YamlFrontMatterBlock>
 {

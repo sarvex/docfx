@@ -1,13 +1,12 @@
 // Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.MarkdigEngine.Extensions;
-
-using System.Linq;
 using Markdig.Helpers;
 using Markdig.Parsers;
 using Markdig.Renderers.Html;
 using Markdig.Syntax;
+
+namespace Microsoft.DocAsCode.MarkdigEngine.Extensions;
 
 class XrefInlineShortParser : InlineParser
 {
@@ -66,7 +65,6 @@ class XrefInlineShortParser : InlineParser
             href.Append(c);
             c = slice.NextChar();
         }
-
 
         var xrefInline = new XrefInline
         {

@@ -3,10 +3,6 @@
 
 namespace Microsoft.DocAsCode.Plugins;
 
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-
 public static class FileAbstractLayerExtensions
 {
     public static StreamReader OpenReadText(this IFileAbstractLayer fal, string file) =>

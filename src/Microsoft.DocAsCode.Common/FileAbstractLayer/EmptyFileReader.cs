@@ -3,9 +3,6 @@
 
 namespace Microsoft.DocAsCode.Common;
 
-using System.Collections.Generic;
-using System.Linq;
-
 internal sealed class EmptyFileReader : IFileReader
 {
     public static readonly EmptyFileReader Instance = new EmptyFileReader();

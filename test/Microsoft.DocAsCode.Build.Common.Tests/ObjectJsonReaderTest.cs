@@ -1,16 +1,12 @@
 ﻿// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.Build.Common.Tests;
-
-using System;
-using System.Collections.Generic;
-using System.IO;
-
 using Microsoft.DocAsCode.Common;
 
 using Xunit;
 using Newtonsoft.Json;
+
+namespace Microsoft.DocAsCode.Build.Common.Tests;
 
 public class ObjectJsonReaderTest
 {

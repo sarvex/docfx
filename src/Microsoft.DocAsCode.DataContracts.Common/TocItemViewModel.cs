@@ -1,10 +1,6 @@
 // Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.DataContracts.Common;
-
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 
 using Newtonsoft.Json;
@@ -12,6 +8,8 @@ using YamlDotNet.Serialization;
 
 using Microsoft.DocAsCode.Common;
 using Microsoft.DocAsCode.YamlSerialization;
+
+namespace Microsoft.DocAsCode.DataContracts.Common;
 
 [Serializable]
 public class TocItemViewModel

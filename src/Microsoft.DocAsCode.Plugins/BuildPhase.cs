@@ -3,8 +3,6 @@
 
 namespace Microsoft.DocAsCode.Plugins;
 
-using System;
-
 public enum BuildPhase
 {
     Compile,

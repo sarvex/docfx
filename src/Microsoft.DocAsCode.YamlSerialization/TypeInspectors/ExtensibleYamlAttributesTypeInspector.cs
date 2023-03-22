@@ -1,10 +1,6 @@
-﻿namespace Microsoft.DocAsCode.YamlSerialization.TypeInspectors;
+﻿using YamlDotNet.Serialization;
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using YamlDotNet.Serialization;
+namespace Microsoft.DocAsCode.YamlSerialization.TypeInspectors;
 
 /// <summary>
 /// Applies the <see cref="YamlMemberAttribute"/> to another <see cref="ITypeInspector"/>.

@@ -1,14 +1,11 @@
 ﻿// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.YamlSerialization.TypeInspectors;
-
-using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 
 using YamlDotNet.Serialization;
+
+namespace Microsoft.DocAsCode.YamlSerialization.TypeInspectors;
 
 public abstract class ExtensibleTypeInspectorSkeleton : ITypeInspector, IExtensibleTypeInspector
 {

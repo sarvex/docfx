@@ -3,15 +3,12 @@
 
 using Jint.Native.Function;
 
-namespace Microsoft.DocAsCode.Build.Engine;
-
-using System;
-using System.Collections.Generic;
-
 using Jint;
 using Jint.Native;
 using Jint.Native.Object;
 using Microsoft.DocAsCode.Common;
+
+namespace Microsoft.DocAsCode.Build.Engine;
 
 public class TemplateJintPreprocessor : ITemplatePreprocessor
 {
@@ -116,10 +113,10 @@ public class TemplateJintPreprocessor : ITemplatePreprocessor
         return model;
     }
 
-    private Engine SetupEngine(IResourceFileReader resourceCollection, ResourceInfo scriptResource, DocumentBuildContext context)
+    private Jint.Engine SetupEngine(IResourceFileReader resourceCollection, ResourceInfo scriptResource, DocumentBuildContext context)
     {
         var rootPath = (RelativePath)scriptResource.Path;
-        var engineCache = new Dictionary<string, Engine>();
+        var engineCache = new Dictionary<string, Jint.Engine>();
 
         var utility = new TemplateUtility(context);
         _utilityObject = new
@@ -147,7 +144,7 @@ public class TemplateJintPreprocessor : ITemplatePreprocessor
                     return null;
                 }
 
-                if (!engineCache.TryGetValue(s, out Engine cachedEngine))
+                if (!engineCache.TryGetValue(s, out Jint.Engine cachedEngine))
                 {
                     cachedEngine = CreateEngine(engine, RequireFuncVariableName);
                     engineCache[s] = cachedEngine;
@@ -176,7 +173,7 @@ public class TemplateJintPreprocessor : ITemplatePreprocessor
         return engine;
     }
 
-    private Engine CreateEngine(Engine engine, params string[] sharedVariables)
+    private Jint.Engine CreateEngine(Jint.Engine engine, params string[] sharedVariables)
     {
         var newEngine = CreateDefaultEngine();
         if (sharedVariables != null)
@@ -190,9 +187,9 @@ public class TemplateJintPreprocessor : ITemplatePreprocessor
         return newEngine;
     }
 
-    private Engine CreateDefaultEngine()
+    private Jint.Engine CreateDefaultEngine()
     {
-        var engine = new Engine();
+        var engine = new Jint.Engine();
 
         engine.SetValue(ExportsVariableName, new JsObject(engine));
         engine.SetValue(ConsoleVariableName, ConsoleObject);
@@ -201,7 +198,7 @@ public class TemplateJintPreprocessor : ITemplatePreprocessor
         return engine;
     }
 
-    private static Func<object, object> GetFunc(Engine engine, string funcName, ObjectInstance exports)
+    private static Func<object, object> GetFunc(Jint.Engine engine, string funcName, ObjectInstance exports)
     {
         var func = exports.Get(funcName);
         if (func.IsUndefined() || func.IsNull())

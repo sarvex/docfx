@@ -1,11 +1,9 @@
 ﻿// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.Build.Common.Tests;
-
 using Xunit;
 
-using Microsoft.DocAsCode.Build.Common;
+namespace Microsoft.DocAsCode.Build.Common.Tests;
 
 public class ReflectionHelperTest
 {

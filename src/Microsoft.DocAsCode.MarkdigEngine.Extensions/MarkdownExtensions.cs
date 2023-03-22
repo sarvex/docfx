@@ -1,16 +1,13 @@
 // Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.MarkdigEngine.Extensions;
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Markdig;
 using Markdig.Extensions.AutoIdentifiers;
 using Markdig.Extensions.CustomContainers;
 using Markdig.Extensions.EmphasisExtras;
 using Markdig.Parsers;
+
+namespace Microsoft.DocAsCode.MarkdigEngine.Extensions;
 
 public static class MarkdownExtensions
 {

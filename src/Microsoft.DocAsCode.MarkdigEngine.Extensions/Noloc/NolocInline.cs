@@ -1,6 +1,7 @@
-﻿namespace Microsoft.DocAsCode.MarkdigEngine.Extensions;
-
+﻿
 using Markdig.Syntax.Inlines;
+
+namespace Microsoft.DocAsCode.MarkdigEngine.Extensions;
 
 public class NolocInline : LeafInline
 {

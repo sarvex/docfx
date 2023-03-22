@@ -1,10 +1,9 @@
 // Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.MarkdigEngine.Tests;
-
-using System.Collections.Generic;
 using Xunit;
+
+namespace Microsoft.DocAsCode.MarkdigEngine.Tests;
 
 public class VideoTest
 {
@@ -55,6 +54,5 @@ public class VideoTest
     {
         TestUtility.VerifyMarkup(source, expected, errors: new[] { "invalid-video" });
     }
-
 
 }

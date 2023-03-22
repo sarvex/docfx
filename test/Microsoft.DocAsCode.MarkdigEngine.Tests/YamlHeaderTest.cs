@@ -1,12 +1,10 @@
 // Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.MarkdigEngine.Tests;
-
-using MarkdigEngine;
-
 using Microsoft.DocAsCode.Plugins;
 using Xunit;
+
+namespace Microsoft.DocAsCode.MarkdigEngine.Tests;
 
 public class YamlHeaderTest
 {
@@ -39,7 +37,6 @@ public class YamlHeaderTest
         var marked = SimpleMarkup(source);
         Assert.Equal(expected.Replace("\r\n", "\n"), marked.Html);
     }
-
 
     [Fact(Skip = "Invalid YamlHeader")]
     [Trait("Related", "DfmMarkdown")]

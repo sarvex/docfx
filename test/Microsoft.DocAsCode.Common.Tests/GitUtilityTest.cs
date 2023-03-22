@@ -1,14 +1,11 @@
 ﻿// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.Common.Tests;
-
-using System;
-using System.IO;
-
 using Xunit;
 
 using Microsoft.DocAsCode.Common.Git;
+
+namespace Microsoft.DocAsCode.Common.Tests;
 
 [Collection("docfx STA")]
     public class GitUtilityTest : IDisposable

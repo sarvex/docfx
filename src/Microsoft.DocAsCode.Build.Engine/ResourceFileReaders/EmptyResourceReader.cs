@@ -3,9 +3,6 @@
 
 namespace Microsoft.DocAsCode.Build.Engine;
 
-using System.Collections.Generic;
-using System.IO;
-
 public sealed class EmptyResourceReader : ResourceFileReader
 {
     private static readonly IEnumerable<string> Empty = new string[0];

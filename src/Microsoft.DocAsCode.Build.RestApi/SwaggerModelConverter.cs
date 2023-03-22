@@ -1,11 +1,6 @@
 ﻿// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.Build.RestApi;
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text.RegularExpressions;
 
 using Microsoft.DocAsCode.Build.RestApi.Swagger;
@@ -14,6 +9,8 @@ using Microsoft.DocAsCode.DataContracts.Common;
 using Microsoft.DocAsCode.DataContracts.RestApi;
 
 using Newtonsoft.Json.Linq;
+
+namespace Microsoft.DocAsCode.Build.RestApi;
 
 public static class SwaggerModelConverter
 {

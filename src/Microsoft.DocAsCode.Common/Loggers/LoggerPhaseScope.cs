@@ -3,8 +3,6 @@
 
 namespace Microsoft.DocAsCode.Common;
 
-using System;
-
 public sealed class LoggerPhaseScope : IDisposable
 {
     private readonly string _originPhaseName;

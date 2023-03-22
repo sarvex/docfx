@@ -1,15 +1,12 @@
 // Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.Glob;
-
-using System;
-using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Linq;
 
 using Microsoft.DocAsCode.Common;
+
+namespace Microsoft.DocAsCode.Glob;
 
 [Serializable]
 public class GlobMatcher : IEquatable<GlobMatcher>

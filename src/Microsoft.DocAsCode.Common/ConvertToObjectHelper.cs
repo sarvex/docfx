@@ -1,17 +1,14 @@
 ﻿// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
+using System.Dynamic;
+
+using Newtonsoft.Json.Linq;
+
 /// <summary>
 /// The utility class for docascode project
 /// </summary>
 namespace Microsoft.DocAsCode.Common;
-
-using System;
-using System.Collections.Generic;
-using System.Dynamic;
-using System.Linq;
-
-using Newtonsoft.Json.Linq;
 
 public static class ConvertToObjectHelper
 {

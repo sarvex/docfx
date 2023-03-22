@@ -1,9 +1,9 @@
 // Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.MarkdigEngine.Tests;
-
 using Xunit;
+
+namespace Microsoft.DocAsCode.MarkdigEngine.Tests;
 
 public class MonikerRangeTest
 {
@@ -52,7 +52,6 @@ Inline ::: should not end moniker zone.</p>
 ";
         TestUtility.VerifyMarkup(source, expected, lineNumber: true, filePath: "fake.md");
     }
-
 
     [Fact]
     public void MonikerRangeTestInvalid()

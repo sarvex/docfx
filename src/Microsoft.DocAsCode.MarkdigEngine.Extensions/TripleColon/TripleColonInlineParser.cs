@@ -1,13 +1,12 @@
 // Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-namespace Microsoft.DocAsCode.MarkdigEngine.Extensions;
 
 using Markdig.Helpers;
 using Markdig.Parsers;
 using Markdig.Renderers.Html;
 using Markdig.Syntax;
-using System;
-using System.Collections.Generic;
+
+namespace Microsoft.DocAsCode.MarkdigEngine.Extensions;
 
 public class TripleColonInlineParser : InlineParser
 {

@@ -1,17 +1,13 @@
 ﻿// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.Dotnet;
-
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Reflection;
 
 using YamlDotNet.Serialization;
 
 using Microsoft.DocAsCode.Common;
+
+namespace Microsoft.DocAsCode.Dotnet;
 
 [Serializable]
 internal class ConfigFilterRule

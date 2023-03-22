@@ -1,23 +1,17 @@
 ﻿// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using System;
 using System.Collections.Concurrent;
 using System.Diagnostics;
-using System.IO;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using ImageMagick;
 using Microsoft.DocAsCode.Common;
 using Microsoft.DocAsCode.Dotnet;
 using Microsoft.Playwright;
-using VerifyTests;
-using VerifyXunit;
-using Xunit;
 
 namespace Microsoft.DocAsCode.Tests;
 

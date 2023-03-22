@@ -1,20 +1,12 @@
 ﻿// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
+using Xunit;
+using Microsoft.DocAsCode.Tests.Common;
+
 namespace Microsoft.DocAsCode.Common.Tests;
 
-using System;
-using System.Collections.Generic;
-
-using Xunit;
-
-using Microsoft.DocAsCode.Common;
-using Microsoft.DocAsCode.Tests.Common;
-using System.Threading.Tasks;
-using System.Linq;
-using System.Threading;
-
-    [Collection("docfx STA")]
+[Collection("docfx STA")]
 public class ScopeTest
 {
     [Fact]

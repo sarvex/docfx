@@ -1,12 +1,10 @@
 // Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode;
-
-using System.Collections.Generic;
-
 using CommandLine;
 using Microsoft.DocAsCode.Dotnet;
+
+namespace Microsoft.DocAsCode;
 
 [OptionUsage("metadata [<docfx.json file path>]")]
 [OptionUsage("metadata <code project1> [<code project2>] ... [<code projectN>]")]

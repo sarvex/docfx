@@ -3,9 +3,6 @@
 
 namespace Microsoft.DocAsCode.Build.Engine;
 
-using System.Collections.Generic;
-using System.IO;
-
 public interface IResourceFileReader
 {
     IEnumerable<string> Names { get; }

@@ -1,14 +1,13 @@
 ﻿// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.Build.ResourceFiles;
-
-using System.Collections.Generic;
 using System.Composition;
 using System.Collections.Immutable;
 
 using Microsoft.DocAsCode.Build.Common;
 using Microsoft.DocAsCode.Plugins;
+
+namespace Microsoft.DocAsCode.Build.ResourceFiles;
 
 [Export(nameof(ResourceDocumentProcessor), typeof(IDocumentBuildStep))]
 public class ValidateResourceMetadata : BaseDocumentBuildStep

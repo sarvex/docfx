@@ -1,14 +1,7 @@
 // Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.Dotnet;
-
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 
 using Microsoft.Build.Construction;
 using Microsoft.Build.Framework;
@@ -20,6 +13,8 @@ using Microsoft.CodeAnalysis.MSBuild;
 using Microsoft.DocAsCode.Common;
 using Microsoft.DocAsCode.DataContracts.Common;
 using Microsoft.DocAsCode.DataContracts.ManagedReference;
+
+namespace Microsoft.DocAsCode.Dotnet;
 
 internal class ExtractMetadataWorker : IDisposable
 {

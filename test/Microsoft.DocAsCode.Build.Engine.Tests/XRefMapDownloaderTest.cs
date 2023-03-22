@@ -1,18 +1,10 @@
 ﻿// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.Build.Engine.Tests;
-
-using System;
-using System.Threading.Tasks;
-
 using Xunit;
-
-using Microsoft.DocAsCode.Build.Engine;
 using System.Net;
-using System.IO;
-using System.Collections.Generic;
-using System.Linq;
+
+namespace Microsoft.DocAsCode.Build.Engine.Tests;
 
 public class XRefMapDownloadTest
 {

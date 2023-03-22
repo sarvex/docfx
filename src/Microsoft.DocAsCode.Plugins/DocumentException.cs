@@ -1,7 +1,5 @@
 ﻿namespace Microsoft.DocAsCode.Plugins;
 
-using System;
-
 public class DocumentException : Exception
 {
     public string File { get; set; }

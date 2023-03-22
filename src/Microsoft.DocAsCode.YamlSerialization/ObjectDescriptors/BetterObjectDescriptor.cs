@@ -1,14 +1,12 @@
 ﻿// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.YamlSerialization.ObjectDescriptors;
-
-using System;
-
 using YamlDotNet.Core;
 using YamlDotNet.Serialization;
 
 using Microsoft.DocAsCode.YamlSerialization.Helpers;
+
+namespace Microsoft.DocAsCode.YamlSerialization.ObjectDescriptors;
 
 public class BetterObjectDescriptor : IObjectDescriptor
 {

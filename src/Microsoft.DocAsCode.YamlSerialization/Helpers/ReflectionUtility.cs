@@ -3,9 +3,6 @@
 
 namespace Microsoft.DocAsCode.YamlSerialization.Helpers;
 
-using System;
-using System.Collections.Generic;
-
 internal static class ReflectionUtility
 {
     public static Type GetImplementedGenericInterface(Type type, Type genericInterfaceType)

@@ -1,12 +1,10 @@
 ﻿
 using Jint;
-
-namespace Microsoft.DocAsCode.Build.Engine.Tests;
-
-using System.Collections.Generic;
 using Microsoft.DocAsCode.Common;
 
 using Xunit;
+
+namespace Microsoft.DocAsCode.Build.Engine.Tests;
 
 public class JintProcessorHelperTest
 {

@@ -1,16 +1,12 @@
 // Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.MarkdigEngine.Extensions;
-
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Text.RegularExpressions;
 
 using Markdig.Helpers;
 using Markdig.Parsers;
+
+namespace Microsoft.DocAsCode.MarkdigEngine.Extensions;
 
 public static class ExtensionsHelper
 {
@@ -172,7 +168,6 @@ public static class ExtensionsHelper
             return result;
         }
     }
-
 
     #region private methods
     private static string GetAbsolutePathWithTildeCore(string basePath, string tildePath)

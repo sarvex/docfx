@@ -3,8 +3,6 @@
 
 namespace Microsoft.DocAsCode.Common.StreamSegmentSerialization;
 
-using System.IO;
-
 public sealed class StreamSegment
 {
     public StreamSegment(Stream underlyingStream, int startOffset, int length, int next, StreamSegmentType contentType)

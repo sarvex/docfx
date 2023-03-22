@@ -1,12 +1,6 @@
 // Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.Dotnet.Tests;
-
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
 
@@ -14,6 +8,8 @@ using Microsoft.DocAsCode.DataContracts.Common;
 using Microsoft.DocAsCode.DataContracts.ManagedReference;
 
 using Xunit;
+
+namespace Microsoft.DocAsCode.Dotnet.Tests;
 
 public class XmlCommentUnitTest
 {

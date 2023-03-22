@@ -1,11 +1,6 @@
 ﻿// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.Tests;
-
-using System;
-using System.IO;
-using System.Linq;
 using System.Xml.Linq;
 
 using Microsoft.DocAsCode.Common;
@@ -13,6 +8,8 @@ using Microsoft.DocAsCode.Tests.Common;
 
 using HtmlAgilityPack;
 using Xunit;
+
+namespace Microsoft.DocAsCode.Tests;
 
 [Collection("docfx STA")]
 public class CompositeCommandTest : TestBase

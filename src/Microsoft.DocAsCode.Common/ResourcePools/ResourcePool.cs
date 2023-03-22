@@ -3,9 +3,6 @@
 
 namespace Microsoft.DocAsCode.Common;
 
-using System;
-using System.Threading.Tasks;
-
 public static class ResourcePool
 {
     public static ResourcePoolManager<T> Create<T>(Func<T> creator, int maxResourceCount)

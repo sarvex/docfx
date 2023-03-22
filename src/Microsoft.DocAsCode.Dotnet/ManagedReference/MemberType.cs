@@ -3,8 +3,6 @@
 
 namespace Microsoft.DocAsCode.DataContracts.ManagedReference;
 
-using System;
-
 [Serializable]
 public enum MemberType
 {

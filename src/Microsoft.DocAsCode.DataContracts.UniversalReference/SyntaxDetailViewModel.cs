@@ -1,10 +1,6 @@
 ﻿// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.DataContracts.UniversalReference;
-
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 
 using Microsoft.DocAsCode.Common;
@@ -13,6 +9,8 @@ using Microsoft.DocAsCode.YamlSerialization;
 
 using Newtonsoft.Json;
 using YamlDotNet.Serialization;
+
+namespace Microsoft.DocAsCode.DataContracts.UniversalReference;
 
 [Serializable]
 public class SyntaxDetailViewModel

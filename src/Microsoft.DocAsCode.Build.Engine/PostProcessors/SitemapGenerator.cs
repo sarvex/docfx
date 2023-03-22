@@ -1,20 +1,16 @@
 ﻿// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.Build.Engine;
-
-using System;
-using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Composition;
 using System.Globalization;
-using System.IO;
-using System.Linq;
 using System.Xml.Linq;
 
 using Microsoft.DocAsCode.Common;
 using Microsoft.DocAsCode.Glob;
 using Microsoft.DocAsCode.Plugins;
+
+namespace Microsoft.DocAsCode.Build.Engine;
 
 [Export(nameof(SitemapGenerator), typeof(IPostProcessor))]
 public class SitemapGenerator : IPostProcessor

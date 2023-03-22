@@ -3,10 +3,6 @@
 
 namespace Microsoft.DocAsCode.Common;
 
-using System;
-using System.Collections.Generic;
-using System.Threading;
-
 public class ResourcePoolManager<TResource>
     : IDisposable
     where TResource : class

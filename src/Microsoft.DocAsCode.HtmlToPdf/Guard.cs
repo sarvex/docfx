@@ -3,8 +3,6 @@
 
 namespace Microsoft.DocAsCode.HtmlToPdf;
 
-using System;
-
 /// <summary>
 /// Represents a simple class for validating parameters and throwing exceptions.
 /// </summary>

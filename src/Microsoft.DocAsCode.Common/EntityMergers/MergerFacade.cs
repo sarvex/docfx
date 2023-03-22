@@ -3,8 +3,6 @@
 
 namespace Microsoft.DocAsCode.Common.EntityMergers;
 
-using System.Collections.Generic;
-
 public class MergerFacade
 {
     private readonly IMerger _merger;

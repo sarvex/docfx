@@ -1,12 +1,7 @@
 ﻿// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.Build.Common.Tests;
-
-using System;
-using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Linq;
 
 using Xunit;
 
@@ -14,6 +9,8 @@ using Microsoft.DocAsCode.Build.Engine;
 using Microsoft.DocAsCode.DataContracts.Common;
 using Microsoft.DocAsCode.Plugins;
 using Microsoft.DocAsCode.MarkdigEngine;
+
+namespace Microsoft.DocAsCode.Build.Common.Tests;
 
 public class ModelAttributeHandlerTest
 {

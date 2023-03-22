@@ -1,12 +1,6 @@
 ﻿// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.Tests;
-
-using System;
-using System.Collections.Generic;
-using System.IO;
-
 using Xunit;
 
 using Microsoft.DocAsCode.Common;
@@ -15,6 +9,8 @@ using Microsoft.DocAsCode.DataContracts.ManagedReference;
 using Microsoft.DocAsCode.SubCommands;
 using Microsoft.DocAsCode.Tests.Common;
 using Microsoft.DocAsCode.Dotnet;
+
+namespace Microsoft.DocAsCode.Tests;
 
 [Collection("docfx STA")]
 public class MetadataCommandTest : TestBase

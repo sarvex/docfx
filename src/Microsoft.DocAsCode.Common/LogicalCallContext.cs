@@ -1,10 +1,9 @@
 ﻿// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.Common;
-
 using System.Collections.Concurrent;
-using System.Threading;
+
+namespace Microsoft.DocAsCode.Common;
 
 /// <summary>
 ///     A NETStandard-friendly replacement for CallContext.

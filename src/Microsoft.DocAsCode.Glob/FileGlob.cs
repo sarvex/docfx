@@ -3,10 +3,6 @@
 
 namespace Microsoft.DocAsCode.Glob;
 
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-
 public class FileGlob
 {
     public static IEnumerable<string> GetFiles(string cwd, IEnumerable<string> patterns, IEnumerable<string> excludePatterns, GlobMatcherOptions options = GlobMatcher.DefaultOptions)

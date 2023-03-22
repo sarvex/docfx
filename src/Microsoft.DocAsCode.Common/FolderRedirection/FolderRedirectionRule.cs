@@ -3,8 +3,6 @@
 
 namespace Microsoft.DocAsCode.Common;
 
-using System;
-
 public class FolderRedirectionRule
 {
     public FolderRedirectionRule(string from, string to)

@@ -1,17 +1,14 @@
 // Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.SubCommands;
-
-using System;
-using System.Collections.Generic;
 using System.Composition;
 using System.ComponentModel;
 using System.Composition.Hosting;
-using System.Linq;
 
 using Microsoft.DocAsCode.Common;
 using Microsoft.DocAsCode.Plugins;
+
+namespace Microsoft.DocAsCode.SubCommands;
 
 internal class CommandController : ISubCommandController
 {

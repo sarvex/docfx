@@ -1,13 +1,11 @@
 ﻿// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.Build.Common;
-
-using System;
 using System.Collections.Immutable;
-using System.IO;
 
 using Microsoft.DocAsCode.Plugins;
+
+namespace Microsoft.DocAsCode.Build.Common;
 
 /// <summary>
 /// Base document processor for reference.

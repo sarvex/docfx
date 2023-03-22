@@ -3,8 +3,6 @@
 
 namespace Microsoft.DocAsCode.Exceptions;
 
-using System;
-
 internal class ExtractMetadataException : DocfxException
 {
     public ExtractMetadataException(string message) : base(message)

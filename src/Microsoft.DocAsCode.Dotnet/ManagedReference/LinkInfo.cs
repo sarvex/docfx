@@ -1,14 +1,13 @@
 // Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.DataContracts.ManagedReference;
-
-using System;
 using YamlDotNet.Serialization;
 
 using Microsoft.DocAsCode.Common.EntityMergers;
 using Microsoft.DocAsCode.DataContracts.Common;
 using Newtonsoft.Json;
+
+namespace Microsoft.DocAsCode.DataContracts.ManagedReference;
 
 [Serializable]
 public class LinkInfo

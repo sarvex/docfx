@@ -3,8 +3,6 @@
 
 namespace Microsoft.DocAsCode.Build.OverwriteDocuments;
 
-using System;
-
 [Serializable]
 public class OPathSegment
 {

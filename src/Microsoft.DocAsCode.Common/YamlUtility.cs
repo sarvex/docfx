@@ -1,18 +1,14 @@
 ﻿// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.Common;
-
-using System.IO;
 using System.Text;
-using System.Threading;
 
 using Microsoft.DocAsCode.Plugins;
 using Microsoft.DocAsCode.YamlSerialization;
 
-using YamlDotNet.Serialization;
-
 using YamlDeserializer = Microsoft.DocAsCode.YamlSerialization.YamlDeserializer;
+
+namespace Microsoft.DocAsCode.Common;
 
 public static class YamlUtility
 {

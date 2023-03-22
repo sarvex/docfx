@@ -3,9 +3,6 @@
 
 namespace Microsoft.DocAsCode;
 
-using System;
-using System.IO;
-
 internal static class Constants
 {
     public static Func<string, string> GetIndexFilePathFunc = new Func<string, string>(s => Path.Combine(s, "index.yml"));

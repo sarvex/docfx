@@ -1,11 +1,11 @@
 // Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.MarkdigEngine.Extensions;
-
 using Markdig;
 using Markdig.Extensions.CustomContainers;
 using Markdig.Renderers;
+
+namespace Microsoft.DocAsCode.MarkdigEngine.Extensions;
 
 public class MonikerRangeExtension : IMarkdownExtension
 {

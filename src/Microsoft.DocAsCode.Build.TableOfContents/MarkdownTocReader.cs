@@ -1,12 +1,9 @@
-﻿namespace Microsoft.DocAsCode.Build.TableOfContents;
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 using Microsoft.DocAsCode.Common;
 using Microsoft.DocAsCode.DataContracts.Common;
 using Microsoft.DocAsCode.Plugins;
+
+namespace Microsoft.DocAsCode.Build.TableOfContents;
 
 public static class MarkdownTocReader
 {

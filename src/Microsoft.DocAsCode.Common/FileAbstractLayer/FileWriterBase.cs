@@ -3,9 +3,6 @@
 
 namespace Microsoft.DocAsCode.Common;
 
-using System;
-using System.IO;
-
 public abstract class FileWriterBase : IFileWriter
 {
     private const int MaxRetry = 3;

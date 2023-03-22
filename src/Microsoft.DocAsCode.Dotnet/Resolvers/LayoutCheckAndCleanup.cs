@@ -1,12 +1,12 @@
 // Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.Dotnet;
-
 using System.Diagnostics;
 using System.Text;
 
 using Microsoft.DocAsCode.Common;
+
+namespace Microsoft.DocAsCode.Dotnet;
 
 internal class LayoutCheckAndCleanup : IResolverPipeline
 {
@@ -93,7 +93,6 @@ internal class LayoutCheckAndCleanup : IResolverPipeline
 
         return message.ToString();
     }
-
 
     /// <summary>
     /// e.g. Methods

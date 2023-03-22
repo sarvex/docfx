@@ -1,18 +1,13 @@
 ﻿// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.Tests;
-
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
 
 using Microsoft.DocAsCode.Tests.Common;
 
 using Xunit;
+
+namespace Microsoft.DocAsCode.Tests;
 
 [Collection("docfx STA")]
 public class DocsetTest : TestBase

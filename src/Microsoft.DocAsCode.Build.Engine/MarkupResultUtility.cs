@@ -1,19 +1,15 @@
 ﻿// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.Build.Engine;
-
-using System;
-using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.IO;
-using System.Linq;
 using System.Net;
 
 using Microsoft.DocAsCode.Common;
 using Microsoft.DocAsCode.Plugins;
 
 using HtmlAgilityPack;
+
+namespace Microsoft.DocAsCode.Build.Engine;
 
 public static class MarkupUtility
 {
@@ -80,7 +76,6 @@ public static class MarkupUtility
         }
         return result;
     }
-
 
     private static ImmutableDictionary<string, ImmutableList<LinkSourceInfo>> GetFileLinkSource(string currentFile, HtmlDocument doc, ImmutableDictionary<string, FileAndType> sourceFiles)
     {

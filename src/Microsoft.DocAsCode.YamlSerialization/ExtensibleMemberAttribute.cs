@@ -3,8 +3,6 @@
 
 namespace Microsoft.DocAsCode.YamlSerialization;
 
-using System;
-
 public sealed class ExtensibleMemberAttribute : Attribute
 {
     public string Prefix { get; }

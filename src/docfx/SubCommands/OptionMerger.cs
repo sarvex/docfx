@@ -3,9 +3,6 @@
 
 namespace Microsoft.DocAsCode.SubCommands;
 
-using System;
-using System.Collections.Generic;
-
 internal static class OptionMerger
 {
     public delegate T Merger<T>(string key, MergeContext<T> item, MergeContext<T> overrideItem);

@@ -1,14 +1,8 @@
 ﻿// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.Build.ManagedReference;
-
-using System;
-using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Composition;
-using System.Linq;
-using System.IO;
 using System.Text;
 
 using Microsoft.DocAsCode.Build.Common;
@@ -19,6 +13,8 @@ using Microsoft.DocAsCode.DataContracts.ManagedReference;
 using Microsoft.DocAsCode.Plugins;
 
 using Newtonsoft.Json;
+
+namespace Microsoft.DocAsCode.Build.ManagedReference;
 
 [Export(typeof(IDocumentProcessor))]
 public class ManagedReferenceDocumentProcessor : ReferenceDocumentProcessorBase

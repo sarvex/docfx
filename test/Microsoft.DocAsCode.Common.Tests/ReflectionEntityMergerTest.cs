@@ -1,14 +1,13 @@
 ﻿// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.Common.Tests;
-
-using System.Collections.Generic;
 using Xunit;
 
 using Microsoft.DocAsCode.Common.EntityMergers;
 
-    [Trait("Related", "ReflectionEntityMerger")]
+namespace Microsoft.DocAsCode.Common.Tests;
+
+[Trait("Related", "ReflectionEntityMerger")]
 public class ReflectionEntityMergerTest
 {
     [Fact]

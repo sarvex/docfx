@@ -1,13 +1,10 @@
 // Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.MarkdigEngine;
-
-using System.Collections.Generic;
-
-using MarkdigEngine.Extensions;
-
 using Markdig.Syntax;
+using Microsoft.DocAsCode.MarkdigEngine.Extensions;
+
+namespace Microsoft.DocAsCode.MarkdigEngine;
 
 public class TabGroupIdRewriter : IMarkdownObjectRewriter
 {

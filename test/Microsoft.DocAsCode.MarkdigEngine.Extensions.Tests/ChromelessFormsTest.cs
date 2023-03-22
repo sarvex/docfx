@@ -1,9 +1,9 @@
 ﻿// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.MarkdigEngine.Tests;
-
 using Xunit;
+
+namespace Microsoft.DocAsCode.MarkdigEngine.Tests;
 
 public class ChromelessFormsTest
 {
@@ -50,7 +50,6 @@ public class ChromelessFormsTest
 
         TestUtility.VerifyMarkup(content, null, new[] { "invalid-form" });
     }
-
 
     [Fact]
     public void ChromelessFormsAttributeValueRequired()

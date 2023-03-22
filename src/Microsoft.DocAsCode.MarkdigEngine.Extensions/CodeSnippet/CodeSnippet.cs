@@ -1,17 +1,14 @@
 // Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.MarkdigEngine.Extensions;
-
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Net;
 
 using Markdig.Parsers;
 using Markdig.Renderers.Html;
 using Markdig.Syntax;
-using System;
+
+namespace Microsoft.DocAsCode.MarkdigEngine.Extensions;
 
 public class CodeSnippet : LeafBlock
 {

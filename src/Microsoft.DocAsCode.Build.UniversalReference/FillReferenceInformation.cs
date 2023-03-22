@@ -1,8 +1,6 @@
 ﻿// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.Build.UniversalReference;
-
 using System.Collections.Immutable;
 using System.Composition;
 
@@ -10,6 +8,8 @@ using Microsoft.DocAsCode.Build.Common;
 using Microsoft.DocAsCode.DataContracts.Common;
 using Microsoft.DocAsCode.DataContracts.UniversalReference;
 using Microsoft.DocAsCode.Plugins;
+
+namespace Microsoft.DocAsCode.Build.UniversalReference;
 
 [Export(nameof(UniversalReferenceDocumentProcessor), typeof(IDocumentBuildStep))]
 public class FillReferenceInformation : BaseDocumentBuildStep

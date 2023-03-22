@@ -3,8 +3,6 @@
 
 namespace Microsoft.DocAsCode.Exceptions;
 
-using System;
-
 public class DocfxInitException : Exception
 {
     public DocfxInitException(string message, Exception innerException) : base(message, innerException)

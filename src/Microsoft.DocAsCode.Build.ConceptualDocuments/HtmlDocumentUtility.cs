@@ -1,11 +1,10 @@
 ﻿// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.Build.ConceptualDocuments;
-
-using System;
 using System.Net;
 using HtmlAgilityPack;
+
+namespace Microsoft.DocAsCode.Build.ConceptualDocuments;
 
 public static class HtmlDocumentUtility
 {

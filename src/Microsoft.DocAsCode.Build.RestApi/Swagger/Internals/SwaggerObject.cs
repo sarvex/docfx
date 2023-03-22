@@ -3,9 +3,6 @@
 
 namespace Microsoft.DocAsCode.Build.RestApi.Swagger.Internals;
 
-using System.Collections.Generic;
-using System.Linq;
-
 internal class SwaggerObject : SwaggerObjectBase
 {
     public override SwaggerObjectType ObjectType => SwaggerObjectType.Object;

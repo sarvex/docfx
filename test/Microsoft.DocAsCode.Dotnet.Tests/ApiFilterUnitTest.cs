@@ -1,12 +1,11 @@
 ﻿// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.Dotnet.Tests;
-
 using Xunit;
 
 using Microsoft.CodeAnalysis;
-using System.Linq;
+
+namespace Microsoft.DocAsCode.Dotnet.Tests;
 
 [Trait("Related", "Filter")]
 [Collection("docfx STA")]

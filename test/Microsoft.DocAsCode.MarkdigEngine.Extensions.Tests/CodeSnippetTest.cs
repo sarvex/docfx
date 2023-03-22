@@ -1,10 +1,9 @@
 ﻿// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.MarkdigEngine.Tests;
-
-using System.Collections.Generic;
 using Xunit;
+
+namespace Microsoft.DocAsCode.MarkdigEngine.Tests;
 
 public class CodeSnippetTest
 {
@@ -292,7 +291,6 @@ public class MyClass
         });
     }
 
-
     [Theory]
             [Trait("Related", "DfmMarkdown")]
     #region Inline Data
@@ -354,10 +352,12 @@ public class MyClass
 }
 </code></pre>")]
     [InlineData(@"[!code-csharp[Main](Program.cs#namespace ""This is root"")]", @"<pre><code class=""lang-csharp"" name=""Main"" title=""This is root"">using System;
+
 using System.Collections.Generic;
 using System.IO;
 </code></pre>")]
     [InlineData(@"[!code-csharp[Main](Program.cs#NAMESPACE ""This is root"")]", @"<pre><code class=""lang-csharp"" name=""Main"" title=""This is root"">using System;
+
 using System.Collections.Generic;
 using System.IO;
 </code></pre>")]
@@ -384,6 +384,7 @@ using System.IO;
 }
 </code></pre>")]
     [InlineData(@"[!code-csharp[Main](Program.cs?name=namespace ""This is root"")]", @"<pre><code class=""lang-csharp"" name=""Main"" title=""This is root"">using System;
+
 using System.Collections.Generic;
 using System.IO;
 </code></pre>")]
@@ -663,7 +664,6 @@ public static void Foo()
             { "Program.cs", content },
         });
     }
-
 
     [Fact(Skip = "won't support")]
     [Trait("Related", "DfmMarkdown")]

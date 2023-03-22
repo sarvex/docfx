@@ -1,11 +1,8 @@
-﻿namespace Microsoft.DocAsCode.DataContracts.Common;
-
-using System;
-using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.Linq;
+﻿using System.Collections.Immutable;
 
 using Microsoft.DocAsCode.Common;
+
+namespace Microsoft.DocAsCode.DataContracts.Common;
 
 public class ExternalReferencePackageCollection : IDisposable
 {

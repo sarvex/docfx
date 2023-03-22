@@ -1,14 +1,11 @@
 // Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.SubCommands;
-
-using System;
-
-using Microsoft.DocAsCode;
 using Microsoft.DocAsCode.Build.Engine;
 using Microsoft.DocAsCode.Common;
 using Microsoft.DocAsCode.Plugins;
+
+namespace Microsoft.DocAsCode.SubCommands;
 
 internal sealed class DownloadCommand : ISubCommand
 {

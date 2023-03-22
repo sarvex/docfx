@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Immutable;
+﻿using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Reflection;
 using System.Reflection.Metadata;
-using System.Threading;
 using Microsoft.CodeAnalysis;
 
 #pragma warning disable RS1009

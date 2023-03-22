@@ -3,8 +3,6 @@
 
 namespace Microsoft.DocAsCode.Dotnet;
 
-using System.Collections.Generic;
-
 internal class ExtractMetadataConfig
 {
     public List<string> Files { get; init; }

@@ -1,13 +1,6 @@
 ﻿// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.Build.Common;
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.IO;
-
 using YamlDotNet.Serialization;
 using YamlDotNet.Core;
 using YamlDotNet.Serialization.Utilities;
@@ -18,6 +11,8 @@ using Microsoft.DocAsCode.Plugins;
 
 using Constants = Microsoft.DocAsCode.DataContracts.Common.Constants;
 using YamlDeserializer = Microsoft.DocAsCode.YamlSerialization.YamlDeserializer;
+
+namespace Microsoft.DocAsCode.Build.Common;
 
 public class OverwriteDocumentReader
 {

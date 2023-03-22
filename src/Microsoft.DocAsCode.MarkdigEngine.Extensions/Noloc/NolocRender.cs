@@ -1,7 +1,8 @@
-﻿namespace Microsoft.DocAsCode.MarkdigEngine.Extensions;
-
+﻿
 using Markdig.Renderers;
 using Markdig.Renderers.Html;
+
+namespace Microsoft.DocAsCode.MarkdigEngine.Extensions;
 
 public class NolocRender : HtmlObjectRenderer<NolocInline>
 {

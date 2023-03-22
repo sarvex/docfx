@@ -1,10 +1,6 @@
 ﻿// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.YamlSerialization.NodeDeserializers;
-
-using System;
-using System.Collections.Generic;
 using System.Reflection;
 using System.Reflection.Emit;
 
@@ -17,6 +13,8 @@ using Microsoft.DocAsCode.YamlSerialization.Helpers;
 
 using EditorBrowsable = System.ComponentModel.EditorBrowsableAttribute;
 using EditorBrowsableState = System.ComponentModel.EditorBrowsableState;
+
+namespace Microsoft.DocAsCode.YamlSerialization.NodeDeserializers;
 
 public class EmitGenericCollectionNodeDeserializer : INodeDeserializer
 {

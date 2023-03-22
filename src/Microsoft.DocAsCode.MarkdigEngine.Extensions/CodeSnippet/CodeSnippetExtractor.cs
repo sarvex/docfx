@@ -1,13 +1,11 @@
 // Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.MarkdigEngine.Extensions;
-
-using System;
-using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
 using Markdig.Helpers;
+
+namespace Microsoft.DocAsCode.MarkdigEngine.Extensions;
 
 public class CodeSnippetExtractor
 {

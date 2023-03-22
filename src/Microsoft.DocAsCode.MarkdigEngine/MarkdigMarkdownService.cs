@@ -1,21 +1,16 @@
 // Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.MarkdigEngine;
-
-using System;
 using System.Collections.Immutable;
-using System.IO;
-using System.Linq;
-
-using MarkdigEngine.Extensions;
 
 using Markdig;
 using Markdig.Renderers;
 using Markdig.Syntax;
 using Microsoft.DocAsCode.Plugins;
 using Microsoft.DocAsCode.Common;
-using System.Collections.Generic;
+using Microsoft.DocAsCode.MarkdigEngine.Extensions;
+
+namespace Microsoft.DocAsCode.MarkdigEngine;
 
 public class MarkdigMarkdownService : IMarkdownService
 {

@@ -3,8 +3,6 @@
 
 namespace Microsoft.DocAsCode.Common.EntityMergers;
 
-using System;
-
 [AttributeUsage(AttributeTargets.Property, Inherited = true, AllowMultiple = false)]
 public sealed class MergeOptionAttribute : Attribute
 {

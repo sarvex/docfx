@@ -1,16 +1,12 @@
 ﻿// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.Build.RestApi;
-
-using System;
-using System.IO;
-using System.Linq;
-
 using Microsoft.DocAsCode.Build.RestApi.Swagger.Internals;
 using Microsoft.DocAsCode.Common;
 
 using Newtonsoft.Json.Linq;
+
+namespace Microsoft.DocAsCode.Build.RestApi;
 
 internal static class RestApiHelper
 {

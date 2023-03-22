@@ -1,16 +1,12 @@
 // Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode;
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-
 using Microsoft.DocAsCode.Common;
 
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+
+namespace Microsoft.DocAsCode;
 
 internal class FileMetadataPairsConverter : JsonConverter
 {

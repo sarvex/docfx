@@ -3,8 +3,6 @@
 
 namespace Microsoft.DocAsCode.Build.Engine;
 
-using System;
-
 public class ExportSettings
 {
     public bool Export { get; set; }

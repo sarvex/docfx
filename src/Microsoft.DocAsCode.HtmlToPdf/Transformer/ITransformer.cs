@@ -3,8 +3,6 @@
 
 namespace Microsoft.DocAsCode.HtmlToPdf.Transformer;
 
-using System.Collections.Generic;
-
 public interface ITransformer
 {
     void Transform(IEnumerable<string> htmlFilePaths);

@@ -1,15 +1,13 @@
 ﻿// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.DocAsCode.Tests;
-
-using System.IO;
-
 using Microsoft.DocAsCode.Plugins;
 using Microsoft.DocAsCode.SubCommands;
 
 using Xunit;
 using Newtonsoft.Json;
+
+namespace Microsoft.DocAsCode.Tests;
 
 [Collection("docfx STA")]
 public class ArgsParserTest

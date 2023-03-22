@@ -3,8 +3,6 @@
 
 namespace Microsoft.DocAsCode.Common;
 
-using System;
-
 public interface ILoggerListener : IDisposable
 {
     void WriteLine(ILogItem item);

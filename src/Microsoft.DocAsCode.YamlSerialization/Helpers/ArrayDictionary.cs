@@ -3,9 +3,6 @@
 
 namespace Microsoft.DocAsCode.YamlSerialization.Helpers;
 
-using System;
-using System.Collections.Generic;
-
 /// <summary>
 /// Array based key-value cache.
 /// *Optimized for small size.*
