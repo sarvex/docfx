@@ -8,7 +8,7 @@ namespace Microsoft.DocAsCode.Dotnet;
 internal static class YamlMetadataResolver
 {
     // Order matters
-    private static readonly List<IResolverPipeline> pipelines = new List<IResolverPipeline>
+    private static readonly List<IResolverPipeline> pipelines = new()
     {
         new LayoutCheckAndCleanup(),
         new SetParent(),
@@ -32,10 +32,10 @@ internal static class YamlMetadataResolver
         bool preserveRawInlineComments,
         NamespaceLayout namespaceLayout)
     {
-        MetadataModel viewModel = new MetadataModel();
+        MetadataModel viewModel = new();
         viewModel.TocYamlViewModel = GenerateToc(allMembers, namespaceLayout);
         viewModel.Members = new List<MetadataItem>();
-        ResolverContext context = new ResolverContext
+        ResolverContext context = new()
         {
             References = allReferences,
             Members = allMembers,

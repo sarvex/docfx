@@ -5,8 +5,8 @@ namespace Microsoft.DocAsCode.Common;
 
 public class CompositeLogListener : ILoggerListener
 {
-    private readonly object _sync = new object();
-    private readonly List<ILoggerListener> _listeners = new List<ILoggerListener>();
+    private readonly object _sync = new();
+    private readonly List<ILoggerListener> _listeners = new();
 
     public CompositeLogListener()
     {

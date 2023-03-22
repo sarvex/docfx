@@ -14,19 +14,19 @@ namespace Microsoft.DocAsCode.Build.Engine;
 public sealed class ValidateBookmark : HtmlDocumentHandler
 {
     private static readonly string XPathTemplate = "//*/@{0}";
-    private static readonly HashSet<string> WhiteList = new HashSet<string> { "top" };
+    private static readonly HashSet<string> WhiteList = new() { "top" };
     /// <summary>
     /// bookmarks mapping from output file -> bookmarks
     /// </summary>
     private readonly OSPlatformSensitiveDictionary<HashSet<string>> _registeredBookmarks =
-        new OSPlatformSensitiveDictionary<HashSet<string>>();
+        new();
     /// <summary>
     /// file mapping from output file -> src file
     /// </summary>
     private readonly OSPlatformSensitiveDictionary<string> _fileMapping =
-        new OSPlatformSensitiveDictionary<string>();
+        new();
     private OSPlatformSensitiveDictionary<List<LinkItem>> _linksWithBookmark =
-        new OSPlatformSensitiveDictionary<List<LinkItem>>();
+        new();
 
     #region IHtmlDocumentHandler members
 

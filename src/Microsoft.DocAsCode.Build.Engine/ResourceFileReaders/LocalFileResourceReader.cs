@@ -57,7 +57,7 @@ public sealed class LocalFileResourceReader : ResourceFileReader
 
             return files;
         }
-        List<string> allFiles = new List<string>(files);
+        List<string> allFiles = new(files);
         foreach (var dir in dirs)
         {
             allFiles.AddRange(GetFiles(dir, searchPattern, searchLevel - 1));

@@ -12,7 +12,7 @@ namespace Microsoft.DocAsCode.Build.Common;
 
 public class MarkdownContentHandler : IModelAttributeHandler
 {
-    private readonly ConcurrentDictionary<Type, MarkdownContentHandlerImpl> _cache = new ConcurrentDictionary<Type, MarkdownContentHandlerImpl>();
+    private readonly ConcurrentDictionary<Type, MarkdownContentHandlerImpl> _cache = new();
 
     public object Handle(object obj, HandleModelAttributesContext context)
     {

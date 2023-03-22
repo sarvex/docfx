@@ -23,7 +23,7 @@ public class SplitClassPageToMemberLevel : BaseDocumentBuildStep
     private const string SplitFromPropertyName = "_splitFrom";
     private const string IsOverloadPropertyName = "_isOverload";
     private const int MaximumFileNameLength = 180;
-    private static readonly List<string> EmptyList = new List<string>();
+    private static readonly List<string> EmptyList = new();
     private static readonly string[] EmptyArray = new string[0];
 
     public override string Name => nameof(SplitClassPageToMemberLevel);

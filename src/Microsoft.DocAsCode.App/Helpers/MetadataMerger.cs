@@ -17,8 +17,8 @@ internal class MetadataMerger
 {
     public const string PhaseName = "Merge Metadata";
 
-    private readonly Dictionary<string, Dictionary<string, object>> _metaTable = new Dictionary<string, Dictionary<string, object>>();
-    private readonly Dictionary<string, Dictionary<string, object>> _propTable = new Dictionary<string, Dictionary<string, object>>();
+    private readonly Dictionary<string, Dictionary<string, object>> _metaTable = new();
+    private readonly Dictionary<string, Dictionary<string, object>> _propTable = new();
 
     public void Merge(MetadataMergeParameters parameters)
     {
@@ -210,7 +210,7 @@ internal class MetadataMerger
     private sealed class TocComparer
         : Comparer<TocItemViewModel>
     {
-        public static readonly TocComparer Instance = new TocComparer();
+        public static readonly TocComparer Instance = new();
 
         public override int Compare(TocItemViewModel x, TocItemViewModel y)
         {

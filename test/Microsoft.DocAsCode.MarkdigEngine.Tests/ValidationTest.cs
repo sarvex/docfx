@@ -18,7 +18,7 @@ public class ValidationTest
     public const string MarkdownValidatePhaseName = "Markdown style";
 
     private readonly MarkdownContext DefaultContext = 
-        new MarkdownContext(
+        new(
             null,
             (code, message, origin, line) => Logger.LogInfo(message, null, null, line.ToString(), code),
             (code, message, origin, line) => Logger.LogSuggestion(message, null, null, line.ToString(), code),

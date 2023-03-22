@@ -9,8 +9,8 @@ namespace Microsoft.DocAsCode.Common;
 
 public class UriTemplate<T>
 {
-    private static readonly Regex _marcoRegex = new Regex(@"{%\s*([\S]+?)\s*%}", RegexOptions.Compiled);
-    private static readonly Regex _pipelineRegex = new Regex(@"\|>\s*([^|\s]+)\s*(.*?)\s*(?:$|(?=\|>))", RegexOptions.Compiled);
+    private static readonly Regex _marcoRegex = new(@"{%\s*([\S]+?)\s*%}", RegexOptions.Compiled);
+    private static readonly Regex _pipelineRegex = new(@"\|>\s*([^|\s]+)\s*(.*?)\s*(?:$|(?=\|>))", RegexOptions.Compiled);
 
     public string Template { get; }
     private readonly Func<string, T> _func;
@@ -40,8 +40,8 @@ public class UriTemplate<T>
         var t = _marcoRegex.Replace(
             template,
             m => Environment.GetEnvironmentVariable(m.Groups[1].Value));
-        List<IUriTemplatePipeline<T>> pipeline = new List<IUriTemplatePipeline<T>>();
-        List<string[]> parameters = new List<string[]>();
+        List<IUriTemplatePipeline<T>> pipeline = new();
+        List<string[]> parameters = new();
         t = _pipelineRegex.Replace(
             t,
             m =>

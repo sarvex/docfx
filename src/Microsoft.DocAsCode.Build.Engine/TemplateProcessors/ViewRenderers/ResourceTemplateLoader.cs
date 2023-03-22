@@ -9,7 +9,7 @@ namespace Microsoft.DocAsCode.Build.Engine;
 internal sealed class ResourceTemplateLoader : IStubbleLoader
 {
     private const string PartialTemplateExtension = ".tmpl.partial";
-    private readonly ConcurrentDictionary<string, string> _templateCache = new ConcurrentDictionary<string, string>();
+    private readonly ConcurrentDictionary<string, string> _templateCache = new();
     private readonly IResourceFileReader _reader;
 
     public ResourceTemplateLoader(IResourceFileReader reader)

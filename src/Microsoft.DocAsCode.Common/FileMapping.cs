@@ -30,7 +30,7 @@ namespace Microsoft.DocAsCode;
 [Serializable]
 public class FileMapping
 {
-    private List<FileMappingItem> _items = new List<FileMappingItem>();
+    private List<FileMappingItem> _items = new();
 
     public bool Expanded { get; set; }
 

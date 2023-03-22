@@ -19,12 +19,12 @@ public class YamlDeserializerWithFallback
     }
 
     public static YamlDeserializerWithFallback Create<T>() =>
-        new YamlDeserializerWithFallback(
+        new(
             (Func<TextReader> tr) => YamlUtility.Deserialize<T>(tr()),
             (string path) => YamlUtility.Deserialize<T>(path));
 
     public YamlDeserializerWithFallback WithFallback<T>() =>
-        new YamlDeserializerWithFallback(
+        new(
             Fallback(_textReaderDeserialize, tr => YamlUtility.Deserialize<T>(tr())),
             Fallback(_filePathDeserialize, p => YamlUtility.Deserialize<T>(p)));
 

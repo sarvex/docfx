@@ -13,9 +13,9 @@ namespace Microsoft.DocAsCode.Build.Engine;
 internal sealed class HostService : IHostService, IDisposable
 {
     #region Fields
-    private readonly object _syncRoot = new object();
-    private readonly object _tocSyncRoot = new object();
-    private readonly Dictionary<string, List<FileModel>> _uidIndex = new Dictionary<string, List<FileModel>>();
+    private readonly object _syncRoot = new();
+    private readonly object _tocSyncRoot = new();
+    private readonly Dictionary<string, List<FileModel>> _uidIndex = new();
     #endregion
 
     #region Properties

@@ -22,10 +22,10 @@ public static class GitUtility
     private static readonly string GetRemoteBranchCommand = "rev-parse --abbrev-ref @{u}";
 
     private static readonly Regex GitHubRepoUrlRegex =
-        new Regex(@"^((https|http):\/\/(.+@)?github\.com\/|git@github\.com:)(?<account>\S+)\/(?<repository>[A-Za-z0-9_.-]+)(\.git)?\/?$", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.RightToLeft);
+        new(@"^((https|http):\/\/(.+@)?github\.com\/|git@github\.com:)(?<account>\S+)\/(?<repository>[A-Za-z0-9_.-]+)(\.git)?\/?$", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.RightToLeft);
 
     private static readonly Regex VsoGitRepoUrlRegex =
-        new Regex(@"^(((https|http):\/\/(?<account>\S+))|((ssh:\/\/)(?<account>\S+)@(?:\S+)))\.visualstudio\.com(?<port>:\d+)?(?:\/DefaultCollection)?(\/(?<project>[^\/]+)(\/.*)*)*\/(?:_git|_ssh)\/(?<repository>([^._,]|[^._,][^@~;{}'+=,<>|\/\\?:&$*""#[\]]*[^.,]))$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        new(@"^(((https|http):\/\/(?<account>\S+))|((ssh:\/\/)(?<account>\S+)@(?:\S+)))\.visualstudio\.com(?<port>:\d+)?(?:\/DefaultCollection)?(\/(?<project>[^\/]+)(\/.*)*)*\/(?:_git|_ssh)\/(?<repository>([^._,]|[^._,][^@~;{}'+=,<>|\/\\?:&$*""#[\]]*[^.,]))$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
     private static readonly string GitHubNormalizedRepoUrlTemplate = "https://github.com/{0}/{1}";
     private static readonly string VsoNormalizedRepoUrlTemplate = "https://{0}.visualstudio.com/DefaultCollection/{1}/_git/{2}";
@@ -44,10 +44,10 @@ public static class GitUtility
         "BUILD_SOURCEBRANCHNAME"  // VSO Agent
     };
 
-    private static readonly ConcurrentDictionary<string, GitRepoInfo> Cache = new ConcurrentDictionary<string, GitRepoInfo>();
+    private static readonly ConcurrentDictionary<string, GitRepoInfo> Cache = new();
 
     private static bool? GitCommandExists = null;
-    private static object SyncRoot = new object();
+    private static object SyncRoot = new();
 
     public static GitDetail TryGetFileDetail(string filePath)
     {

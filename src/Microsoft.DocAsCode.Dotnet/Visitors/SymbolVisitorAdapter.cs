@@ -14,7 +14,7 @@ namespace Microsoft.DocAsCode.Dotnet;
 internal class SymbolVisitorAdapter : SymbolVisitor<MetadataItem>
 {
     #region Fields
-    private static readonly Regex MemberSigRegex = new Regex(@"^([\w\{\}`]+\.)+", RegexOptions.Compiled);
+    private static readonly Regex MemberSigRegex = new(@"^([\w\{\}`]+\.)+", RegexOptions.Compiled);
     private static readonly IReadOnlyList<string> EmptyListOfString = new string[0];
     private readonly YamlModelGenerator _generator;
     private Dictionary<string, ReferenceItem> _references;

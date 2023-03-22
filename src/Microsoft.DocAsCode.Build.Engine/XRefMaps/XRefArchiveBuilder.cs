@@ -9,8 +9,8 @@ public class XRefArchiveBuilder
 {
     private const string PhaseName = "Archive";
 
-    private readonly object _syncRoot = new object();
-    private readonly XRefMapDownloader _downloader = new XRefMapDownloader();
+    private readonly object _syncRoot = new();
+    private readonly XRefMapDownloader _downloader = new();
 
     public async Task<bool> DownloadAsync(Uri uri, string outputFile)
     {

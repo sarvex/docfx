@@ -32,7 +32,7 @@ public class ValidateBookmarkTest : TestBase
     [Fact]
     public void TestBasicFeature()
     {
-        Manifest manifest = new Manifest
+        Manifest manifest = new()
         {
             SourceBasePath = _outputFolder,
             Files =
@@ -91,7 +91,7 @@ public class ValidateBookmarkTest : TestBase
     public void TestNoCheck()
     {
         // Arrange
-        Manifest manifest = new Manifest
+        Manifest manifest = new()
         {
             SourceBasePath = _outputFolder,
             Files =

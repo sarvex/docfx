@@ -10,9 +10,9 @@ namespace Microsoft.DocAsCode.MarkdigEngine.Extensions;
 
 public static class ExtensionsHelper
 {
-    public static readonly Regex HtmlEscapeWithEncode = new Regex(@"&", RegexOptions.Compiled);
-    public static readonly Regex HtmlEscapeWithoutEncode = new Regex(@"&(?!#?\w+;)", RegexOptions.Compiled);
-    public static readonly Regex HtmlUnescape = new Regex(@"&([#\w]+);", RegexOptions.Compiled);
+    public static readonly Regex HtmlEscapeWithEncode = new(@"&", RegexOptions.Compiled);
+    public static readonly Regex HtmlEscapeWithoutEncode = new(@"&(?!#?\w+;)", RegexOptions.Compiled);
+    public static readonly Regex HtmlUnescape = new(@"&([#\w]+);", RegexOptions.Compiled);
 
     public static char SkipSpaces(ref StringSlice slice)
     {

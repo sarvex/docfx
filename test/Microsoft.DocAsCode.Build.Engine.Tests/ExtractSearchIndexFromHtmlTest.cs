@@ -13,7 +13,7 @@ namespace Microsoft.DocAsCode.Build.Engine.Tests;
 [Collection("docfx STA")]
 public class ExtractSearchIndexFromHtmlTest
 {
-    private static ExtractSearchIndex _extractor = new ExtractSearchIndex();
+    private static ExtractSearchIndex _extractor = new();
 
     [Fact]
     public void TestBasicFeature()

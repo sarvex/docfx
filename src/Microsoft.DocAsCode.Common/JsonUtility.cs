@@ -10,7 +10,7 @@ namespace Microsoft.DocAsCode.Common;
 
 public static class JsonUtility
 {
-    public static readonly ThreadLocal<JsonSerializer> DefaultSerializer = new ThreadLocal<JsonSerializer>(
+    public static readonly ThreadLocal<JsonSerializer> DefaultSerializer = new(
         () => new JsonSerializer
         {
             NullValueHandling = NullValueHandling.Ignore,
@@ -30,7 +30,7 @@ public static class JsonUtility
 
     public static string Serialize(object graph, Formatting formatting = Formatting.None, JsonSerializer serializer = null)
     {
-        using StringWriter writer = new StringWriter();
+        using StringWriter writer = new();
         Serialize(writer, graph, formatting, serializer);
         return writer.ToString();
     }
@@ -38,14 +38,14 @@ public static class JsonUtility
     public static void Serialize(string path, object graph, Formatting formatting = Formatting.None, JsonSerializer serializer = null)
     {
         using var stream = EnvironmentContext.FileAbstractLayer.Create(path);
-        using StreamWriter writer = new StreamWriter(stream);
+        using StreamWriter writer = new(stream);
         Serialize(writer, graph, formatting, serializer);
     }
 
     public static T Deserialize<T>(string path, JsonSerializer serializer = null)
     {
         using var stream = EnvironmentContext.FileAbstractLayer.OpenRead(path);
-        using StreamReader reader = new StreamReader(stream);
+        using StreamReader reader = new(stream);
         return Deserialize<T>(reader, serializer);
     }
 

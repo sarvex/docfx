@@ -36,7 +36,7 @@ public sealed class YamlDeserializer
 
     private readonly Dictionary<TagName, Type> _tagMappings;
     private readonly List<IYamlTypeConverter> _converters;
-    private readonly TypeDescriptorProxy _typeDescriptor = new TypeDescriptorProxy();
+    private readonly TypeDescriptorProxy _typeDescriptor = new();
     private readonly IValueDeserializer _valueDeserializer;
     private readonly ITypeConverter _reflectionTypeConverter = new ReflectionTypeConverter();
 

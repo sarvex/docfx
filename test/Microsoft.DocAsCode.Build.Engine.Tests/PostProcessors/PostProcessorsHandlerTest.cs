@@ -12,7 +12,7 @@ namespace Microsoft.DocAsCode.Build.Engine.Tests;
 public class PostProcessorsHandlerTest : TestBase
 {
     private const string MetaAppendContent = "-meta";
-    private static readonly PostProcessorsHandler PostProcessorsHandler = new PostProcessorsHandler();
+    private static readonly PostProcessorsHandler PostProcessorsHandler = new();
     private static readonly int MaxParallelism = Environment.ProcessorCount;
 
     [Fact]

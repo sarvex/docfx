@@ -7,9 +7,9 @@ public class ResourcePoolManager<TResource>
     : IDisposable
     where TResource : class
 {
-    private readonly object _syncRoot = new object();
-    private readonly List<TResource> _resources = new List<TResource>();
-    private readonly Stack<TResource> _stack = new Stack<TResource>();
+    private readonly object _syncRoot = new();
+    private readonly List<TResource> _resources = new();
+    private readonly Stack<TResource> _stack = new();
     private readonly Func<TResource> _creator;
     private readonly int _maxResourceCount;
 

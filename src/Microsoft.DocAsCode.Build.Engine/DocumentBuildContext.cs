@@ -14,8 +14,8 @@ namespace Microsoft.DocAsCode.Build.Engine;
 
 public sealed class DocumentBuildContext : IDocumentBuildContext
 {
-    private static readonly HttpClient _client = new HttpClient(new HttpClientHandler { CheckCertificateRevocationList = true });
-    private readonly ConcurrentDictionary<string, TocInfo> _tableOfContents = new ConcurrentDictionary<string, TocInfo>(FilePathComparer.OSPlatformSensitiveStringComparer);
+    private static readonly HttpClient _client = new(new HttpClientHandler { CheckCertificateRevocationList = true });
+    private readonly ConcurrentDictionary<string, TocInfo> _tableOfContents = new(FilePathComparer.OSPlatformSensitiveStringComparer);
     private readonly Task<IXRefContainerReader> _reader;
     private ImmutableArray<string> _xrefMapUrls { get; }
     private ImmutableArray<string> _xrefServiceUrls { get; }

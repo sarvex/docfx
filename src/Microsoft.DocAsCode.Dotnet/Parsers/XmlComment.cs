@@ -18,13 +18,13 @@ namespace Microsoft.DocAsCode.Dotnet;
 internal class XmlComment
 {
     private const string idSelector = @"((?![0-9])[\w_])+[\w\(\)\.\{\}\[\]\|\*\^~#@!`,_<>:]*";
-    private static readonly Regex CommentIdRegex = new Regex(@"^(?<type>N|T|M|P|F|E|Overload):(?<id>" + idSelector + ")$", RegexOptions.Compiled);
-    private static readonly Regex LineBreakRegex = new Regex(@"\r?\n", RegexOptions.Compiled);
-    private static readonly Regex CodeElementRegex = new Regex(@"<code[^>]*>([\s\S]*?)</code>", RegexOptions.Compiled);
-    private static readonly Regex RegionRegex = new Regex(@"^\s*#region\s*(.*)$");
-    private static readonly Regex XmlRegionRegex = new Regex(@"^\s*<!--\s*<([^/\s].*)>\s*-->$");
-    private static readonly Regex EndRegionRegex = new Regex(@"^\s*#endregion\s*.*$");
-    private static readonly Regex XmlEndRegionRegex = new Regex(@"^\s*<!--\s*</(.*)>\s*-->$");
+    private static readonly Regex CommentIdRegex = new(@"^(?<type>N|T|M|P|F|E|Overload):(?<id>" + idSelector + ")$", RegexOptions.Compiled);
+    private static readonly Regex LineBreakRegex = new(@"\r?\n", RegexOptions.Compiled);
+    private static readonly Regex CodeElementRegex = new(@"<code[^>]*>([\s\S]*?)</code>", RegexOptions.Compiled);
+    private static readonly Regex RegionRegex = new(@"^\s*#region\s*(.*)$");
+    private static readonly Regex XmlRegionRegex = new(@"^\s*<!--\s*<([^/\s].*)>\s*-->$");
+    private static readonly Regex EndRegionRegex = new(@"^\s*#endregion\s*.*$");
+    private static readonly Regex XmlEndRegionRegex = new(@"^\s*<!--\s*</(.*)>\s*-->$");
 
     private readonly XmlCommentParserContext _context;
 

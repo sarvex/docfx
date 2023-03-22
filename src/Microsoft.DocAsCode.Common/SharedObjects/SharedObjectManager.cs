@@ -33,5 +33,5 @@ public class SharedObjectManager<TState, TEvent>
         _states.GetOrAdd(_transit(value, @event), _creator);
 
     private SharedObjectNode<TState, TEvent> CreateNewNode(TState value) =>
-        new SharedObjectNode<TState, TEvent>(this, value);
+        new(this, value);
 }

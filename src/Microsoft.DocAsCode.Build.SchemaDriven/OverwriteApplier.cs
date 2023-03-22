@@ -12,7 +12,7 @@ namespace Microsoft.DocAsCode.Build.SchemaDriven;
 
 public class OverwriteApplier
 {
-    private readonly SchemaProcessor _xrefSpecUpdater = new SchemaProcessor(
+    private readonly SchemaProcessor _xrefSpecUpdater = new(
         new XrefPropertiesInterpreter()
     );
 

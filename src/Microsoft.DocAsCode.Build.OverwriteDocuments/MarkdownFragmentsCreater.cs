@@ -20,13 +20,13 @@ public class MarkdownFragmentsCreater
 
     private int _position;
 
-    private InlineCodeHeadingRule _inlineCodeHeadingRule = new InlineCodeHeadingRule();
+    private InlineCodeHeadingRule _inlineCodeHeadingRule = new();
 
-    private L1InlineCodeHeadingRule _l1InlineCodeHeadingRule = new L1InlineCodeHeadingRule();
+    private L1InlineCodeHeadingRule _l1InlineCodeHeadingRule = new();
 
-    private L2InlineCodeHeadingRule _l2InlineCodeHeadingRule = new L2InlineCodeHeadingRule();
+    private L2InlineCodeHeadingRule _l2InlineCodeHeadingRule = new();
 
-    private YamlCodeBlockRule _yamlCodeBlockRule = new YamlCodeBlockRule();
+    private YamlCodeBlockRule _yamlCodeBlockRule = new();
 
     public IEnumerable<MarkdownFragmentModel> Create(MarkdownDocument document)
     {

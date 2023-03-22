@@ -13,15 +13,15 @@ namespace Microsoft.DocAsCode.MarkdigEngine.Extensions;
 public class MarkdownValidatorBuilder
 {
     private readonly List<RuleWithId<MarkdownValidationRule>> _validators =
-        new List<RuleWithId<MarkdownValidationRule>>();
+        new();
     private readonly List<RuleWithId<MarkdownTagValidationRule>> _tagValidators =
-        new List<RuleWithId<MarkdownTagValidationRule>>();
+        new();
     private readonly Dictionary<string, MarkdownValidationRule> _globalValidators =
-        new Dictionary<string, MarkdownValidationRule>();
+        new();
     private readonly List<MarkdownValidationSetting> _settings =
-        new List<MarkdownValidationSetting>();
+        new();
     private List<IMarkdownObjectValidatorProvider> _validatorProviders =
-        new List<IMarkdownObjectValidatorProvider>();
+        new();
 
     public const string DefaultValidatorName = "default";
     public const string MarkdownValidatePhaseName = "Markdown style";
@@ -206,7 +206,7 @@ public class MarkdownValidatorBuilder
 
     public void LoadEnabledRulesProvider()
     {
-        HashSet<string> enabledContractName = new HashSet<string>();
+        HashSet<string> enabledContractName = new();
         foreach (var item in _validators)
         {
             if (IsDisabledBySetting(item) ?? item.Rule.Disable)

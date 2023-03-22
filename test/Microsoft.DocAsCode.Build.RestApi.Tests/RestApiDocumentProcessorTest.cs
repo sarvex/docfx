@@ -41,7 +41,7 @@ public class RestApiDocumentProcessorTest : TestBase
     [Fact]
     public void ProcessSwaggerShouldSucceed()
     {
-        FileCollection files = new FileCollection(_defaultFiles);
+        FileCollection files = new(_defaultFiles);
         BuildDocument(files);
 
         var outputRawModelPath = GetRawModelFilePath("contacts.json");
@@ -131,7 +131,7 @@ public class RestApiDocumentProcessorTest : TestBase
     [Fact]
     public void ProcessSwaggerWithExternalReferenceShouldSucceed()
     {
-        FileCollection files = new FileCollection(_defaultFiles);
+        FileCollection files = new(_defaultFiles);
         BuildDocument(files);
 
         var outputRawModelPath = GetRawModelFilePath("contacts.json");
@@ -233,7 +233,7 @@ public class RestApiDocumentProcessorTest : TestBase
     [Fact]
     public void ProcessSwaggerWithTagsOverwriteShouldSucceed()
     {
-        FileCollection files = new FileCollection(_defaultFiles);
+        FileCollection files = new(_defaultFiles);
         files.Add(DocumentType.Overwrite, new[] { "TestData/overwrite/rest.overwrite.tags.md" });
         BuildDocument(files);
 
@@ -253,7 +253,7 @@ public class RestApiDocumentProcessorTest : TestBase
     [Fact]
     public void ProcessSwaggerWithDefaultOverwriteShouldSucceed()
     {
-        FileCollection files = new FileCollection(_defaultFiles);
+        FileCollection files = new(_defaultFiles);
         files.Add(DocumentType.Overwrite, new[] { "TestData/overwrite/rest.overwrite.default.md" });
         BuildDocument(files);
 
@@ -269,7 +269,7 @@ public class RestApiDocumentProcessorTest : TestBase
     [Fact]
     public void ProcessSwaggerWithSimpleOverwriteShouldSucceed()
     {
-        FileCollection files = new FileCollection(_defaultFiles);
+        FileCollection files = new(_defaultFiles);
         files.Add(DocumentType.Overwrite, new[] { "TestData/overwrite/rest.overwrite.simple.md" });
         BuildDocument(files);
         var outputRawModelPath = GetRawModelFilePath("contacts.json");
@@ -377,7 +377,7 @@ public class RestApiDocumentProcessorTest : TestBase
     [Fact]
     public void ProcessSwaggerWithNotPredefinedOverwriteShouldSucceed()
     {
-        FileCollection files = new FileCollection(_defaultFiles);
+        FileCollection files = new(_defaultFiles);
         files.Add(DocumentType.Overwrite, new[] { "TestData/overwrite/rest.overwrite.not.predefined.md" });
         BuildDocument(files);
         {
@@ -392,7 +392,7 @@ public class RestApiDocumentProcessorTest : TestBase
     [Fact]
     public void ProcessSwaggerWithInvalidOverwriteShouldFail()
     {
-        FileCollection files = new FileCollection(_defaultFiles);
+        FileCollection files = new(_defaultFiles);
         files.Add(DocumentType.Overwrite, new[] { "TestData/overwrite/rest.overwrite.invalid.md" });
         Assert.Throws<DocumentException>(() => BuildDocument(files));
     }
@@ -400,7 +400,7 @@ public class RestApiDocumentProcessorTest : TestBase
     [Fact]
     public void ProcessSwaggerWithUnmergableOverwriteShouldSucceed()
     {
-        FileCollection files = new FileCollection(_defaultFiles);
+        FileCollection files = new(_defaultFiles);
         files.Add(DocumentType.Overwrite, new[] { "TestData/overwrite/rest.overwrite.unmergable.md" });
         BuildDocument(files);
         {
@@ -447,7 +447,7 @@ public class RestApiDocumentProcessorTest : TestBase
     public void SystemKeysListShouldBeComplete()
     {
         var userKeys = new[] { "meta", "swagger", "securityDefinitions", "schemes" };
-        FileCollection files = new FileCollection(_defaultFiles);
+        FileCollection files = new(_defaultFiles);
         BuildDocument(files);
 
         var outputRawModelPath = GetRawModelFilePath("contacts.json");

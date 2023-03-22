@@ -7,7 +7,7 @@ namespace Microsoft.DocAsCode.Common;
 
 public static class PathUtility
 {
-    private static readonly Regex UriWithProtocol = new Regex(@"^\w{2,}\:", RegexOptions.Compiled);
+    private static readonly Regex UriWithProtocol = new(@"^\w{2,}\:", RegexOptions.Compiled);
 
     private static readonly char[] AdditionalInvalidChars = ":*".ToArray();
     public static readonly char[] InvalidFileNameChars = Path.GetInvalidFileNameChars().Concat(AdditionalInvalidChars).ToArray();
@@ -18,7 +18,7 @@ public static class PathUtility
     private static readonly string NeedUrlEncodeFileNameCharsRegexString = "[^0-9a-zA-Z-_.!*()]";
 
     private static readonly string InvalidOrNeedUrlEncodeFileNameCharsRegexString = $"{InvalidFileNameCharsRegexString}|{NeedUrlEncodeFileNameCharsRegexString}";
-    private static readonly Regex InvalidOrNeedUrlEncodeFileNameCharsRegex = new Regex(InvalidOrNeedUrlEncodeFileNameCharsRegexString, RegexOptions.Compiled);
+    private static readonly Regex InvalidOrNeedUrlEncodeFileNameCharsRegex = new(InvalidOrNeedUrlEncodeFileNameCharsRegexString, RegexOptions.Compiled);
 
     public static bool IsPathCaseInsensitive()
     {
@@ -78,8 +78,8 @@ public static class PathUtility
             basePath += "/";
         }
 
-        Uri fromUri = new Uri(Path.GetFullPath(basePath));
-        Uri toUri = new Uri(Path.GetFullPath(absolutePath));
+        Uri fromUri = new(Path.GetFullPath(basePath));
+        Uri toUri = new(Path.GetFullPath(absolutePath));
 
         if (fromUri.Scheme != toUri.Scheme)
         {

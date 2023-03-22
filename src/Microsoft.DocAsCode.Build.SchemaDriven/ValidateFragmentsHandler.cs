@@ -10,7 +10,7 @@ namespace Microsoft.DocAsCode.Build.SchemaDriven;
 
 public class ValidateFragmentsHandler : ISchemaFragmentsHandler
 {
-    Dictionary<string, bool> _isMissingUidsLogged = new Dictionary<string, bool>();
+    Dictionary<string, bool> _isMissingUidsLogged = new();
 
     public void HandleUid(string uidKey, YamlMappingNode node, Dictionary<string, MarkdownFragment> fragments, BaseSchema schema, string oPathPrefix, string uid)
     {

@@ -11,7 +11,7 @@ namespace Microsoft.DocAsCode.YamlSerialization.Helpers;
 internal sealed class ArrayDictionary<TKey, TValue>
 {
     private readonly IEqualityComparer<TKey> _comparer;
-    private readonly object _syncRoot = new object();
+    private readonly object _syncRoot = new();
     private volatile KeyValuePair<TKey, TValue>[] _cache = null;
 
     public ArrayDictionary(IEqualityComparer<TKey> comparer = null)

@@ -9,7 +9,7 @@ namespace Microsoft.DocAsCode.Build.Engine;
 
 public sealed class ArchiveResourceReader : ResourceFileReader
 {
-    private readonly object _locker = new object();
+    private readonly object _locker = new();
     private ZipArchive _zipped;
     private bool disposed = false;
 

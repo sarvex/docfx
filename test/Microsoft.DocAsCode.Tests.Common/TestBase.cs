@@ -7,8 +7,8 @@ namespace Microsoft.DocAsCode.Tests.Common;
 
 public class TestBase : IClassFixture<TestBase>, IDisposable
 {
-    private readonly List<string> _folderCollection = new List<string>();
-    private object _locker = new object();
+    private readonly List<string> _folderCollection = new();
+    private object _locker = new();
 
     protected string GetRandomFolder()
     {

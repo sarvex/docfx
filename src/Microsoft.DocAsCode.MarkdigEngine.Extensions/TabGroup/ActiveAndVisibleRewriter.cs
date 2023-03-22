@@ -10,7 +10,7 @@ namespace Microsoft.DocAsCode.MarkdigEngine.Extensions;
 public class ActiveAndVisibleRewriter : IMarkdownObjectRewriter
 {
     private readonly MarkdownContext _context;
-    private List<string[]> tabSelectionInfo = new List<string[]>();
+    private List<string[]> tabSelectionInfo = new();
 
     public ActiveAndVisibleRewriter(MarkdownContext context)
     {

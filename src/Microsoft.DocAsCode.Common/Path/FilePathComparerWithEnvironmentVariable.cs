@@ -8,8 +8,8 @@ public class FilePathComparerWithEnvironmentVariable
 {
     private readonly FilePathComparer _inner;
 
-    public static readonly FilePathComparerWithEnvironmentVariable OSPlatformSensitiveComparer = new FilePathComparerWithEnvironmentVariable(new FilePathComparer());
-    public static readonly FilePathComparerWithEnvironmentVariable OSPlatformSensitiveRelativePathComparer = new FilePathComparerWithEnvironmentVariable(new FilePathComparer(true));
+    public static readonly FilePathComparerWithEnvironmentVariable OSPlatformSensitiveComparer = new(new FilePathComparer());
+    public static readonly FilePathComparerWithEnvironmentVariable OSPlatformSensitiveRelativePathComparer = new(new FilePathComparer(true));
 
     public FilePathComparerWithEnvironmentVariable(FilePathComparer inner)
     {

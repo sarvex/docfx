@@ -5,8 +5,8 @@ namespace Microsoft.DocAsCode.Common;
 
 public class CircularStream
 {
-    private readonly CircularBuffer<byte> _buffer = new CircularBuffer<byte>(4096);
-    private readonly object _syncRoot = new object();
+    private readonly CircularBuffer<byte> _buffer = new(4096);
+    private readonly object _syncRoot = new();
     private bool _eof;
 
     private int Read(byte[] buffer, int offset, int count)

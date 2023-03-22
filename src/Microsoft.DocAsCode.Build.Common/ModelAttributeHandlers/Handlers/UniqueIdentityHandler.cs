@@ -11,7 +11,7 @@ namespace Microsoft.DocAsCode.Build.Common;
 
 public class UniqueIdentityReferenceHandler : IModelAttributeHandler
 {
-    private readonly ConcurrentDictionary<Type, UniqueIdentityHandlerImpl> _cache = new ConcurrentDictionary<Type, UniqueIdentityHandlerImpl>();
+    private readonly ConcurrentDictionary<Type, UniqueIdentityHandlerImpl> _cache = new();
 
     public object Handle(object obj, HandleModelAttributesContext context)
     {

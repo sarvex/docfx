@@ -54,7 +54,7 @@ public class TocDocumentProcessorTest : TestBase
 ";
         var file = _fileCreator.CreateFile(string.Empty, FileType.MarkdownContent, fileNameWithoutExtension: fileName);
         var toc = _fileCreator.CreateFile(content, FileType.MarkdownToc);
-        FileCollection files = new FileCollection(_inputFolder);
+        FileCollection files = new(_inputFolder);
         files.Add(DocumentType.Article, new[] { toc, file });
         BuildDocument(files);
 
@@ -88,7 +88,7 @@ public class TocDocumentProcessorTest : TestBase
 #[Topic2](http://href.com) #
 ";
         var toc = _fileCreator.CreateFile(content, FileType.MarkdownToc);
-        FileCollection files = new FileCollection(_inputFolder);
+        FileCollection files = new(_inputFolder);
         files.Add(DocumentType.Article, new[] { toc });
         BuildDocument(files);
 
@@ -153,7 +153,7 @@ public class TocDocumentProcessorTest : TestBase
 #[Topic3](invalid.md)
 ";
         var toc = _fileCreator.CreateFile(content, FileType.MarkdownToc);
-        FileCollection files = new FileCollection(_inputFolder);
+        FileCollection files = new(_inputFolder);
         files.Add(DocumentType.Article, new[] { file1, file2, toc });
         BuildDocument(files);
         var outputRawModelPath = Path.GetFullPath(Path.Combine(_outputFolder, Path.ChangeExtension(toc, RawModelFileExtension)));
@@ -233,7 +233,7 @@ public class TocDocumentProcessorTest : TestBase
   href: sub/
 ";
         var toc = _fileCreator.CreateFile(content, FileType.YamlToc);
-        FileCollection files = new FileCollection(_inputFolder);
+        FileCollection files = new(_inputFolder);
         files.Add(DocumentType.Article, new[] { file1, file2, toc, subToc });
         BuildDocument(files);
         var outputRawModelPath = Path.GetFullPath(Path.Combine(_outputFolder, Path.ChangeExtension(toc, RawModelFileExtension)));
@@ -295,7 +295,7 @@ items:
       href: {file1}
 ";
         var toc = _fileCreator.CreateFile(content, FileType.YamlToc);
-        FileCollection files = new FileCollection(_inputFolder);
+        FileCollection files = new(_inputFolder);
         files.Add(DocumentType.Article, new[] { file1, toc, });
         BuildDocument(files);
         var outputRawModelPath = Path.GetFullPath(Path.Combine(_outputFolder, Path.ChangeExtension(toc, RawModelFileExtension)));
@@ -371,7 +371,7 @@ items:
 ";
 
         var toc = _fileCreator.CreateFile(content, FileType.YamlToc);
-        FileCollection files = new FileCollection(_inputFolder);
+        FileCollection files = new(_inputFolder);
         files.Add(DocumentType.Article, new[] { file1, file2, file3, toc, sub1tocmd, sub1sub3tocmd });
         BuildDocument(files);
         var outputRawModelPath = Path.GetFullPath(Path.Combine(_outputFolder, Path.ChangeExtension(toc, RawModelFileExtension)));
@@ -552,7 +552,7 @@ items:
   href: {subToc}
 ";
         var toc = _fileCreator.CreateFile(content, FileType.YamlToc);
-        FileCollection files = new FileCollection(_inputFolder);
+        FileCollection files = new(_inputFolder);
         files.Add(DocumentType.Article, new[] { toc, subToc });
         var e = Assert.Throws<DocumentException>(() => BuildDocument(files));
         Assert.Equal($"Circular reference to {StringExtension.ToDisplayPath(Path.GetFullPath(Path.Combine(_inputFolder, subToc)))} is found in {StringExtension.ToDisplayPath(Path.GetFullPath(Path.Combine(_inputFolder, referencedToc)))}", e.Message, true);
@@ -635,7 +635,7 @@ items:
   topicHref: {file2}
 ";
         var toc = _fileCreator.CreateFile(content, FileType.YamlToc);
-        FileCollection files = new FileCollection(_inputFolder);
+        FileCollection files = new(_inputFolder);
         files.Add(DocumentType.Article, new[] { file1, file2, toc, referencedToc });
         BuildDocument(files);
         var outputRawModelPath = Path.GetFullPath(Path.Combine(_outputFolder, Path.ChangeExtension(toc, RawModelFileExtension)));
@@ -750,7 +750,7 @@ items:
   homepage: /Topic1/index.html
 ";
         var toc = _fileCreator.CreateFile(content, FileType.YamlToc);
-        FileCollection files = new FileCollection(_inputFolder);
+        FileCollection files = new(_inputFolder);
         files.Add(DocumentType.Article, new[] { toc });
         var e = Assert.Throws<DocumentException>(() => BuildDocument(files));
         Assert.Equal("TopicHref should be used to specify the homepage for /Topic1/ when tocHref is used.", e.Message);

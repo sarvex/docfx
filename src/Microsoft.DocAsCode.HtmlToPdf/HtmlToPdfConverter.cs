@@ -60,7 +60,7 @@ public class HtmlToPdfConverter
             {
                 var numberOfPages = Convert($"{WrapQuoteToPath(htmlFilePath)} -", reader => reader.NumberOfPages);
 
-                PartialPdfModel pdfModel = new PartialPdfModel
+                PartialPdfModel pdfModel = new()
                 {
                     FilePath = htmlFilePath,
                     NumberOfPages = numberOfPages

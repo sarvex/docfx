@@ -9,8 +9,8 @@ namespace Microsoft.DocAsCode.Dotnet;
 
 internal sealed class SpecIdHelper
 {
-    private static readonly Regex TypeParameterRegex = new Regex(@"\B(?<!`)`\d+", RegexOptions.Compiled);
-    private static readonly Regex MethodParameterRegex = new Regex(@"\B``\d+", RegexOptions.Compiled);
+    private static readonly Regex TypeParameterRegex = new(@"\B(?<!`)`\d+", RegexOptions.Compiled);
+    private static readonly Regex MethodParameterRegex = new(@"\B``\d+", RegexOptions.Compiled);
 
     public static string GetSpecId(
         ISymbol symbol,

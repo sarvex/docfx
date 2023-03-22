@@ -44,7 +44,7 @@ public class ManagedReferenceDocumentProcessorTest : TestBase
     [Fact]
     public void ProcessMrefShouldSucceed()
     {
-        FileCollection files = new FileCollection(_defaultFiles);
+        FileCollection files = new(_defaultFiles);
         BuildDocument(files);
 
         var outputRawModelPath = GetRawModelFilePath("CatLibrary.Cat-2.yml");
@@ -92,7 +92,7 @@ public class ManagedReferenceDocumentProcessorTest : TestBase
     [Fact]
     public void ProcessMrefWithComplexFileNameShouldSucceed()
     {
-        FileCollection files = new FileCollection(_defaultFiles);
+        FileCollection files = new(_defaultFiles);
         files.RemoveAll(s => true);
         files.Add(DocumentType.Article, new string[] { "TestData/mref/Namespace1.Class1`2.yml", "TestData/mref/Namespace1.Class1`2.#ctor.yml" }, "TestData/");
         BuildDocument(files);
@@ -129,7 +129,7 @@ public class ManagedReferenceDocumentProcessorTest : TestBase
     [Fact]
     public void ProcessMrefWithDefaultOverwriteShouldSucceed()
     {
-        FileCollection files = new FileCollection(_defaultFiles);
+        FileCollection files = new(_defaultFiles);
         files.Add(DocumentType.Overwrite, new[] { "TestData/overwrite/mref.overwrite.default.md" });
         BuildDocument(files);
         {
@@ -144,7 +144,7 @@ public class ManagedReferenceDocumentProcessorTest : TestBase
     [Fact]
     public void ProcessMrefWithSimpleOverwriteShouldSucceed()
     {
-        FileCollection files = new FileCollection(_defaultFiles);
+        FileCollection files = new(_defaultFiles);
         files.Add(DocumentType.Overwrite, new[] { "TestData/overwrite/mref.overwrite.simple.md" });
         BuildDocument(files);
         var outputRawModelPath = GetRawModelFilePath("CatLibrary.Cat-2.yml");
@@ -176,7 +176,7 @@ public class ManagedReferenceDocumentProcessorTest : TestBase
     [Fact]
     public void ProcessMrefWithNotPredefinedOverwriteShouldSucceed()
     {
-        FileCollection files = new FileCollection(_defaultFiles);
+        FileCollection files = new(_defaultFiles);
         files.Add(DocumentType.Overwrite, new[] { "TestData/overwrite/mref.overwrite.not.predefined.md" });
         BuildDocument(files);
         {
@@ -192,7 +192,7 @@ public class ManagedReferenceDocumentProcessorTest : TestBase
     [Fact]
     public void ProcessMrefWithDynamicDevLangsShouldSucceed()
     {
-        FileCollection files = new FileCollection(_defaultFiles);
+        FileCollection files = new(_defaultFiles);
         files.RemoveAll(s => true);
         files.Add(DocumentType.Article, new [] { "TestData/mref/System.String.yml" }, "TestData/");
 
@@ -249,7 +249,7 @@ public class ManagedReferenceDocumentProcessorTest : TestBase
     [Fact]
     public void ProcessMrefWithInvalidOverwriteShouldFail()
     {
-        FileCollection files = new FileCollection(_defaultFiles);
+        FileCollection files = new(_defaultFiles);
         files.Add(DocumentType.Overwrite, new[] { "TestData/overwrite/mref.overwrite.invalid.md" });
         Assert.Throws<DocumentException>(() => BuildDocument(files));
     }

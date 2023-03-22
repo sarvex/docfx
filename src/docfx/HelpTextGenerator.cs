@@ -8,7 +8,7 @@ namespace Microsoft.DocAsCode;
 
 static class HelpTextGenerator
 {
-    private static readonly HelpText HelpText = new HelpText
+    private static readonly HelpText HelpText = new()
     {
         AdditionalNewLineAfterOption = false,
         AddDashesToOption = true

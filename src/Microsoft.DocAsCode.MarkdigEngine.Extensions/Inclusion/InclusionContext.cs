@@ -14,7 +14,7 @@ namespace Microsoft.DocAsCode.MarkdigEngine.Extensions;
 public static class InclusionContext
 {
     private static readonly ThreadLocal<Stack<(object file, HashSet<object> dependencies, Stack<object> inclusionStack)>> t_markupStacks
-                      = new ThreadLocal<Stack<(object file, HashSet<object> dependencies, Stack<object> inclusionStack)>>(
+                      = new(
                               () => new Stack<(object file, HashSet<object> dependencies, Stack<object> inclusionStack)>());
 
     /// <summary>

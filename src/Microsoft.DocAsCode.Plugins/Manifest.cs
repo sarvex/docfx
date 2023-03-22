@@ -10,8 +10,8 @@ namespace Microsoft.DocAsCode.Plugins;
 
 public class Manifest
 {
-    private readonly ReaderWriterLockSlim _lock = new ReaderWriterLockSlim();
-    private readonly Dictionary<string, List<OutputFileInfo>> _index = new Dictionary<string, List<OutputFileInfo>>();
+    private readonly ReaderWriterLockSlim _lock = new();
+    private readonly Dictionary<string, List<OutputFileInfo>> _index = new();
 
     public Manifest()
     {

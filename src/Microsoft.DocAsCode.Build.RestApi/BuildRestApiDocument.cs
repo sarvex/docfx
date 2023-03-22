@@ -15,7 +15,7 @@ namespace Microsoft.DocAsCode.Build.RestApi;
 [Export(nameof(RestApiDocumentProcessor), typeof(IDocumentBuildStep))]
 public class BuildRestApiDocument : BuildReferenceDocumentBase
 {
-    private static readonly HashSet<string> MarkupKeys = new HashSet<string> { "description" };
+    private static readonly HashSet<string> MarkupKeys = new() { "description" };
 
     public override string Name => nameof(BuildRestApiDocument);
 

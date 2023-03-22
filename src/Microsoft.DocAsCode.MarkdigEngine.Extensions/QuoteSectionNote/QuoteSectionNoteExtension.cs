@@ -29,7 +29,7 @@ public class QuoteSectionNoteExtension : IMarkdownExtension
     {
         if (renderer is HtmlRenderer htmlRenderer)
         {
-            QuoteSectionNoteRender quoteSectionNoteRender = new QuoteSectionNoteRender(_context);
+            QuoteSectionNoteRender quoteSectionNoteRender = new(_context);
 
             if (!renderer.ObjectRenderers.Replace<QuoteBlockRenderer>(quoteSectionNoteRender))
             {

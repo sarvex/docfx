@@ -7,7 +7,7 @@ namespace Microsoft.DocAsCode.Dotnet;
 
 internal sealed class SpecIdCoreVisitor : SymbolVisitor<string>
 {
-    public static readonly SpecIdCoreVisitor Instance = new SpecIdCoreVisitor();
+    public static readonly SpecIdCoreVisitor Instance = new();
 
     private SpecIdCoreVisitor()
     {

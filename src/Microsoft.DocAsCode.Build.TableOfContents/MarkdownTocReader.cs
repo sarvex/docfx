@@ -168,9 +168,9 @@ public static class MarkdownTocReader
     /// </summary>
     internal sealed class TopicTocParseRule : ParseRule
     {
-        private static readonly Regex UidRegex = new Regex(@"^\s*(?:xref:|@)(\s*?\S+?[\s\S]*?)\s*$", RegexOptions.Compiled);
+        private static readonly Regex UidRegex = new(@"^\s*(?:xref:|@)(\s*?\S+?[\s\S]*?)\s*$", RegexOptions.Compiled);
         public static readonly Regex TocRegex =
-            new Regex(@"^(?<headerLevel>#+)(( |\t)*)\[(?<tocTitle>.+)\]\((?<tocLink>(?!http[s]?://).*?)(\)| ""(?<displayText>.*)""\))(?:( |\t)+#*)?( |\t)*(\n|$)", RegexOptions.Compiled);
+            new(@"^(?<headerLevel>#+)(( |\t)*)\[(?<tocTitle>.+)\]\((?<tocLink>(?!http[s]?://).*?)(\)| ""(?<displayText>.*)""\))(?:( |\t)+#*)?( |\t)*(\n|$)", RegexOptions.Compiled);
 
         public override Match Match(string text) => TocRegex.Match(text);
 
@@ -205,9 +205,9 @@ public static class MarkdownTocReader
     internal sealed class TopicXrefAutoLinkTocParseRule : ParseRule
     {
         public static readonly Regex XrefAutoLinkTocRegex =
-            new Regex($@"^(#+)(?: |\t)*{XrefAutoLinkRegexString}( |\t)*#*( |\t)*(\n|$)", RegexOptions.Compiled);
+            new($@"^(#+)(?: |\t)*{XrefAutoLinkRegexString}( |\t)*#*( |\t)*(\n|$)", RegexOptions.Compiled);
         public static readonly Regex XrefAutoLinkWithQuoteTocRegex =
-            new Regex($@"^(#+)(?: |\t)*{XrefAutoLinkRegexWithQuoteString}( |\t)*#*( |\t)*(\n|$)", RegexOptions.Compiled);
+            new($@"^(#+)(?: |\t)*{XrefAutoLinkRegexWithQuoteString}( |\t)*#*( |\t)*(\n|$)", RegexOptions.Compiled);
 
         public override Match Match(string text)
         {
@@ -229,9 +229,9 @@ public static class MarkdownTocReader
     internal sealed class TopicXrefShortcutTocParseRule : ParseRule
     {
         public static readonly Regex XrefShortcutTocRegex =
-            new Regex($@"^(#+)(?: |\t)*{XrefShortcutRegexString}( |\t)*#*( |\t)*(\n|$)", RegexOptions.Compiled);
+            new($@"^(#+)(?: |\t)*{XrefShortcutRegexString}( |\t)*#*( |\t)*(\n|$)", RegexOptions.Compiled);
         public static readonly Regex XrefShortcutTocWithQuoteTocRegex =
-            new Regex($@"^(#+)(?: |\t)*{XrefShortcutRegexWithQuoteString}( |\t)*#*( |\t)*(\n|$)", RegexOptions.Compiled);
+            new($@"^(#+)(?: |\t)*{XrefShortcutRegexWithQuoteString}( |\t)*#*( |\t)*(\n|$)", RegexOptions.Compiled);
 
         public override Match Match(string text)
         {
@@ -253,7 +253,7 @@ public static class MarkdownTocReader
     internal sealed class ExternalLinkTocParseRule : ParseRule
     {
         public static readonly Regex TocRegex =
-            new Regex(@"^(?<headerLevel>#+)(( |\t)*)\[(?<tocTitle>.+?)\]\((?<tocLink>(http[s]?://).*?)\)(?:( |\t)+#*)?( |\t)*(\n|$)", RegexOptions.Compiled);
+            new(@"^(?<headerLevel>#+)(( |\t)*)\[(?<tocTitle>.+?)\]\((?<tocLink>(http[s]?://).*?)\)(?:( |\t)+#*)?( |\t)*(\n|$)", RegexOptions.Compiled);
 
         public override Match Match(string text) => TocRegex.Match(text);
 
@@ -266,7 +266,7 @@ public static class MarkdownTocReader
     internal sealed class ContainerParseRule : ParseRule
     {
         public static readonly Regex ContainerRegex =
-            new Regex(@"^(?<headerLevel>#+)(( |\t)*)(?<tocTitle>.+?)(?:( |\t)+#*)?( |\t)*(\n|$)", RegexOptions.Compiled);
+            new(@"^(?<headerLevel>#+)(( |\t)*)(?<tocTitle>.+?)(?:( |\t)+#*)?( |\t)*(\n|$)", RegexOptions.Compiled);
 
         public override Match Match(string text) => ContainerRegex.Match(text);
 
@@ -279,7 +279,7 @@ public static class MarkdownTocReader
     internal sealed class CommentParseRule : ParseRule
     {
         public static readonly Regex CommentRegex =
-            new Regex(@"^\s*<!--[\s\S]*?-->\s*(\n|$)", RegexOptions.Compiled);
+            new(@"^\s*<!--[\s\S]*?-->\s*(\n|$)", RegexOptions.Compiled);
 
         public override Match Match(string text) => CommentRegex.Match(text);
 
@@ -289,7 +289,7 @@ public static class MarkdownTocReader
     internal sealed class WhitespaceParseRule : ParseRule
     {
         public static readonly Regex WhitespaceRegex =
-            new Regex(@"^\s*(\n|$)", RegexOptions.Compiled);
+            new(@"^\s*(\n|$)", RegexOptions.Compiled);
 
         public override Match Match(string text) => WhitespaceRegex.Match(text);
 

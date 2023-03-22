@@ -45,7 +45,7 @@ public class JsonConverterTest
 
         Assert.Equal(7, buildOptions.GlobalMetadata.Count());
 
-        JsonSerializerSettings settings = new JsonSerializerSettings
+        JsonSerializerSettings settings = new()
         {
             NullValueHandling = NullValueHandling.Ignore,
             Formatting = Formatting.None,
@@ -59,7 +59,7 @@ public class JsonConverterTest
     [Trait("Related", "docfx")]
     public void TestFileMetadataPairsConverterCouldSerializeAndDeserialize()
     {
-        FileMetadataPairs item = new FileMetadataPairs(
+        FileMetadataPairs item = new(
             new List<FileMetadataPairsItem>
             {
                 new FileMetadataPairsItem("*.md", 1L),
@@ -121,11 +121,11 @@ public class JsonConverterTest
     public void TestManifestItemCollectionConverterCouldSerializeAndDeserialize()
     {
         var manifest = new Manifest();
-        ManifestItem manifestItemA = new ManifestItem
+        ManifestItem manifestItemA = new()
         {
             SourceRelativePath = "a"
         };
-        ManifestItem manifestItemB = new ManifestItem
+        ManifestItem manifestItemB = new()
         {
             SourceRelativePath = "b"
         };

@@ -300,7 +300,7 @@ public class TemplateModelTransformer
     private void TransformHtml(IDocumentBuildContext context, string html, string sourceFilePath, string destFilePath, StreamWriter outputWriter, out List<XRefDetails> unresolvedXRefs)
     {
         // Update href and xref
-        HtmlDocument document = new HtmlDocument();
+        HtmlDocument document = new();
         document.LoadHtml(html);
 
         unresolvedXRefs = new List<XRefDetails>();

@@ -354,7 +354,7 @@ public class EmitTypeInspector : ExtensibleTypeInspectorSkeleton
 
     private sealed class EmitPropertyDescriptorSkeleton
     {
-        private readonly ArrayDictionary<Type, Attribute> _attributeCache = new ArrayDictionary<Type, Attribute>();
+        private readonly ArrayDictionary<Type, Attribute> _attributeCache = new();
         private readonly Func<Type, Attribute> _attributeFunc;
 
         public EmitPropertyDescriptorSkeleton()

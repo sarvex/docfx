@@ -31,8 +31,8 @@ internal sealed class XRefCollection
     private sealed class ReaderCreator
     {
         private readonly ImmutableList<Uri> _uris;
-        private readonly HashSet<string> _set = new HashSet<string>();
-        private readonly Dictionary<Task<IXRefContainer>, Uri> _processing = new Dictionary<Task<IXRefContainer>, Uri>();
+        private readonly HashSet<string> _set = new();
+        private readonly Dictionary<Task<IXRefContainer>, Uri> _processing = new();
         private readonly XRefMapDownloader _downloader;
 
         public ReaderCreator(ImmutableList<Uri> uris, int maxParallelism, string baseFolder, IReadOnlyList<string> fallbackFolders)

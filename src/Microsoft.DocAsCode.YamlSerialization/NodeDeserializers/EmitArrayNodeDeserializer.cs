@@ -16,7 +16,7 @@ public class EmitArrayNodeDeserializer : INodeDeserializer
     private static MethodInfo DeserializeHelperMethod =
         typeof(EmitArrayNodeDeserializer).GetMethod(nameof(DeserializeHelper));
     private static readonly ConcurrentDictionary<Type, Func<IParser, Type, Func<IParser, Type, object>, object>> _funcCache =
-        new ConcurrentDictionary<Type, Func<IParser, Type, Func<IParser, Type, object>, object>>();
+        new();
 
     bool INodeDeserializer.Deserialize(IParser reader, Type expectedType, Func<IParser, Type, object> nestedObjectDeserializer, out object value)
     {

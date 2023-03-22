@@ -111,7 +111,7 @@ public class XrefServiceResolver
 
     private sealed class RemoveHostUriTemplatePipeline : IUriTemplatePipeline<Task<List<XRefSpec>>>
     {
-        public static readonly RemoveHostUriTemplatePipeline Default = new RemoveHostUriTemplatePipeline();
+        public static readonly RemoveHostUriTemplatePipeline Default = new();
 
         public async Task<List<XRefSpec>> Handle(Task<List<XRefSpec>> value, string[] parameters)
         {
@@ -137,7 +137,7 @@ public class XrefServiceResolver
 
     private sealed class AddQueryStringUriTemplatePipeline : IUriTemplatePipeline<Task<List<XRefSpec>>>
     {
-        public static readonly AddQueryStringUriTemplatePipeline Default = new AddQueryStringUriTemplatePipeline();
+        public static readonly AddQueryStringUriTemplatePipeline Default = new();
 
         public Task<List<XRefSpec>> Handle(Task<List<XRefSpec>> value, string[] parameters)
         {
@@ -171,7 +171,7 @@ public class XrefServiceResolver
 
     private sealed class EmptyUriTemplatePipeline : IUriTemplatePipeline<Task<List<XRefSpec>>>
     {
-        public static readonly EmptyUriTemplatePipeline Default = new EmptyUriTemplatePipeline();
+        public static readonly EmptyUriTemplatePipeline Default = new();
 
         public Task<List<XRefSpec>> Handle(Task<List<XRefSpec>> value, string[] parameters)
         {

@@ -91,7 +91,7 @@ public class LruList<T>
 
     private sealed class SynchronizedLruList : LruList<T>
     {
-        private readonly object _syncRoot = new object();
+        private readonly object _syncRoot = new();
 
         public SynchronizedLruList(int capacity, Action<T> onRemoving, IEqualityComparer<T> comparer)
             : base(capacity, onRemoving, comparer)

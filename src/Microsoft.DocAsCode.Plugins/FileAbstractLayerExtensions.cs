@@ -6,7 +6,7 @@ namespace Microsoft.DocAsCode.Plugins;
 public static class FileAbstractLayerExtensions
 {
     public static StreamReader OpenReadText(this IFileAbstractLayer fal, string file) =>
-        new StreamReader(fal.OpenRead(file));
+        new(fal.OpenRead(file));
 
     public static string ReadAllText(this IFileAbstractLayer fal, string file)
     {
@@ -27,7 +27,7 @@ public static class FileAbstractLayerExtensions
     }
 
     public static StreamWriter CreateText(this IFileAbstractLayer fal, string file) =>
-        new StreamWriter(fal.Create(file));
+        new(fal.Create(file));
 
     public static void WriteAllText(this IFileAbstractLayer fal, string file, string content)
     {

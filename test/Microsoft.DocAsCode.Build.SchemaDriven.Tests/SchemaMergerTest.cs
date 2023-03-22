@@ -216,7 +216,7 @@ summary: *content
 ---
 Overwrite with content
 ", _inputFolder);
-        FileCollection files = new FileCollection(_defaultFiles);
+        FileCollection files = new(_defaultFiles);
         files.Add(DocumentType.Article, new[] { inputFile }, _inputFolder);
         files.Add(DocumentType.Overwrite, new[] { overwriteFile }, _inputFolder);
         BuildDocument(files);
@@ -343,7 +343,7 @@ reference: ../inc/inc2.md
 ---
 Nice
 ", _inputFolder);
-        FileCollection files = new FileCollection(_defaultFiles);
+        FileCollection files = new(_defaultFiles);
         files.Add(DocumentType.Article, new[] { inputFile }, _inputFolder);
         files.Add(DocumentType.Overwrite, new[] { overwriteFile }, _inputFolder);
         BuildDocument(files);

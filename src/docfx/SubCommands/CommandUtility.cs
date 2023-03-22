@@ -10,7 +10,7 @@ namespace Microsoft.DocAsCode.SubCommands;
 
 internal static class CommandUtility
 {
-    private static readonly Parser LooseParser = new Parser(s =>
+    private static readonly Parser LooseParser = new(s =>
     {
         s.IgnoreUnknownArguments = true;
         s.CaseSensitive = false;

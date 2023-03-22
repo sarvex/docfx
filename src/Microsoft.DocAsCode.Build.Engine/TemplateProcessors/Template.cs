@@ -12,7 +12,7 @@ public class Template
     private const string Primary = ".primary";
     private const string Auxiliary = ".aux";
 
-    private readonly object _locker = new object();
+    private readonly object _locker = new();
 
     public string Name { get; }
     public string ScriptName { get; }

@@ -110,17 +110,17 @@ public class HtmlCodeSnippetRenderer : HtmlObjectRenderer<CodeSnippet>
         { "vb", new string[] {"vbnet", "vbscript", "bas", "vbs", "vba" } }
     };
 
-    private static readonly Dictionary<string, string> s_languageByFileExtension = new Dictionary<string, string>();
+    private static readonly Dictionary<string, string> s_languageByFileExtension = new();
 
     // If we ever come across a language that has not been defined above, we shouldn't break the build.
     // We can at least try it with a default language, "C#" for now, and try and resolve the code snippet.
-    private static readonly HashSet<CodeSnippetExtractor> s_defaultExtractors = new HashSet<CodeSnippetExtractor>();
+    private static readonly HashSet<CodeSnippetExtractor> s_defaultExtractors = new();
 
     // Language names and aliases follow http://highlightjs.readthedocs.org/en/latest/css-classes-reference.html#language-names-and-aliases
     // Language file extensions follow https://github.com/github/linguist/blob/master/lib/linguist/languages.yml
     // Currently only supports parts of the language names, aliases and extensions
     // Later we can move the repository's supported/custom language names, aliases, extensions and corresponding comments regexes to docfx build configuration
-    private static readonly Dictionary<string, HashSet<CodeSnippetExtractor>> s_languageExtractors = new Dictionary<string, HashSet<CodeSnippetExtractor>>();
+    private static readonly Dictionary<string, HashSet<CodeSnippetExtractor>> s_languageExtractors = new();
 
     private readonly MarkdownContext _context;
 
@@ -262,7 +262,7 @@ public class HtmlCodeSnippetRenderer : HtmlObjectRenderer<CodeSnippet>
             return string.Empty;
         }
 
-        StringBuilder showCode = new StringBuilder();
+        StringBuilder showCode = new();
         string[] lines = ((JArray)sourceObject).ToObject<string[]>();
         for (int i = 0; i < lines.Length; i++)
         {
@@ -299,7 +299,7 @@ public class HtmlCodeSnippetRenderer : HtmlObjectRenderer<CodeSnippet>
             var tagWithPrefix = TagPrefix + obj.TagName;
             foreach (var extractor in extractors)
             {
-                HashSet<int> tagLines = new HashSet<int>();
+                HashSet<int> tagLines = new();
                 var tagToCoderangeMapping = extractor.GetAllTags(allLines, ref tagLines);
                 if (tagToCoderangeMapping.TryGetValue(obj.TagName, out var cr)
                     || tagToCoderangeMapping.TryGetValue(tagWithPrefix, out cr))
@@ -340,8 +340,8 @@ public class HtmlCodeSnippetRenderer : HtmlObjectRenderer<CodeSnippet>
 
     private string GetCodeLines(string[] allLines, CodeSnippet obj, List<CodeRange> codeRanges, HashSet<int> ignoreLines = null)
     {
-        List<string> codeLines = new List<string>();
-        StringBuilder showCode = new StringBuilder();
+        List<string> codeLines = new();
+        StringBuilder showCode = new();
         int commonIndent = int.MaxValue;
 
         foreach (var codeRange in codeRanges)
@@ -391,7 +391,7 @@ public class HtmlCodeSnippetRenderer : HtmlObjectRenderer<CodeSnippet>
 
     private string CountAndReplaceIndentSpaces(string line, out int count)
     {
-        StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new();
         count = 0;
 
         for (int i = 0; i < line.Length; i++)

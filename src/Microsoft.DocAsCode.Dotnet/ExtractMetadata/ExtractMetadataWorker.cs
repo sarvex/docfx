@@ -228,7 +228,7 @@ internal class ExtractMetadataWorker : IDisposable
         outputFileNames.Add(tocFilePath, 1);
         yield return tocFileName;
 
-        ApiReferenceViewModel indexer = new ApiReferenceViewModel();
+        ApiReferenceViewModel indexer = new();
 
         // 2. generate each item's yaml
         var members = model.Members;
@@ -334,8 +334,8 @@ internal class ExtractMetadataWorker : IDisposable
             return null;
         }
 
-        Dictionary<string, MetadataItem> namespaceMapping = new Dictionary<string, MetadataItem>();
-        Dictionary<string, MetadataItem> allMembers = new Dictionary<string, MetadataItem>();
+        Dictionary<string, MetadataItem> namespaceMapping = new();
+        Dictionary<string, MetadataItem> allMembers = new();
 
         foreach (var project in projectMetadataList)
         {

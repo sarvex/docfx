@@ -11,8 +11,8 @@ namespace Microsoft.DocAsCode.MarkdigEngine.Extensions;
 
 internal class Tag
 {
-    private static readonly Regex OpeningTag = new Regex(@"\<(\w+)((?:""[^""]*""|'[^']*'|[^'"">])*?)\>", RegexOptions.Compiled);
-    private static readonly Regex ClosingTag = new Regex(@"\</(\w+)((?:""[^""]*""|'[^']*'|[^'"">])*?)\>", RegexOptions.Compiled);
+    private static readonly Regex OpeningTag = new(@"\<(\w+)((?:""[^""]*""|'[^']*'|[^'"">])*?)\>", RegexOptions.Compiled);
+    private static readonly Regex ClosingTag = new(@"\</(\w+)((?:""[^""]*""|'[^']*'|[^'"">])*?)\>", RegexOptions.Compiled);
 
     public int Line { get; set; }
 

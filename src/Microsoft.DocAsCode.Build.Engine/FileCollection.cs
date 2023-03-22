@@ -8,7 +8,7 @@ namespace Microsoft.DocAsCode.Build.Engine;
 
 public class FileCollection
 {
-    private readonly List<FileAndType> _files = new List<FileAndType>();
+    private readonly List<FileAndType> _files = new();
 
     public int Count => _files.Count;
 

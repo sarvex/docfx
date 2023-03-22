@@ -17,7 +17,7 @@ namespace Microsoft.DocAsCode.Dotnet;
 internal static class VisitorHelper
 {
     public static string GlobalNamespaceId { get; set; }
-    private static readonly Regex GenericMethodPostFix = new Regex(@"``\d+$", RegexOptions.Compiled);
+    private static readonly Regex GenericMethodPostFix = new(@"``\d+$", RegexOptions.Compiled);
 
     public static void FeedComments(MetadataItem item, XmlCommentParserContext context)
     {

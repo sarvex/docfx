@@ -29,7 +29,7 @@ public class YamlHeaderRenderer : HtmlObjectRenderer<YamlFrontMatterBlock>
         var content = obj.Lines.ToString();
         try
         {
-            using StringReader reader = new StringReader(content);
+            using StringReader reader = new(content);
             var result = YamlUtility.Deserialize<Dictionary<string, object>>(reader);
             if (result != null)
             {

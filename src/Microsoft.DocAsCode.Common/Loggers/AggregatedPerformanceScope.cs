@@ -7,7 +7,7 @@ namespace Microsoft.DocAsCode.Common;
 
 public sealed class AggregatedPerformanceScope : IDisposable
 {
-    private readonly ConcurrentDictionary<string, Lazy<AggregatedPerformance>> _aggregatedPerformanceByPhase = new ConcurrentDictionary<string, Lazy<AggregatedPerformance>>();
+    private readonly ConcurrentDictionary<string, Lazy<AggregatedPerformance>> _aggregatedPerformanceByPhase = new();
     private readonly LogLevel _logLevel = LogLevel.Verbose;
 
     public AggregatedPerformanceScope(LogLevel? logLevel = null)

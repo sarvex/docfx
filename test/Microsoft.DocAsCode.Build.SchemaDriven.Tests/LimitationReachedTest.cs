@@ -15,8 +15,8 @@ namespace Microsoft.DocAsCode.Build.SchemaDriven.Tests;
 [Collection("docfx STA")]
 public class LimitationReachedTest : TestBase
 {
-    private static Regex InputMatcher = new Regex(@"```(yml|yaml)\s*(### YamlMime:[\s\S]*?)\s*```", RegexOptions.Compiled | RegexOptions.IgnoreCase);
-    private static Regex SchemaMatcher = new Regex(@"```json\s*(\{\s*""\$schema""[\s\S]*?)\s*```", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+    private static Regex InputMatcher = new(@"```(yml|yaml)\s*(### YamlMime:[\s\S]*?)\s*```", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+    private static Regex SchemaMatcher = new(@"```json\s*(\{\s*""\$schema""[\s\S]*?)\s*```", RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
     private string _outputFolder;
     private string _inputFolder;
@@ -67,7 +67,7 @@ public class LimitationReachedTest : TestBase
 metadata: Web Apps Documentation
 ", _inputFolder)).ToArray();
 
-        FileCollection files = new FileCollection(_defaultFiles);
+        FileCollection files = new(_defaultFiles);
         files.Add(DocumentType.Article, inputFiles, _inputFolder);
         BuildDocument(files);
         Assert.Equal(2, listener.Items.Count);

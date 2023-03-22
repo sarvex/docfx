@@ -10,7 +10,7 @@ namespace Microsoft.DocAsCode.Build.Engine;
 
 public class XrefClient
 {
-    public static readonly XrefClient Default = new XrefClient();
+    public static readonly XrefClient Default = new();
     private static readonly HttpClient _sharedClient =
         new Func<HttpClient>(() =>
         {

@@ -514,7 +514,7 @@ TODO: Add .NET projects to the *src* folder and run `docfx` to generate **REAL**
         protected override string[] GetAnswer()
         {
             var line = Console.ReadLine();
-            List<string> answers = new List<string>();
+            List<string> answers = new();
             while (!string.IsNullOrEmpty(line))
             {
                 answers.Add(line);

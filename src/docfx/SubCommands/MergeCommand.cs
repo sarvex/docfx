@@ -14,7 +14,7 @@ internal sealed class MergeCommand : ISubCommand
     internal readonly string OutputFolder;
 
     private static JsonSerializer GetSerializer() =>
-        new JsonSerializer
+        new()
         {
             NullValueHandling = NullValueHandling.Ignore,
             ReferenceLoopHandling = ReferenceLoopHandling.Serialize,

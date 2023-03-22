@@ -21,8 +21,8 @@ namespace Microsoft.DocAsCode.Build.SchemaDriven.Tests;
 [Collection("docfx STA")]
 public class SchemaDrivenProcessorTest : TestBase
 {
-    private static readonly Regex InputMatcher = new Regex(@"```(yml|yaml)\s*(### YamlMime:[\s\S]*?)\s*```", RegexOptions.Compiled | RegexOptions.IgnoreCase);
-    private static readonly Regex SchemaMatcher = new Regex(@"```json\s*(\{\s*""\$schema""[\s\S]*?)\s*```", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+    private static readonly Regex InputMatcher = new(@"```(yml|yaml)\s*(### YamlMime:[\s\S]*?)\s*```", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+    private static readonly Regex SchemaMatcher = new(@"```json\s*(\{\s*""\$schema""[\s\S]*?)\s*```", RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
     private readonly string _outputFolder;
     private readonly string _inputFolder;
@@ -77,7 +77,7 @@ searchScope:
 breadcrumb_path: https://live.docs.microsoft.com/absolute/toc.json
 ", _inputFolder);
 
-        FileCollection files = new FileCollection(_defaultFiles);
+        FileCollection files = new(_defaultFiles);
         files.Add(DocumentType.Article, new[] { inputFile, inputFile2 }, _inputFolder);
         BuildDocument(files);
 
@@ -166,7 +166,7 @@ items:
             message: ""3.1.1**Hello**""
   - description: ""**outside**""
 ", _inputFolder);
-        FileCollection files = new FileCollection(_defaultFiles);
+        FileCollection files = new(_defaultFiles);
         files.Add(DocumentType.Article, new[] { inputFile }, _inputFolder);
         BuildDocument(files);
 
@@ -216,7 +216,7 @@ items:
 ", _templateFolder);
         var inputFileName = "inputs/CatLibrary.ICat.yml";
         var inputFile = CreateFile(inputFileName, File.ReadAllText("TestData/inputs/CatLibrary.ICat.yml"), _inputFolder);
-        FileCollection files = new FileCollection(_defaultFiles);
+        FileCollection files = new(_defaultFiles);
         files.Add(DocumentType.Article, new[] { inputFile }, _inputFolder);
 
         // act
@@ -256,7 +256,7 @@ This method is within <a class=""xref"" href=""CatLibrary.ICat.html"">ICat</a></
         var schemaFile = CreateFile("template/schemas/mref.test.schema.json", File.ReadAllText("TestData/schemas/mref.test.schema.json"), _templateFolder);
         var inputFileName = "inputs/CatLibrary.ICat.yml";
         var inputFile = CreateFile(inputFileName, File.ReadAllText("TestData/inputs/EmptyUidReference.yml"), _inputFolder);
-        FileCollection files = new FileCollection(_defaultFiles);
+        FileCollection files = new(_defaultFiles);
         files.Add(DocumentType.Article, new[] { inputFile }, _inputFolder);
 
         // act
@@ -314,7 +314,7 @@ searchScope:
 title: Web Apps Documentation
 ", _inputFolder);
 
-        FileCollection files = new FileCollection(_defaultFiles);
+        FileCollection files = new(_defaultFiles);
         files.Add(DocumentType.Article, new[] { inputFile1, inputFile2, dependentMarkdown }, _inputFolder);
         using (new LoggerPhaseScope("FirstRound"))
         {
@@ -390,7 +390,7 @@ title: Web Apps Documentation
 metadata: Web Apps Documentation
 ", _inputFolder)).ToArray();
 
-        FileCollection files = new FileCollection(_defaultFiles);
+        FileCollection files = new(_defaultFiles);
         files.Add(DocumentType.Article, inputFiles, _inputFolder);
         Assert.Throws<InvalidSchemaException>(() => BuildDocument(files));
     }
@@ -419,7 +419,7 @@ metadata: Web Apps Documentation
 uid: azure.hello1
 ", _inputFolder);
 
-        FileCollection files = new FileCollection(_defaultFiles);
+        FileCollection files = new(_defaultFiles);
         files.Add(DocumentType.Article, new[] { inputFile }, _inputFolder);
         BuildDocument(files, new DocumentBuildParameters
         {
@@ -488,7 +488,7 @@ uid: invalid.azure.hello2
 metadata: Web Apps Documentation
 ", _inputFolder);
 
-        FileCollection files = new FileCollection(_defaultFiles);
+        FileCollection files = new(_defaultFiles);
         files.Add(DocumentType.Article, new[] { inputFile }, _inputFolder);
         BuildDocument(files);
         var errors = listener.Items.Where(s => s.Code == "ViolateSchema").ToList();
@@ -531,7 +531,7 @@ searchScope:
   - .NET
 ", _inputFolder);
 
-        FileCollection files = new FileCollection(_defaultFiles);
+        FileCollection files = new(_defaultFiles);
         files.Add(DocumentType.Article, new[] { inputFile1 }, _inputFolder);
         Assert.Throws<InvalidJsonPointerException>(() => BuildDocument(files));
     }

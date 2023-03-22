@@ -113,7 +113,7 @@ public static class SwaggerModelConverter
 
     #region Private methods
 
-    private static readonly Regex HtmlEncodeRegex = new Regex(@"\W", RegexOptions.Compiled);
+    private static readonly Regex HtmlEncodeRegex = new(@"\W", RegexOptions.Compiled);
     private const string TagText = "tag";
     private static readonly string[] OperationNames = { "get", "put", "post", "delete", "options", "head", "patch" };
 

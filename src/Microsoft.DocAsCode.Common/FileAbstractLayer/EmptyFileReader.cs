@@ -5,7 +5,7 @@ namespace Microsoft.DocAsCode.Common;
 
 internal sealed class EmptyFileReader : IFileReader
 {
-    public static readonly EmptyFileReader Instance = new EmptyFileReader();
+    public static readonly EmptyFileReader Instance = new();
 
     private EmptyFileReader()
     {

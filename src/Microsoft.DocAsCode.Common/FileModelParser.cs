@@ -17,7 +17,7 @@ internal static class FileModelParser
         else if (item.Type == JTokenType.Property)
         {
             JProperty jProperty = item as JProperty;
-            FileMappingItem model = new FileMappingItem { Name = jProperty.Name };
+            FileMappingItem model = new() { Name = jProperty.Name };
             var value = jProperty.Value;
             if (value.Type == JTokenType.Array)
             {

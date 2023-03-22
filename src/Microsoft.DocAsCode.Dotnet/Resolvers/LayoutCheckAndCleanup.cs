@@ -19,7 +19,7 @@ internal class LayoutCheckAndCleanup : IResolverPipeline
     /// <returns></returns>
     public void Run(MetadataModel yaml, ResolverContext context)
     {
-        StringBuilder message = new StringBuilder();
+        StringBuilder message = new();
         foreach (var member in yaml.TocYamlViewModel.Items)
         {
             var result = CheckNamespaces(member);
@@ -37,7 +37,7 @@ internal class LayoutCheckAndCleanup : IResolverPipeline
 
     private string CheckNamespaces(MetadataItem member)
     {
-        StringBuilder message = new StringBuilder();
+        StringBuilder message = new();
 
         // Skip if it is already invalid
         if (member.Items == null || member.IsInvalid)
@@ -74,7 +74,7 @@ internal class LayoutCheckAndCleanup : IResolverPipeline
     /// <returns></returns>
     private string CheckNamespaceMembers(MetadataItem member)
     {
-        StringBuilder message = new StringBuilder();
+        StringBuilder message = new();
 
         // Skip if it is already invalid
         if (member.Items == null || member.IsInvalid)
@@ -101,7 +101,7 @@ internal class LayoutCheckAndCleanup : IResolverPipeline
     /// <returns></returns>
     private string CheckNamespaceMembersMembers(MetadataItem member)
     {
-        StringBuilder message = new StringBuilder();
+        StringBuilder message = new();
         if (member.IsInvalid)
         {
             return string.Empty;

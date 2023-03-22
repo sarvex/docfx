@@ -9,7 +9,7 @@ namespace Microsoft.DocAsCode.Common.EntityMergers;
 public class ReflectionEntityMerger : IMerger
 {
     private readonly ConcurrentDictionary<Type, PropertyMergerImpl> _cache =
-        new ConcurrentDictionary<Type, PropertyMergerImpl>();
+        new();
 
     private void Merge(ref object source, object overrides, Type type, IMergeContext context)
     {

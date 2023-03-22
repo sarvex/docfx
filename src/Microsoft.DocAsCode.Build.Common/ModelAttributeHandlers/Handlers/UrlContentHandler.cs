@@ -12,7 +12,7 @@ namespace Microsoft.DocAsCode.Build.Common;
 
 public class UrlContentHandler : IModelAttributeHandler
 {
-    private readonly ConcurrentDictionary<Type, UrlContentHandlerImpl> _cache = new ConcurrentDictionary<Type, UrlContentHandlerImpl>();
+    private readonly ConcurrentDictionary<Type, UrlContentHandlerImpl> _cache = new();
 
     public object Handle(object obj, HandleModelAttributesContext context)
     {

@@ -10,7 +10,7 @@ namespace Microsoft.DocAsCode.Build.RestApi.Swagger;
 
 public class SwaggerJsonParser
 {
-    private static readonly ThreadLocal<JsonSerializer> Serializer = new ThreadLocal<JsonSerializer>(
+    private static readonly ThreadLocal<JsonSerializer> Serializer = new(
         () =>
         {
             var jsonSerializer = new JsonSerializer

@@ -9,7 +9,7 @@ public static class FileAbstractLayerExtensions
         fal.Exists((RelativePath)file);
 
     public static StreamReader OpenReadText(this FileAbstractLayer fal, RelativePath file) =>
-        new StreamReader(fal.OpenRead(file));
+        new(fal.OpenRead(file));
 
     public static StreamReader OpenReadText(this FileAbstractLayer fal, string file) =>
         OpenReadText(fal, (RelativePath)file);
@@ -24,7 +24,7 @@ public static class FileAbstractLayerExtensions
         ReadAllText(fal, (RelativePath)file);
 
     public static StreamWriter CreateText(this FileAbstractLayer fal, RelativePath file) =>
-        new StreamWriter(fal.Create(file));
+        new(fal.Create(file));
 
     public static StreamWriter CreateText(this FileAbstractLayer fal, string file) =>
         CreateText(fal, (RelativePath)file);

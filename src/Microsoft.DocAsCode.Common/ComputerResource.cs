@@ -6,7 +6,7 @@ namespace Microsoft.DocAsCode.Common;
 [Serializable]
 public sealed class ComputerResource : IDisposable
 {
-    private static ComputerResourceCollection _resources = new ComputerResourceCollection();
+    private static ComputerResourceCollection _resources = new();
 
     private readonly ComputerResource _outer;
     private readonly ComputerResourceType _type;

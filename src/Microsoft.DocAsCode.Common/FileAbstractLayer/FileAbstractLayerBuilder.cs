@@ -9,7 +9,7 @@ namespace Microsoft.DocAsCode.Common;
 
 public class FileAbstractLayerBuilder
 {
-    public static readonly FileAbstractLayerBuilder Default = new FileAbstractLayerBuilder(EmptyFileReader.Instance, null);
+    public static readonly FileAbstractLayerBuilder Default = new(EmptyFileReader.Instance, null);
     private readonly IFileReader _reader;
     private readonly IFileWriter _writer;
 

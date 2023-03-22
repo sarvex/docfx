@@ -43,7 +43,7 @@ internal static class WordCounter
             throw new ArgumentNullException(nameof(html));
         }
 
-        HtmlDocument document = new HtmlDocument();
+        HtmlDocument document = new();
 
         // Append a space before each end bracket so that InnerText inside different child nodes can separate itself from each other.
         document.LoadHtml(html.Replace("</", " </"));

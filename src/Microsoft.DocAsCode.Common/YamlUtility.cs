@@ -12,8 +12,8 @@ namespace Microsoft.DocAsCode.Common;
 
 public static class YamlUtility
 {
-    private static readonly ThreadLocal<YamlSerializer> serializer = new ThreadLocal<YamlSerializer>(() => new YamlSerializer(SerializationOptions.DisableAliases));
-    private static readonly ThreadLocal<YamlDeserializer> deserializer = new ThreadLocal<YamlDeserializer>(() => new YamlDeserializer(ignoreUnmatched: true));
+    private static readonly ThreadLocal<YamlSerializer> serializer = new(() => new YamlSerializer(SerializationOptions.DisableAliases));
+    private static readonly ThreadLocal<YamlDeserializer> deserializer = new(() => new YamlDeserializer(ignoreUnmatched: true));
 
     public static void Serialize(TextWriter writer, object graph)
     {

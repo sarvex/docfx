@@ -9,7 +9,7 @@ namespace Microsoft.DocAsCode.Build.Engine;
 
 internal static class ParseTemplateHelper
 {
-    private static readonly Regex IsRegexPatternRegex = new Regex(@"^\s*/(.*)/\s*$", RegexOptions.Compiled);
+    private static readonly Regex IsRegexPatternRegex = new(@"^\s*/(.*)/\s*$", RegexOptions.Compiled);
 
     public static string ExpandMasterPage(IResourceFileReader reader, ResourceInfo info, Regex masterRegex, Regex bodyRegex)
     {

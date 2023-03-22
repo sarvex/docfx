@@ -5,7 +5,7 @@ namespace Microsoft.DocAsCode.Common;
 
 public class FolderRedirectionManager
 {
-    private List<Rule> _rules = new List<Rule>();
+    private List<Rule> _rules = new();
 
     public FolderRedirectionManager(IEnumerable<FolderRedirectionRule> rules)
     {

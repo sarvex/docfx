@@ -40,7 +40,7 @@ internal class JsonLocationHelper
             }
         }
 
-        StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new();
         foreach (var state in locations)
         {
             state.WriteTo(sb);

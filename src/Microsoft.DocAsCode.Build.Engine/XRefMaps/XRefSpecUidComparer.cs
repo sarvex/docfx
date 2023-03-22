@@ -7,7 +7,7 @@ namespace Microsoft.DocAsCode.Build.Engine;
 
 public sealed class XRefSpecUidComparer : Comparer<XRefSpec>
 {
-    public static readonly XRefSpecUidComparer Instance = new XRefSpecUidComparer();
+    public static readonly XRefSpecUidComparer Instance = new();
 
     public override int Compare(XRefSpec x, XRefSpec y)
     {

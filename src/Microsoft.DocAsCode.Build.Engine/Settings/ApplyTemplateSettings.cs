@@ -12,8 +12,8 @@ public class ApplyTemplateSettings
     private const string RawModelOutputFolderNameForDebug = "rawmodel";
     private const string ViewModelOutputFolderNameForDebug = "viewmodel";
     private static readonly string DefaultOutputFolderForDebug = Path.Combine(Path.GetTempPath(), "docfx");
-    public static readonly ExportSettings DefaultRawModelExportSettings = new ExportSettings { Extension = RawModelExtension, PathRewriter = s => s + RawModelExtension };
-    public static readonly ExportSettings DefaultViewModelExportSettings = new ExportSettings { Extension = ViewModelExtension, PathRewriter = s => s + ViewModelExtension };
+    public static readonly ExportSettings DefaultRawModelExportSettings = new() { Extension = RawModelExtension, PathRewriter = s => s + RawModelExtension };
+    public static readonly ExportSettings DefaultViewModelExportSettings = new() { Extension = ViewModelExtension, PathRewriter = s => s + ViewModelExtension };
     public string InputFolder { get; }
     public string OutputFolder { get; }
     public bool DebugMode { get; }

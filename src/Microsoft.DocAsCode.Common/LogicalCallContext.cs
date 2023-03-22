@@ -10,7 +10,7 @@ namespace Microsoft.DocAsCode.Common;
 /// </summary>
 public static class LogicalCallContext
 {
-    static readonly ConcurrentDictionary<string, AsyncLocal<object>> _data = new ConcurrentDictionary<string, AsyncLocal<object>>();
+    static readonly ConcurrentDictionary<string, AsyncLocal<object>> _data = new();
 
     public static void SetData(string key, object data) => _data.GetOrAdd(key, _ => new AsyncLocal<object>()).Value = data;
 

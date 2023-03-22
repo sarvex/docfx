@@ -10,8 +10,8 @@ namespace Microsoft.DocAsCode.Build.Engine;
 [Serializable]
 public class TemplateManager
 {
-    private readonly List<string> _templates = new List<string>();
-    private readonly List<string> _themes = new List<string>();
+    private readonly List<string> _templates = new();
+    private readonly List<string> _themes = new();
     private readonly ResourceFinder _finder;
 
     public TemplateManager(Assembly assembly, string rootNamespace, List<string> templates, List<string> themes, string baseDirectory)
@@ -34,7 +34,7 @@ public class TemplateManager
     public CompositeResourceReader CreateTemplateResource() => CreateTemplateResource(_templates);
 
     private CompositeResourceReader CreateTemplateResource(IEnumerable<string> resources) =>
-        new CompositeResourceReader(
+        new(
             resources.Select(s => _finder.Find(s)).Where(s => s != null));
 
     public void ProcessTheme(string outputDirectory, bool overwrite)

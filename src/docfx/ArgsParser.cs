@@ -7,7 +7,7 @@ namespace Microsoft.DocAsCode;
 
 internal class ArgsParser
 {
-    public static readonly ArgsParser Instance = new ArgsParser();
+    public static readonly ArgsParser Instance = new();
     private ArgsParser()
     {
     }

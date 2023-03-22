@@ -14,7 +14,7 @@ namespace Microsoft.DocAsCode.Build.SchemaDriven;
 public class BuildSchemaBasedDocument : BuildReferenceDocumentBase
 {
     private const string DocumentTypeKey = "documentType";
-    private readonly SchemaProcessor _schemaProcessor = new SchemaProcessor(
+    private readonly SchemaProcessor _schemaProcessor = new(
         new FileIncludeInterpreter(),
         new MarkdownInterpreter(),
         new XrefPropertiesInterpreter(),

@@ -46,7 +46,7 @@ internal static class RunMerge
     }
 
     private static MetadataMergeParameters ConfigToParameter(MergeJsonItemConfig config, string baseDirectory, string outputDirectory) =>
-        new MetadataMergeParameters
+        new()
         {
             OutputBaseDir = outputDirectory,
             Metadata = config.GlobalMetadata?.ToImmutableDictionary() ?? ImmutableDictionary<string, object>.Empty,

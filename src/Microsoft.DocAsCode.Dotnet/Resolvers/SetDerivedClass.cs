@@ -7,7 +7,7 @@ namespace Microsoft.DocAsCode.Dotnet;
 
 internal class SetDerivedClass: IResolverPipeline
 {
-    private readonly Dictionary<string, List<string>> _derivedClassMapping = new Dictionary<string, List<string>>();
+    private readonly Dictionary<string, List<string>> _derivedClassMapping = new();
 
     public void Run(MetadataModel yaml, ResolverContext context)
     {

@@ -27,7 +27,7 @@ internal static class YamlViewModelExtensions
 
     public static MetadataItem ShrinkToSimpleToc(this MetadataItem item)
     {
-        MetadataItem shrinkedItem = new MetadataItem
+        MetadataItem shrinkedItem = new()
         {
             Name = item.Name,
             DisplayNames = item.DisplayNames,
@@ -67,7 +67,7 @@ internal static class YamlViewModelExtensions
     /// <returns></returns>
     public static MetadataItem ShrinkToSimpleTocWithNamespaceNotEmpty(this MetadataItem item)
     {
-        MetadataItem shrinkedItem = new MetadataItem
+        MetadataItem shrinkedItem = new()
         {
             Name = item.Name,
             DisplayNames = item.DisplayNames,

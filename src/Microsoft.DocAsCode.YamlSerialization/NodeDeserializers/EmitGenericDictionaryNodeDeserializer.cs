@@ -19,9 +19,9 @@ public class EmitGenericDictionaryNodeDeserializer : INodeDeserializer
         typeof(EmitGenericDictionaryNodeDeserializer).GetMethod(nameof(DeserializeHelper));
         private readonly IObjectFactory _objectFactory;
     private readonly Dictionary<Type, Type[]> _gpCache =
-        new Dictionary<Type, Type[]>();
+        new();
     private readonly Dictionary<Tuple<Type, Type>, Action<IParser, Type, Func<IParser, Type, object>, object>> _actionCache =
-        new Dictionary<Tuple<Type, Type>, Action<IParser, Type, Func<IParser, Type, object>, object>>();
+        new();
 
     public EmitGenericDictionaryNodeDeserializer(IObjectFactory objectFactory)
     {

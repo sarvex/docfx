@@ -19,7 +19,7 @@ public class MarkdownFragment
     public override string ToString()
     {
         string uidWrapper = OverwriteUtility.GetUidWrapper(Uid);
-        StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new();
         sb.Append("# " + uidWrapper);
         sb.Append(Uid);
         sb.AppendLine(uidWrapper);

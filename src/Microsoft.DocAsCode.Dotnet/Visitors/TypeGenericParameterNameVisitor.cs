@@ -7,7 +7,7 @@ namespace Microsoft.DocAsCode.Dotnet;
 
 internal sealed class TypeGenericParameterNameVisitor : SymbolVisitor<List<string>>
 {
-    public static readonly TypeGenericParameterNameVisitor Instance = new TypeGenericParameterNameVisitor();
+    public static readonly TypeGenericParameterNameVisitor Instance = new();
 
     private TypeGenericParameterNameVisitor()
     {

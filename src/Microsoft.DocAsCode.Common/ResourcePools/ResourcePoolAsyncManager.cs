@@ -9,8 +9,8 @@ public class ResourcePoolAsyncManager<TResource>
     : IDisposable
     where TResource : class
 {
-    private readonly ConcurrentBag<TResource> _resources = new ConcurrentBag<TResource>();
-    private readonly ConcurrentStack<TResource> _stack = new ConcurrentStack<TResource>();
+    private readonly ConcurrentBag<TResource> _resources = new();
+    private readonly ConcurrentStack<TResource> _stack = new();
     private readonly Func<Task<TResource>> _creator;
     private readonly SemaphoreSlim _semaphore;
 

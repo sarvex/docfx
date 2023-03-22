@@ -206,7 +206,7 @@ public class CompositeDictionary
 
     public sealed class Builder
     {
-        private readonly List<Entry> _entries = new List<Entry>();
+        private readonly List<Entry> _entries = new();
 
         internal Builder() { }
 

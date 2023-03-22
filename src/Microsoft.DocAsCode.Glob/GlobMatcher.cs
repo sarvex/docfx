@@ -17,17 +17,17 @@ public class GlobMatcher : IEquatable<GlobMatcher>
     private const char NegateChar = '!';
     private const string GlobStar = "**";
     private const string ReplacerGroupName = "replacer";
-    private static readonly HashSet<char> NeedEscapeCharactersInRegex = new HashSet<char>(@"'().*{}+?[]^$\!".ToCharArray());
-    private static readonly Regex UnescapeGlobRegex = new Regex(@"\\(?<replacer>.)", RegexOptions.Compiled);
+    private static readonly HashSet<char> NeedEscapeCharactersInRegex = new(@"'().*{}+?[]^$\!".ToCharArray());
+    private static readonly Regex UnescapeGlobRegex = new(@"\\(?<replacer>.)", RegexOptions.Compiled);
 
     /// <summary>
     /// start with * and has more than one * and followed by anything except * or /
     /// </summary>
-    private static readonly Regex ExpandGlobStarRegex = new Regex(@"^\*{2,}(?=[^/*])", RegexOptions.Compiled);
+    private static readonly Regex ExpandGlobStarRegex = new(@"^\*{2,}(?=[^/*])", RegexOptions.Compiled);
     // Never match .abc file unless AllowDotMatch option is set
     private const string PatternStartWithDotAllowed = @"(?!(?:^|\/)\.{1,2}(?:$|\/))";
     private const string PatternStartWithoutDotAllowed = @"(?!\.)";
-    private static readonly HashSet<char> RegexCharactersWithDotPossible = new HashSet<char>(new char[] { '.', '[', '(' });
+    private static readonly HashSet<char> RegexCharactersWithDotPossible = new(new char[] { '.', '[', '(' });
     /// <summary>
     /// Any character other than /
     /// </summary>
@@ -38,7 +38,7 @@ public class GlobMatcher : IEquatable<GlobMatcher>
     /// </summary>
     private const string SingleStarToRegex = "[^/]*?";
 
-    private static readonly Regex GlobStarRegex = new Regex(@"^\*{2,}/?$", RegexOptions.Compiled);
+    private static readonly Regex GlobStarRegex = new(@"^\*{2,}/?$", RegexOptions.Compiled);
 
     private GlobRegexItem[][] _items;
     private bool _negate = false;
@@ -161,7 +161,7 @@ public class GlobMatcher : IEquatable<GlobMatcher>
             return IsFolderPath(globPart) ? GlobRegexItem.GlobStar : GlobRegexItem.GlobStarForFileOnly;
         }
 
-        StringBuilder builder = new StringBuilder();
+        StringBuilder builder = new();
         bool escaping = false;
         bool disableEscape = !Options.HasFlag(GlobMatcherOptions.AllowEscape);
         bool hasMagic = false;
@@ -460,7 +460,7 @@ public class GlobMatcher : IEquatable<GlobMatcher>
     /// <returns></returns>
     internal static string[] ExpandGroup(string pattern, GlobMatcherOptions options = DefaultOptions)
     {
-        GlobUngrouper ungrouper = new GlobUngrouper();
+        GlobUngrouper ungrouper = new();
         bool escaping = false;
         bool disableEscape = !options.HasFlag(GlobMatcherOptions.AllowEscape);
         foreach (char c in pattern)
@@ -557,7 +557,7 @@ public class GlobMatcher : IEquatable<GlobMatcher>
             }
             public override List<StringBuilder> Flatten()
             {
-                List<StringBuilder> result = new List<StringBuilder>(1);
+                List<StringBuilder> result = new(1);
                 result.Add(_builder);
                 return result;
             }
@@ -572,13 +572,13 @@ public class GlobMatcher : IEquatable<GlobMatcher>
             }
             public override GlobNode AddChar(char c)
             {
-                SequenceNode node = new SequenceNode(this);
+                SequenceNode node = new(this);
                 _nodes.Add(node);
                 return node.AddChar(c);
             }
             public override GlobNode StartLevel()
             {
-                SequenceNode node = new SequenceNode(this);
+                SequenceNode node = new(this);
                 _nodes.Add(node);
                 return node.StartLevel();
             }
@@ -593,7 +593,7 @@ public class GlobMatcher : IEquatable<GlobMatcher>
             }
             public override List<StringBuilder> Flatten()
             {
-                List<StringBuilder> result = new List<StringBuilder>();
+                List<StringBuilder> result = new();
                 foreach (GlobNode node in _nodes)
                 {
                     foreach (StringBuilder builder in node.Flatten())
@@ -614,13 +614,13 @@ public class GlobMatcher : IEquatable<GlobMatcher>
             }
             public override GlobNode AddChar(char c)
             {
-                TextNode node = new TextNode(this);
+                TextNode node = new(this);
                 _nodes.Add(node);
                 return node.AddChar(c);
             }
             public override GlobNode StartLevel()
             {
-                ChoiceNode node = new ChoiceNode(this);
+                ChoiceNode node = new(this);
                 _nodes.Add(node);
                 return node;
             }
@@ -634,16 +634,16 @@ public class GlobMatcher : IEquatable<GlobMatcher>
             }
             public override List<StringBuilder> Flatten()
             {
-                List<StringBuilder> result = new List<StringBuilder>();
+                List<StringBuilder> result = new();
                 result.Add(new StringBuilder());
                 foreach (GlobNode node in _nodes)
                 {
-                    List<StringBuilder> tmp = new List<StringBuilder>();
+                    List<StringBuilder> tmp = new();
                     foreach (StringBuilder builder in node.Flatten())
                     {
                         foreach (StringBuilder sb in result)
                         {
-                            StringBuilder newsb = new StringBuilder(sb.ToString());
+                            StringBuilder newsb = new(sb.ToString());
                             newsb.Append(builder.ToString());
                             tmp.Add(newsb);
                         }
@@ -705,7 +705,7 @@ public class GlobMatcher : IEquatable<GlobMatcher>
     /// </summary>
     private sealed class CharClass
     {
-        private readonly StringBuilder _chars = new StringBuilder();
+        private readonly StringBuilder _chars = new();
         public void Add(char c)
         {
             _chars.Append(c);
@@ -728,9 +728,9 @@ public class GlobMatcher : IEquatable<GlobMatcher>
     [Serializable]
     private sealed class GlobRegexItem
     {
-        public static readonly GlobRegexItem GlobStar = new GlobRegexItem(GlobRegexItemType.GlobStar);
-        public static readonly GlobRegexItem GlobStarForFileOnly = new GlobRegexItem(GlobRegexItemType.GlobStarForFileOnly);
-        public static readonly GlobRegexItem Empty = new GlobRegexItem(string.Empty, string.Empty, GlobRegexItemType.PlainText);
+        public static readonly GlobRegexItem GlobStar = new(GlobRegexItemType.GlobStar);
+        public static readonly GlobRegexItem GlobStarForFileOnly = new(GlobRegexItemType.GlobStarForFileOnly);
+        public static readonly GlobRegexItem Empty = new(string.Empty, string.Empty, GlobRegexItemType.PlainText);
         public GlobRegexItemType ItemType { get; }
         public string RegexContent { get; }
         public string PlainText { get; }

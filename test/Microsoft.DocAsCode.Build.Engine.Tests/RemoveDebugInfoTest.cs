@@ -29,7 +29,7 @@ public class RemoveDebugInfoTest : TestBase
     [Fact]
     public void TestBasicFeature()
     {
-        Manifest manifest = new Manifest
+        Manifest manifest = new()
         {
             SourceBasePath = _outputFolder,
             Files =

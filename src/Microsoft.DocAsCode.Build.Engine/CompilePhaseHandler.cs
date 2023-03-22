@@ -10,7 +10,7 @@ namespace Microsoft.DocAsCode.Build.Engine;
 
 internal class CompilePhaseHandler : IPhaseHandler
 {
-    private readonly List<TreeItemRestructure> _restructions = new List<TreeItemRestructure>();
+    private readonly List<TreeItemRestructure> _restructions = new();
 
     public string Name => nameof(CompilePhaseHandler);
 

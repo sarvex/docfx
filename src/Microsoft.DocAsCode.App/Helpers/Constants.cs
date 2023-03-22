@@ -5,7 +5,7 @@ namespace Microsoft.DocAsCode;
 
 internal static class Constants
 {
-    public static Func<string, string> GetIndexFilePathFunc = new Func<string, string>(s => Path.Combine(s, "index.yml"));
+    public static Func<string, string> GetIndexFilePathFunc = new(s => Path.Combine(s, "index.yml"));
     public const string ConfigFileName = "docfx.json";
     public const string SupportedProjectName = "project.json";
     public const string ConfigFileExtension = ".json";

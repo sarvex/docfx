@@ -158,7 +158,7 @@ tagRules : [
 ]
 }");
 
-        FileCollection files = new FileCollection(Directory.GetCurrentDirectory());
+        FileCollection files = new(Directory.GetCurrentDirectory());
         files.Add(DocumentType.Article, new[] { tocFile, conceptualFile, conceptualFile2, conceptualFile3, conceptualFile4 });
         files.Add(DocumentType.Article, new[] { "TestData/System.Console.csyml", "TestData/System.ConsoleColor.csyml" }, "TestData/", null);
         files.Add(DocumentType.Resource, new[] { resourceFile });
@@ -439,7 +439,7 @@ settings : [
 }
 ", _templateFolder);
 
-        FileCollection files = new FileCollection(Directory.GetCurrentDirectory());
+        FileCollection files = new(Directory.GetCurrentDirectory());
         files.Add(DocumentType.Article, new[] { tocFile, conceptualFile, conceptualFile2 });
         files.Add(DocumentType.Article, new[] { "TestData/System.Console.csyml", "TestData/System.ConsoleColor.csyml" }, "TestData/", null);
         files.Add(DocumentType.Resource, new[] { resourceFile });
@@ -524,7 +524,7 @@ exports.getOptions = function (){
                 "#[Test](test.md)"
             },
             _inputFolder);
-        FileCollection files = new FileCollection(Directory.GetCurrentDirectory());
+        FileCollection files = new(Directory.GetCurrentDirectory());
         files.Add(DocumentType.Article, new[] { conceptualFile, conceptualFile2, tocFile, tocFile2 });
         BuildDocument(
             files,
@@ -728,7 +728,7 @@ exports.getOptions = function (){
             },
             _inputFolder);
 
-        FileCollection files = new FileCollection(Directory.GetCurrentDirectory());
+        FileCollection files = new(Directory.GetCurrentDirectory());
         files.Add(DocumentType.Article, new[] { tocFile, conceptualFile, conceptualFile2 });
         #endregion
 
@@ -830,7 +830,7 @@ exports.getOptions = function (){
             },
             _inputFolder);
 
-        FileCollection files = new FileCollection(Directory.GetCurrentDirectory());
+        FileCollection files = new(Directory.GetCurrentDirectory());
         files.Add(DocumentType.Article, new[] { conceptualFile }, Path.Combine(_inputFolder, "a"), ".");
         #endregion
 
@@ -859,7 +859,7 @@ exports.getOptions = function (){
 
     private class FakeResponseHandler : DelegatingHandler
     {
-        private readonly Dictionary<Uri, HttpResponseMessage> _fakeResponses = new Dictionary<Uri, HttpResponseMessage>();
+        private readonly Dictionary<Uri, HttpResponseMessage> _fakeResponses = new();
 
         public void AddFakeResponse(Uri uri, HttpResponseMessage responseMessage)
         {
@@ -945,7 +945,7 @@ exports.getOptions = function (){
         var versionDir = "v0.1";
         var subDir = "sub";
 
-        FileCollection files = new FileCollection(Directory.GetCurrentDirectory());
+        FileCollection files = new(Directory.GetCurrentDirectory());
         files.Add(DocumentType.Article, new[] { conceptualFile }, _inputFolder, ".");
         files.Add(DocumentType.Article, new[] { conceptualFileWithFileMapping }, _inputFolder, subDir);
         #endregion

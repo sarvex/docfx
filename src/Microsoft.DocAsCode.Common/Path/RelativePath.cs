@@ -17,8 +17,8 @@ public sealed class RelativePath : IEquatable<RelativePath>
     public const string WorkingFolderString = "~";
     public static readonly string NormalizedWorkingFolder = "~/";
     public static readonly string AltWorkingFolder = "~\\";
-    public static readonly RelativePath Empty = new RelativePath(false, 0, new string[] { string.Empty });
-    public static readonly RelativePath WorkingFolder = new RelativePath(true, 0, new string[] { string.Empty });
+    public static readonly RelativePath Empty = new(false, 0, new string[] { string.Empty });
+    public static readonly RelativePath WorkingFolder = new(true, 0, new string[] { string.Empty });
     public static readonly char[] InvalidPartChars = PathUtility.InvalidPathChars.Concat(@"\/?").ToArray();
     private static readonly string[] EncodedInvalidPartChars = Array.ConvertAll(InvalidPartChars, ch => Uri.EscapeDataString(ch.ToString()));
     private static readonly char[] UnsafeInvalidPartChars = { '/' };

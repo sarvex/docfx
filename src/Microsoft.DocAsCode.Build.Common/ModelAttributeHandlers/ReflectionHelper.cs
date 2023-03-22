@@ -21,13 +21,13 @@ public static class ReflectionHelper
               where prop.GetSetMethod() != null
               where prop.GetIndexParameters().Length == 0
               select prop).ToList();
-    private static readonly ConcurrentDictionary<Type, List<PropertyInfo>> _gettablePropertiesCache = new ConcurrentDictionary<Type, List<PropertyInfo>>();
-    private static readonly ConcurrentDictionary<Type, List<PropertyInfo>> _settablePropertiesCache = new ConcurrentDictionary<Type, List<PropertyInfo>>();
-    private static readonly ConcurrentDictionary<Type, bool> _isDictionaryCache = new ConcurrentDictionary<Type, bool>();
-    private static readonly ConcurrentDictionary<Tuple<Type, Type>, Type> _genericTypeCache = new ConcurrentDictionary<Tuple<Type, Type>, Type>();
-    private static readonly ConcurrentDictionary<PropertyInfo, Func<object, object>> _propertyGetterCache = new ConcurrentDictionary<PropertyInfo, Func<object, object>>();
-    private static readonly ConcurrentDictionary<PropertyInfo, Action<object, object>> _propertySetterCache = new ConcurrentDictionary<PropertyInfo, Action<object, object>>();
-    private static readonly ConcurrentDictionary<Tuple<Type, Type[], Type[]>, Func<object[], object>> _createInstanceCache = new ConcurrentDictionary<Tuple<Type, Type[], Type[]>, Func<object[], object>>(StructuralEqualityComparer<Tuple<Type, Type[], Type[]>>.Default);
+    private static readonly ConcurrentDictionary<Type, List<PropertyInfo>> _gettablePropertiesCache = new();
+    private static readonly ConcurrentDictionary<Type, List<PropertyInfo>> _settablePropertiesCache = new();
+    private static readonly ConcurrentDictionary<Type, bool> _isDictionaryCache = new();
+    private static readonly ConcurrentDictionary<Tuple<Type, Type>, Type> _genericTypeCache = new();
+    private static readonly ConcurrentDictionary<PropertyInfo, Func<object, object>> _propertyGetterCache = new();
+    private static readonly ConcurrentDictionary<PropertyInfo, Action<object, object>> _propertySetterCache = new();
+    private static readonly ConcurrentDictionary<Tuple<Type, Type[], Type[]>, Func<object[], object>> _createInstanceCache = new(StructuralEqualityComparer<Tuple<Type, Type[], Type[]>>.Default);
 
     public static object CreateInstance(Type type, Type[] typeArguments, Type[] argumentTypes, object[] arguments)
     {
@@ -328,7 +328,7 @@ public static class ReflectionHelper
 
     private sealed class StructuralEqualityComparer<T> : IEqualityComparer<T>
     {
-        public static readonly StructuralEqualityComparer<T> Default = new StructuralEqualityComparer<T>();
+        public static readonly StructuralEqualityComparer<T> Default = new();
 
         public bool Equals(T x, T y)
         {

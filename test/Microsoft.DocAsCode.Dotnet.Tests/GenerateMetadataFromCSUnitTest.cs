@@ -3120,7 +3120,7 @@ namespace Test1
         // MemoryStream fails when MetadataReference.CreateFromAssembly with error: Empty path name is not legal
         var compilation = CreateCompilationFromCSharpCode(code);
         EmitResult result;
-        using (FileStream stream = new FileStream(assemblyName, FileMode.Create))
+        using (FileStream stream = new(assemblyName, FileMode.Create))
         {
             result = compilation.Emit(stream);
         }

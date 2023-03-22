@@ -9,7 +9,7 @@ namespace Microsoft.DocAsCode.MarkdigEngine.Extensions;
 
 public class QuoteSectionNoteParser : BlockParser
 {
-    private List<string> _noteTypes = new List<string>{ "[!NOTE]", "[!TIP]", "[!WARNING]", "[!IMPORTANT]", "[!CAUTION]" };
+    private List<string> _noteTypes = new() { "[!NOTE]", "[!TIP]", "[!WARNING]", "[!IMPORTANT]", "[!CAUTION]" };
     private readonly MarkdownContext _context;
 
     public QuoteSectionNoteParser(MarkdownContext context)

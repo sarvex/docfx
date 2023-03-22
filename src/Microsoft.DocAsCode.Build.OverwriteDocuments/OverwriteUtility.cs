@@ -12,7 +12,7 @@ public static class OverwriteUtility
     private static readonly string[] UidWrappers = { "`", "``", "```", "````", "`````", "``````" };
 
     private static readonly Regex OPathRegex =
-        new Regex(
+        new(
             @"^(?<propertyName>[:A-Za-z_](?>[\w\.\-:]*))(?:\[\s*(?<key>[:A-Za-z_](?>[\w\.\-:]*))\s*=\s*(?:""(?<value>(?:(?>[^""\\]*)|\\.)*)"")\s*\])?(?:\/|$)",
             RegexOptions.Compiled);
 

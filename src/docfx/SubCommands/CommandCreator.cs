@@ -10,7 +10,7 @@ namespace Microsoft.DocAsCode.SubCommands;
 
 internal abstract class CommandCreator<TOptions, TCommand> : ISubCommandCreator where TOptions : class where TCommand : ISubCommand
 {
-    public static readonly Parser LooseParser = new Parser(s => s.IgnoreUnknownArguments = true);
+    public static readonly Parser LooseParser = new(s => s.IgnoreUnknownArguments = true);
     public static readonly Parser StrictParser = Parser.Default;
     private static readonly TOptions DefaultOption = Activator.CreateInstance<TOptions>();
 

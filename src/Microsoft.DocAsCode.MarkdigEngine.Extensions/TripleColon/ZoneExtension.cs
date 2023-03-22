@@ -10,8 +10,8 @@ namespace Microsoft.DocAsCode.MarkdigEngine.Extensions;
 
 public class ZoneExtension : ITripleColonExtensionInfo
 {
-    private static readonly Regex pivotRegex = new Regex(@"^\s*(?:[a-z0-9-]+)(?:\s*,\s*[a-z0-9-]+)*\s*$");
-    private static readonly Regex pivotReplaceCommasRegex = new Regex(@"\s*,\s*");
+    private static readonly Regex pivotRegex = new(@"^\s*(?:[a-z0-9-]+)(?:\s*,\s*[a-z0-9-]+)*\s*$");
+    private static readonly Regex pivotReplaceCommasRegex = new(@"\s*,\s*");
     public string Name => "zone";
     public bool SelfClosing => false;
 

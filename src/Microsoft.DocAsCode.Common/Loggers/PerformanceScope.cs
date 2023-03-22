@@ -7,7 +7,7 @@ namespace Microsoft.DocAsCode.Common;
 
 public sealed class PerformanceScope : IDisposable
 {
-    private readonly Stopwatch _stopwatch = new Stopwatch();
+    private readonly Stopwatch _stopwatch = new();
     private readonly AggregatedPerformanceScope _aggregatedPerformanceLogger = null;
     private readonly Action<TimeSpan> _logger;
 

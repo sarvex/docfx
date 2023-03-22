@@ -9,8 +9,8 @@ public class FilePathComparer
     private readonly bool _ignoreToFullPath;
     private readonly static StringComparer _stringComparer = GetStringComparer();
 
-    public static readonly FilePathComparer OSPlatformSensitiveComparer = new FilePathComparer();
-    public static readonly FilePathComparer OSPlatformSensitiveRelativePathComparer = new FilePathComparer(true);
+    public static readonly FilePathComparer OSPlatformSensitiveComparer = new();
+    public static readonly FilePathComparer OSPlatformSensitiveRelativePathComparer = new(true);
     public static readonly StringComparer OSPlatformSensitiveStringComparer = GetStringComparer();
 
     public FilePathComparer()

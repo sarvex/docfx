@@ -10,7 +10,7 @@ namespace Microsoft.DocAsCode.Build.SchemaDriven.Processors;
 internal static class Helper
 {
     private const string ContentOriginalFileKeyName = "ContentOriginalFile";
-    private static readonly HashSet<string> s_locales = new HashSet<string>(
+    private static readonly HashSet<string> s_locales = new(
 CultureInfo.GetCultures(CultureTypes.AllCultures).Except(
 CultureInfo.GetCultures(CultureTypes.NeutralCultures)).Select(c => c.Name).Concat(
 new[] { "zh-cn", "zh-tw", "zh-hk", "zh-sg", "zh-mo" }),

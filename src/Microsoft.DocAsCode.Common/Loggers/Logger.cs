@@ -12,7 +12,7 @@ public static class Logger
     public static int WarningCount => _warningCount;
     public static int ErrorCount => _errorCount;
 
-    private static readonly CompositeLogListener _syncListener = new CompositeLogListener();
+    private static readonly CompositeLogListener _syncListener = new();
     private static int _warningCount = 0;
     private static int _errorCount = 0;
     public volatile static LogLevel LogLevelThreshold = LogLevel.Info;

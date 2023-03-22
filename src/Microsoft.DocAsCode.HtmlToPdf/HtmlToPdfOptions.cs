@@ -85,7 +85,7 @@ public class HtmlToPdfOptions
     /// <returns>The configuration of html to pdf options.</returns>
     public override string ToString()
     {
-        StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new();
 
         // here to show the options http://wkhtmltopdf.org/usage/wkhtmltopdf.txt
         // why set javascript delay to 3000? https://github.com/wkhtmltopdf/wkhtmltopdf/issues/2054
