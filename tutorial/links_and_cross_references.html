@@ -234,6 +234,10 @@ to be <a href="https://en.wikipedia.org/wiki/Percent-encoding">encoded</a> to <c
 </code></pre>
 <h2 id="cross-reference-between-projects">Cross reference between projects</h2>
 <p>Another common need is to reference topics from an external project. For example, when you're writing the documentation for your own .NET library, you'll want to add some links that point to types in .NET base class library. DocFX gives you two ways to achieve this functionality: by exporting all UIDs in a project into a map file to be imported in another project, and through cross reference services.</p>
+<div class="TIP">
+<h5>Tip</h5>
+<p>Docfx automatically resolves .NET base class library types and other types published to <a href="https://learn.microsoft.com">https://learn.microsoft.com</a> by default, without cross reference map or cross reference service. This process does not require network access.</p>
+</div>
 <h3 id="cross-reference-map-file">Cross reference map file</h3>
 <p>When building a DocFX project, there will be an <code>xrefmap.yml</code> generated under output folder. This file contains information for all topics that have UID defined and their corresponding urls. The format of <code>xrefmap.yml</code> looks like this:</p>
 <pre><code class="lang-yaml">references:
@@ -288,7 +292,6 @@ local.</p>
   }
 }
 </code></pre>
-<p>For example, the URL for the cross reference service for .NET BCL types is <code>https://xref.docs.microsoft.com/query?uid={uid}</code>.</p>
 <h2 id="advanced-more-options-for-cross-reference">Advanced: more options for cross reference</h2>
 <p>You can create a cross link with following options:</p>
 <ul>
@@ -296,16 +299,16 @@ local.</p>
 <p>e.g.: <code>@&quot;System.String?text=string&quot;</code> will be resolved as <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>.</p>
 </li>
 <li><p><code>alt</code>: the display text when the cross reference does not have a <code>href</code> property.</p>
-<p>e.g.: <code>&lt;xref href=&quot;System.Collections.Immutable.ImmutableArray`1?alt=ImmutableArray&quot;/&gt;</code> will be resolved as <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.immutable.immutablearray-1">ImmutableArray&lt;T&gt;</a>.</p>
+<p>e.g.: <code>&lt;xref href=&quot;System.Collections.Immutable.ImmutableArray`1?alt=ImmutableArray&quot;/&gt;</code> will be resolved as <span class="xref">ImmutableArray</span>.</p>
 </li>
 <li><p><code>displayProperty</code>: the property of display text when the cross reference is has resolved correctly.</p>
-<p>e.g.: <code>&lt;a href=&quot;xref:System.String?displayProperty=fullName&quot;/&gt;</code> will be resolved as <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">System.String</a>.</p>
+<p>e.g.: <code>&lt;a href=&quot;xref:System.String?displayProperty=fullName&quot;/&gt;</code> will be resolved as <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>.</p>
 </li>
 <li><p><code>altProperty</code>: the property of display text when the cross reference does not have a <code>href</code> property.</p>
-<p>e.g.: <code>&lt;xref href=&quot;System.Collections.Immutable.ImmutableArray`1&quot; altProperty=&quot;name&quot;/&gt;</code> will be resolved as <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.immutable.immutablearray-1">ImmutableArray&lt;T&gt;</a>.</p>
+<p>e.g.: <code>&lt;xref href=&quot;System.Collections.Immutable.ImmutableArray`1&quot; altProperty=&quot;name&quot;/&gt;</code> will be resolved as <span class="xref">System.Collections.Immutable.ImmutableArray`1</span>.</p>
 </li>
 <li><p><code>title</code>: the title of link.</p>
-<p>e.g.: <code>[](xref:System.String?title=String+Class)</code> will be resolved as <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string" title="String Class">String</a>.</p>
+<p>e.g.: <code>[](xref:System.String?title=String+Class)</code> will be resolved as <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string" title="String Class">string</a>.</p>
 </li>
 </ul>
 </article>
