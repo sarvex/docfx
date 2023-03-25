@@ -110,7 +110,7 @@
   },
 }
 </code></pre>
-<p>Features that needs source code information such as &quot;Improve this doc&quot; and &quot;View source&quot; is not available using this approach.</p>
+<p>If <a href="https://learn.microsoft.com/en-us/dotnet/standard/library-guidance/sourcelink">source link</a> is enabled on the assembly and the <code>.pdb</code> file exists along side the assembly, docfx shows the &quot;View Source&quot; link based on the source URL extract from source link.</p>
 <h2 id="generate-from-projects-or-solutions">Generate from projects or solutions</h2>
 <p>When the file extension is <code>.csproj</code>, <code>.vbproj</code> or <code>.sln</code>, docfx uses <a href="https://gist.github.com/DustinCampbell/32cd69d04ea1c08a16ae5c4cd21dd3a3"><code>MSBuildWorkspace</code></a> to perform a design-time build of the projects before generating API docs.</p>
 <p>In order to successfully load an MSBuild project, .NET Core SDK must be installed and available globally. The installation must have the necessary workloads and components to support the projects you'll be loading.</p>
