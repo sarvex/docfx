@@ -783,6 +783,32 @@ references:
   isSpec: "True"
   fullName: Microsoft.DocAsCode.DataContracts.ManagedReference.ItemViewModel.SeeAlsosUidReference
   nameWithType: ItemViewModel.SeeAlsosUidReference
+- uid: Microsoft.DocAsCode.DataContracts.ManagedReference.ItemViewModel.Sees
+  name: Sees
+  href: api/Microsoft.DocAsCode.DataContracts.ManagedReference.ItemViewModel.html#Microsoft_DocAsCode_DataContracts_ManagedReference_ItemViewModel_Sees
+  commentId: P:Microsoft.DocAsCode.DataContracts.ManagedReference.ItemViewModel.Sees
+  fullName: Microsoft.DocAsCode.DataContracts.ManagedReference.ItemViewModel.Sees
+  nameWithType: ItemViewModel.Sees
+- uid: Microsoft.DocAsCode.DataContracts.ManagedReference.ItemViewModel.Sees*
+  name: Sees
+  href: api/Microsoft.DocAsCode.DataContracts.ManagedReference.ItemViewModel.html#Microsoft_DocAsCode_DataContracts_ManagedReference_ItemViewModel_Sees_
+  commentId: Overload:Microsoft.DocAsCode.DataContracts.ManagedReference.ItemViewModel.Sees
+  isSpec: "True"
+  fullName: Microsoft.DocAsCode.DataContracts.ManagedReference.ItemViewModel.Sees
+  nameWithType: ItemViewModel.Sees
+- uid: Microsoft.DocAsCode.DataContracts.ManagedReference.ItemViewModel.SeesUidReference
+  name: SeesUidReference
+  href: api/Microsoft.DocAsCode.DataContracts.ManagedReference.ItemViewModel.html#Microsoft_DocAsCode_DataContracts_ManagedReference_ItemViewModel_SeesUidReference
+  commentId: P:Microsoft.DocAsCode.DataContracts.ManagedReference.ItemViewModel.SeesUidReference
+  fullName: Microsoft.DocAsCode.DataContracts.ManagedReference.ItemViewModel.SeesUidReference
+  nameWithType: ItemViewModel.SeesUidReference
+- uid: Microsoft.DocAsCode.DataContracts.ManagedReference.ItemViewModel.SeesUidReference*
+  name: SeesUidReference
+  href: api/Microsoft.DocAsCode.DataContracts.ManagedReference.ItemViewModel.html#Microsoft_DocAsCode_DataContracts_ManagedReference_ItemViewModel_SeesUidReference_
+  commentId: Overload:Microsoft.DocAsCode.DataContracts.ManagedReference.ItemViewModel.SeesUidReference
+  isSpec: "True"
+  fullName: Microsoft.DocAsCode.DataContracts.ManagedReference.ItemViewModel.SeesUidReference
+  nameWithType: ItemViewModel.SeesUidReference
 - uid: Microsoft.DocAsCode.DataContracts.ManagedReference.ItemViewModel.Source
   name: Source
   href: api/Microsoft.DocAsCode.DataContracts.ManagedReference.ItemViewModel.html#Microsoft_DocAsCode_DataContracts_ManagedReference_ItemViewModel_Source
