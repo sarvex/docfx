@@ -223,10 +223,6 @@ And if <code>href</code> is referencing to a <strong>folder</strong>, it must en
 <td>Defines the filter configuration file, please go to <a href="howto_filter_out_unwanted_apis_attributes.html">How to filter out unwanted apis attributes</a> for more details.</td>
 </tr>
 <tr>
-<td>useCompatibilityFileName</td>
-<td>If set to true, DocFX would keep <code>`</code> in comment id instead of replacing it with <code>-</code>.</td>
-</tr>
-<tr>
 <td>properties</td>
 <td>Defines an optional set of MSBuild properties used when interpreting project files. These are the same properties that are passed to msbuild via the <code>/property:name=value</code> command line argument.</td>
 </tr>
@@ -257,7 +253,6 @@ And if <code>href</code> is referencing to a <strong>folder</strong>, it must en
         }
       ],
       &quot;dest&quot;: &quot;obj/docfx/api/js&quot;,
-      &quot;useCompatibilityFileName&quot;: true,
       &quot;properties&quot;: {
           &quot;TargetFramework&quot;: &quot;net46&quot;
       }
