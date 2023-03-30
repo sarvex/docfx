@@ -1115,6 +1115,19 @@ references:
   isSpec: "True"
   fullName: Microsoft.DocAsCode.DataContracts.ManagedReference.PageViewModel.Items
   nameWithType: PageViewModel.Items
+- uid: Microsoft.DocAsCode.DataContracts.ManagedReference.PageViewModel.MemberLayout
+  name: MemberLayout
+  href: api/Microsoft.DocAsCode.DataContracts.ManagedReference.PageViewModel.html#Microsoft_DocAsCode_DataContracts_ManagedReference_PageViewModel_MemberLayout
+  commentId: P:Microsoft.DocAsCode.DataContracts.ManagedReference.PageViewModel.MemberLayout
+  fullName: Microsoft.DocAsCode.DataContracts.ManagedReference.PageViewModel.MemberLayout
+  nameWithType: PageViewModel.MemberLayout
+- uid: Microsoft.DocAsCode.DataContracts.ManagedReference.PageViewModel.MemberLayout*
+  name: MemberLayout
+  href: api/Microsoft.DocAsCode.DataContracts.ManagedReference.PageViewModel.html#Microsoft_DocAsCode_DataContracts_ManagedReference_PageViewModel_MemberLayout_
+  commentId: Overload:Microsoft.DocAsCode.DataContracts.ManagedReference.PageViewModel.MemberLayout
+  isSpec: "True"
+  fullName: Microsoft.DocAsCode.DataContracts.ManagedReference.PageViewModel.MemberLayout
+  nameWithType: PageViewModel.MemberLayout
 - uid: Microsoft.DocAsCode.DataContracts.ManagedReference.PageViewModel.Metadata
   name: Metadata
   href: api/Microsoft.DocAsCode.DataContracts.ManagedReference.PageViewModel.html#Microsoft_DocAsCode_DataContracts_ManagedReference_PageViewModel_Metadata
@@ -1399,6 +1412,24 @@ references:
   commentId: F:Microsoft.DocAsCode.Dotnet.SymbolIncludeState.Include
   fullName: Microsoft.DocAsCode.Dotnet.SymbolIncludeState.Include
   nameWithType: SymbolIncludeState.Include
+- uid: Microsoft.DocAsCode.MemberLayout
+  name: MemberLayout
+  href: api/Microsoft.DocAsCode.MemberLayout.html
+  commentId: T:Microsoft.DocAsCode.MemberLayout
+  fullName: Microsoft.DocAsCode.MemberLayout
+  nameWithType: MemberLayout
+- uid: Microsoft.DocAsCode.MemberLayout.SamePage
+  name: SamePage
+  href: api/Microsoft.DocAsCode.MemberLayout.html#Microsoft_DocAsCode_MemberLayout_SamePage
+  commentId: F:Microsoft.DocAsCode.MemberLayout.SamePage
+  fullName: Microsoft.DocAsCode.MemberLayout.SamePage
+  nameWithType: MemberLayout.SamePage
+- uid: Microsoft.DocAsCode.MemberLayout.SeparatePages
+  name: SeparatePages
+  href: api/Microsoft.DocAsCode.MemberLayout.html#Microsoft_DocAsCode_MemberLayout_SeparatePages
+  commentId: F:Microsoft.DocAsCode.MemberLayout.SeparatePages
+  fullName: Microsoft.DocAsCode.MemberLayout.SeparatePages
+  nameWithType: MemberLayout.SeparatePages
 - uid: user_manual
   name: docfx.exe User Manual
   href: tutorial/docfx.exe_user_manual.html
