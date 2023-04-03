@@ -1,7 +1,8 @@
 ﻿using System.Collections.Immutable;
+using System.Text;
+using System.Web;
 using Microsoft.CodeAnalysis;
 using Microsoft.DocAsCode.DataContracts.ManagedReference;
-
 using CS = Microsoft.CodeAnalysis.CSharp;
 using VB = Microsoft.CodeAnalysis.VisualBasic;
 
@@ -108,7 +109,7 @@ internal static partial class SymbolFormatter
         }
     }
 
-    public static List<LinkItem> ToLinkItems(this ImmutableArray<SymbolDisplayPart> parts, Compilation compilation, SyntaxLanguage language, bool overload)
+    public static List<LinkItem> ToLinkItems(this ImmutableArray<SymbolDisplayPart> parts, Compilation compilation, bool overload)
     {
         var result = new List<LinkItem>();
         foreach (var part in parts)

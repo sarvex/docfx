@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Text.RegularExpressions;
 
 using Microsoft.CodeAnalysis;
+using Microsoft.DocAsCode.Common;
 using Microsoft.DocAsCode.DataContracts.ManagedReference;
 using Microsoft.DocAsCode.Exceptions;
 
@@ -37,11 +38,11 @@ internal class SymbolVisitorAdapter : SymbolVisitor<MetadataItem>
         {
             return null;
         }
+
         var item = new MetadataItem
         {
             Name = VisitorHelper.GetId(symbol),
             CommentId = VisitorHelper.GetCommentId(symbol),
-            RawComment = symbol.GetDocumentationCommentXml(expandIncludes: true),
         };
 
         item.DisplayNames = new SortedList<SyntaxLanguage, string>();
@@ -50,13 +51,20 @@ internal class SymbolVisitorAdapter : SymbolVisitor<MetadataItem>
         item.Source = VisitorHelper.GetSourceDetail(symbol, _compilation);
         var assemblyName = symbol.ContainingAssembly?.Name;
         item.AssemblyNameList = string.IsNullOrEmpty(assemblyName) ? null : new List<string> { assemblyName };
-        if (!(symbol is INamespaceSymbol))
+        if (symbol is not INamespaceSymbol)
         {
             var namespaceName = VisitorHelper.GetId(symbol.ContainingNamespace);
             item.NamespaceName = string.IsNullOrEmpty(namespaceName) ? null : namespaceName;
         }
 
-        VisitorHelper.FeedComments(item, GetXmlCommentParserContext(item));
+        var commentModel = XmlComment.Parse(symbol, _compilation, GetXmlCommentParserContext(item));
+        item.Summary = commentModel.Summary;
+        item.Remarks = commentModel.Remarks;
+        item.Exceptions = commentModel.Exceptions;
+        item.SeeAlsos = commentModel.SeeAlsos;
+        item.Examples = commentModel.Examples;
+        item.CommentModel = commentModel;
+
         if (item.Exceptions != null)
         {
             foreach (var exceptions in item.Exceptions)
@@ -82,7 +90,6 @@ internal class SymbolVisitorAdapter : SymbolVisitor<MetadataItem>
         var item = new MetadataItem
         {
             Name = VisitorHelper.GetId(symbol),
-            RawComment = symbol.GetDocumentationCommentXml(expandIncludes: true),
         };
 
         item.DisplayNames = new SortedList<SyntaxLanguage, string>
@@ -717,9 +724,22 @@ internal class SymbolVisitorAdapter : SymbolVisitor<MetadataItem>
         return new XmlCommentParserContext
         {
             AddReferenceDelegate = GetAddReferenceDelegate(item),
-            Source = item.Source,
-            CodeSourceBasePath = _codeSourceBasePath
+            ResolveCode = ResolveCode,
         };
+
+        string ResolveCode(string source)
+        {
+            var sourcePath = item.Source?.Path;
+            var sourceDirectory = sourcePath is null ? null : Path.GetDirectoryName(sourcePath);
+            var path = Path.GetFullPath(Path.Combine(_codeSourceBasePath ?? sourceDirectory ?? ".", source));
+            if (!File.Exists(path))
+            {
+                Logger.LogWarning($"Source file '{path}' not found.");
+                return null;
+            }
+
+            return File.ReadAllText(path);
+        }
     }
 
     private List<AttributeInfo> GetAttributeInfo(ImmutableArray<AttributeData> attributes)

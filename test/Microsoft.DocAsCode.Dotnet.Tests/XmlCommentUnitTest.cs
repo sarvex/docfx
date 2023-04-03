@@ -1,75 +1,213 @@
 // Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using System.Text.RegularExpressions;
-using System.Xml.Linq;
-
-using Microsoft.DocAsCode.DataContracts.Common;
-
+using Microsoft.CodeAnalysis;
 using Xunit;
 
 namespace Microsoft.DocAsCode.Dotnet.Tests;
 
+#nullable enable
+
 public class XmlCommentUnitTest
 {
-    private static void Verify(string comment, string summary)
+    private static void Verify(string comment, string expected)
     {
-        Assert.Equal(
-            summary,
-            XmlComment.Parse($"<summary>{comment}</summary>").Summary,
-            ignoreLineEndingDifferences: true);
+        Assert.Equal(expected, XmlComment.Format(comment), ignoreLineEndingDifferences: true);
+    }
+
+    private static XmlComment Parse(string comment, Func<string, string?>? resolveCode = null)
+    {
+        var compilation = CompilationHelper.CreateCompilationFromCSharpCode($"{comment}\npublic class Foo{{}}");
+        Assert.Empty(compilation.GetDeclarationDiagnostics());
+
+        var symbol = compilation.GetSymbolsWithName("Foo").Single();
+        return XmlComment.Parse(symbol, compilation, new() { ResolveCode = resolveCode });
+    }
+
+    private static XmlComment Parse(string code, string symbolName, Func<string, string?>? resolveCode = null)
+    {
+        var compilation = CompilationHelper.CreateCompilationFromCSharpCode(code);
+        Assert.Empty(compilation.GetDeclarationDiagnostics());
+
+        var symbol = compilation.GetSymbolsWithName(symbolName).Single();
+        return XmlComment.Parse(symbol, compilation, new() { ResolveCode = resolveCode });
+    }
+
+    [Fact]
+    public static void Basic()
+    {
+        Verify("A", "A");
+        Verify("<para>a</para>", "<p>a</p>");
+    }
+
+    [Fact]
+    public static void Note()
+    {
+        Verify("<note>a</note>", "<div class=\"note\"><h5>note</h5>a</div>");
+        Verify("<note type=\"warning\">a</note>", "<div class=\"warning\"><h5>warning</h5>a</div>");
+        Verify("<note type=\"tips\">a</note>", "<div class=\"tips\"><h5>tips</h5>a</div>");
+    }
+
+    [Fact]
+    public static void List()
+    {
+        Verify(
+            """
+            ///<list type='bullet'>
+            ///    <item>
+            ///        <description>
+            ///            <code language = 'c#'>
+            ///            public class XmlElement
+            ///                : XmlLinkedNode
+            ///            </code>
+            ///            <list type='number'>
+            ///                <item>
+            ///                    <description>
+            ///                        word inside list->listItem->list->listItem->para.>
+            ///                        the second line.
+            ///                    </description>
+            ///                </item>
+            ///                <item>
+            ///                    <description>item2 in numbered list</description>
+            ///                </item>
+            ///            </list>
+            ///        </description>
+            ///    </item>
+            ///    <item>
+            ///        <description>item2 in bullet list</description>
+            ///    </item>
+            ///    <item>
+            ///        loose text <i>not</i> wrapped in description
+            ///    </item>
+            ///</list>
+            """,
+            """
+            <ul><li><item>
+
+                    <pre><code class="lang-csharp">
+                    public class XmlElement
+                        : XmlLinkedNode
+                    </code></pre>
+                    <ol><li><item>
+
+                                word inside list-&gt;listItem-&gt;list-&gt;listItem-&gt;para.&gt;
+                                the second line.
+
+                        </item></li><li><item>
+                            item2 in numbered list
+                        </item></li></ol>
+
+            </item></li><li><item>
+                item2 in bullet list
+            </item></li><li><item>
+                loose text <i>not</i> wrapped in description
+            </item></li></ul>
+            """);
     }
 
     [Fact]
     public static void SeeLangword()
     {
         Verify("<see langword=\"if\" />", "<a href=\"https://learn.microsoft.com/dotnet/csharp/language-reference/statements/selection-statements#the-if-statement\">if</a>");
+        Verify("<see langword=\"if\">my if</see>", "<a href=\"https://learn.microsoft.com/dotnet/csharp/language-reference/statements/selection-statements#the-if-statement\">my if</a>");
         Verify("<see langword=\"undefined-langword\" />", "<c>undefined-langword</c>");
+        Verify("<see langword=\"undefined-langword\">my</see>", "<c>my</c>");
+    }
+
+    [Fact]
+    public static void SeeHref()
+    {
+        Verify("<see href=\"https://example.org\"/>", "<a href=\"https://example.org\">https://example.org</a>");
+        Verify("<see href=\"https://example.org\">example</see>", "<a href=\"https://example.org\">example</a>");
+    }
+
+    [Fact]
+    public void See()
+    {
+        var input = """
+            /// <summary>
+            /// <see cref="System.AccessViolationException" />
+            /// <see cref="System.AccessViolationException">Exception type</see>
+            /// <see cref="System.Int32" />
+            /// <see cref="System.Int32">Integer</see>
+            /// <see cref="System.Int" />
+            /// <see cref="System.Int">int</see>
+            /// </summary>
+            """;
+
+        Assert.Equal(
+            """
+            <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.accessviolationexception">AccessViolationException</a>
+            <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.accessviolationexception">Exception type</a>
+            <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>
+            <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">Integer</a>
+            <c class="xref">System.Int</c>
+            <c class="xref">int</c>
+
+            """,
+            Parse(input).Summary,
+            ignoreLineEndingDifferences: true);
     }
 
     [Fact]
     public static void Issue8122()
     {
-        var comment = XmlComment.Parse("<seealso href=\"#\">Foo's</seealso>");
+        var comment = Parse("/// <seealso href=\"#\">Foo's</seealso>");
         Assert.Equal("Foo's", comment.SeeAlsos[0].AltText);
     }
 
     [Fact]
     public static void Issue4165()
     {
-        var comment = XmlComment.Parse(
+        var comment = Parse(
             """
-            <param name="args">arg1</param>
-            <param name="args">arg2</param>
-            """);
+            public class Foo
+            {
+                ///<param name="args">arg1</param>
+                ///<param name="args">arg2</param>
+                public void Bar(string args) {}
+            }
+            """, "Bar");
         Assert.Equal("arg1", comment.Parameters["args"]);
+    }
+
+    [Fact]
+    public static void Issue2623()
+    {
+        var input =
+            """
+            /// <remarks>
+            /// ```csharp
+            /// MyClass myClass = new MyClass();
+            ///
+            /// void Update()
+            /// {
+            ///     myClass.Execute();
+            /// }
+            /// ```
+            /// </remarks>
+            """;
+
+        Assert.Equal(
+            """
+            ```csharp
+            MyClass myClass = new MyClass();
+
+            void Update()
+            {
+                myClass.Execute();
+            }
+            ```
+
+            """,
+            Parse(input).Remarks,
+            ignoreLineEndingDifferences: true);
     }
 
     [Fact]
     public void TestXmlCommentParser()
     {
-        string inputFolder = Path.GetRandomFileName();
-        Directory.CreateDirectory(inputFolder);
-        File.WriteAllText(Path.Combine(inputFolder, "Example.cs"), """
-
-            using System;
-
-            namespace Example
-            {
-            #region Example
-                static class Program
-                {
-                    public int Main(string[] args)
-                    {
-                        Console.HelloWorld();
-                    }
-                }
-            #endregion
-            }
-
-            """);
-        string input = """
-
+        var input = """
             <member name='T:TestClass1.Partial1'>
                 <summary>
                     Partial classes <see cref='T:System.AccessViolationException'/><see cref='T:System.AccessViolationException'/>can not cross assemblies, Test <see langword='null'/>
@@ -79,36 +217,7 @@ public class XmlCommentUnitTest
                     ```
                 </summary>
                 <remarks>
-                <see href="https://example.org"/>
-                <see href="https://example.org">example</see>
                 <para>This is <paramref name='ref'/> <paramref />a sample of exception node</para>
-                <list type='bullet'>
-                    <item>
-                        <description>
-                            <code language = 'c#'>
-                            public class XmlElement
-                                : XmlLinkedNode
-                            </code>
-                            <list type='number'>
-                                <item>
-                                    <description>
-                                        word inside list->listItem->list->listItem->para.>
-                                        the second line.
-                                    </description>
-                                </item>
-                                <item>
-                                    <description>item2 in numbered list</description>
-                                </item>
-                            </list>
-                        </description>
-                    </item>
-                    <item>
-                        <description>item2 in bullet list</description>
-                    </item>
-                    <item>
-                        loose text <i>not</i> wrapped in description
-                    </item>
-                </list>
                 </remarks>
                 <returns>Task<see cref='T:System.AccessViolationException'/> returns</returns>
 
@@ -140,10 +249,6 @@ public class XmlCommentUnitTest
                 Check empty code.
                 <code></code>
                 </example>
-                <example>
-                This is an example using source reference.
-                <code source='Example.cs' region='Example'/>
-                </example>
                 <see cref="T:Microsoft.DocAsCode.EntityModel.SpecIdHelper"/>
                 <see cref="T:System.Diagnostics.SourceSwitch"/>
                 <see cref="Overload:System.String.Compare"/>
@@ -155,17 +260,8 @@ public class XmlCommentUnitTest
                 <seealso href="http://www.bing.com"/>
             </member>
             """;
-        var context = new XmlCommentParserContext
-        {
-            AddReferenceDelegate = null,
-            Source = new SourceDetail
-            {
-                Path = Path.Combine(inputFolder, "Source.cs"),
-            }
-        };
 
-        var commentModel = XmlComment.Parse(input, context);
-        Assert.True(commentModel.InheritDoc == null, nameof(commentModel.InheritDoc));
+        var commentModel = Parse(input);
 
         var summary = commentModel.Summary;
         Assert.Equal("""
@@ -251,7 +347,7 @@ public class XmlCommentUnitTest
                 """, e, ignoreLineEndingDifferences: true)
             );
 
-        commentModel = XmlComment.Parse(input, context);
+        commentModel = Parse(input);
 
         var seeAlsos = commentModel.SeeAlsos;
         Assert.Equal(3, seeAlsos.Count);
@@ -264,165 +360,132 @@ public class XmlCommentUnitTest
     }
 
     [Fact]
-    public void SeeAltText()
+    public void ParamRefTypeParamRef()
     {
-        string inputFolder = Path.GetRandomFileName();
-        Directory.CreateDirectory(inputFolder);
-        string input = """
-
-            <member name='T:TestClass1.Partial1'>
-                <summary>
-                    Class summary <see cref='T:System.AccessViolationException'>Exception type</see>
-                </summary>
-                <remarks>
-                See <see cref='T:System.Int'>Integer</see>.
-                </remarks>
-                <returns>Returns an <see cref='T:System.AccessViolationException'>Exception</see>.</returns>
-
-                    <param name='input'>This is an <see cref='T:System.AccessViolationException'>Exception</see>.</param>
-            </member>
-            """;
-        var context = new XmlCommentParserContext
-        {
-            AddReferenceDelegate = null,
-            Source = new SourceDetail
+        var input =
+            """
+            public class Foo
             {
-                Path = Path.Combine(inputFolder, "Source.cs"),
+                /// <summary>
+                /// <typeparamref name="T"/>
+                /// <paramref name="arg"/>
+                /// </summary>
+                /// <typeparam name="T"></typeparam>
+                /// <param name="arg"></param>
+                public void Bar<T>(T arg) { }
             }
-        };
+            """;
 
-        var commentModel = XmlComment.Parse(input, context);
-        Assert.True(commentModel.InheritDoc == null, nameof(commentModel.InheritDoc));
+        Assert.Equal(
+            """
+            <c>T</c>
+            <c>arg</c>
 
-        var summary = commentModel.Summary;
-        Assert.Equal("""
-
-            Class summary <xref href="System.AccessViolationException?text=Exception+type" data-throw-if-not-resolved="false"></xref>
-
-            """, summary, ignoreLineEndingDifferences: true);
-
-        var returns = commentModel.Returns;
-        Assert.Equal("Returns an <xref href=\"System.AccessViolationException?text=Exception\" data-throw-if-not-resolved=\"false\"></xref>.", returns);
-
-        var paramInput = commentModel.Parameters["input"];
-        Assert.Equal("This is an <xref href=\"System.AccessViolationException?text=Exception\" data-throw-if-not-resolved=\"false\"></xref>.", paramInput);
-
-        var remarks = commentModel.Remarks;
-        Assert.Equal("""
-
-            See <xref href="System.Int?text=Integer" data-throw-if-not-resolved="false"></xref>.
-
-            """, remarks, ignoreLineEndingDifferences: true);
+            """,
+            Parse(input, "Bar").Summary,
+            ignoreLineEndingDifferences: true);
     }
 
     [Fact]
     public void InheritDoc()
     {
-        const string input = """
+        var code =
+            """
+            /// <summary>Summary of IFoo</summary>
+            /// <remarks>Remarks of IFoo</remarks>
+            public interface IFoo
+            {
+                /// <summary>Summary of M</summary>
+                void M();
+            }
 
-            <member name="M:ClassLibrary1.MyClass.DoThing">
-                <inheritdoc />
-            </member>
+            /// <inheritdoc cref="IFoo" />
+            public class Foo : IFoo
+            {
+                public void M() {}
+
+                public override string ToString() => "";
+            }
             """;
-        var context = new XmlCommentParserContext
-        {
-            AddReferenceDelegate = null,
-        };
 
-        var commentModel = XmlComment.Parse(input, context);
-        Assert.True(commentModel.InheritDoc != null, nameof(commentModel.InheritDoc));
+        var compilation = CompilationHelper.CreateCompilationFromCSharpCode(code);
+        Assert.Empty(compilation.GetDeclarationDiagnostics());
+
+        var foo = compilation.GetSymbolsWithName("Foo").OfType<INamedTypeSymbol>().Single();
+        Assert.Equal("Summary of IFoo", XmlComment.Parse(foo, compilation).Summary);
+        Assert.Equal("Remarks of IFoo", XmlComment.Parse(foo, compilation).Remarks);
+        Assert.Equal("Summary of M", XmlComment.Parse(foo.GetMembers("M").Single(), compilation).Summary);
+
+        // Pending https://github.com/dotnet/roslyn/pull/66668
+        Assert.Null(XmlComment.Parse(foo.GetMembers("ToString").Single(), compilation).Summary);
     }
 
     [Fact]
-    public void InheritDocWithCref()
+    public void XamlCodeSource()
     {
-        const string input = """
-
-            <member name="M:ClassLibrary1.MyClass.DoThing">
-                <inheritdoc cref="M:ClassLibrary1.MyClass.DoThing"/>
-            </member>
-            """;
-        var context = new XmlCommentParserContext
-        {
-            AddReferenceDelegate = null,
-        };
-
-        var commentModel = XmlComment.Parse(input, context);
-        Assert.Equal("ClassLibrary1.MyClass.DoThing", commentModel.InheritDoc);
-    }
-
-    [Fact]
-    public void TestXmlCommentParserForXamlSource()
-    {
-        string inputFolder = Path.GetRandomFileName();
-        Directory.CreateDirectory(inputFolder);
-        var expectedExampleContent = """
-                            <Grid>
-                              <TextBlock Text="Hello World" />
-                            </Grid>
-            """;
-
-        File.WriteAllText(Path.Combine(inputFolder, "Example.xaml"), $@"
-<UserControl x:Class=""Examples""
-            xmlns=""http://schemas.microsoft.com/winfx/2006/xaml/presentation""
-            xmlns:x=""http://schemas.microsoft.com/winfx/2006/xaml""
-            xmlns:mc=""http://schemas.openxmlformats.org/markup-compatibility/2006""
-            xmlns:d=""http://schemas.microsoft.com/expression/blend/2008""
-            mc: Ignorable = ""d""
-            d:DesignHeight=""300"" d:DesignWidth=""300"" >
+        var example =
+            """
+            <UserControl
+                x:Class="Examples"
+                xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                mc: Ignorable = "d"
+                d:DesignHeight="300" d:DesignWidth="300" >
                 <UserControl.Resources>
 
                 <!-- <Example> -->
-{expectedExampleContent}
+                <Grid>
+                  <TextBlock Text="Hello World" />
+                </Grid>
                 <!-- </Example> -->
-");
-        string input = """
-
-            <member name='T:TestClass1.Partial1'>
-                <summary>
-                </summary>
-                <returns>Something</returns>
-
-                <example>
-                This is an example using source reference in a xaml file.
-                <code source='Example.xaml' region='Example'/>
-                </example>
-            </member>
+            </UserControl>
             """;
-        var context = new XmlCommentParserContext
-        {
-            AddReferenceDelegate = null,
-            Source = new SourceDetail
-            {
-                Path = Path.Combine(inputFolder, "Source.cs"),
-            }
-        };
 
-        var commentModel = XmlComment.Parse(input, context);
-        
-        // using xml to get rid of escaped tags
-        var example = commentModel.Examples.Single();
-        var doc = XDocument.Parse($"<root>{example}</root>");
-        var codeNode = doc.Descendants("code").Single();
-        var actual = NormalizeWhitespace(codeNode.Value);
-        var expected = NormalizeWhitespace(expectedExampleContent);
-        Assert.Equal(expected, actual, ignoreLineEndingDifferences: true);
+        var comment = Parse("/// <example><code source='Example.xaml' region='Example'/></example>", _ => example);
+
+        Assert.Equal(
+            """
+            <pre><code class="lang-xaml">&lt;Grid&gt;
+              &lt;TextBlock Text=&quot;Hello World&quot; /&gt;
+            &lt;/Grid&gt;
+            </code></pre>
+            """, comment.Examples.Single(), ignoreLineEndingDifferences: true);
     }
 
     [Fact]
-    public void ParseXmlCommentWithoutRootNode()
+    public void CSharpCodeSource()
     {
-        var input = @"<summary>A</summary>";
-        var commentModel = XmlComment.Parse(input, new XmlCommentParserContext());
-        Assert.Equal("A", commentModel.Summary);
-    }
+        var example = """
+            using System;
 
-    /// <summary>
-    /// Normalizes multiple whitespaces into 1 single whitespace to allow ignoring of insignificant whitespaces.
-    /// </summary>
-    private string NormalizeWhitespace(string s)
-    {
-        var regex = new Regex(@"(?<= ) +");
-        return regex.Replace(s, string.Empty);
+            namespace Example
+            {
+            #region Example
+                static class Program
+                {
+                    public int Main(string[] args)
+                    {
+                        Console.HelloWorld();
+                    }
+                }
+            #endregion
+            }
+            """;
+
+        var comment = Parse("/// <example><code source='Example.cs' region='Example'/></example>", _ => example);
+
+        Assert.Equal(
+            """
+            <pre><code class="lang-cs">static class Program
+            {
+                public int Main(string[] args)
+                {
+                    Console.HelloWorld();
+                }
+            }
+            </code></pre>
+            """, comment.Examples.Single(), ignoreLineEndingDifferences: true);
     }
 }

@@ -1,9 +1,13 @@
 // Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using Microsoft.DocAsCode.DataContracts.Common;
-
 namespace Microsoft.DocAsCode.Dotnet;
+
+internal class CRefTarget
+{
+    public string Id { get; set; }
+    public string CommentId { get; set; }
+}
 
 internal class XmlCommentParserContext
 {
@@ -11,7 +15,5 @@ internal class XmlCommentParserContext
 
     public Func<string, CRefTarget> ResolveCRef { get; set; }
 
-    public SourceDetail Source { get; set; }
-
-    public string CodeSourceBasePath { get; set; }
+    public Func<string, string> ResolveCode { get; set; }
 }
