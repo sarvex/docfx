@@ -42,9 +42,6 @@ internal class MetadataJsonItemConfig
     [JsonProperty("shouldSkipMarkup")]
     public bool? ShouldSkipMarkup { get; set; }
 
-    [JsonProperty("raw")]
-    public bool? Raw { get; set; }
-
     [JsonProperty("references")]
     public FileMapping References { get; set; }
 
