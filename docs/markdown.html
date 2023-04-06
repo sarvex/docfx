@@ -15,11 +15,19 @@
       <meta name="docfx:rel" content="../">
       <meta name="docfx:docurl" content="https://github.com/dotnet/docfx/blob/main/docs/docs/markdown.md/#L1">
 
+      <script>
+        MathJax = {
+          options: {
+            processHtmlClass: ['tex2jax_process', 'math']
+          }
+        };
+      </script>
+
       <script type="text/javascript" src="../styles/docfx.min.js"></script>
       <script type="text/javascript" src="../styles/main.js"></script>
   </head>
 
-  <body data-layout="" data-yaml-mime="">
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
     <header class="bg-body border-bottom">
       <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
         <div class="container-xxl flex-nowrap">
@@ -143,6 +151,23 @@ await Docset.Build(&quot;docfx.json&quot;, options);
 </code></pre>
 <p>This will be rendered as:</p>
 <p><img src="https://learn.microsoft.com/en-us/media/learn/not-found/learn-not-found-light-mode.png?branch=main" alt="alt-text"></p>
+<h2 id="math-expressions">Math Expressions</h2>
+<p>Docfx supports <a href="https://en.wikibooks.org/wiki/LaTeX/Mathematics">LaTeX formatted math expressions</a> within markdown using <a href="https://docs.mathjax.org/en/latest/#">MathJax</a>.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>Math expressions is only supported in the <code>modern</code> template.</p>
+</div>
+<p>To include a math expression inline with your text, delimit the expression with a dollar symbol $.</p>
+<pre><code class="lang-md">This sentence uses `$` delimiters to show math inline:  $\sqrt{3x-1}+(1+x)^2$
+</code></pre>
+<p>This sentence uses <code>$</code> delimiters to show math inline:  <span class="math">\(\sqrt{3x-1}+(1+x)^2\)</span></p>
+<p>To add a math expression as a block, start a new line and delimit the expression with two dollar symbols $$.</p>
+<pre><code class="lang-md">**The Cauchy-Schwarz Inequality**
+
+$$\left( \sum_{k=1}^n a_k b_k \right)^2 \leq \left( \sum_{k=1}^n a_k^2 \right) \left( \sum_{k=1}^n b_k^2 \right)$$
+</code></pre>
+<p><strong>The Cauchy-Schwarz Inequality</strong></p>
+<p><span class="math">\(\left( \sum_{k=1}^n a_k b_k \right)^2 \leq \left( \sum_{k=1}^n a_k^2 \right) \left( \sum_{k=1}^n b_k^2 \right)\)</span></p>
 <h2 id="include-markdown-files">Include Markdown Files</h2>
 <p>Where markdown files need to be repeated in multiple articles, you can use an include file. The includes feature replace the reference with the contents of the included file at build time.</p>
 <p>You can reuse a common text snippet within a sentence using inline include:</p>
