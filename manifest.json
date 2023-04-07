@@ -908,36 +908,6 @@
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "tutorial/universalreference/gen_doc_for_js.md",
-      "output": {
-        ".html": {
-          "relative_path": "tutorial/universalreference/gen_doc_for_js.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "tutorial/universalreference/gen_doc_for_ts.md",
-      "output": {
-        ".html": {
-          "relative_path": "tutorial/universalreference/gen_doc_for_ts.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "tutorial/universalreference/intro_multiple_langs_support.md",
-      "output": {
-        ".html": {
-          "relative_path": "tutorial/universalreference/intro_multiple_langs_support.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
       "source_relative_path": "tutorial/walkthrough/advanced_walkthrough.md",
       "output": {
         ".html": {
