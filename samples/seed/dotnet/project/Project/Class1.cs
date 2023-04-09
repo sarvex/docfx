@@ -98,4 +98,9 @@ public class Class1
     /// <c>@"\\?\"</c> `@"\\?\"`
     /// </remarks>
     public void Issue4392() { }
+
+    /// <summary>
+    /// <see cref="IConfiguration"/> related helper and extension routines.
+    /// </summary>
+    public void Issue1887() { }
 }
