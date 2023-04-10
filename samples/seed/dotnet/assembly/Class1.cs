@@ -12,3 +12,7 @@ public class Class1
     [EditorBrowsable(EditorBrowsableState.Never)]
     public void HiddenAPI() { }
 }
+
+public record struct Issue8623_RecordStruct(int X, int Y);
+
+public record class Issue8623_RecordClass(int X, int Y);
