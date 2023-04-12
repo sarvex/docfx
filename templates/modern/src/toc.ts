@@ -52,6 +52,7 @@ export async function renderToc(): Promise<TocNode[]> {
       node.href = url.href
       active = normalizeUrlPath(url) === normalizeUrlPath(window.location)
       if (active) {
+        node.expanded = true
         selectedNodes.push(node)
       }
     }
@@ -78,14 +79,15 @@ export async function renderToc(): Promise<TocNode[]> {
 
   function renderTocNodes(nodes: TocNode[]) {
     return html`<ul>${nodes.map(node => {
+      const active = activeNodes.includes(node)
       const { href, name, items, expanded } = node
       const isLeaf = !items || items.length <= 0
 
       const dom = href
-        ? html`<a class='${classMap({ 'nav-link': !activeNodes.includes(node) })}' href=${href}>${breakWordLit(name)}</a>`
+        ? html`<a class='${classMap({ 'nav-link': !active })}' href=${href}>${breakWordLit(name)}</a>`
         : (isLeaf
           ? html`<span class='text-body-tertiary name-only'>${breakWordLit(name)}</a>`
-          : html`<a class='${classMap({ 'nav-link': !activeNodes.includes(node) })}' href='#' @click=${toggleExpand}>${breakWordLit(name)}</a>`)
+          : html`<a class='${classMap({ 'nav-link': !active })}' href='#' @click=${toggleExpand}>${breakWordLit(name)}</a>`)
 
       return html`
         <li class=${classMap({ expanded })}>

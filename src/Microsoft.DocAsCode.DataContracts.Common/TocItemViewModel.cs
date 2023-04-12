@@ -26,6 +26,10 @@ public class TocItemViewModel
     [JsonProperty(Constants.PropertyName.DisplayName)]
     public string DisplayName { get; set; }
 
+    [YamlMember(Alias = Constants.PropertyName.Expanded)]
+    [JsonProperty(Constants.PropertyName.Expanded)]
+    public bool Expanded { get; set; }
+
     [ExtensibleMember(Constants.ExtensionMemberPrefix.Name)]
     [JsonIgnore]
     public SortedList<string, string> NameInDevLangs { get; } = new SortedList<string, string>();

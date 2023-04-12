@@ -221,7 +221,15 @@ internal class ExtractMetadataWorker : IDisposable
             Metadata = new() { ["memberLayout"] = _config.MemberLayout },
             Items = model.TocYamlViewModel.ToTocViewModel(),
         };
-        string tocFilePath = Path.Combine(_config.OutputFolder, tocFileName);
+
+        // Expand first level TOC nodes if we can fit the expanded items in one screen with approx. 32 items.
+        if (tocViewModel.Items.Sum(n => n.Items?.Count ?? 0 + 1) <= 32)
+        {
+            foreach (var item in tocViewModel.Items)
+                item.Expanded = true;
+        }
+
+        var tocFilePath = Path.Combine(_config.OutputFolder, tocFileName);
 
         YamlUtility.Serialize(tocFilePath, tocViewModel, YamlMime.TableOfContent);
         outputFileNames.Add(tocFilePath, 1);

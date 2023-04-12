@@ -34,6 +34,7 @@ public static class Constants
 
         public const string Name = "name";
         public const string DisplayName = "displayName";
+        public const string Expanded = "expanded";
         public const string NameWithType = "nameWithType";
         public const string FullName = "fullName";
         public const string Content = "content";
