@@ -264,7 +264,7 @@ public IEnumerable&lt;FileModel&gt; Prebuild(ImmutableList&lt;FileModel&gt; mode
 <li>Build our project.</li>
 <li>Copy the output dll files to:
 <ul>
-<li><p>Global: a folder you create, named <code>Plugins</code> under the folder where DocFX.exe resides.</p>
+<li><p>Global: a folder you create, named <code>Plugins</code> under the folder where the Docfx executable resides.</p>
 </li>
 <li><p>Non-global: a folder you create with the name <code>Plugins</code> under a template folder. Then run <code>DocFX build</code> command with parameter <code>-t {template}</code>.</p>
 <p><em>Hint</em>: DocFX can merge templates so create a template that only contains the <code>Plugins</code> folder, then run the command <code>DocFX build</code> with parameter <code>-t {templateForRender},{templateForPlugins}</code>.</p>

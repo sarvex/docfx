@@ -2,9 +2,9 @@
 <html>
   <head>
     <meta charset="utf-8">
-      <title>docfx.exe User Manual | docfx </title>
+      <title>docfx.json reference | docfx </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="title" content="docfx.exe User Manual | docfx ">
+      <meta name="title" content="docfx.json reference | docfx ">
       
       <link rel="icon" href="../favicon.ico">
       <link rel="stylesheet" href="../styles/docfx.min.css">
@@ -13,7 +13,7 @@
       <meta name="docfx:tocrel" content="../docs/toc.html">
       
       <meta name="docfx:rel" content="../">
-      <meta name="docfx:docurl" content="https://github.com/dotnet/docfx/blob/main/docs/tutorial/docfx.exe_user_manual.md/#L1">
+      <meta name="docfx:docurl" content="https://github.com/dotnet/docfx/blob/main/docs/reference/docfx-json-reference.md/#L1">
 
       <script>
         MathJax = {
@@ -72,144 +72,14 @@
           <nav id="breadcrumb"></nav>
         </div>
 
-        <article data-uid="user_manual">
-<h1 id="doc-as-code-docfxexe-user-manual">Doc-as-code: <code>docfx.exe</code> User Manual</h1>
+        <article data-uid="docfx_json_refence">
+<h1 id="docfxjson-configuration-reference"><code>docfx.json</code> Configuration Reference</h1>
 
-<h2 id="0-introduction">0. Introduction</h2>
-<p><code>docfx.exe</code> is used to generate documentation for programs. It has the ability to:</p>
-<ol>
-<li>Extract language metadata for programing languages as defined in <a href="../spec/metadata_format_spec.html">Metadata Format Specification</a>. Currently <code>C#</code>, <code>VB</code> and <code>F#</code> are supported. The language metadata will be saved with <code>YAML</code> format as described in <a href="http://yaml.org/">YAML 1.2</a>.</li>
-<li>Look for available conceptual files as provided and link it with existing programs with syntax described in <a href="../spec/metadata_format_spec.html">Section 3. Work with Metadata in Markdown</a>. Supported conceptual files are <em>plain text</em> files, <em>html</em> files, and <em>markdown</em> files.</li>
-<li>Generate documentation to
-a. Visualize language metadata, with extra <strong>content</strong> provided by linked conceptual files using syntax described in <a href="../spec/metadata_format_spec.html">Section 3. Work with Metadata in Markdown</a>.
-b. Organize and render available conceptual files. It can be easily cross-referenced with language metadata pages. We support <strong>Docfx Flavored Markdown(DFM)</strong> for writing conceptual files. <strong>DFM</strong> supports all <em>Github Flavored Markdown(GFM)</em> syntax with 2 exceptions when resolving <a href="../spec/docfx_flavored_markdown.html#differences-introduced-by-dfm-syntax">list</a>. It also adds several new features including <em>file inclusion</em>, <em>cross reference</em>, and <em>yaml header</em>. For detailed description about DFM, please refer to <a href="../spec/docfx_flavored_markdown.html">DFM</a>.</li>
-</ol>
-<p>Currently generating documentations to a <em>client only</em> <strong>website</strong> is supported. The generated <strong>website</strong> can be easily published to whatever platform such as <em>Github Pages</em> and <em>Azure Website</em> with no extra effort.</p>
-<p>Generating offline documentation such as <strong>PDF</strong> is also supported now.</p>
-<h2 id="1-syntax">1. Syntax</h2>
-<pre><code>docfx &lt;command&gt; [&lt;args&gt;]
-</code></pre>
-<h2 id="2-commands">2. Commands</h2>
-<h3 id="20-init-command-docfx-init">2.0 Init command <code>docfx init</code></h3>
-<p><code>docfx init</code> helps generate an <code>docfx.json</code> file.</p>
-<h3 id="21-help-command-docfx-help">2.1 Help command <code>docfx help</code></h3>
-<p><code>docfx help -a</code> list available subcommands.</p>
-<p><code>docfx help &lt;command&gt;</code> to read about a specific subcommand</p>
-<h3 id="22-extract-language-metadata-command-docfx-metadata">2.2 Extract language metadata command <code>docfx metadata</code></h3>
-<p><strong>Syntax</strong></p>
-<pre><code>docfx metadata [&lt;projects&gt;] [--property &lt;n1&gt;=&lt;v1&gt;;&lt;n2&gt;=&lt;v2&gt;]
-</code></pre>
-<p><strong>Layout</strong></p>
-<pre><code>|-- &lt;metadata folder&gt;
-      |-- api
-      |     |-- &lt;namespace&gt;.yml
-      |     |-- &lt;class&gt;.yml
-      |-- toc.yml
-      |-- index.yml
-</code></pre>
-<h4 id="221-optional-projects-argument">2.2.1 Optional <code>&lt;projects&gt;</code> argument</h4>
-<p><code>&lt;projects&gt;</code> specifies the projects to have metadata extracted. There are several approaches to extract language metadata.</p>
-<ol>
-<li><p>From a supported file or file list
-Supported file extensions include <code>.csproj</code>, <code>.vbproj</code>, <code>.sln</code>, <code>project.json</code>, <code>dll</code> assembly file, <code>.cs</code> source file and <code>.vb</code> source file.</p>
-<p>Multiple files are separated by whitespace, e.g. <code>docfx metadata Class1.cs a.csproj</code></p>
-<div class="NOTE">
-<h5>Note</h5>
-<p>Glob pattern is <strong>NOT</strong> supported in command line options.</p>
-</div>
-</li>
-<li><p>From <em>docfx.json</em> file, as described in <strong>Section3</strong>.</p>
-</li>
-<li><p>If the argument is not specified, <code>docfx.exe</code> will try reading <code>docfx.json</code> under current directory.</p>
-</li>
-</ol>
-<p>The default output folder is <code>_site/</code> folder if it is not specified in <code>docfx.json</code> under current directory.</p>
-<h4 id="222-command-option---shouldskipmarkup">2.2.2 Command option <code>--shouldSkipMarkup</code></h4>
-<p>If adding option <code>--shouldSkipMarkup</code> in metadata command, it means that DocFX would not render triple-slash-comments in source code as markdown.</p>
-<p>e.g. <code>docfx metadata --shouldSkipMarkup</code></p>
-<h4 id="223-command-option---property-n1v1n2v2">2.2.3 Command option <code>--property &lt;n1&gt;=&lt;v1&gt;;&lt;n2&gt;=&lt;v2&gt;</code></h4>
-<p>An optional set of MSBuild properties used when interpreting project files. These are the same properties that are passed to msbuild via the /property:<n1>=<v1>;<n2>=<v2> command line argument.
-For example: <code>docfx metadata --property TargetFramework=net46</code> generates metadata files with .NET framework 4.6. This command can be used when the project supports multiple <code>TargetFrameworks</code>.</v2></n2></v1></n1></p>
-<h3 id="23-generate-documentation-command-docfx-build">2.3 Generate documentation command <code>docfx build</code></h3>
-<p><strong>Syntax</strong></p>
-<pre><code>docfx build [-o:&lt;output_path&gt;] [-t:&lt;template folder&gt;]
-</code></pre>
-<p><code>docfx build</code> generates documentation for current folder.</p>
-<p>If <code>toc.yml</code> or <code>toc.md</code> is found in current folder, it will be rendered as the top level TABLE-OF-CONTENT. As in website, it will be rendered as the top navigation bar. Path in <code>toc.yml</code> or <code>toc.md</code> are relative to the TOC file.</p>
-<div class="NOTE">
-<h5>Note</h5>
-<p>Please note that <code>homepage</code> is not supported in <code>toc.md</code>.
-And if <code>href</code> is referencing to a <strong>folder</strong>, it must end with <code>/</code>.</p>
-</div>
-<p><strong>toc.yml syntax</strong>
-<code>toc.yml</code> is an array of items. Each item can have following properties:</p>
-<table>
-<thead>
-<tr>
-<th>Property</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>name</td>
-<td><strong>Required</strong>. The title of the navigation page.</td>
-</tr>
-<tr>
-<td>href</td>
-<td><strong>Required</strong>. Can be a folder or a file <em>UNDER</em> current folder. A folder must end with <code>/</code>. In case of a folder, TOC.md inside the folder will be rendered as second level TABLE-OF-CONTENT. As in website, it will be rendered as a sidebar.</td>
-</tr>
-<tr>
-<td>homepage</td>
-<td>The default content shown when no article is selected.</td>
-</tr>
-</tbody>
-</table>
-<p><strong>TOC.yml Sample</strong></p>
-<pre><code class="lang-yaml">- name: Home
-  href: articles/Home.md
-- name: Roslyn Wiki
-  href: roslyn_wiki/
-- name: Roslyn API
-  href: api_roslyn/
-  homepage: homepages/roslyn_language_features.md
-</code></pre>
-<p><strong>TOC.md Sample</strong></p>
-<pre><code class="lang-markdown">## [Home](articles/Home.md)
-## [Roslyn Wiki](roslyn_wiki/)
-## [Roslyn API](api_roslyn/)
-</code></pre>
-<h4 id="231-optional-output_path-argument">2.3.1 Optional <code>&lt;output_path&gt;</code> argument</h4>
-<p>The default output folder is <code>_site/</code> folder</p>
-<h4 id="232-optional-template-folder-argument">2.3.2 Optional <code>&lt;template folder&gt;</code> argument</h4>
-<p>If specified, use the template from template folder</p>
-<p><strong>Template Folder Structure</strong></p>
-<pre><code>|-- &lt;template folder&gt;
-      |-- index.html
-      |-- styles
-      |     |-- docascode.css
-      |     |-- docascode.js
-      |-- template
-      |     |-- toc.html
-      |     |-- navbar.html
-      |     |-- yamlContent.html
-      |-- favicon.ico
-      |-- logo.ico
-</code></pre>
-<h3 id="24-generate-pdf-documentation-command-docfx-pdf">2.4 Generate PDF documentation command <code>docfx pdf</code></h3>
-<p><strong>Syntax</strong></p>
-<pre><code>docfx pdf [&lt;config_file_path&gt;] [-o:&lt;output_path&gt;]
-</code></pre>
-<p><code>docfx pdf</code> generates PDF for the files defined in config file, if config file is not specified, <code>docfx</code> tries to find and use <code>docfx.json</code> file under current folder.</p>
-<div class="NOTE">
-<h5>Note</h5>
-<p>Prerequisite: We leverage <a href="https://wkhtmltopdf.org/">wkhtmltopdf</a> to generate PDF. <a href="https://wkhtmltopdf.org/downloads.html">Download wkhtmltopdf</a> and save the executable folder path to <strong>%PATH%</strong>. Or just install wkhtmltopdf using chocolatey: <code>choco install wkhtmltopdf</code></p>
-</div>
-<p>Current design is that each TOC file generates a corresponding PDF file. Walk through <a href="walkthrough/walkthrough_generate_pdf.html">Walkthrough: Generate PDF Files</a> to get start.</p>
-<p>If <code>cover.md</code> is found in a folder, it will be rendered as the cover page.</p>
-<h2 id="3-docfxjson-format">3. <code>docfx.json</code> Format</h2>
+<h2 id="introduction">Introduction</h2>
+<p><code>docfx.json</code> is the main configuration file for Docfx.  The following is a description of the format of that file.</p>
+<h2 id="1-docfxjson-format">1. <code>docfx.json</code> Format</h2>
 <p>Top level <code>docfx.json</code> structure is key-value pair. <code>key</code> is the name of the subcommand, current supported subcommands are <code>metadata</code> and <code>build</code>.</p>
-<h3 id="31-properties-for-metadata">3.1 Properties for <code>metadata</code></h3>
+<h3 id="11-properties-for-metadata">1.1 Properties for <code>metadata</code></h3>
 <p><code>Metadata</code> section defines an array of source projects and their output folder. Each item has <code>src</code> and <code>dest</code> property. <code>src</code> defines the source projects to have metadata generated, which is in <code>File Mapping Format</code>. Detailed syntax is described in <strong>4. Supported <code>name-files</code> File Mapping Format</strong> below. <code>dest</code> defines the output folder of the generated metadata files.</p>
 <table>
 <thead>
@@ -233,7 +103,7 @@ And if <code>href</code> is referencing to a <strong>folder</strong>, it must en
 </tr>
 <tr>
 <td>filter</td>
-<td>Defines the filter configuration file, please go to <a href="howto_filter_out_unwanted_apis_attributes.html">How to filter out unwanted apis attributes</a> for more details.</td>
+<td>Defines the filter configuration file, please go to <a href="../tutorial/howto_filter_out_unwanted_apis_attributes.html">How to filter out unwanted apis attributes</a> for more details.</td>
 </tr>
 <tr>
 <td>properties</td>
@@ -277,7 +147,7 @@ And if <code>href</code> is referencing to a <strong>folder</strong>, it must en
 <h5>Note</h5>
 <p>Make sure to specify <code>&quot;TargetFramework&quot;: &lt;one of the frameworks&gt;</code> in your docfx.json when the project is targeting for multiple platforms.</p>
 </div>
-<h3 id="32-properties-for-build">3.2 Properties for <code>build</code></h3>
+<h3 id="12-properties-for-build">1.2 Properties for <code>build</code></h3>
 <table>
 <thead>
 <tr>
@@ -360,7 +230,7 @@ And if <code>href</code> is referencing to a <strong>folder</strong>, it must en
 </tr>
 <tr>
 <td>sitemap</td>
-<td>In format <a href="#325-sitemapoptions">SitemapOptions</a> Specifies the options for the sitemap.xml file.</td>
+<td>In format <a href="#125-sitemapoptions">SitemapOptions</a> Specifies the options for the sitemap.xml file.</td>
 </tr>
 <tr>
 <td>disableGitFeatures</td>
@@ -368,7 +238,7 @@ And if <code>href</code> is referencing to a <strong>folder</strong>, it must en
 </tr>
 </tbody>
 </table>
-<h4 id="321-templates-and-themes">3.2.1 <code>Template</code>s and <code>Theme</code>s</h4>
+<h4 id="121-templates-and-themes">1.2.1 <code>Template</code>s and <code>Theme</code>s</h4>
 <p><em>Template</em>s are used to transform <em>YAML</em> files generated by <code>docfx</code> to human-readable <em>page</em>s. A <em>page</em> can be a markdown file, a html file or even a plain text file. Each <em>YAML</em> file will be transformed to ONE <em>page</em> and be exported to the output folder preserving its relative path to <code>src</code>. For example, if <em>page</em>s are in <em>HTML</em> format, a static website will be generated in the output folder.</p>
 <p><em>Theme</em> is to provide general styles for all the generated <em>page</em>s. Files inside a <em>theme</em> will be generally <strong>COPIED</strong> to the output folder. A typical usage is, after <em>YAML</em> files are transformed to <em>HTML</em> pages, well-designed <em>CSS</em> style files in a <em>Theme</em> can then overwrite the default styles defined in <em>template</em>, e.g. <em>main.css</em>.</p>
 <p>There are two ways to use custom templates and themes.</p>
@@ -407,7 +277,7 @@ And if <code>href</code> is referencing to a <strong>folder</strong>, it must en
 Please avoid using these as template folder name.</p>
 </div>
 <p>To custom theme, one way is to specify theme name with <code>--theme</code> command option, multiple themes must be separated by <code>,</code> with no spaces. The other way is to set key-value mapping in <code>docfx.json</code> as similar to defining template. Also, both <code>.zip</code> file and folder are supported.</p>
-<p>Please refer to <a href="howto_create_custom_template.html">How to Create Custom Templates</a> to create custom templates.</p>
+<p>Please refer to <a href="../tutorial/howto_create_custom_template.html">How to Create Custom Templates</a> to create custom templates.</p>
 <p><strong>Sample</strong></p>
 <pre><code class="lang-json">{
   &quot;build&quot;: {
@@ -445,7 +315,7 @@ Please avoid using these as template folder name.</p>
   }
 }
 </code></pre>
-<h4 id="322-reserved-metadata">3.2.2 Reserved Metadata</h4>
+<h4 id="122-reserved-metadata">1.2.2 Reserved Metadata</h4>
 <p>After passing values through global metadata or file metadata, DocFX can use these metadata in templates to control the output html.
 Reserved metadatas:</p>
 <table>
@@ -529,7 +399,7 @@ Reserved metadatas:</p>
 </tr>
 </tbody>
 </table>
-<h4 id="323-separated-metadata-files-for-global-metadata-and-file-metadata">3.2.3 Separated metadata files for global metadata and file metadata</h4>
+<h4 id="123-separated-metadata-files-for-global-metadata-and-file-metadata">1.2.3 Separated metadata files for global metadata and file metadata</h4>
 <p>There're three ways to set metadata for a file in DocFX:</p>
 <ol>
 <li>using global metadata, it will set metadata for every file.</li>
@@ -604,7 +474,7 @@ Reserved metadatas:</p>
 </li>
 </ul>
 <p>Given multiple metadata files, the behavior would be <strong>undetermined</strong>, if same key is set in these files.</p>
-<h4 id="325-sitemapoptions">3.2.5 SitemapOptions</h4>
+<h4 id="125-sitemapoptions">1.2.5 SitemapOptions</h4>
 <p>The SitemapOptions is to configure the values for generating <a href="https://www.sitemaps.org/protocol.html">sitemap.xml</a> file.</p>
 <table>
 <thead>
@@ -638,7 +508,7 @@ Reserved metadatas:</p>
 <tr>
 <td><code>fileOptions</code></td>
 <td>SitemapOptions</td>
-<td>Optional. This property can be used when some specific files have different sitemap settings. It is a set of key-value pairs, where key is the <a href="#43-glob-pattern"><em>glob</em> pattern</a> for input files, and value is the sitemap options. Order matters and the latter matching option overwrites the former ones.</td>
+<td>Optional. This property can be used when some specific files have different sitemap settings. It is a set of key-value pairs, where key is the <a href="#23-glob-pattern"><em>glob</em> pattern</a> for input files, and value is the sitemap options. Order matters and the latter matching option overwrites the former ones.</td>
 </tr>
 </tbody>
 </table>
@@ -686,8 +556,8 @@ Reserved metadatas:</p>
   &lt;/url&gt;
 &lt;/urlset&gt;
 </code></pre>
-<h3 id="33-properties-for-pdf">3.3 Properties for <code>pdf</code></h3>
-<p><code>pdf</code> supports <strong>ALL</strong> the <a href="#32-properties-for-build">properties for <code>build</code></a>, besides that, the following table lists additional properties specified for <code>pdf</code> only.</p>
+<h3 id="13-properties-for-pdf">1.3 Properties for <code>pdf</code></h3>
+<p><code>pdf</code> supports <strong>ALL</strong> the <a href="#12-properties-for-build">properties for <code>build</code></a>, besides that, the following table lists additional properties specified for <code>pdf</code> only.</p>
 <table>
 <thead>
 <tr>
@@ -734,7 +604,7 @@ Reserved metadatas:</p>
 </tr>
 </tbody>
 </table>
-<h4 id="331-properties-for-the-wkhtmltopdf-key">3.3.1 Properties for the <code>wkhtmltopdf</code> Key</h4>
+<h4 id="131-properties-for-the-wkhtmltopdf-key">1.3.1 Properties for the <code>wkhtmltopdf</code> Key</h4>
 <table>
 <thead>
 <tr>
@@ -753,9 +623,9 @@ Reserved metadatas:</p>
 </tr>
 </tbody>
 </table>
-<h2 id="4-supported-file-mapping-format">4. Supported File Mapping Format</h2>
+<h2 id="2-supported-file-mapping-format">2. Supported File Mapping Format</h2>
 <p>There are several ways to define file mapping.</p>
-<h3 id="41-array-format">4.1 Array Format</h3>
+<h3 id="21-array-format">2.1 Array Format</h3>
 <p>This form supports multiple file mappings, and also allows additional properties per mapping.
 Supported properties:</p>
 <table>
@@ -816,10 +686,10 @@ Supported properties:</p>
   {&quot;files&quot;: &quot;Example.yml&quot;, &quot;src&quot;: &quot;v2.0&quot;, &quot;dest&quot;:&quot;v2.0/api&quot;, &quot;version&quot;: &quot;v2.0&quot;}
 ]
 </code></pre>
-<h3 id="42-compact-format">4.2 Compact Format</h3>
+<h3 id="22-compact-format">2.2 Compact Format</h3>
 <pre><code class="lang-json">&quot;key&quot;: [&quot;file1&quot;, &quot;file2&quot;]
 </code></pre>
-<h3 id="43-glob-pattern">4.3 Glob Pattern</h3>
+<h3 id="23-glob-pattern">2.3 Glob Pattern</h3>
 <p><code>DocFX</code> uses <a href="https://github.com/vicancy/Glob">Glob</a> to support <em>glob</em> pattern in file path.
 It offers several options to determine how to parse the Glob pattern:</p>
 <ul>
@@ -835,7 +705,7 @@ It offers several options to determine how to parse the Glob pattern:</p>
 <li><code>{}</code> allows for a comma-separated list of <strong>OR</strong> expressions</li>
 </ol>
 <p><strong>SAMPLES</strong></p>
-<h2 id="5-q--a">5. Q &amp; A</h2>
+<h2 id="3-q--a">3. Q &amp; A</h2>
 <ol>
 <li>Do we support files outside current project folder (the folder where <code>docfx.json</code> exists)?<br>
 A: YES. DO specify <code>src</code> and files outside of current folder will be copied to output folder keeping the same relative path to <code>src</code>.</li>
@@ -847,7 +717,7 @@ A: NO.</li>
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/dotnet/docfx/blob/main/docs/tutorial/docfx.exe_user_manual.md/#L1" class="edit-link">Edit this page</a>
+          <a href="https://github.com/dotnet/docfx/blob/main/docs/reference/docfx-json-reference.md/#L1" class="edit-link">Edit this page</a>
         </div>
 
         <div class="next-article d-print-none border-top" id="nextArticle"></div>

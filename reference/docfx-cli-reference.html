@@ -1,0 +1,251 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>docfx CLI reference | docfx </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="docfx CLI reference | docfx ">
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.min.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="../docs/toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      <meta name="docfx:docurl" content="https://github.com/dotnet/docfx/blob/main/docs/reference/docfx-cli-reference.md/#L1">
+
+      <script>
+        MathJax = {
+          options: {
+            processHtmlClass: ['tex2jax_process', 'math']
+          }
+        };
+      </script>
+
+      <script type="text/javascript" src="../styles/docfx.min.js"></script>
+      <script type="text/javascript" src="../styles/main.js"></script>
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.svg" alt="docfx">
+            docfx
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="docfx_cli_reference">
+<h1 id="docfx-cli-reference"><code>docfx</code> CLI Reference</h1>
+
+<h2 id="introduction">Introduction</h2>
+<p><code>docfx</code> is used to generate documentation for programs. It has the ability to:</p>
+<ol>
+<li>Extract language metadata for programing languages as defined in <a href="../spec/metadata_format_spec.html">Metadata Format Specification</a>. Currently <code>C#</code> and <code>VB</code> are supported (although see note below regarding <code>VB</code> support). The language metadata is saved in <code>YAML</code> format as described in [YAML 1.2][1].</li>
+<li>Look for available conceptual files as provided and link them with existing programs using the syntax described in <a href="../spec/metadata_format_spec.html">Metadata Yaml Format</a>. Supported conceptual files are <em>plain text</em> files, <em>html</em> files, and <em>markdown</em> files.</li>
+<li>Generate documentation to
+a. Visualize language metadata, with extra <strong>content</strong> provided by linked conceptual files using the syntax described in <a href="../spec/metadata_format_spec.html">Metadata Yaml Format</a>.
+b. Organize and render available conceptual files which can be easily cross-referenced with language metadata pages. Docfx supports <strong>Docfx Flavored Markdown(DFM)</strong> for writing conceptual files. <strong>DFM</strong> supports all <em>Github Flavored Markdown(GFM)</em> syntax with 2 exceptions when resolving <a href="../docs/markdown.html#differences-introduced-by-dfm-syntax">list</a>. It also adds several new features including <em>file inclusion</em>, <em>cross reference</em>, and <em>yaml header</em>. For detailed description about DFM, please refer to <a href="../spec/docfx_flavored_markdown.html">DFM</a>.</li>
+</ol>
+<div class="NOTE">
+<h5>Note</h5>
+<p>Although Docfx is able to process <code>VB</code> projects and individual <code>VB</code> source code files and extract metadata from them, the documentation output from Docfx is always in <code>C#</code> format, i.e. types and member signatures, etc., are shown in <code>C#</code> format and not <code>VB</code> format.</p>
+</div>
+<p>Currently generating documentation to a <em>client only</em> <strong>website</strong> is supported. The generated <strong>website</strong> can be easily published to whatever platform such as <em>Github Pages</em> and <em>Azure Website</em> with little extra effort.</p>
+<p>Generating offline documentation such as <strong>PDF</strong> is also supported.</p>
+<h2 id="syntax">Syntax</h2>
+<pre><code>docfx &lt;command&gt; [&lt;args&gt;]
+</code></pre>
+<h2 id="commands">Commands</h2>
+<h3 id="1-init-command-docfx-init">1. Init command <code>docfx init</code></h3>
+<p><code>docfx init</code> helps generate an <code>docfx.json</code> file.</p>
+<h3 id="2-help-command-docfx-help">2. Help command <code>docfx help</code></h3>
+<p><code>docfx help -a</code> list available subcommands.</p>
+<p><code>docfx help &lt;command&gt;</code> to read about a specific subcommand</p>
+<h3 id="3-extract-language-metadata-command-docfx-metadata">3. Extract language metadata command <code>docfx metadata</code></h3>
+<p><strong>Syntax</strong></p>
+<pre><code>docfx metadata [&lt;projects&gt;] [--property &lt;n1&gt;=&lt;v1&gt;;&lt;n2&gt;=&lt;v2&gt;]
+</code></pre>
+<p><strong>Layout</strong></p>
+<pre><code>|-- &lt;metadata folder&gt;
+      |-- api
+      |     |-- &lt;namespace&gt;.yml
+      |     |-- &lt;class&gt;.yml
+      |-- toc.yml
+      |-- index.yml
+</code></pre>
+<h4 id="optional-arguments-for-the-docfx-metadata-command">Optional arguments for the <code>docfx metadata</code> command</h4>
+<ul>
+<li><p><strong><code>&lt;projects&gt;</code> argument (optional)</strong></p>
+<p><code>&lt;projects&gt;</code> specifies the projects to have metadata extracted. There are several approaches to extract language metadata.</p>
+<ol>
+<li>From a supported file or file list
+Supported file extensions include <code>.csproj</code>, <code>.vbproj</code>, <code>.sln</code>, <code>project.json</code>, <code>dll</code> assembly file, <code>.cs</code> source file and <code>.vb</code> source file.</li>
+</ol>
+<pre><code>Multiple files are separated by whitespace, e.g. `docfx metadata Class1.cs a.csproj`
+
+&gt; [!Note]
+&gt; Glob pattern is **NOT** supported in command line options.
+</code></pre>
+<ol start="2">
+<li><p>From <em>docfx.json</em> file, as described in <strong>Section3</strong>.</p>
+</li>
+<li><p>If the argument is not specified, <code>docfx</code> will try reading <code>docfx.json</code> under current directory.</p>
+</li>
+</ol>
+<p>The default output folder is <code>_site/</code> folder if it is not specified in <code>docfx.json</code> under current directory.</p>
+</li>
+<li><p><strong><code>--shouldSkipMarkup</code> command option</strong></p>
+<p>If adding option <code>--shouldSkipMarkup</code> in metadata command, it means that DocFX would not render triple-slash-comments in source code as markdown.</p>
+<p>e.g. <code>docfx metadata --shouldSkipMarkup</code></p>
+</li>
+<li><p><strong><code>--property &lt;n1&gt;=&lt;v1&gt;;&lt;n2&gt;=&lt;v2&gt;</code> command option</strong></p>
+</li>
+</ul>
+<p>An optional set of MSBuild properties used when interpreting project files. These are the same properties that are passed to msbuild via the /property:<n1>=<v1>;<n2>=<v2> command line argument.
+For example: <code>docfx metadata --property TargetFramework=net48</code> generates metadata files with .NET framework 4.8. This command can be used when the project supports multiple <code>TargetFrameworks</code>.</v2></n2></v1></n1></p>
+<h3 id="4-generate-documentation-command-docfx-build">4. Generate documentation command <code>docfx build</code></h3>
+<p><strong>Syntax</strong></p>
+<pre><code>docfx build [-o:&lt;output_path&gt;] [-t:&lt;template folder&gt;]
+</code></pre>
+<p><code>docfx build</code> generates documentation for current folder.</p>
+<p>If <code>toc.yml</code> or <code>toc.md</code> is found in current folder, it will be rendered as the top level TABLE-OF-CONTENT. As in website, it will be rendered as the top navigation bar. Path in <code>toc.yml</code> or <code>toc.md</code> are relative to the TOC file.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>Please note that <code>homepage</code> is not supported in <code>toc.md</code>.
+And if <code>href</code> is referencing to a <strong>folder</strong>, it must end with <code>/</code>.</p>
+</div>
+<p><strong>toc.yml syntax</strong>
+<code>toc.yml</code> is an array of items. Each item can have following properties:</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td><strong>Required</strong>. The title of the navigation page.</td>
+</tr>
+<tr>
+<td>href</td>
+<td><strong>Required</strong>. Can be a folder or a file <em>UNDER</em> current folder. A folder must end with <code>/</code>. In case of a folder, TOC.md inside the folder will be rendered as second level TABLE-OF-CONTENT. As in website, it will be rendered as a sidebar.</td>
+</tr>
+<tr>
+<td>homepage</td>
+<td>The default content shown when no article is selected.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>TOC.yml Sample</strong></p>
+<pre><code class="lang-yaml">- name: Home
+  href: articles/Home.md
+- name: Roslyn Wiki
+  href: roslyn_wiki/
+- name: Roslyn API
+  href: api_roslyn/
+  homepage: homepages/roslyn_language_features.md
+</code></pre>
+<p><strong>TOC.md Sample</strong></p>
+<pre><code class="lang-markdown">## [Home](articles/Home.md)
+## [Roslyn Wiki](roslyn_wiki/)
+## [Roslyn API](api_roslyn/)
+</code></pre>
+<h4 id="optional-arguments-for-the-docfx-build-command">Optional arguments for the <code>docfx build</code> command</h4>
+<ul>
+<li><p><strong><code>&lt;output_path&gt;</code> argument (optional)</strong></p>
+<p>The default output folder is <code>_site/</code> folder</p>
+</li>
+<li><p><strong><code>&lt;template folder&gt;</code> argument (optional)</strong></p>
+<p>If specified, use the template from template folder</p>
+</li>
+</ul>
+<p><strong>Template Folder Structure</strong></p>
+<pre><code>|-- &lt;template folder&gt;
+      |-- index.html
+      |-- styles
+      |     |-- docascode.css
+      |     |-- docascode.js
+      |-- template
+      |     |-- toc.html
+      |     |-- navbar.html
+      |     |-- yamlContent.html
+      |-- favicon.ico
+      |-- logo.ico
+</code></pre>
+<h3 id="5-generate-pdf-documentation-command-docfx-pdf">5. Generate PDF documentation command <code>docfx pdf</code></h3>
+<p><strong>Syntax</strong></p>
+<pre><code>docfx pdf [&lt;config_file_path&gt;] [-o:&lt;output_path&gt;]
+</code></pre>
+<p><code>docfx pdf</code> generates PDF for the files defined in config file, if config file is not specified, <code>docfx</code> tries to find and use <code>docfx.json</code> file under current folder.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>Prerequisite: We leverage <a href="https://wkhtmltopdf.org/">wkhtmltopdf</a> to generate PDF. <a href="https://wkhtmltopdf.org/downloads.html">Download wkhtmltopdf</a> and save the executable folder path to <strong>%PATH%</strong>. Or just install wkhtmltopdf using chocolatey: <code>choco install wkhtmltopdf</code></p>
+</div>
+<p>Current design is that each TOC file generates a corresponding PDF file. Walk through <a href="../tutorial/walkthrough/walkthrough_generate_pdf.html">Walkthrough: Generate PDF Files</a> to get start.</p>
+<p>If <code>cover.md</code> is found in a folder, it will be rendered as the cover page.</p>
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/dotnet/docfx/blob/main/docs/reference/docfx-cli-reference.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+        
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

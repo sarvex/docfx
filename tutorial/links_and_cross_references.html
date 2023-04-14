@@ -108,7 +108,7 @@ This is especially common in API reference docs, for example, you may want to us
 <h5>Note</h5>
 <p>DocFX does not simply replace the file extension here (<code>.md</code> to <code>.html</code>), it also tracks the mapping between input and
 output files to make sure source file path will resolve to correct output path. For example, if in the above case,
-<code>subfolder</code> is renamed to <code>subfolder2</code> using <a href="docfx.exe_user_manual.html#4-supported-file-mapping-format">file mapping</a> in
+<code>subfolder</code> is renamed to <code>subfolder2</code> using <a href="../reference/docfx-json-reference.html#2-supported-file-mapping-format">file mapping</a> in
 <code>docfx.json</code>, in output html, the link url will also resolve to <code>subfolder2/file2.html</code>.</p>
 </div>
 <h3 id="relative-path-vs-absolute-path">Relative path vs. absolute path</h3>
@@ -136,7 +136,7 @@ This kind of path will also be validated and resolved during build. For example,
 If you write something like <code>&lt;file.md&gt;</code>, it will be treated as an HTML tag rather than a link.</p>
 </div>
 <h3 id="links-in-file-includes">Links in file includes</h3>
-<p>If you use <a href="../spec/docfx_flavored_markdown.html#file-inclusion">file include</a> to include another file, the links in the included file are relative to the included file. For example, if <code>file1.md</code> includes <code>file2.md</code>:</p>
+<p>If you use <a href="../docs/markdown.html#include-markdown-files">file include</a> to include another file, the links in the included file are relative to the included file. For example, if <code>file1.md</code> includes <code>file2.md</code>:</p>
 <pre><code class="lang-markdown">[!include[file2](subfolder/file2.md)]
 </code></pre>
 <p>All links in <code>file2.md</code> are relative to the <code>file2.md</code> itself, even when it's included by <code>file1.md</code>.</p>
@@ -172,7 +172,7 @@ topics. So it's not recommended to include them in <code>docfx.json</code>.</p>
 <p>Title is extracted from the first heading of the Markdown file. Or you can also specify title using title metadata.</p>
 </div>
 <h3 id="define-uid">Define UID</h3>
-<p>The unique identifier of a file in DocFX is called a UID. For a Markdown file, you can specify its UID by adding a UID metadata in the <a href="../spec/docfx_flavored_markdown.html#yaml-header">YAML header</a>. For example, the following Markdown defines a UID &quot;fileA&quot;.</p>
+<p>The unique identifier of a file in DocFX is called a UID. For a Markdown file, you can specify its UID by adding a UID metadata in the <a href="../docs/markdown.html#yaml-header">YAML header</a>. For example, the following Markdown defines a UID &quot;fileA&quot;.</p>
 <pre><code class="lang-markdown">---
 uid: fileA
 ---

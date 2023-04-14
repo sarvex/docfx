@@ -645,6 +645,26 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "reference/docfx-cli-reference.md",
+      "output": {
+        ".html": {
+          "relative_path": "reference/docfx-cli-reference.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "reference/docfx-json-reference.md",
+      "output": {
+        ".html": {
+          "relative_path": "reference/docfx-json-reference.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "spec/docfx_document_schema.md",
       "output": {
         ".html": {
@@ -762,16 +782,6 @@
       "output": {
         ".html": {
           "relative_path": "tutorial/advanced_support_hyperlink.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "tutorial/docfx.exe_user_manual.md",
-      "output": {
-        ".html": {
-          "relative_path": "tutorial/docfx.exe_user_manual.html"
         }
       },
       "version": ""

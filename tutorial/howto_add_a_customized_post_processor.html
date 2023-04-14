@@ -122,7 +122,7 @@ public class MyProcessor : IPostProcessor
 <p>Using <code>ExtractSearchIndex</code> for example again, we traverse all HTML files, extract key words from these HTML files and save a file named <code>index.json</code> under the <code>outputFolder</code>. Finally we return the manifest which is not modified.</p>
 <h2 id="step4-build-your-project-and-copy-the-output-dll-files-to">Step4: Build your project and copy the output dll files to:</h2>
 <ul>
-<li><p>Global: the folder with name <code>Plugins</code> under DocFX.exe</p>
+<li><p>Global: the folder with name <code>Plugins</code> under the folder containing the Docfx executable</p>
 </li>
 <li><p>Non-global: the folder with name <code>Plugins</code> under a template folder, then run <code>DocFX build</code> command with parameter <code>-t {template}</code>.</p>
 <p><em>Hint</em>: DocFX can merge templates, so we can specify multiple template folders as <code>DocFX build -t {templateForRender},{templateForPlugins}</code>. Each of the template folders should have a subfolder named <code>Plugins</code> with exported assemblies.</p>

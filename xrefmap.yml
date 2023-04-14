@@ -1,6 +1,12 @@
 ### YamlMime:XRefMap
 sorted: true
 references:
+- uid: docfx_cli_reference
+  name: docfx CLI reference
+  href: reference/docfx-cli-reference.html
+- uid: docfx_json_refence
+  name: docfx.json reference
+  href: reference/docfx-json-reference.html
 - uid: Microsoft.DocAsCode
   name: Microsoft.DocAsCode
   href: api/Microsoft.DocAsCode.html
@@ -1430,6 +1436,3 @@ references:
   commentId: F:Microsoft.DocAsCode.MemberLayout.SeparatePages
   fullName: Microsoft.DocAsCode.MemberLayout.SeparatePages
   nameWithType: MemberLayout.SeparatePages
-- uid: user_manual
-  name: docfx.exe User Manual
-  href: tutorial/docfx.exe_user_manual.html
