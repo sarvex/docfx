@@ -4,7 +4,6 @@
 using System.Collections.Concurrent;
 using System.Reflection;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.DocAsCode.Common;
 using Microsoft.Extensions.FileProviders;
@@ -24,16 +23,9 @@ namespace Microsoft.DocAsCode.Pdf;
 /// </summary>
 class PdfOutline
 {
-    [JsonPropertyName("enablePdf")]
     public bool EnablePdf { get; set; }
-
-    [JsonPropertyName("name")]
     public string? Name { get; set; }
-
-    [JsonPropertyName("items")]
     public PdfOutline[]? Items { get; set; }
-
-    [JsonPropertyName("href")]
     public string? Href { get; set; }
 }
 
@@ -45,9 +37,11 @@ static class RunPdf2
     {
         directory = Path.GetFullPath(directory);
 
+        var jsonOptions = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
+
         var tocs = (
             from path in Directory.EnumerateFiles(directory, "toc.json", new EnumerationOptions { RecurseSubdirectories = true })
-            let toc = JsonSerializer.Deserialize<PdfOutline>(File.ReadAllBytes(path))
+            let toc = JsonSerializer.Deserialize<PdfOutline>(File.ReadAllBytes(path), jsonOptions)
             let url = new Uri(Path.GetRelativePath(directory, path), UriKind.Relative)
             where toc != null && toc.EnablePdf
             select (path, url, toc)).ToList();

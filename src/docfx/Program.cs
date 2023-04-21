@@ -21,7 +21,7 @@ internal class Program
             config.AddCommand<MetadataCommand>("metadata");
             config.AddCommand<ServeCommand>("serve");
             config.AddCommand<PdfCommand>("pdf");
-            config.AddCommand<Pdf2Command>("pdf2");
+            config.AddCommand<Pdf2Command>("pdf2").IsHidden();
             config.AddBranch("template", template =>
             {
                 template.AddCommand<TemplateCommand.ListCommand>("list");

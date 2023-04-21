@@ -51,7 +51,7 @@ public class SamplesTest
 
     static SamplesTest()
     {
-        Playwright.Program.Main(new[] { "install" });
+        Playwright.Program.Main(new[] { "install", "chrome" });
         Process.Start("dotnet", $"build \"{s_samplesDir}/seed/dotnet/assembly/BuildFromAssembly.csproj\"").WaitForExit();
     }
 

@@ -18,7 +18,7 @@ class Pdf2Command : AsyncCommand<Pdf2Command.Settings>
         [CommandArgument(0, "[directory]")]
         public string? Directory { get; set; }
 
-        [Description("Installs headless chrome")]
+        [Description("Installs chrome to print PDF files")]
         [CommandOption("--install")]
         public bool Install { get; set; }
     }
@@ -27,7 +27,7 @@ class Pdf2Command : AsyncCommand<Pdf2Command.Settings>
     {
         if (settings.Install)
         {
-            return Playwright.Program.Main(new[] { "install" });
+            return Playwright.Program.Main(new[] { "install", "chrome" });
         }
 
         await RunPdf2.CreatePdfForDirectory(settings.Directory ?? Directory.GetCurrentDirectory());
