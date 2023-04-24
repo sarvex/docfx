@@ -147,9 +147,9 @@ and their associated configs, compilations and models.</p>
 
   <a id="Microsoft_DocAsCode_Docset_Build_" data-uid="Microsoft.DocAsCode.Docset.Build*"></a>
 
-  <h3 id="Microsoft_DocAsCode_Docset_Build_System_String_Microsoft_DocAsCode_BuildOptions_" data-uid="Microsoft.DocAsCode.Docset.Build(System.String,Microsoft.DocAsCode.BuildOptions)">
-  Build(string, BuildOptions)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/dotnet/docfx/blob/main/src/Microsoft.DocAsCode.App/Docset.cs/#L31"><i class="bi bi-code-slash"></i></a>
+  <h3 id="Microsoft_DocAsCode_Docset_Build_System_String_" data-uid="Microsoft.DocAsCode.Docset.Build(System.String)">
+  Build(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dotnet/docfx/blob/main/src/Microsoft.DocAsCode.App/Docset.cs/#L20"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Builds a docset specified by docfx.json config.</p>
@@ -157,16 +157,13 @@ and their associated configs, compilations and models.</p>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static Task Build(string configPath, BuildOptions options)</code></pre>
+    <pre><code class="lang-csharp hljs">public static Task Build(string configPath)</code></pre>
   </div>
 
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>configPath</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
     <dd><p>The path to docfx.json config file.</p>
-</dd>
-    <dt><code>options</code> <a class="xref" href="Microsoft.DocAsCode.BuildOptions.html">BuildOptions</a></dt>
-    <dd><p>The build options.</p>
 </dd>
   </dl>
 
@@ -189,9 +186,9 @@ and their associated configs, compilations and models.</p>
 
   <a id="Microsoft_DocAsCode_Docset_Build_" data-uid="Microsoft.DocAsCode.Docset.Build*"></a>
 
-  <h3 id="Microsoft_DocAsCode_Docset_Build_System_String_" data-uid="Microsoft.DocAsCode.Docset.Build(System.String)">
-  Build(string)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/dotnet/docfx/blob/main/src/Microsoft.DocAsCode.App/Docset.cs/#L20"><i class="bi bi-code-slash"></i></a>
+  <h3 id="Microsoft_DocAsCode_Docset_Build_System_String_Microsoft_DocAsCode_BuildOptions_" data-uid="Microsoft.DocAsCode.Docset.Build(System.String,Microsoft.DocAsCode.BuildOptions)">
+  Build(string, BuildOptions)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dotnet/docfx/blob/main/src/Microsoft.DocAsCode.App/Docset.cs/#L31"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Builds a docset specified by docfx.json config.</p>
@@ -199,13 +196,16 @@ and their associated configs, compilations and models.</p>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static Task Build(string configPath)</code></pre>
+    <pre><code class="lang-csharp hljs">public static Task Build(string configPath, BuildOptions options)</code></pre>
   </div>
 
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>configPath</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
     <dd><p>The path to docfx.json config file.</p>
+</dd>
+    <dt><code>options</code> <a class="xref" href="Microsoft.DocAsCode.BuildOptions.html">BuildOptions</a></dt>
+    <dd><p>The build options.</p>
 </dd>
   </dl>
 
