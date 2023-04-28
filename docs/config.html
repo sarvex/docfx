@@ -7,24 +7,24 @@
       <meta name="title" content="Config | docfx ">
       
       <link rel="icon" href="../favicon.ico">
-      <link rel="stylesheet" href="../styles/docfx.min.css">
-      <link rel="stylesheet" href="../styles/main.css">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
       <meta name="docfx:navrel" content="../toc.html">
       <meta name="docfx:tocrel" content="toc.html">
       
       <meta name="docfx:rel" content="../">
       <meta name="docfx:docurl" content="https://github.com/dotnet/docfx/blob/main/docs/docs/config.md/#L1">
 
-      <script>
-        MathJax = {
+      <script type="module">
+        import docfx from './../public/main.js'
+        window.docfx = docfx
+        window.MathJax = {
           options: {
             processHtmlClass: ['tex2jax_process', 'math']
           }
-        };
+        }
       </script>
-
-      <script type="text/javascript" src="../styles/docfx.min.js"></script>
-      <script type="text/javascript" src="../styles/main.js"></script>
+      <script type="text/javascript" src="../public/docfx.min.js"></script>
   </head>
 
   <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
@@ -102,6 +102,13 @@
 }
 </code></pre>
 <p>In this example, files in the <code>articles</code> directory uses <code>docs</code> as the base URL: The <code>articles/getting-started/installation.md</code> file is accessible by the <code>docs/getting-started/installation.html</code> URL.</p>
+<h2 id="url-redirects">URL Redirects</h2>
+<p>The <code>redirect_url</code> metadata is a simple way to create redirects in your documentation. This metadata can be added to a Markdown file in your project, and it will be used to redirect users to a new URL when they try to access the original URL:</p>
+<pre><code>---
+redirect_url: [new URL]  
+---
+</code></pre>
+<p>Replace [new URL] with the URL that you want to redirect users to. You can use any valid URL, including relative URLs or external URLs.</p>
 <h2 id="metadata">Metadata</h2>
 <p>Metadata are attributes attached to an file. It helps shape the look and feel of a page and provides extra context to the article.</p>
 <p>To add metadata to an article, use &quot;YAML Front Matter&quot; markdown extension syntax:</p>
@@ -132,108 +139,6 @@ description: a description
 }
 </code></pre>
 <p>When the same metadata key is defined in multiple places, YAML Front Matter takes precedence over <code>fileMetadata</code> which in turn takes precedence over <code>globalMetadata</code>.</p>
-<h3 id="predefined-metadata">Predefined Metadata</h3>
-<p>Here is a list of predefined metadata recognized by the default docfx site template to customize basic site settings:</p>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>_appTitle</code></td>
-<td>string</td>
-<td>A string append to every page title.</td>
-</tr>
-<tr>
-<td><code>_appName</code></td>
-<td>string</td>
-<td>The name of the site displayed after logo.</td>
-</tr>
-<tr>
-<td><code>_appFooter</code></td>
-<td>string</td>
-<td>The footer HTML.</td>
-</tr>
-<tr>
-<td><code>_appLogoPath</code></td>
-<td>string</td>
-<td>App logo URL path.</td>
-</tr>
-<tr>
-<td><code>_appFaviconPath</code></td>
-<td>string</td>
-<td>Favicon URL path.</td>
-</tr>
-<tr>
-<td><code>_enableSearch</code></td>
-<td>bool</td>
-<td>Whether to show the search box.</td>
-</tr>
-<tr>
-<td><code>_enableNewTab</code></td>
-<td>bool</td>
-<td>Whether to open external links in a new tab.</td>
-</tr>
-<tr>
-<td><code>_disableNavbar</code></td>
-<td>bool</td>
-<td>Whether to show the navigation bar.</td>
-</tr>
-<tr>
-<td><code>_disableBreadcrumb</code></td>
-<td>bool</td>
-<td>Whether to show the breadcrumb.</td>
-</tr>
-<tr>
-<td><code>_disableToc</code></td>
-<td>bool</td>
-<td>Whether to show the TOC.</td>
-</tr>
-<tr>
-<td><code>_disableAffix</code></td>
-<td>bool</td>
-<td>Whether to show the right rail.</td>
-</tr>
-<tr>
-<td><code>_disableNextArticle</code></td>
-<td>bool</td>
-<td>Whether to show the previous and next article link.</td>
-</tr>
-<tr>
-<td><code>_noindex</code></td>
-<td>bool</td>
-<td>Whether to include in search results</td>
-</tr>
-<tr>
-<td><code>_disableContribution</code></td>
-<td>bool</td>
-<td>Whether to show the <em>&quot;Improve this Doc&quot;</em> and _&quot;View Source&quot; buttons.</td>
-</tr>
-<tr>
-<td><code>_gitContribute</code></td>
-<td>object</td>
-<td>Defines the <code>repo</code> and <code>branch</code> property of git links.</td>
-</tr>
-<tr>
-<td><code>_gitUrlPattern</code></td>
-<td>string</td>
-<td>URL pattern of git links.</td>
-</tr>
-<tr>
-<td><code>redirect_url</code></td>
-<td>string</td>
-<td>Redirects the current page to the specified redirect URL. URLs can be relative.</td>
-</tr>
-</tbody>
-</table>
-<div class="TIP">
-<h5>Tip</h5>
-<p>Docfx produces the right git links for major CI pipelines including <a href="https://github.com/features/actions">GitHub</a>, <a href="https://about.gitlab.com/gitlab-ci/">GitLab</a>, <a href="https://azure.microsoft.com/en-us/services/devops/pipelines/">Azure Pipelines</a>, <a href="https://www.appveyor.com/">AppVeyor</a>, <a href="https://www.jetbrains.com/teamcity/">TeamCity</a>, <a href="https://jenkins.io/">Jenkins</a>. <code>_gitContribute</code> and <code>_gitUrlPattern</code> are optional on these platforms.</p>
-</div>
 <h2 id="sitemap">Sitemap</h2>
 <p>Docfx produces a <a href="https://www.sitemaps.org/protocol.html">sitemap.xml</a> about the pages on your site for search engines like Google to crawl your site more efficiently.</p>
 <p>The <code>sitemap</code> option in <code>docfx.json</code> controls how sitemaps are generated:</p>

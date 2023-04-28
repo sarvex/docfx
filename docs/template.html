@@ -7,24 +7,24 @@
       <meta name="title" content="Template | docfx ">
       
       <link rel="icon" href="../favicon.ico">
-      <link rel="stylesheet" href="../styles/docfx.min.css">
-      <link rel="stylesheet" href="../styles/main.css">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
       <meta name="docfx:navrel" content="../toc.html">
       <meta name="docfx:tocrel" content="toc.html">
       
       <meta name="docfx:rel" content="../">
       <meta name="docfx:docurl" content="https://github.com/dotnet/docfx/blob/main/docs/docs/template.md/#L1">
 
-      <script>
-        MathJax = {
+      <script type="module">
+        import docfx from './../public/main.js'
+        window.docfx = docfx
+        window.MathJax = {
           options: {
             processHtmlClass: ['tex2jax_process', 'math']
           }
-        };
+        }
       </script>
-
-      <script type="text/javascript" src="../styles/docfx.min.js"></script>
-      <script type="text/javascript" src="../styles/main.js"></script>
+      <script type="text/javascript" src="../public/docfx.min.js"></script>
   </head>
 
   <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
@@ -76,9 +76,269 @@
 <h1 id="template">Template</h1>
 
 <p>Template defines the appearance of the website.</p>
-<p>Docfx ships a default website template with the same look and feel as this site. Additional templates are available at the <a href="../extensions/templates.html">Template Gallery</a>.</p>
-<h2 id="create-a-custom-template">Create a Custom Template</h2>
+<p>Docfx ships several built-in templates. We recommend using the modern template that matches the look and feel of this site. It supports dark mode, more features, rich customization options and.</p>
+<p>Use the modern template by setting the <code>templates</code> property to <code>[&quot;default&quot;, &quot;modern&quot;]</code>:</p>
+<pre><code class="lang-json">{
+  &quot;build&quot;: {
+    &quot;templates&quot;: [
+      &quot;default&quot;,
+      &quot;modern&quot;
+    ]
+  }
+}
+</code></pre>
+<p>Additional templates are available at the <a href="../extensions/templates.html">Template Gallery</a>.</p>
+<h2 id="template-metadata">Template Metadata</h2>
+<p>The easiest way of customizing the the appearance of pages is using <a href="config.html#metadata">metadata</a>. Here is a list of predefined metadata:</p>
+<div class="tabGroup" id="tabgroup_bHGHmlrG6S">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_bHGHmlrG6S_modern" role="tab" aria-controls="tabpanel_bHGHmlrG6S_modern" data-tab="modern" tabindex="0" aria-selected="true">Modern Template</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_bHGHmlrG6S_default" role="tab" aria-controls="tabpanel_bHGHmlrG6S_default" data-tab="default" tabindex="-1">Default Template</a>
+</li>
+</ul>
+<section id="tabpanel_bHGHmlrG6S_modern" role="tabpanel" data-tab="modern">
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>_appTitle</code></td>
+<td>string</td>
+<td>A string append to every page title.</td>
+</tr>
+<tr>
+<td><code>_appName</code></td>
+<td>string</td>
+<td>The name of the site displayed after logo.</td>
+</tr>
+<tr>
+<td><code>_appFooter</code></td>
+<td>string</td>
+<td>The footer HTML.</td>
+</tr>
+<tr>
+<td><code>_appLogoPath</code></td>
+<td>string</td>
+<td>App logo URL path.</td>
+</tr>
+<tr>
+<td><code>_appFaviconPath</code></td>
+<td>string</td>
+<td>Favicon URL path.</td>
+</tr>
+<tr>
+<td><code>_enableSearch</code></td>
+<td>bool</td>
+<td>Whether to show the search box.</td>
+</tr>
+<tr>
+<td><code>_enableNewTab</code></td>
+<td>bool</td>
+<td>Whether to open external links in a new tab.</td>
+</tr>
+<tr>
+<td><code>_noindex</code></td>
+<td>bool</td>
+<td>Whether to include in search results</td>
+</tr>
+<tr>
+<td><code>_disableContribution</code></td>
+<td>bool</td>
+<td>Whether to show the <em>&quot;Improve this Doc&quot;</em> and _&quot;View Source&quot; buttons.</td>
+</tr>
+<tr>
+<td><code>_gitContribute</code></td>
+<td>object</td>
+<td>Defines the <code>repo</code> and <code>branch</code> property of git links.</td>
+</tr>
+<tr>
+<td><code>_gitUrlPattern</code></td>
+<td>string</td>
+<td>URL pattern of git links.</td>
+</tr>
+<tr>
+<td><code>_disableNextArticle</code></td>
+<td>bool</td>
+<td>Whether to show the previous and next article link.</td>
+</tr>
+<tr>
+<td><code>layout</code></td>
+<td>string</td>
+<td>Determines the layout of the page. Supported values are <code>landing</code>, <code>conceptual</code>, <code>chromeless</code>.</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="tabpanel_bHGHmlrG6S_default" role="tabpanel" data-tab="default" aria-hidden="true" hidden="hidden">
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>_appTitle</code></td>
+<td>string</td>
+<td>A string append to every page title.</td>
+</tr>
+<tr>
+<td><code>_appName</code></td>
+<td>string</td>
+<td>The name of the site displayed after logo.</td>
+</tr>
+<tr>
+<td><code>_appFooter</code></td>
+<td>string</td>
+<td>The footer HTML.</td>
+</tr>
+<tr>
+<td><code>_appLogoPath</code></td>
+<td>string</td>
+<td>App logo URL path.</td>
+</tr>
+<tr>
+<td><code>_appFaviconPath</code></td>
+<td>string</td>
+<td>Favicon URL path.</td>
+</tr>
+<tr>
+<td><code>_enableSearch</code></td>
+<td>bool</td>
+<td>Whether to show the search box.</td>
+</tr>
+<tr>
+<td><code>_enableNewTab</code></td>
+<td>bool</td>
+<td>Whether to open external links in a new tab.</td>
+</tr>
+<tr>
+<td><code>_noindex</code></td>
+<td>bool</td>
+<td>Whether to include in search results</td>
+</tr>
+<tr>
+<td><code>_disableContribution</code></td>
+<td>bool</td>
+<td>Whether to show the <em>&quot;Improve this Doc&quot;</em> and _&quot;View Source&quot; buttons.</td>
+</tr>
+<tr>
+<td><code>_gitContribute</code></td>
+<td>object</td>
+<td>Defines the <code>repo</code> and <code>branch</code> property of git links.</td>
+</tr>
+<tr>
+<td><code>_gitUrlPattern</code></td>
+<td>string</td>
+<td>URL pattern of git links.</td>
+</tr>
+<tr>
+<td><code>_disableNavbar</code></td>
+<td>bool</td>
+<td>Whether to show the navigation bar.</td>
+</tr>
+<tr>
+<td><code>_disableBreadcrumb</code></td>
+<td>bool</td>
+<td>Whether to show the breadcrumb.</td>
+</tr>
+<tr>
+<td><code>_disableToc</code></td>
+<td>bool</td>
+<td>Whether to show the TOC.</td>
+</tr>
+<tr>
+<td><code>_disableAffix</code></td>
+<td>bool</td>
+<td>Whether to show the right rail.</td>
+</tr>
+</tbody>
+</table>
+</section>
+</div>
+
+<div class="TIP">
+<h5>Tip</h5>
+<p>Docfx produces the right git links for major CI pipelines including <a href="https://github.com/features/actions">GitHub</a>, <a href="https://about.gitlab.com/gitlab-ci/">GitLab</a>, <a href="https://azure.microsoft.com/en-us/services/devops/pipelines/">Azure Pipelines</a>, <a href="https://www.appveyor.com/">AppVeyor</a>, <a href="https://www.jetbrains.com/teamcity/">TeamCity</a>, <a href="https://jenkins.io/">Jenkins</a>. <code>_gitContribute</code> and <code>_gitUrlPattern</code> are optional on these platforms.</p>
+</div>
+<h2 id="custom-template">Custom Template</h2>
 <p>To build your own template, create a new folder and add it to <code>templates</code> config in <code>docfx.json</code>:</p>
+<div class="tabGroup" id="tabgroup_bHGHmlrG6S-1">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_bHGHmlrG6S-1_modern" role="tab" aria-controls="tabpanel_bHGHmlrG6S-1_modern" data-tab="modern" tabindex="0" aria-selected="true">Modern Template</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_bHGHmlrG6S-1_default" role="tab" aria-controls="tabpanel_bHGHmlrG6S-1_default" data-tab="default" tabindex="-1">Default Template</a>
+</li>
+</ul>
+<section id="tabpanel_bHGHmlrG6S-1_modern" role="tabpanel" data-tab="modern">
+
+<pre><code class="lang-json">{
+  &quot;build&quot;: {
+    &quot;templates&quot;: [
+      &quot;default&quot;,
+      &quot;modern&quot;,
+      &quot;my-template&quot; // &lt;-- Path to custom template
+    ]
+  }
+}
+</code></pre>
+<p>Add your custom CSS file to <code>my-template/public/main.css</code> to customize colors, show and hide elements, etc. This is an example stylesheet that adjust the font size of article headers.</p>
+<pre><code class="lang-css">/* file: my-template/public/main.css */
+article h1 {
+  font-size: 40px;
+}
+</code></pre>
+<p>You can also use <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties">CSS variables</a> to adjust the templates. There are many predefined CSS variables in <a href="https://getbootstrap.com/docs/5.3/customize/color/#colors">Bootstrap</a> that can be used to customize the site:</p>
+<pre><code class="lang-css">/* file: my-template/public/main.css */
+body {
+  --bs-link-color-rgb: 66, 184, 131 !important;
+  --bs-link-hover-color-rgb: 64, 180, 128 !important;
+}
+</code></pre>
+<p>The <code>my-template/public/main.js</code> file is the entry JavaScript file to customize docfx site behaviors. This is a basic setup that changes the default color mode to dark and adds some icon links in the header:</p>
+<pre><code class="lang-js">/* file: my-template/public/main.js */
+export default {
+  defaultTheme: 'dark',
+  iconLinks?: [
+    {
+      icon: 'github',
+      href: 'https://github.com/dotnet/docfx'
+      title: 'GitHub'
+    },
+    {
+      icon: 'twitter',
+      href: 'https://twitter.com'
+      title: 'Twitter'
+    }
+  ]
+}
+</code></pre>
+<p>You can also configure syntax highlighting options using the <code>configureHljs</code> option:</p>
+<pre><code class="lang-js">export default {
+  configureHljs: (hljs) =&gt; {
+    // Customize hightlight.js here
+  },
+}
+</code></pre>
+<p>See <a href="https://github.com/dotnet/docfx/blob/main/samples/seed/template/public/main.js">this example</a> on how to enable <code>bicep</code> syntax highlighting.</p>
+<p>More customization options are available in the <a href="https://github.com/dotnet/docfx/blob/main/templates/modern/src/options.d.ts">docfx options object</a>.</p>
+</section>
+<section id="tabpanel_bHGHmlrG6S-1_default" role="tabpanel" data-tab="default" aria-hidden="true" hidden="hidden">
+
 <pre><code class="lang-json">{
   &quot;build&quot;: {
     &quot;templates&quot;: [
@@ -95,7 +355,6 @@ article h1 {
   font-size: 40px;
 }
 </code></pre>
-<h2 id="custom-html-templates">Custom HTML Templates</h2>
 <p>In addition to CSS and JavaScript, you can customize how docfx generates HTML using <a href="https://mustache.github.io/">Mustache Templates</a>.</p>
 <p>Create a <code>partials/footer.tmpl.partial</code> file to replace the footer. This example update the footer to show a GitHub Follow button.</p>
 <pre><code class="lang-html">&lt;footer&gt;
@@ -155,6 +414,8 @@ article h1 {
 </tr>
 </tbody>
 </table>
+</section>
+</div>
 </article>
 
         <div class="contribution d-print-none">
