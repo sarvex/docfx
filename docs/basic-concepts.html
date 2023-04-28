@@ -1,0 +1,219 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Basic Concepts | docfx </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Basic Concepts | docfx ">
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.min.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      <meta name="docfx:docurl" content="https://github.com/dotnet/docfx/blob/main/docs/docs/basic-concepts.md/#L1">
+
+      <script>
+        MathJax = {
+          options: {
+            processHtmlClass: ['tex2jax_process', 'math']
+          }
+        };
+      </script>
+
+      <script type="text/javascript" src="../styles/docfx.min.js"></script>
+      <script type="text/javascript" src="../styles/main.js"></script>
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.svg" alt="docfx">
+            docfx
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="basic-concepts">Basic Concepts</h1>
+
+<h2 id="introduction">Introduction</h2>
+<p>Docfx is a powerful tool but easy to use for most regular use cases, once you understand the basic concepts.</p>
+<p>Docfx can be used as a static site generator, but the real value of the tool is in bringing together static documentation pages and .NET API documentation.  Docfx supports both C# and VB projects (although currently the output of tool is limited to C# syntax), and relies on the long-established <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/xmldoc/">XML comment syntax</a> for C# (and <a href="https://learn.microsoft.com/en-us/dotnet/visual-basic/programming-guide/program-structure/documenting-your-code-with-xml">similarly for VB</a>).  For example, the following C# code:</p>
+<pre><code class="lang-c#">    /// &lt;summary&gt;
+    /// Calculates the age of a person on a certain date based on the supplied date of birth.  Takes account of leap years,
+    /// using the convention that someone born on 29th February in a leap year is not legally one year older until 1st March
+    /// of a non-leap year.
+    /// &lt;/summary&gt;
+    /// &lt;param name=&quot;dateOfBirth&quot;&gt;Individual's date of birth.&lt;/param&gt;
+    /// &lt;param name=&quot;date&quot;&gt;Date at which to evaluate age at.&lt;/param&gt;
+    /// &lt;returns&gt;Age of the individual in years (as an integer).&lt;/returns&gt;
+    /// &lt;remarks&gt;This code is not guaranteed to be correct for non-UK locales, as some countries have skipped certain dates
+    /// within living memory.&lt;/remarks&gt;
+    public static int AgeAt(this DateOnly dateOfBirth, DateOnly date)
+    {
+        int age = date.Year - dateOfBirth.Year;
+
+        return dateOfBirth &gt; date.AddYears(-age) ? --age : age;
+    }
+</code></pre>
+<p>can be used to generate output like this:</p>
+<p><img src="../images/output-example.png" alt="Example of Docfx output corresponding to the above source code"></p>
+<p>Static documentation pages are prepared using <a href="markdown.html">Markdown</a> (slightly enhanced to support specific features).  Markdown content can also be injected into the generated API documentation using a feature called 'Overwrites'.</p>
+<p>Once the API documentation has been parsed from the source code, it is compiled along with the Markdown content into a set of HTML pages which can be published a website.  It is also possible to compile the final output into one or more PDFs for offline use.</p>
+<p>Docfx is a command-line tool that can be invoked directly, or as a .NET Core CLI tool using the <code>dotnet</code> command, but it can also be invoked from source code using the <code>Docset.Build</code> method in the <code>Microsoft.DocAsCode</code> namespace.  It is configured using a JSON configuration file, <a href="../reference/docfx-json-reference.html"><code>docfx.json</code></a> which has sections for different parts of the build process.</p>
+<h2 id="consuming-net-projects">Consuming .NET projects</h2>
+<p>The most common use case for processing .NET projects is to specify one or more .csproj files in the <code>docfx.json</code> file:</p>
+<pre><code class="lang-json">{
+  &quot;metadata&quot;: [
+    {
+      &quot;src&quot;: [
+        {
+          &quot;files&quot;: [
+            &quot;src/MyProject.Abc/*.csproj&quot;,
+            &quot;src/MyProject.Xyz/*.csproj&quot;
+          ],
+          &quot;src&quot;: &quot;path/to/csprojs&quot;
+        }
+      ],
+      &quot;dest&quot;: &quot;api&quot;
+    }
+  ],
+  //...
+}
+</code></pre>
+<p>Although Docfx can build a documentation website in one step, it's helpful to understand the separate steps the tool uses to generate its output.</p>
+<p>The first step is called the <em><strong>metadata</strong></em> step and can be completed using the following command line:</p>
+<pre><code class="lang-shell">docfx metadata path/to/docfx.json
+</code></pre>
+<p>This command reads all the source files specified by the projects listed in <code>docfx.json</code> and searches for XML documentation entries.  Note that this step does not use <code>.xml</code> compiler output but rather uses the <a href="https://github.com/dotnet/roslyn">Roslyn compiler</a> to navigate the supplied codebase.  The output of this step is a set of YAML files that are stored in the <code>dest</code> folder specified in <code>docfx.json</code>.</p>
+<p>Here's an example of the (partial) output from the above code example:</p>
+<pre><code class="lang-yaml">### YamlMime:ManagedReference
+items:
+- uid: MyProject.Extensions.DateOnlyExtensions.AgeAt(System.DateOnly,System.DateOnly)
+  commentId: M:MyProject.Extensions.DateOnlyExtensions.AgeAt(System.DateOnly,System.DateOnly)
+  id: AgeAt(System.DateOnly,System.DateOnly)
+  isExtensionMethod: true
+  parent: MyProject.Extensions.DateOnlyExtensions
+  langs:
+  - csharp
+  - vb
+  name: AgeAt(DateOnly, DateOnly)
+  nameWithType: DateOnlyExtensions.AgeAt(DateOnly, DateOnly)
+  fullName: MyProject.Extensions.DateOnlyExtensions.AgeAt(System.DateOnly, System.DateOnly)
+  type: Method
+  source:
+    remote:
+      path: src/MyProject/Extensions/DateOnlyExtensions.cs
+      branch: main
+      repo: https://github.com/MyUser/MyProject.git
+    id: AgeAt
+    path: ../../MyProject/src/MyProject/Extensions/DateOnlyExtensions.cs
+    startLine: 63
+  assemblies:
+  - MyProject.Common
+  namespace: MyProject.Extensions
+  summary: &gt;-
+    Calculates the age of a person on a certain date based on the supplied date of birth.  Takes account of leap years, using the convention that someone born on 29th February in a leap year is not legally one year older until 1st March of a non-leap year.
+</code></pre>
+<p>For the most part, it isn't important to know too much about the output of the <code>metadata</code> step, except where you want to make reference to entities from your Markdown content.  When doing so, you need to reference the relevant <code>uid</code> from the YAML file.  However, as you can see, the <code>uid</code> is the same as the full signature of the entity or method including the namespace.</p>
+<p>It's also worth knowing that the <code>metadata</code> step generates <code>toc.yml</code>, a table-of-contents file for the input source code, grouped by .NET namespace.  This is the only auto-generated table-of-contents file; all other <code>toc.yml</code> must be manually created/edited.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>In additional to using <code>.csproj</code> files for input, it is also possible to generate the intermediate YAML output from compiled <code>.dll</code> (or <code>.exe</code>) and <code>.xml</code> files. See <a href="dotnet-api-docs.html">.NET API Docs</a> for further details.</p>
+</div>
+<h2 id="documentation-build-process">Documentation Build Process</h2>
+<p>The next step is called the <em><strong>build</strong></em> step and can be completed using the following command line:</p>
+<pre><code class="lang-shell">docfx build path/to/docfx.json
+</code></pre>
+<p>(You can append <code>--serve</code> to this step and Docfx will start a local web server so you can preview the final output.)</p>
+<p>Internally, there are many parts to this step, but in short, Docfx does the following during the <code>build</code> step:</p>
+<ul>
+<li>resolve all cross-references</li>
+<li>convert the YAML content from the <code>metadata</code> step into a structured data format, for passing onto the template engine</li>
+<li>convert all Markdown content into HTML</li>
+<li>apply templates and themes</li>
+</ul>
+<p>Conversion of Markdown to HTML is achieved using the <a href="https://github.com/xoofx/markdig">Markdig</a> CommonMark-compliant Markdown processor.</p>
+<p>Template and theme processing is the one part of Docfx that is not coded in C#; instead the <a href="https://github.com/sebastienros/jint">Jint JavaScript interpreter</a> is used to run a set of JavaScript scripts; this approach allows an extra level of customisation of the build process as Docfx provides a way to override the default scripts using the template section of the <code>docfx.json</code> file:</p>
+<pre><code class="lang-json">{
+  &quot;build&quot;: {
+    //...
+    &quot;dest&quot;: &quot;_site&quot;,
+    &quot;template&quot;: [
+      &quot;default&quot;,
+      &quot;modern&quot;,
+      &quot;templates/mytemplate&quot;
+    ]
+  }
+}
+</code></pre>
+<p>In this example, Docfx first searches the <code>templates\mytemplate</code> folder, then the <code>modern</code> folder, then <code>default</code> folder for each <code>.css</code> or <code>.js</code> file.  Note that <code>default</code> and <code>modern</code> templates are included with Docfx and included in the Docfx installation packaged alongside the Docfx executable.</p>
+<p>(The embedded templates can be exported using the command</p>
+<pre><code>docfx template export default -o path/for/exported_templates
+</code></pre>
+<p>where <code>default</code> is the name of the template being exported.  The command <code>docfx template list</code> can be used to list the embedded templates within Docfx.)</p>
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/dotnet/docfx/blob/main/docs/docs/basic-concepts.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+        
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Supported by the <a href="https://dotnetfoundation.org">.NET Foundation</a>. Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

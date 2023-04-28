@@ -286,6 +286,16 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "docs/basic-concepts.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/basic-concepts.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "docs/config.md",
       "output": {
         ".html": {
@@ -629,6 +639,16 @@
       "output": {
         ".html": {
           "relative_path": "extensions/tools.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/output-example.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/output-example.png"
         }
       },
       "version": ""
