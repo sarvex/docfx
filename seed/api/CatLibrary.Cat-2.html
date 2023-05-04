@@ -1,0 +1,807 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class Cat&lt;T, K&gt;
+ | docfx seed website </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class Cat&lt;T, K&gt;
+ | docfx seed website ">
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/dotnet/docfx/blob/main/samples/seed/specs/Cat.md/#L2">
+
+      <script type="module">
+        import docfx from './../public/main.js'
+        window.docfx = docfx
+        window.MathJax = {
+          options: {
+            processHtmlClass: ['tex2jax_process', 'math']
+          }
+        }
+      </script>
+      <script type="text/javascript" src="../public/docfx.min.js"></script>
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.svg" alt="Seed">
+            Seed
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="CatLibrary.Cat`2">
+
+
+
+  <h1 id="CatLibrary_Cat_2" data-uid="CatLibrary.Cat`2" class="text-break">
+    Class Cat&lt;T, K&gt;
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dotnet/docfx/blob/main/samples/seed/dotnet/solution/CatLibrary/Class1.cs/#L113"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="CatLibrary.html">CatLibrary</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>CatLibrary.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Here's main class of this <i>Demo</i>.</p>
+<p>You can see mostly type of article within this class and you for more detail, please see the remarks.</p>
+<p></p>
+<p>this class is a template class. It has two Generic parameter. they are: <code class="typeparamref">T</code> and <code class="typeparamref">K</code>.</p>
+<p>The extension method of this class can refer to <a class="xref" href="CatLibrary.ICatExtension.html">ICatExtension</a> class</p>
+</div>
+  <div class="markdown conceptual">
+<p>This is a class talking about <a href="https://en.wikipedia.org/wiki/Cat">CAT</a>.</p>
+<blockquote>
+<p><strong>NOTE</strong>
+This is a CAT class</p>
+</blockquote>
+<p>Refer to <a class="xref" href="CatLibrary.IAnimal.html">IAnimal</a> to see other animals.</p>
+</div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Serializable]
+public class Cat&lt;T, K&gt; : ICat, IAnimal where T : class, new() where K : struct</code></pre>
+  </div>
+
+
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>This type should be class and can new instance.</p>
+</dd>
+    <dt><code>K</code></dt>
+    <dd><p>This type is a struct type, class type can't be used for this parameter.</p>
+</dd>
+  </dl>
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><span class="xref">Cat&lt;T, K&gt;</span></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist implements">
+    <dt>Implements</dt>
+    <dd>
+      <div><a class="xref" href="CatLibrary.ICat.html">ICat</a></div>
+      <div><a class="xref" href="CatLibrary.IAnimal.html">IAnimal</a></div>
+    </dd>
+  </dl>
+
+
+  <dl class="typelist derived">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="CatLibrary.ICatExtension.html#CatLibrary_ICatExtension_Play_CatLibrary_ICat_CatLibrary_Core_ContainersRefType_ColorType_">ICatExtension.Play(ICat, ContainersRefType.ColorType)</a>
+  </div>
+  <div>
+      <a class="xref" href="CatLibrary.ICatExtension.html#CatLibrary_ICatExtension_Sleep_CatLibrary_ICat_System_Int64_">ICatExtension.Sleep(ICat, long)</a>
+  </div>
+  </dd></dl>
+
+
+  <h2 id="CatLibrary_Cat_2_examples">Examples</h2>
+  <p>Here's example of how to create an instance of this class. As T is limited with <code>class</code> and K is limited with <code>struct</code>.</p>
+<pre><code class="lang-csharp">var a = new Cat(object, int)();
+int catNumber = new int();
+unsafe
+{
+    a.GetFeetLength(catNumber);
+}</code></pre>
+<p>As you see, here we bring in <b>pointer</b> so we need to add <code class="languageKeyword">unsafe</code> keyword.</p>
+
+
+  <h2 id="CatLibrary_Cat_2_remarks">Remarks</h2>
+  <div class="markdown level0 remarks"><p><em>THIS</em> is remarks overridden in <em>MARKDWON</em> file</p>
+</div>
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="CatLibrary_Cat_2__ctor_" data-uid="CatLibrary.Cat`2.#ctor*"></a>
+
+  <h3 id="CatLibrary_Cat_2__ctor" data-uid="CatLibrary.Cat`2.#ctor">
+  Cat()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dotnet/docfx/blob/main/samples/seed/dotnet/solution/CatLibrary/Class1.cs/#L122"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Default constructor.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Cat()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="CatLibrary_Cat_2__ctor_" data-uid="CatLibrary.Cat`2.#ctor*"></a>
+
+  <h3 id="CatLibrary_Cat_2__ctor_System_String_System_Int32__System_String_System_Boolean_" data-uid="CatLibrary.Cat`2.#ctor(System.String,System.Int32@,System.String,System.Boolean)">
+  Cat(string, out int, string, bool)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dotnet/docfx/blob/main/samples/seed/dotnet/solution/CatLibrary/Class1.cs/#L137"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>It's a complex constructor. The parameter will have some attributes.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Cat(string nickName, out int age, string realName, bool isHealthy)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>nickName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>it's string type.</p>
+</dd>
+    <dt><code>age</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>It's an out and ref parameter.</p>
+</dd>
+    <dt><code>realName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>It's an out paramter.</p>
+</dd>
+    <dt><code>isHealthy</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>It's an in parameter.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="CatLibrary_Cat_2__ctor_" data-uid="CatLibrary.Cat`2.#ctor*"></a>
+
+  <h3 id="CatLibrary_Cat_2__ctor__0_" data-uid="CatLibrary.Cat`2.#ctor(`0)">
+  Cat(T)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dotnet/docfx/blob/main/samples/seed/dotnet/solution/CatLibrary/Class1.cs/#L128"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Constructor with one generic parameter.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Cat(T ownType)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>ownType</code> <span class="xref">T</span></dt>
+    <dd><p>This parameter type defined by class.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="fields">Fields
+</h2>
+
+
+
+  <h3 id="CatLibrary_Cat_2_isHealthy" data-uid="CatLibrary.Cat`2.isHealthy">
+  isHealthy
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dotnet/docfx/blob/main/samples/seed/dotnet/solution/CatLibrary/Class1.cs/#L231"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Field with attribute.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[ContextStatic]
+[NonSerialized]
+public bool isHealthy</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="CatLibrary_Cat_2_Age_" data-uid="CatLibrary.Cat`2.Age*"></a>
+
+  <h3 id="CatLibrary_Cat_2_Age" data-uid="CatLibrary.Cat`2.Age">
+  Age
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dotnet/docfx/blob/main/samples/seed/dotnet/solution/CatLibrary/Class1.cs/#L213"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Hint cat's age.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected int Age { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="CatLibrary_Cat_2_Item_" data-uid="CatLibrary.Cat`2.Item*"></a>
+
+  <h3 id="CatLibrary_Cat_2_Item_System_String_" data-uid="CatLibrary.Cat`2.Item(System.String)">
+  this[string]
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dotnet/docfx/blob/main/samples/seed/dotnet/solution/CatLibrary/Class1.cs/#L204"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>This is index property of Cat. You can see that the visibility is different between <code>get</code> and <code>set</code> method.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int this[string a] { protected get; set; }</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>a</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Cat's name.</p>
+</dd>
+  </dl>
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>Cat's number.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="CatLibrary_Cat_2_Name_" data-uid="CatLibrary.Cat`2.Name*"></a>
+
+  <h3 id="CatLibrary_Cat_2_Name" data-uid="CatLibrary.Cat`2.Name">
+  Name
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dotnet/docfx/blob/main/samples/seed/dotnet/solution/CatLibrary/Class1.cs/#L255"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>EII property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string Name { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="CatLibrary_Cat_2_CalculateFood_" data-uid="CatLibrary.Cat`2.CalculateFood*"></a>
+
+  <h3 id="CatLibrary_Cat_2_CalculateFood_System_DateTime_" data-uid="CatLibrary.Cat`2.CalculateFood(System.DateTime)">
+  Override CalculateFood Name
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dotnet/docfx/blob/main/samples/seed/dotnet/solution/CatLibrary/Class1.cs/#L145"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>It's an overridden summary in <code>markdown</code> format</p>
+</div>
+  <div class="markdown level1 conceptual">
+<p>This is overriding methods. You can override parameter descriptions for methods, you can even add exceptions to methods. Check the intermediate <code>obj</code> folder to see the data model of the generated method/class. Override Yaml header should follow the data structure.</p>
+</div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Dictionary&lt;string, List&lt;int&gt;&gt; CalculateFood(DateTime date)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>date</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.datetime">DateTime</a></dt>
+    <dd><p>This is overridden description for a parameter. <code>id</code> must be specified.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2">Dictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>&gt;&gt;</dt>
+    <dd><p>It's overridden description for return. <code>type</code> must be specified.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentexception">ArgumentException</a></dt>
+    <dd><p>This is an <code>overridden</code> argument exception. you can add additional exception by adding different exception <code>type</code>.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="CatLibrary_Cat_2_Equals_" data-uid="CatLibrary.Cat`2.Equals*"></a>
+
+  <h3 id="CatLibrary_Cat_2_Equals_System_Object_" data-uid="CatLibrary.Cat`2.Equals(System.Object)">
+  Equals(object)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dotnet/docfx/blob/main/samples/seed/dotnet/solution/CatLibrary/Class1.cs/#L165"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Override the method of <code>Object.Equals(object obj).</code></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override bool Equals(object obj)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>obj</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></dt>
+    <dd><p>Can pass any class type.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>The return value tell you whehter the compare operation is successful.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="CatLibrary_Cat_2_GetTailLength_" data-uid="CatLibrary.Cat`2.GetTailLength*"></a>
+
+  <h3 id="CatLibrary_Cat_2_GetTailLength_System_Int32__System_Object___" data-uid="CatLibrary.Cat`2.GetTailLength(System.Int32*,System.Object[])">
+  GetTailLength(int*, params object[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dotnet/docfx/blob/main/samples/seed/dotnet/solution/CatLibrary/Class1.cs/#L174"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>It's an <code>unsafe</code> method.
+As you see, <code class="paramref">catName</code> is a <b>pointer</b>, so we need to add <code class="languageKeyword">unsafe</code> keyword.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public long GetTailLength(int* catName, params object[] parameters)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>catName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>*</dt>
+    <dd><p>Thie represent for cat name length.</p>
+</dd>
+    <dt><code>parameters</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>[]</dt>
+    <dd><p>Optional parameters.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>Return cat tail's length.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="CatLibrary_Cat_2_Jump_" data-uid="CatLibrary.Cat`2.Jump*"></a>
+
+  <h3 id="CatLibrary_Cat_2_Jump__0__1_System_Boolean__" data-uid="CatLibrary.Cat`2.Jump(`0,`1,System.Boolean@)">
+  Jump(T, K, ref bool)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dotnet/docfx/blob/main/samples/seed/dotnet/solution/CatLibrary/Class1.cs/#L154"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>This method have attribute above it.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Conditional(&quot;Debug&quot;)]
+public void Jump(T ownType, K anotherOwnType, ref bool cheat)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>ownType</code> <span class="xref">T</span></dt>
+    <dd><p>Type come from class define.</p>
+</dd>
+    <dt><code>anotherOwnType</code> <span class="xref">K</span></dt>
+    <dd><p>Type come from class define.</p>
+</dd>
+    <dt><code>cheat</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>Hint whether this cat has cheat mode.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentexception">ArgumentException</a></dt>
+    <dd><p>This is an argument exception</p>
+</dd>
+  </dl>
+
+
+
+  <h2 class="section" id="events">Events
+</h2>
+
+
+
+  <h3 id="CatLibrary_Cat_2_ownEat" data-uid="CatLibrary.Cat`2.ownEat">
+  ownEat
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dotnet/docfx/blob/main/samples/seed/dotnet/solution/CatLibrary/Class1.cs/#L223"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Eat event of this cat</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event EventHandler ownEat</code></pre>
+  </div>
+
+
+
+
+
+
+  <h4 class="section">Event Type</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.eventhandler">EventHandler</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+  <h2 class="section" id="operators">Operators
+</h2>
+
+
+  <a id="CatLibrary_Cat_2_op_Addition_" data-uid="CatLibrary.Cat`2.op_Addition*"></a>
+
+  <h3 id="CatLibrary_Cat_2_op_Addition_CatLibrary_Cat__0__1__System_Int32_" data-uid="CatLibrary.Cat`2.op_Addition(CatLibrary.Cat{`0,`1},System.Int32)">
+  operator +(Cat&lt;T, K&gt;, int)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dotnet/docfx/blob/main/samples/seed/dotnet/solution/CatLibrary/Class1.cs/#L183"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Addition operator of this class.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static int operator +(Cat&lt;T, K&gt; lsr, int rsr)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>lsr</code> <a class="xref" href="CatLibrary.Cat-2.html">Cat</a>&lt;T, K&gt;</dt>
+    <dd><p>...</p>
+</dd>
+    <dt><code>rsr</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><pre><code></code></pre>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>Result with <i>int</i> type.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="CatLibrary_Cat_2_op_Explicit_" data-uid="CatLibrary.Cat`2.op_Explicit*"></a>
+
+  <h3 id="CatLibrary_Cat_2_op_Explicit_CatLibrary_Cat__0__1___CatLibrary_Tom" data-uid="CatLibrary.Cat`2.op_Explicit(CatLibrary.Cat{`0,`1})~CatLibrary.Tom">
+  explicit operator Tom(Cat&lt;T, K&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dotnet/docfx/blob/main/samples/seed/dotnet/solution/CatLibrary/Class1.cs/#L196"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Expilicit operator of this class.</p>
+<p>It means this cat can evolve to change to Tom. Tom and Jerry.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static explicit operator Tom(Cat&lt;T, K&gt; src)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>src</code> <a class="xref" href="CatLibrary.Cat-2.html">Cat</a>&lt;T, K&gt;</dt>
+    <dd><p>Instance of this class.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="CatLibrary.Tom.html">Tom</a></dt>
+    <dd><p>Advanced class type of cat.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="CatLibrary_Cat_2_op_Subtraction_" data-uid="CatLibrary.Cat`2.op_Subtraction*"></a>
+
+  <h3 id="CatLibrary_Cat_2_op_Subtraction_CatLibrary_Cat__0__1__System_Int32_" data-uid="CatLibrary.Cat`2.op_Subtraction(CatLibrary.Cat{`0,`1},System.Int32)">
+  operator -(Cat&lt;T, K&gt;, int)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dotnet/docfx/blob/main/samples/seed/dotnet/solution/CatLibrary/Class1.cs/#L188"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Similar with operaotr +, refer to that topic.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static int operator -(Cat&lt;T, K&gt; lsr, int rsr)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>lsr</code> <a class="xref" href="CatLibrary.Cat-2.html">Cat</a>&lt;T, K&gt;</dt>
+    <dd></dd>
+    <dt><code>rsr</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/dotnet/docfx/blob/main/samples/seed/dotnet/solution/CatLibrary/Class1.cs/#L113" class="edit-link">Edit this page</a>
+        </div>
+
+        
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
