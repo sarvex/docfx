@@ -161,6 +161,36 @@ uid: fileA
 <h5>Warning</h5>
 <p>Dangerous certain consequences of an action.</p>
 </div>
+<h3 id="custom-alerts">Custom Alerts</h3>
+<p>You can define custom alerts with the <code>build.markdownEngineProperties.alerts</code> property in <code>docfx.json</code> and use it in markdown files. The key specifies the markdown keyword without the surrounding <code>[!</code>, <code>]</code> symbols. The value is the CSS class names:</p>
+<pre><code class="lang-json">{
+  &quot;build&quot;: {
+    &quot;markdownEngineProperties&quot;: {
+      &quot;alerts&quot;: {
+        &quot;TODO&quot;: &quot;alert alert-secondary&quot;
+      }
+    }
+  }
+}
+</code></pre>
+<pre><code class="lang-md">&gt; [!TODO]
+&gt; This is a custom TODO section
+</code></pre>
+<p>The above custom alert looks like this in rendered page:</p>
+<div class="alert alert-secondary">
+<h5>TODO</h5>
+<p>This is a custom TODO section</p>
+</div>
+<p>DocFX allows you to customize the display of alert titles in your documentation. By default, alert titles are displayed as the keyword in upper case. To change this behavior, you can create a custom template and use a <code>token.json</code> file to define your custom alert titles:</p>
+<ol>
+<li><strong>Create a custom template</strong>: Follow the steps in the [Custom Template Guide](<a href="template.html#custom-template">create a custom template</a>) to create your own template.</li>
+<li><strong>Create a <code>token.json</code> file</strong>: In your custom template folder, create a new file named <code>token.json</code>. This file will be used to define your custom alert titles. The format should be as follows:</li>
+</ol>
+<pre><code class="lang-md">{  
+  &quot;todo&quot;: &quot;MY TODO&quot;  
+}
+</code></pre>
+<p>In this example, the key is the alert keyword in <strong>lower case</strong> (e.g., &quot;todo&quot;), and the value is the custom display title of the alert (e.g., &quot;MY TODO&quot;).</p>
 <h2 id="video">Video</h2>
 <p>You can embed a video in your page by using the following Markdown syntax:</p>
 <pre><code class="lang-md">&gt; [!Video embed_link]
