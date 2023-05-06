@@ -236,6 +236,56 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "obj/api/BuildFromProject.Issue8540.A.A.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BuildFromProject.Issue8540.A.A.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/BuildFromProject.Issue8540.A.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BuildFromProject.Issue8540.A.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/BuildFromProject.Issue8540.B.B.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BuildFromProject.Issue8540.B.B.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/BuildFromProject.Issue8540.B.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BuildFromProject.Issue8540.B.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/BuildFromProject.Issue8540.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BuildFromProject.Issue8540.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "obj/api/BuildFromProject.yml",
       "output": {
         ".html": {
